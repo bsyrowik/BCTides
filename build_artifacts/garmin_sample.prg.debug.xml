@@ -1,0 +1,1020 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<debugInfo>
+    <manifest filename="/home/bains/garmin_test/garmin_sample/manifest.xml"/>
+    <pcToLineNum>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleApp.mc" id="1" lineNum="13" parent="globals/garmin_sampleApp" pc="268435456" symbol="initialize"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleApp.mc" id="1" lineNum="14" parent="globals/garmin_sampleApp" pc="268435460" symbol="initialize"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleApp.mc" id="1" lineNum="15" parent="globals/garmin_sampleApp" pc="268435483" symbol="initialize"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleApp.mc" id="1" lineNum="22" parent="globals/garmin_sampleApp" pc="268435515" symbol="initialize"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleApp.mc" id="2" lineNum="26" parent="globals/garmin_sampleApp" pc="268435534" symbol="onStart"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleApp.mc" id="2" lineNum="27" parent="globals/garmin_sampleApp" pc="268435538" symbol="onStart"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleApp.mc" id="2" lineNum="28" parent="globals/garmin_sampleApp" pc="268435551" symbol="onStart"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleApp.mc" id="3" lineNum="35" parent="globals/garmin_sampleApp" pc="268435583" symbol="onStop"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleApp.mc" id="3" lineNum="37" parent="globals/garmin_sampleApp" pc="268435587" symbol="onStop"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleApp.mc" id="3" lineNum="38" parent="globals/garmin_sampleApp" pc="268435614" symbol="onStop"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleApp.mc" id="4" lineNum="43" parent="globals/garmin_sampleApp" pc="268435647" symbol="onSettingsChanged"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleApp.mc" id="4" lineNum="44" parent="globals/garmin_sampleApp" pc="268435651" symbol="onSettingsChanged"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleApp.mc" id="4" lineNum="45" parent="globals/garmin_sampleApp" pc="268435674" symbol="onSettingsChanged"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleApp.mc" id="5" lineNum="49" parent="globals/garmin_sampleApp" pc="268435691" symbol="getInitialView"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleApp.mc" id="5" lineNum="50" parent="globals/garmin_sampleApp" pc="268435695" symbol="getInitialView"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleApp.mc" id="5" lineNum="51" parent="globals/garmin_sampleApp" pc="268435718" symbol="getInitialView"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleApp.mc" id="5" lineNum="57" parent="globals/garmin_sampleApp" pc="268435750" symbol="getInitialView"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleApp.mc" id="5" lineNum="58" parent="globals/garmin_sampleApp" pc="268435763" symbol="getInitialView"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleApp.mc" id="5" lineNum="60" parent="globals/garmin_sampleApp" pc="268435794" symbol="getInitialView"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleApp.mc" id="5" lineNum="61" parent="globals/garmin_sampleApp" pc="268435826" symbol="getInitialView"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleApp.mc" id="5" lineNum="62" parent="globals/garmin_sampleApp" pc="268435864" symbol="getInitialView"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleApp.mc" id="6" lineNum="72" parent="globals/garmin_sampleApp" pc="268435904" symbol="getGlanceView"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleApp.mc" id="6" lineNum="73" parent="globals/garmin_sampleApp" pc="268435908" symbol="getGlanceView"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleApp.mc" id="7" lineNum="6" parent="globals/garmin_sampleApp" pc="268436358" symbol="&lt;init&gt;"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleApp.mc" id="7" lineNum="6" parent="globals/garmin_sampleApp" pc="268436358" symbol="&lt;init&gt;"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleApp.mc" id="8" lineNum="78" parent="globals" pc="268436377" symbol="getApp"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleApp.mc" id="8" lineNum="79" parent="globals" pc="268436389" symbol="getApp"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="10" lineNum="29" parent="globals/PageIndicatorArc" pc="268436406" symbol="initialize"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="10" lineNum="30" parent="globals/PageIndicatorArc" pc="268436410" symbol="initialize"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="10" lineNum="31" parent="globals/PageIndicatorArc" pc="268436420" symbol="initialize"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="10" lineNum="32" parent="globals/PageIndicatorArc" pc="268436430" symbol="initialize"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="10" lineNum="33" parent="globals/PageIndicatorArc" pc="268436440" symbol="initialize"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="11" lineNum="39" parent="globals/PageIndicatorArc" pc="268436451" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="11" lineNum="40" parent="globals/PageIndicatorArc" pc="268436455" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="11" lineNum="41" parent="globals/PageIndicatorArc" pc="268436462" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="11" lineNum="43" parent="globals/PageIndicatorArc" pc="268436469" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="11" lineNum="44" parent="globals/PageIndicatorArc" pc="268436497" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="11" lineNum="45" parent="globals/PageIndicatorArc" pc="268436504" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="11" lineNum="47" parent="globals/PageIndicatorArc" pc="268436535" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="11" lineNum="48" parent="globals/PageIndicatorArc" pc="268436542" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="11" lineNum="48" parent="globals/PageIndicatorArc" pc="268436566" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="11" lineNum="49" parent="globals/PageIndicatorArc" pc="268436585" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="11" lineNum="49" parent="globals/PageIndicatorArc" pc="268436609" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="11" lineNum="50" parent="globals/PageIndicatorArc" pc="268436628" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="11" lineNum="50" parent="globals/PageIndicatorArc" pc="268436652" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="11" lineNum="51" parent="globals/PageIndicatorArc" pc="268436671" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="11" lineNum="51" parent="globals/PageIndicatorArc" pc="268436695" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="11" lineNum="53" parent="globals/PageIndicatorArc" pc="268436714" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="11" lineNum="54" parent="globals/PageIndicatorArc" pc="268436725" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="11" lineNum="56" parent="globals/PageIndicatorArc" pc="268436742" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="11" lineNum="57" parent="globals/PageIndicatorArc" pc="268436763" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="11" lineNum="58" parent="globals/PageIndicatorArc" pc="268436771" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="11" lineNum="60" parent="globals/PageIndicatorArc" pc="268436810" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="11" lineNum="62" parent="globals/PageIndicatorArc" pc="268436846" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="11" lineNum="63" parent="globals/PageIndicatorArc" pc="268436853" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="11" lineNum="64" parent="globals/PageIndicatorArc" pc="268436904" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="11" lineNum="65" parent="globals/PageIndicatorArc" pc="268436920" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="11" lineNum="66" parent="globals/PageIndicatorArc" pc="268436971" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="11" lineNum="69" parent="globals/PageIndicatorArc" pc="268436984" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="11" lineNum="70" parent="globals/PageIndicatorArc" pc="268437002" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="12" lineNum="18" parent="globals/PageIndicatorArc" pc="268445592" symbol="&lt;init&gt;"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="13" lineNum="88" parent="globals/PageIndicatorRad" pc="268437099" symbol="initialize"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="13" lineNum="89" parent="globals/PageIndicatorRad" pc="268437103" symbol="initialize"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="13" lineNum="90" parent="globals/PageIndicatorRad" pc="268437113" symbol="initialize"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="13" lineNum="91" parent="globals/PageIndicatorRad" pc="268437123" symbol="initialize"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="13" lineNum="92" parent="globals/PageIndicatorRad" pc="268437133" symbol="initialize"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="14" lineNum="98" parent="globals/PageIndicatorRad" pc="268437144" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="14" lineNum="99" parent="globals/PageIndicatorRad" pc="268437148" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="14" lineNum="100" parent="globals/PageIndicatorRad" pc="268437155" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="14" lineNum="101" parent="globals/PageIndicatorRad" pc="268437162" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="14" lineNum="102" parent="globals/PageIndicatorRad" pc="268437169" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="14" lineNum="104" parent="globals/PageIndicatorRad" pc="268437176" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="14" lineNum="105" parent="globals/PageIndicatorRad" pc="268437201" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="14" lineNum="106" parent="globals/PageIndicatorRad" pc="268437225" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="14" lineNum="108" parent="globals/PageIndicatorRad" pc="268437238" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="14" lineNum="109" parent="globals/PageIndicatorRad" pc="268437245" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="14" lineNum="109" parent="globals/PageIndicatorRad" pc="268437269" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="14" lineNum="110" parent="globals/PageIndicatorRad" pc="268437288" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="14" lineNum="110" parent="globals/PageIndicatorRad" pc="268437312" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="14" lineNum="111" parent="globals/PageIndicatorRad" pc="268437344" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="14" lineNum="111" parent="globals/PageIndicatorRad" pc="268437368" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="14" lineNum="112" parent="globals/PageIndicatorRad" pc="268437406" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="14" lineNum="112" parent="globals/PageIndicatorRad" pc="268437430" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="14" lineNum="114" parent="globals/PageIndicatorRad" pc="268437456" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="14" lineNum="115" parent="globals/PageIndicatorRad" pc="268437488" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="14" lineNum="116" parent="globals/PageIndicatorRad" pc="268437509" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="14" lineNum="117" parent="globals/PageIndicatorRad" pc="268437516" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="14" lineNum="118" parent="globals/PageIndicatorRad" pc="268437567" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="14" lineNum="119" parent="globals/PageIndicatorRad" pc="268437589" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="14" lineNum="120" parent="globals/PageIndicatorRad" pc="268437640" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="14" lineNum="122" parent="globals/PageIndicatorRad" pc="268437662" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="14" lineNum="123" parent="globals/PageIndicatorRad" pc="268437702" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="14" lineNum="125" parent="globals/PageIndicatorRad" pc="268437742" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="14" lineNum="126" parent="globals/PageIndicatorRad" pc="268437750" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="14" lineNum="128" parent="globals/PageIndicatorRad" pc="268437777" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="15" lineNum="77" parent="globals/PageIndicatorRad" pc="268445502" symbol="&lt;init&gt;"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="16" lineNum="146" parent="globals/PageIndicator" pc="268437815" symbol="initialize"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="16" lineNum="147" parent="globals/PageIndicator" pc="268437819" symbol="initialize"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="16" lineNum="148" parent="globals/PageIndicator" pc="268437829" symbol="initialize"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="16" lineNum="149" parent="globals/PageIndicator" pc="268437839" symbol="initialize"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="16" lineNum="150" parent="globals/PageIndicator" pc="268437849" symbol="initialize"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="17" lineNum="156" parent="globals/PageIndicator" pc="268437860" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="17" lineNum="157" parent="globals/PageIndicator" pc="268437864" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="17" lineNum="158" parent="globals/PageIndicator" pc="268437871" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="17" lineNum="159" parent="globals/PageIndicator" pc="268437878" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="17" lineNum="160" parent="globals/PageIndicator" pc="268437909" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="17" lineNum="161" parent="globals/PageIndicator" pc="268437916" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="17" lineNum="163" parent="globals/PageIndicator" pc="268437923" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="17" lineNum="164" parent="globals/PageIndicator" pc="268437947" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="17" lineNum="165" parent="globals/PageIndicator" pc="268437975" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="17" lineNum="166" parent="globals/PageIndicator" pc="268438009" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="17" lineNum="167" parent="globals/PageIndicator" pc="268438033" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="17" lineNum="168" parent="globals/PageIndicator" pc="268438061" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="17" lineNum="169" parent="globals/PageIndicator" pc="268438089" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="17" lineNum="170" parent="globals/PageIndicator" pc="268438113" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="17" lineNum="171" parent="globals/PageIndicator" pc="268438138" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="17" lineNum="172" parent="globals/PageIndicator" pc="268438169" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="17" lineNum="173" parent="globals/PageIndicator" pc="268438193" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="17" lineNum="174" parent="globals/PageIndicator" pc="268438224" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="17" lineNum="177" parent="globals/PageIndicator" pc="268438255" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="17" lineNum="178" parent="globals/PageIndicator" pc="268438287" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="17" lineNum="179" parent="globals/PageIndicator" pc="268438308" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="17" lineNum="180" parent="globals/PageIndicator" pc="268438312" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="17" lineNum="181" parent="globals/PageIndicator" pc="268438316" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="17" lineNum="182" parent="globals/PageIndicator" pc="268438367" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="17" lineNum="184" parent="globals/PageIndicator" pc="268438395" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="17" lineNum="186" parent="globals/PageIndicator" pc="268438420" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="17" lineNum="187" parent="globals/PageIndicator" pc="268438428" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="17" lineNum="189" parent="globals/PageIndicator" pc="268438455" symbol="draw"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/PageIndicator.mc" id="18" lineNum="135" parent="globals/PageIndicator" pc="268445593" symbol="&lt;init&gt;"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="20" lineNum="19" parent="globals/MyGlanceView" pc="268435946" symbol="initialize"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="20" lineNum="20" parent="globals/MyGlanceView" pc="268435950" symbol="initialize"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="21" lineNum="22" parent="globals/MyGlanceView" pc="268435969" symbol="onUpdate"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="21" lineNum="23" parent="globals/MyGlanceView" pc="268435973" symbol="onUpdate"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="21" lineNum="24" parent="globals/MyGlanceView" pc="268436009" symbol="onUpdate"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="21" lineNum="25" parent="globals/MyGlanceView" pc="268436021" symbol="onUpdate"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="21" lineNum="26" parent="globals/MyGlanceView" pc="268436057" symbol="onUpdate"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="21" lineNum="32" parent="globals/MyGlanceView" pc="268436108" symbol="onUpdate"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="21" lineNum="33" parent="globals/MyGlanceView" pc="268436135" symbol="onUpdate"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="21" lineNum="34" parent="globals/MyGlanceView" pc="268436167" symbol="onUpdate"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="21" lineNum="36" parent="globals/MyGlanceView" pc="268436199" symbol="onUpdate"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="21" lineNum="37" parent="globals/MyGlanceView" pc="268436250" symbol="onUpdate"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="21" lineNum="38" parent="globals/MyGlanceView" pc="268436286" symbol="onUpdate"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="22" lineNum="18" parent="globals/MyGlanceView" pc="268436339" symbol="&lt;init&gt;"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="22" lineNum="18" parent="globals/MyGlanceView" pc="268436339" symbol="&lt;init&gt;"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="23" lineNum="60" parent="globals/garmin_sampleView" pc="268438493" symbol="initialize"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="23" lineNum="61" parent="globals/garmin_sampleView" pc="268438497" symbol="initialize"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="23" lineNum="62" parent="globals/garmin_sampleView" pc="268438507" symbol="initialize"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="23" lineNum="64" parent="globals/garmin_sampleView" pc="268438525" symbol="initialize"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="24" lineNum="67" parent="globals/garmin_sampleView" pc="268438589" symbol="onPosition"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="24" lineNum="68" parent="globals/garmin_sampleView" pc="268438593" symbol="onPosition"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="24" lineNum="69" parent="globals/garmin_sampleView" pc="268438603" symbol="onPosition"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="24" lineNum="70" parent="globals/garmin_sampleView" pc="268438649" symbol="onPosition"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="24" lineNum="72" parent="globals/garmin_sampleView" pc="268438675" symbol="onPosition"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="25" lineNum="76" parent="globals/garmin_sampleView" pc="268438692" symbol="onLayout"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="25" lineNum="78" parent="globals/garmin_sampleView" pc="268438696" symbol="onLayout"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="25" lineNum="79" parent="globals/garmin_sampleView" pc="268438719" symbol="onLayout"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="25" lineNum="80" parent="globals/garmin_sampleView" pc="268438765" symbol="onLayout"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="25" lineNum="81" parent="globals/garmin_sampleView" pc="268438788" symbol="onLayout"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="25" lineNum="83" parent="globals/garmin_sampleView" pc="268438835" symbol="onLayout"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="26" lineNum="89" parent="globals/garmin_sampleView" pc="268438873" symbol="onShow"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="26" lineNum="90" parent="globals/garmin_sampleView" pc="268438877" symbol="onShow"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="27" lineNum="93" parent="globals/garmin_sampleView" pc="268438894" symbol="getUnits"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="27" lineNum="94" parent="globals/garmin_sampleView" pc="268438898" symbol="getUnits"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="27" lineNum="95" parent="globals/garmin_sampleView" pc="268438920" symbol="getUnits"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="27" lineNum="96" parent="globals/garmin_sampleView" pc="268438934" symbol="getUnits"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="27" lineNum="97" parent="globals/garmin_sampleView" pc="268438961" symbol="getUnits"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="27" lineNum="98" parent="globals/garmin_sampleView" pc="268438975" symbol="getUnits"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="27" lineNum="100" parent="globals/garmin_sampleView" pc="268438993" symbol="getUnits"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="28" lineNum="104" parent="globals/garmin_sampleView" pc="268439009" symbol="drawSinusoid"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="28" lineNum="105" parent="globals/garmin_sampleView" pc="268439013" symbol="drawSinusoid"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="28" lineNum="106" parent="globals/garmin_sampleView" pc="268439049" symbol="drawSinusoid"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="28" lineNum="107" parent="globals/garmin_sampleView" pc="268439059" symbol="drawSinusoid"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="28" lineNum="108" parent="globals/garmin_sampleView" pc="268439069" symbol="drawSinusoid"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="28" lineNum="109" parent="globals/garmin_sampleView" pc="268439073" symbol="drawSinusoid"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="28" lineNum="110" parent="globals/garmin_sampleView" pc="268439118" symbol="drawSinusoid"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="28" lineNum="111" parent="globals/garmin_sampleView" pc="268439145" symbol="drawSinusoid"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="28" lineNum="112" parent="globals/garmin_sampleView" pc="268439149" symbol="drawSinusoid"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="28" lineNum="113" parent="globals/garmin_sampleView" pc="268439194" symbol="drawSinusoid"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="28" lineNum="114" parent="globals/garmin_sampleView" pc="268439214" symbol="drawSinusoid"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="28" lineNum="115" parent="globals/garmin_sampleView" pc="268439218" symbol="drawSinusoid"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="29" lineNum="119" parent="globals/garmin_sampleView" pc="268439236" symbol="graphTides"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="29" lineNum="122" parent="globals/garmin_sampleView" pc="268439240" symbol="graphTides"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="29" lineNum="123" parent="globals/garmin_sampleView" pc="268439247" symbol="graphTides"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="29" lineNum="125" parent="globals/garmin_sampleView" pc="268439282" symbol="graphTides"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="29" lineNum="127" parent="globals/garmin_sampleView" pc="268439318" symbol="graphTides"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="29" lineNum="128" parent="globals/garmin_sampleView" pc="268439325" symbol="graphTides"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="29" lineNum="129" parent="globals/garmin_sampleView" pc="268439332" symbol="graphTides"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="29" lineNum="130" parent="globals/garmin_sampleView" pc="268439336" symbol="graphTides"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="29" lineNum="131" parent="globals/garmin_sampleView" pc="268439364" symbol="graphTides"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="29" lineNum="133" parent="globals/garmin_sampleView" pc="268439383" symbol="graphTides"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="29" lineNum="134" parent="globals/garmin_sampleView" pc="268439407" symbol="graphTides"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="29" lineNum="135" parent="globals/garmin_sampleView" pc="268439411" symbol="graphTides"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="29" lineNum="136" parent="globals/garmin_sampleView" pc="268439426" symbol="graphTides"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="29" lineNum="137" parent="globals/garmin_sampleView" pc="268439448" symbol="graphTides"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="29" lineNum="141" parent="globals/garmin_sampleView" pc="268439458" symbol="graphTides"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="29" lineNum="143" parent="globals/garmin_sampleView" pc="268439477" symbol="graphTides"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="29" lineNum="144" parent="globals/garmin_sampleView" pc="268439507" symbol="graphTides"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="29" lineNum="145" parent="globals/garmin_sampleView" pc="268439543" symbol="graphTides"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="29" lineNum="146" parent="globals/garmin_sampleView" pc="268439553" symbol="graphTides"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="29" lineNum="147" parent="globals/garmin_sampleView" pc="268439582" symbol="graphTides"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="29" lineNum="149" parent="globals/garmin_sampleView" pc="268439598" symbol="graphTides"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="29" lineNum="150" parent="globals/garmin_sampleView" pc="268439623" symbol="graphTides"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="29" lineNum="152" parent="globals/garmin_sampleView" pc="268439688" symbol="graphTides"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="29" lineNum="154" parent="globals/garmin_sampleView" pc="268439750" symbol="graphTides"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="29" lineNum="155" parent="globals/garmin_sampleView" pc="268439754" symbol="graphTides"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="29" lineNum="157" parent="globals/garmin_sampleView" pc="268439793" symbol="graphTides"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="29" lineNum="158" parent="globals/garmin_sampleView" pc="268439819" symbol="graphTides"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="30" lineNum="162" parent="globals/garmin_sampleView" pc="268439837" symbol="getLabelForT"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="30" lineNum="163" parent="globals/garmin_sampleView" pc="268439841" symbol="getLabelForT"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="30" lineNum="164" parent="globals/garmin_sampleView" pc="268439849" symbol="getLabelForT"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="30" lineNum="165" parent="globals/garmin_sampleView" pc="268439863" symbol="getLabelForT"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="30" lineNum="166" parent="globals/garmin_sampleView" pc="268439899" symbol="getLabelForT"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="30" lineNum="167" parent="globals/garmin_sampleView" pc="268439936" symbol="getLabelForT"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="30" lineNum="168" parent="globals/garmin_sampleView" pc="268439961" symbol="getLabelForT"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="30" lineNum="170" parent="globals/garmin_sampleView" pc="268439989" symbol="getLabelForT"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="30" lineNum="171" parent="globals/garmin_sampleView" pc="268440014" symbol="getLabelForT"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="30" lineNum="172" parent="globals/garmin_sampleView" pc="268440039" symbol="getLabelForT"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="30" lineNum="175" parent="globals/garmin_sampleView" pc="268440055" symbol="getLabelForT"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="30" lineNum="176" parent="globals/garmin_sampleView" pc="268440082" symbol="getLabelForT"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="30" lineNum="177" parent="globals/garmin_sampleView" pc="268440115" symbol="getLabelForT"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="30" lineNum="178" parent="globals/garmin_sampleView" pc="268440142" symbol="getLabelForT"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="30" lineNum="180" parent="globals/garmin_sampleView" pc="268440175" symbol="getLabelForT"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="31" lineNum="183" parent="globals/garmin_sampleView" pc="268440178" symbol="getHeightAtT"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="31" lineNum="189" parent="globals/garmin_sampleView" pc="268440182" symbol="getHeightAtT"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="31" lineNum="190" parent="globals/garmin_sampleView" pc="268440195" symbol="getHeightAtT"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="31" lineNum="191" parent="globals/garmin_sampleView" pc="268440208" symbol="getHeightAtT"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="31" lineNum="192" parent="globals/garmin_sampleView" pc="268440216" symbol="getHeightAtT"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="31" lineNum="193" parent="globals/garmin_sampleView" pc="268440230" symbol="getHeightAtT"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="31" lineNum="194" parent="globals/garmin_sampleView" pc="268440266" symbol="getHeightAtT"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="31" lineNum="195" parent="globals/garmin_sampleView" pc="268440295" symbol="getHeightAtT"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="31" lineNum="196" parent="globals/garmin_sampleView" pc="268440320" symbol="getHeightAtT"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="31" lineNum="198" parent="globals/garmin_sampleView" pc="268440348" symbol="getHeightAtT"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="31" lineNum="199" parent="globals/garmin_sampleView" pc="268440373" symbol="getHeightAtT"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="31" lineNum="200" parent="globals/garmin_sampleView" pc="268440398" symbol="getHeightAtT"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="31" lineNum="203" parent="globals/garmin_sampleView" pc="268440414" symbol="getHeightAtT"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="31" lineNum="204" parent="globals/garmin_sampleView" pc="268440427" symbol="getHeightAtT"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="31" lineNum="205" parent="globals/garmin_sampleView" pc="268440443" symbol="getHeightAtT"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="31" lineNum="206" parent="globals/garmin_sampleView" pc="268440450" symbol="getHeightAtT"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="31" lineNum="207" parent="globals/garmin_sampleView" pc="268440454" symbol="getHeightAtT"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="31" lineNum="208" parent="globals/garmin_sampleView" pc="268440467" symbol="getHeightAtT"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="31" lineNum="212" parent="globals/garmin_sampleView" pc="268440503" symbol="getHeightAtT"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="31" lineNum="213" parent="globals/garmin_sampleView" pc="268440514" symbol="getHeightAtT"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="31" lineNum="214" parent="globals/garmin_sampleView" pc="268440557" symbol="getHeightAtT"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="31" lineNum="215" parent="globals/garmin_sampleView" pc="268440568" symbol="getHeightAtT"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="31" lineNum="217" parent="globals/garmin_sampleView" pc="268440611" symbol="getHeightAtT"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="32" lineNum="220" parent="globals/garmin_sampleView" pc="268440647" symbol="getFromDateString"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="32" lineNum="221" parent="globals/garmin_sampleView" pc="268440651" symbol="getFromDateString"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="32" lineNum="222" parent="globals/garmin_sampleView" pc="268440703" symbol="getFromDateString"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="32" lineNum="223" parent="globals/garmin_sampleView" pc="268440731" symbol="getFromDateString"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="32" lineNum="224" parent="globals/garmin_sampleView" pc="268440762" symbol="getFromDateString"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="33" lineNum="227" parent="globals/garmin_sampleView" pc="268440777" symbol="getToDateString"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="33" lineNum="228" parent="globals/garmin_sampleView" pc="268440781" symbol="getToDateString"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="33" lineNum="229" parent="globals/garmin_sampleView" pc="268440858" symbol="getToDateString"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="33" lineNum="230" parent="globals/garmin_sampleView" pc="268440886" symbol="getToDateString"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="33" lineNum="231" parent="globals/garmin_sampleView" pc="268440917" symbol="getToDateString"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="34" lineNum="234" parent="globals/garmin_sampleView" pc="268440932" symbol="parseDateString"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="34" lineNum="236" parent="globals/garmin_sampleView" pc="268440936" symbol="parseDateString"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="34" lineNum="237" parent="globals/garmin_sampleView" pc="268440968" symbol="parseDateString"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="34" lineNum="238" parent="globals/garmin_sampleView" pc="268441000" symbol="parseDateString"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="34" lineNum="239" parent="globals/garmin_sampleView" pc="268441032" symbol="parseDateString"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="34" lineNum="240" parent="globals/garmin_sampleView" pc="268441064" symbol="parseDateString"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="34" lineNum="241" parent="globals/garmin_sampleView" pc="268441096" symbol="parseDateString"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="34" lineNum="242" parent="globals/garmin_sampleView" pc="268441128" symbol="parseDateString"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="34" lineNum="250" parent="globals/garmin_sampleView" pc="268441186" symbol="parseDateString"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="35" lineNum="253" parent="globals/garmin_sampleView" pc="268441205" symbol="formatDateStringShort"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="35" lineNum="254" parent="globals/garmin_sampleView" pc="268441209" symbol="formatDateStringShort"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="35" lineNum="256" parent="globals/garmin_sampleView" pc="268441240" symbol="formatDateStringShort"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="36" lineNum="265" parent="globals/garmin_sampleView" pc="268441390" symbol="formatDateString"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="36" lineNum="267" parent="globals/garmin_sampleView" pc="268441394" symbol="formatDateString"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="37" lineNum="278" parent="globals/garmin_sampleView" pc="268441560" symbol="onUpdate"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="37" lineNum="280" parent="globals/garmin_sampleView" pc="268441564" symbol="onUpdate"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="37" lineNum="282" parent="globals/garmin_sampleView" pc="268441584" symbol="onUpdate"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="37" lineNum="283" parent="globals/garmin_sampleView" pc="268441595" symbol="onUpdate"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="37" lineNum="284" parent="globals/garmin_sampleView" pc="268441663" symbol="onUpdate"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="37" lineNum="286" parent="globals/garmin_sampleView" pc="268441689" symbol="onUpdate"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="37" lineNum="287" parent="globals/garmin_sampleView" pc="268441763" symbol="onUpdate"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="37" lineNum="288" parent="globals/garmin_sampleView" pc="268441793" symbol="onUpdate"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="37" lineNum="289" parent="globals/garmin_sampleView" pc="268441816" symbol="onUpdate"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="37" lineNum="290" parent="globals/garmin_sampleView" pc="268441860" symbol="onUpdate"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="37" lineNum="294" parent="globals/garmin_sampleView" pc="268441879" symbol="onUpdate"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="37" lineNum="295" parent="globals/garmin_sampleView" pc="268441898" symbol="onUpdate"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="37" lineNum="296" parent="globals/garmin_sampleView" pc="268441923" symbol="onUpdate"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="37" lineNum="297" parent="globals/garmin_sampleView" pc="268441977" symbol="onUpdate"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="37" lineNum="301" parent="globals/garmin_sampleView" pc="268442034" symbol="onUpdate"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="37" lineNum="302" parent="globals/garmin_sampleView" pc="268442051" symbol="onUpdate"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="37" lineNum="303" parent="globals/garmin_sampleView" pc="268442068" symbol="onUpdate"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="37" lineNum="304" parent="globals/garmin_sampleView" pc="268442117" symbol="onUpdate"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="37" lineNum="306" parent="globals/garmin_sampleView" pc="268442135" symbol="onUpdate"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="37" lineNum="307" parent="globals/garmin_sampleView" pc="268442166" symbol="onUpdate"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="37" lineNum="309" parent="globals/garmin_sampleView" pc="268442244" symbol="onUpdate"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="37" lineNum="310" parent="globals/garmin_sampleView" pc="268442261" symbol="onUpdate"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="37" lineNum="312" parent="globals/garmin_sampleView" pc="268442278" symbol="onUpdate"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="37" lineNum="313" parent="globals/garmin_sampleView" pc="268442346" symbol="onUpdate"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="37" lineNum="317" parent="globals/garmin_sampleView" pc="268442364" symbol="onUpdate"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="37" lineNum="318" parent="globals/garmin_sampleView" pc="268442400" symbol="onUpdate"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="37" lineNum="320" parent="globals/garmin_sampleView" pc="268442432" symbol="onUpdate"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="37" lineNum="321" parent="globals/garmin_sampleView" pc="268442451" symbol="onUpdate"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="37" lineNum="323" parent="globals/garmin_sampleView" pc="268442468" symbol="onUpdate"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="37" lineNum="324" parent="globals/garmin_sampleView" pc="268442504" symbol="onUpdate"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="37" lineNum="325" parent="globals/garmin_sampleView" pc="268442511" symbol="onUpdate"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="37" lineNum="329" parent="globals/garmin_sampleView" pc="268442540" symbol="onUpdate"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="37" lineNum="330" parent="globals/garmin_sampleView" pc="268442586" symbol="onUpdate"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="37" lineNum="331" parent="globals/garmin_sampleView" pc="268442632" symbol="onUpdate"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="37" lineNum="333" parent="globals/garmin_sampleView" pc="268442692" symbol="onUpdate"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="37" lineNum="335" parent="globals/garmin_sampleView" pc="268442709" symbol="onUpdate"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="37" lineNum="336" parent="globals/garmin_sampleView" pc="268442716" symbol="onUpdate"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="37" lineNum="337" parent="globals/garmin_sampleView" pc="268442744" symbol="onUpdate"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="37" lineNum="338" parent="globals/garmin_sampleView" pc="268442773" symbol="onUpdate"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="37" lineNum="339" parent="globals/garmin_sampleView" pc="268442780" symbol="onUpdate"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="37" lineNum="341" parent="globals/garmin_sampleView" pc="268442796" symbol="onUpdate"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="37" lineNum="346" parent="globals/garmin_sampleView" pc="268442867" symbol="onUpdate"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="37" lineNum="348" parent="globals/garmin_sampleView" pc="268442907" symbol="onUpdate"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="38" lineNum="352" parent="globals/garmin_sampleView" pc="268442939" symbol="onReceive"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="38" lineNum="354" parent="globals/garmin_sampleView" pc="268442943" symbol="onReceive"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="38" lineNum="355" parent="globals/garmin_sampleView" pc="268442957" symbol="onReceive"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="38" lineNum="356" parent="globals/garmin_sampleView" pc="268442980" symbol="onReceive"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="38" lineNum="357" parent="globals/garmin_sampleView" pc="268442999" symbol="onReceive"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="38" lineNum="358" parent="globals/garmin_sampleView" pc="268443013" symbol="onReceive"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="38" lineNum="359" parent="globals/garmin_sampleView" pc="268443036" symbol="onReceive"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="38" lineNum="360" parent="globals/garmin_sampleView" pc="268443049" symbol="onReceive"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="38" lineNum="361" parent="globals/garmin_sampleView" pc="268443062" symbol="onReceive"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="38" lineNum="362" parent="globals/garmin_sampleView" pc="268443086" symbol="onReceive"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="38" lineNum="364" parent="globals/garmin_sampleView" pc="268443173" symbol="onReceive"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="38" lineNum="366" parent="globals/garmin_sampleView" pc="268443187" symbol="onReceive"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="38" lineNum="367" parent="globals/garmin_sampleView" pc="268443207" symbol="onReceive"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="38" lineNum="368" parent="globals/garmin_sampleView" pc="268443220" symbol="onReceive"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="38" lineNum="370" parent="globals/garmin_sampleView" pc="268443244" symbol="onReceive"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="38" lineNum="372" parent="globals/garmin_sampleView" pc="268443363" symbol="onReceive"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="38" lineNum="375" parent="globals/garmin_sampleView" pc="268443382" symbol="onReceive"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="39" lineNum="381" parent="globals/garmin_sampleView" pc="268443399" symbol="onHide"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="40" lineNum="45" parent="globals/garmin_sampleView" pc="268445504" symbol="&lt;init&gt;"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="41" lineNum="45" parent="globals/garmin_sampleView/statics" pc="268445523" symbol="&lt;init&gt;"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleView.mc" id="41" lineNum="45" parent="globals/garmin_sampleView" pc="268445504" symbol="&lt;init&gt;"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="43" lineNum="12" parent="globals/MainMenuDelegate" pc="268443404" symbol="initialize"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="43" lineNum="13" parent="globals/MainMenuDelegate" pc="268443408" symbol="initialize"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="43" lineNum="14" parent="globals/MainMenuDelegate" pc="268443418" symbol="initialize"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="44" lineNum="17" parent="globals/MainMenuDelegate" pc="268443437" symbol="onSelect"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="44" lineNum="18" parent="globals/MainMenuDelegate" pc="268443441" symbol="onSelect"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="44" lineNum="19" parent="globals/MainMenuDelegate" pc="268443464" symbol="onSelect"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="44" lineNum="20" parent="globals/MainMenuDelegate" pc="268443477" symbol="onSelect"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="44" lineNum="21" parent="globals/MainMenuDelegate" pc="268443526" symbol="onSelect"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="44" lineNum="22" parent="globals/MainMenuDelegate" pc="268443558" symbol="onSelect"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="44" lineNum="23" parent="globals/MainMenuDelegate" pc="268443590" symbol="onSelect"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="44" lineNum="24" parent="globals/MainMenuDelegate" pc="268443639" symbol="onSelect"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="44" lineNum="25" parent="globals/MainMenuDelegate" pc="268443671" symbol="onSelect"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="44" lineNum="26" parent="globals/MainMenuDelegate" pc="268443703" symbol="onSelect"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="44" lineNum="27" parent="globals/MainMenuDelegate" pc="268443752" symbol="onSelect"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="44" lineNum="28" parent="globals/MainMenuDelegate" pc="268443784" symbol="onSelect"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="44" lineNum="30" parent="globals/MainMenuDelegate" pc="268443819" symbol="onSelect"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="44" lineNum="31" parent="globals/MainMenuDelegate" pc="268443842" symbol="onSelect"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="44" lineNum="32" parent="globals/MainMenuDelegate" pc="268443860" symbol="onSelect"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="45" lineNum="6" parent="globals/MainMenuDelegate" pc="268445573" symbol="&lt;init&gt;"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="45" lineNum="6" parent="globals/MainMenuDelegate" pc="268445573" symbol="&lt;init&gt;"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="46" lineNum="39" parent="globals/garmin_sampleDelegate" pc="268443892" symbol="initialize"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="46" lineNum="40" parent="globals/garmin_sampleDelegate" pc="268443896" symbol="initialize"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="46" lineNum="41" parent="globals/garmin_sampleDelegate" pc="268443906" symbol="initialize"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="47" lineNum="43" parent="globals/garmin_sampleDelegate" pc="268443929" symbol="onNextPage"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="47" lineNum="44" parent="globals/garmin_sampleDelegate" pc="268443933" symbol="onNextPage"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="47" lineNum="45" parent="globals/garmin_sampleDelegate" pc="268443971" symbol="onNextPage"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="47" lineNum="47" parent="globals/garmin_sampleDelegate" pc="268443999" symbol="onNextPage"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="47" lineNum="49" parent="globals/garmin_sampleDelegate" pc="268444018" symbol="onNextPage"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="47" lineNum="50" parent="globals/garmin_sampleDelegate" pc="268444034" symbol="onNextPage"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="48" lineNum="52" parent="globals/garmin_sampleDelegate" pc="268444038" symbol="onPreviousPage"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="48" lineNum="53" parent="globals/garmin_sampleDelegate" pc="268444042" symbol="onPreviousPage"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="48" lineNum="54" parent="globals/garmin_sampleDelegate" pc="268444065" symbol="onPreviousPage"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="48" lineNum="56" parent="globals/garmin_sampleDelegate" pc="268444093" symbol="onPreviousPage"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="48" lineNum="58" parent="globals/garmin_sampleDelegate" pc="268444127" symbol="onPreviousPage"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="48" lineNum="59" parent="globals/garmin_sampleDelegate" pc="268444143" symbol="onPreviousPage"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="49" lineNum="62" parent="globals/garmin_sampleDelegate" pc="268444147" symbol="makeRequest"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="49" lineNum="63" parent="globals/garmin_sampleDelegate" pc="268444151" symbol="makeRequest"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="49" lineNum="70" parent="globals/garmin_sampleDelegate" pc="268444239" symbol="makeRequest"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="49" lineNum="71" parent="globals/garmin_sampleDelegate" pc="268444246" symbol="makeRequest"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="49" lineNum="72" parent="globals/garmin_sampleDelegate" pc="268444253" symbol="makeRequest"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="50" lineNum="84" parent="globals/garmin_sampleDelegate" pc="268444373" symbol="onReceive"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="50" lineNum="87" parent="globals/garmin_sampleDelegate" pc="268444377" symbol="onReceive"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="50" lineNum="88" parent="globals/garmin_sampleDelegate" pc="268444388" symbol="onReceive"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="50" lineNum="89" parent="globals/garmin_sampleDelegate" pc="268444411" symbol="onReceive"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="50" lineNum="91" parent="globals/garmin_sampleDelegate" pc="268444431" symbol="onReceive"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="50" lineNum="93" parent="globals/garmin_sampleDelegate" pc="268444457" symbol="onReceive"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="51" lineNum="97" parent="globals/garmin_sampleDelegate" pc="268444493" symbol="onMenu"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="51" lineNum="98" parent="globals/garmin_sampleDelegate" pc="268444497" symbol="onMenu"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="51" lineNum="99" parent="globals/garmin_sampleDelegate" pc="268444544" symbol="onMenu"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="51" lineNum="101" parent="globals/garmin_sampleDelegate" pc="268444544" symbol="onMenu"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="51" lineNum="102" parent="globals/garmin_sampleDelegate" pc="268444566" symbol="onMenu"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="51" lineNum="103" parent="globals/garmin_sampleDelegate" pc="268444588" symbol="onMenu"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="51" lineNum="104" parent="globals/garmin_sampleDelegate" pc="268444602" symbol="onMenu"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="51" lineNum="105" parent="globals/garmin_sampleDelegate" pc="268444627" symbol="onMenu"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="51" lineNum="106" parent="globals/garmin_sampleDelegate" pc="268444641" symbol="onMenu"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="51" lineNum="108" parent="globals/garmin_sampleDelegate" pc="268444666" symbol="onMenu"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="51" lineNum="116" parent="globals/garmin_sampleDelegate" pc="268444746" symbol="onMenu"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="51" lineNum="125" parent="globals/garmin_sampleDelegate" pc="268444814" symbol="onMenu"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="51" lineNum="126" parent="globals/garmin_sampleDelegate" pc="268444840" symbol="onMenu"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="51" lineNum="128" parent="globals/garmin_sampleDelegate" pc="268444872" symbol="onMenu"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="52" lineNum="131" parent="globals/garmin_sampleDelegate" pc="268444876" symbol="onStateUpdated"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="52" lineNum="132" parent="globals/garmin_sampleDelegate" pc="268444880" symbol="onStateUpdated"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="53" lineNum="135" parent="globals/garmin_sampleDelegate" pc="268444897" symbol="onSelect"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="53" lineNum="136" parent="globals/garmin_sampleDelegate" pc="268444901" symbol="onSelect"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="53" lineNum="137" parent="globals/garmin_sampleDelegate" pc="268444913" symbol="onSelect"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="54" lineNum="37" parent="globals/garmin_sampleDelegate" pc="268445483" symbol="&lt;init&gt;"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/garmin_sampleDelegate.mc" id="54" lineNum="37" parent="globals/garmin_sampleDelegate" pc="268445483" symbol="&lt;init&gt;"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/BCTidesModel.mc" id="56" lineNum="10" parent="globals/BCTidesModel" pc="268445503" symbol="&lt;init&gt;"/>
+        <entry filename="/home/bains/garmin_test/garmin_sample/source/BCTidesModel.mc" id="57" lineNum="10" parent="globals/BCTidesModel" pc="268444917" symbol="initialize"/>
+        <entry filename="Rez" id="59" lineNum="2" parent="globals/Rez/Drawables" pc="268445548" symbol="&lt;init&gt;"/>
+        <entry filename="Rez" id="60" lineNum="6" parent="globals/Rez/Fonts" pc="268445569" symbol="&lt;init&gt;"/>
+        <entry filename="Rez" id="61" lineNum="8" parent="globals/Rez/JsonData" pc="268445571" symbol="&lt;init&gt;"/>
+        <entry filename="Rez" id="62" lineNum="17" parent="globals/Rez/Layouts" pc="268444920" symbol="MainLayout"/>
+        <entry filename="Rez" id="62" lineNum="19" parent="globals/Rez/Layouts" pc="268444932" symbol="MainLayout"/>
+        <entry filename="Rez" id="62" lineNum="20" parent="globals/Rez/Layouts" pc="268445058" symbol="MainLayout"/>
+        <entry filename="Rez" id="62" lineNum="21" parent="globals/Rez/Layouts" pc="268445184" symbol="MainLayout"/>
+        <entry filename="Rez" id="62" lineNum="23" parent="globals/Rez/Layouts" pc="268445310" symbol="MainLayout"/>
+        <entry filename="Rez" id="63" lineNum="10" parent="globals/Rez/Layouts" pc="268445570" symbol="&lt;init&gt;"/>
+        <entry filename="Rez" id="64" lineNum="37" parent="globals/Rez/Menus/MainMenu" pc="268445348" symbol="initialize"/>
+        <entry filename="Rez" id="64" lineNum="38" parent="globals/Rez/Menus/MainMenu" pc="268445352" symbol="initialize"/>
+        <entry filename="Rez" id="64" lineNum="39" parent="globals/Rez/Menus/MainMenu" pc="268445370" symbol="initialize"/>
+        <entry filename="Rez" id="64" lineNum="40" parent="globals/Rez/Menus/MainMenu" pc="268445426" symbol="initialize"/>
+        <entry filename="Rez" id="65" lineNum="35" parent="globals/Rez/Menus/MainMenu" pc="268445550" symbol="&lt;init&gt;"/>
+        <entry filename="Rez" id="65" lineNum="35" parent="globals/Rez/Menus/MainMenu" pc="268445550" symbol="&lt;init&gt;"/>
+        <entry filename="Rez" id="66" lineNum="28" parent="globals/Rez/Menus" pc="268445549" symbol="&lt;init&gt;"/>
+        <entry filename="Rez" id="67" lineNum="46" parent="globals/Rez/Strings" pc="268445572" symbol="&lt;init&gt;"/>
+        <entry filename="Rez" id="68" lineNum="1" parent="globals/Rez" pc="268445524" symbol="&lt;init&gt;"/>
+        <entry filename="Rez" id="68" lineNum="1" parent="globals/Rez" pc="268445524" symbol="&lt;init&gt;"/>
+    </pcToLineNum>
+    <symbolTable>
+        <entry id="8388639" module="true" symbol="Graphics"/>
+        <entry id="8389346" symbol="text"/>
+        <entry field="true" id="80" symbol="&lt;globals/PageIndicator/&lt;&gt;_color&gt;"/>
+        <entry field="true" id="68" symbol="MainMenuLabel_favorites"/>
+        <entry field="true" id="39" symbol="mPosition"/>
+        <entry id="8388632" method="true" symbol="&lt;init&gt;"/>
+        <entry field="true" id="8391333" symbol="delegate"/>
+        <entry field="true" id="12" symbol="ALIGN_CENTER_RIGHT"/>
+        <entry id="5" module="true" symbol="globals/Rez/Menus"/>
+        <entry id="25" object="true" symbol="BCTidesModel"/>
+        <entry field="true" id="64" symbol="MainMenuLabel_nearby"/>
+        <entry id="8388638" module="true" symbol="ActivityRecording"/>
+        <entry id="62" method="true" symbol="MainLayout"/>
+        <entry id="8389683" method="true" symbol="onSettingsChanged"/>
+        <entry id="23" object="true" symbol="MainMenuDelegate"/>
+        <entry id="24" object="true" symbol="garmin_sampleDelegate"/>
+        <entry field="true" id="67" symbol="unitsSettingMetric"/>
+        <entry field="true" id="8388938" symbol="month"/>
+        <entry field="true" id="43" symbol="&lt;globals/garmin_sampleView/&lt;&gt;_time_str&gt;"/>
+        <entry id="8390424" module="true" symbol="Storage"/>
+        <entry field="true" id="79" symbol="&lt;globals/PageIndicator/&lt;&gt;_size&gt;"/>
+        <entry id="46" method="true" symbol="onPosition"/>
+        <entry field="true" id="36" symbol="&lt;globals/PageIndicatorRad/&lt;&gt;_margin&gt;"/>
+        <entry id="8388924" module="true" symbol="Gregorian"/>
+        <entry id="49" method="true" symbol="graphTides"/>
+        <entry field="true" id="74" symbol="&lt;globals/MainMenuDelegate/&lt;&gt;_parent&gt;"/>
+        <entry field="true" id="8388611" module="true" symbol="Toybox"/>
+        <entry field="true" id="45" symbol="mPageCount"/>
+        <entry field="true" id="37" symbol="mIndicatorRad"/>
+        <entry field="true" id="29" symbol="mView"/>
+        <entry field="true" id="57" symbol="FEET_PER_METER"/>
+        <entry field="true" id="42" symbol="app"/>
+        <entry id="51" method="true" symbol="getHeightAtT"/>
+        <entry field="true" id="71" symbol="AppName"/>
+        <entry id="9" module="true" symbol="globals/Rez/Strings"/>
+        <entry id="8389594" symbol="headers"/>
+        <entry id="8389080" method="true" symbol="onMenu"/>
+        <entry id="8388772" module="true" object="true" symbol="Fonts"/>
+        <entry id="8388631" module="true" symbol="Activity"/>
+        <entry id="84" symbol="favorites"/>
+        <entry id="8389338" symbol="minute"/>
+        <entry id="8388648" module="true" symbol="WatchUi"/>
+        <entry field="true" id="73" symbol="MENU_GET_DATA"/>
+        <entry field="true" id="77" symbol="&lt;globals/PageIndicatorArc/&lt;&gt;_alignment&gt;"/>
+        <entry id="8390425" module="true" symbol="Properties"/>
+        <entry id="3" module="true" symbol="globals/Rez"/>
+        <entry field="true" id="40" symbol="needGPS"/>
+        <entry id="8389124" method="true" symbol="onUpdate"/>
+        <entry field="true" id="8389065" symbol="locY"/>
+        <entry field="true" id="8389064" symbol="locX"/>
+        <entry id="17" object="true" symbol="PageIndicator"/>
+        <entry field="true" id="8391461" symbol="isGlanceModeEnabled"/>
+        <entry id="8388771" module="true" object="true" symbol="Drawables"/>
+        <entry id="8389348" symbol="font"/>
+        <entry field="true" id="19" symbol="UNITS_PROP_METRIC"/>
+        <entry id="8389079" method="true" symbol="onPreviousPage"/>
+        <entry id="59" module="true" symbol="Menus"/>
+        <entry id="8389275" method="true" symbol="getApp"/>
+        <entry id="7" module="true" symbol="globals/Rez/Layouts"/>
+        <entry field="true" id="66" symbol="unitsSettingImperial"/>
+        <entry id="8389122" method="true" symbol="onLayout"/>
+        <entry field="true" id="69" symbol="unitsSettingSystem"/>
+        <entry id="56" method="true" symbol="formatDateString"/>
+        <entry field="true" id="8389063" symbol="identifier"/>
+        <entry id="8389349" symbol="justification"/>
+        <entry field="true" id="72" symbol="MENU_SETTINGS_UNITS_ID"/>
+        <entry field="true" id="35" symbol="&lt;globals/PageIndicatorRad/&lt;&gt;_alignment&gt;"/>
+        <entry field="true" id="28" symbol="hilo_updated"/>
+        <entry id="30" method="true" symbol="makeRequest"/>
+        <entry id="15" object="true" symbol="PageIndicatorArc"/>
+        <entry id="48" method="true" symbol="drawSinusoid"/>
+        <entry field="true" id="18" symbol="UNITS_PROP_SYSTEM"/>
+        <entry id="8" module="true" symbol="globals/Rez/JsonData"/>
+        <entry field="true" id="20" symbol="UNITS_PROP_IMPERIAL"/>
+        <entry field="true" id="34" symbol="&lt;globals/PageIndicatorRad/&lt;&gt;_color&gt;"/>
+        <entry id="2" module="true" symbol="globals/garmin_sampleView"/>
+        <entry id="4" module="true" symbol="globals/Rez/Drawables"/>
+        <entry id="10" object="true" symbol="garmin_sampleApp"/>
+        <entry id="61" object="true" symbol="MainMenu"/>
+        <entry id="8389844" symbol="responseType"/>
+        <entry field="true" id="44" symbol="mPage"/>
+        <entry field="true" id="41" symbol="&lt;globals/garmin_sampleView/&lt;&gt;_message&gt;"/>
+        <entry field="true" id="63" symbol="unitsSettingPrompt"/>
+        <entry id="22" object="true" symbol="garmin_sampleView"/>
+        <entry id="21" object="true" symbol="MyGlanceView"/>
+        <entry id="8388786" method="true" symbol="method"/>
+        <entry id="8388644" module="true" symbol="System"/>
+        <entry field="true" id="27" symbol="_hilo"/>
+        <entry field="true" id="14" symbol="ALIGN_TOP_CENTER"/>
+        <entry id="8389619" method="true" symbol="onSelect"/>
+        <entry id="8388645" module="true" symbol="Time"/>
+        <entry id="8388769" module="true" object="true" symbol="Rez"/>
+        <entry id="31" method="true" symbol="onReceive"/>
+        <entry field="true" id="8388720" symbol="hour"/>
+        <entry id="8388640" module="true" symbol="Lang"/>
+        <entry id="8390088" module="true" object="true" symbol="JsonData"/>
+        <entry field="true" id="65" symbol="unitsSettingTitle"/>
+        <entry id="8389068" method="true" symbol="draw"/>
+        <entry field="true" id="70" symbol="appVersionTitle"/>
+        <entry field="true" id="60" symbol="LauncherIcon"/>
+        <entry id="8388610" symbol="statics"/>
+        <entry id="8389123" method="true" symbol="onShow"/>
+        <entry field="true" id="78" symbol="&lt;globals/PageIndicatorArc/&lt;&gt;_margin&gt;"/>
+        <entry id="8388643" module="true" symbol="Sensor"/>
+        <entry field="true" id="82" symbol="&lt;globals/PageIndicator/&lt;&gt;_margin&gt;"/>
+        <entry id="32" method="true" symbol="onStateUpdated"/>
+        <entry id="8389350" module="true" symbol="globals"/>
+        <entry id="8388770" module="true" object="true" symbol="Strings"/>
+        <entry id="8388702" method="true" symbol="initialize"/>
+        <entry id="8389279" method="true" symbol="onStart"/>
+        <entry field="true" id="76" symbol="&lt;globals/PageIndicatorArc/&lt;&gt;_color&gt;"/>
+        <entry id="8389780" module="true" symbol="FitContributor"/>
+        <entry field="true" id="26" symbol="view"/>
+        <entry id="83" symbol="nearby"/>
+        <entry id="8388641" module="true" symbol="Math"/>
+        <entry field="true" id="13" symbol="ALIGN_BOTTOM_CENTER"/>
+        <entry id="8391701" method="true" symbol="setAntiAlias"/>
+        <entry field="true" id="33" symbol="&lt;globals/PageIndicatorRad/&lt;&gt;_size&gt;"/>
+        <entry id="8389280" method="true" symbol="getInitialView"/>
+        <entry id="8389281" method="true" symbol="onStop"/>
+        <entry id="50" method="true" symbol="getLabelForT"/>
+        <entry field="true" id="8388939" symbol="day"/>
+        <entry field="true" id="8388940" symbol="year"/>
+        <entry id="8388646" module="true" object="true" symbol="Timer"/>
+        <entry id="58" module="true" symbol="Layouts"/>
+        <entry id="8388636" module="true" symbol="Attention"/>
+        <entry id="53" method="true" symbol="getToDateString"/>
+        <entry field="true" id="75" symbol="&lt;globals/PageIndicatorArc/&lt;&gt;_size&gt;"/>
+        <entry id="55" method="true" symbol="formatDateStringShort"/>
+        <entry id="8388642" module="true" symbol="Position"/>
+        <entry field="true" id="11" symbol="ALIGN_CENTER_LEFT"/>
+        <entry id="16" object="true" symbol="PageIndicatorRad"/>
+        <entry id="6" module="true" symbol="globals/Rez/Fonts"/>
+        <entry id="54" method="true" symbol="parseDateString"/>
+        <entry id="8391457" method="true" symbol="getGlanceView"/>
+        <entry id="8389125" method="true" symbol="onHide"/>
+        <entry id="47" method="true" symbol="getUnits"/>
+        <entry id="8389078" method="true" symbol="onNextPage"/>
+        <entry id="8388635" module="true" symbol="Application"/>
+        <entry field="true" id="8389642" symbol="title"/>
+        <entry id="52" method="true" symbol="getFromDateString"/>
+        <entry field="true" id="38" symbol="mIndicatorL"/>
+        <entry field="true" id="81" symbol="&lt;globals/PageIndicator/&lt;&gt;_alignment&gt;"/>
+    </symbolTable>
+    <localVars>
+        <entry arg="true" endPc="268435582" name="state" stackId="1" startPc="268435534"/>
+        <entry arg="true" endPc="268435646" name="state" stackId="1" startPc="268435583"/>
+        <entry arg="true" endPc="268436450" name="color" stackId="2" startPc="268436406"/>
+        <entry arg="true" endPc="268436450" name="size" stackId="1" startPc="268436406"/>
+        <entry arg="true" endPc="268436450" name="margin" stackId="4" startPc="268436406"/>
+        <entry arg="true" endPc="268436450" name="alignment" stackId="3" startPc="268436406"/>
+        <entry endPc="268437084" name="j" stackId="11" startPc="268437002"/>
+        <entry endPc="268437084" name="degreeStart" stackId="10" startPc="268436763"/>
+        <entry endPc="268437097" name="i" stackId="9" startPc="268436763"/>
+        <entry endPc="268437097" name="radius" stackId="5" startPc="268436455"/>
+        <entry endPc="268437097" name="sweep_deg" stackId="7" startPc="268436455"/>
+        <entry endPc="268437097" name="diameter" stackId="3" startPc="268436455"/>
+        <entry endPc="268437097" name="start_deg" stackId="8" startPc="268436455"/>
+        <entry endPc="268437097" name="spacing_deg" stackId="6" startPc="268436455"/>
+        <entry endPc="268437097" name="spacing" stackId="4" startPc="268436455"/>
+        <entry arg="true" endPc="268437098" name="selectedIndex" stackId="2" startPc="268436451"/>
+        <entry arg="true" endPc="268437098" name="dc" stackId="1" startPc="268436451"/>
+        <entry arg="true" endPc="268437143" name="color" stackId="2" startPc="268437099"/>
+        <entry arg="true" endPc="268437143" name="size" stackId="1" startPc="268437099"/>
+        <entry arg="true" endPc="268437143" name="margin" stackId="4" startPc="268437099"/>
+        <entry arg="true" endPc="268437143" name="alignment" stackId="3" startPc="268437099"/>
+        <entry endPc="268437800" name="deg" stackId="12" startPc="268437509"/>
+        <entry endPc="268437813" name="i" stackId="11" startPc="268437509"/>
+        <entry endPc="268437813" name="radius" stackId="7" startPc="268437148"/>
+        <entry endPc="268437813" name="x" stackId="5" startPc="268437148"/>
+        <entry endPc="268437813" name="spacing_rad" stackId="8" startPc="268437148"/>
+        <entry endPc="268437813" name="diameter" stackId="3" startPc="268437148"/>
+        <entry endPc="268437813" name="start_deg" stackId="10" startPc="268437148"/>
+        <entry endPc="268437813" name="sweep_rad" stackId="9" startPc="268437148"/>
+        <entry endPc="268437813" name="y" stackId="6" startPc="268437148"/>
+        <entry endPc="268437813" name="spacing" stackId="4" startPc="268437148"/>
+        <entry arg="true" endPc="268437814" name="selectedIndex" stackId="2" startPc="268437144"/>
+        <entry arg="true" endPc="268437814" name="dc" stackId="1" startPc="268437144"/>
+        <entry arg="true" endPc="268437859" name="color" stackId="2" startPc="268437815"/>
+        <entry arg="true" endPc="268437859" name="size" stackId="1" startPc="268437815"/>
+        <entry arg="true" endPc="268437859" name="margin" stackId="4" startPc="268437815"/>
+        <entry arg="true" endPc="268437859" name="alignment" stackId="3" startPc="268437815"/>
+        <entry endPc="268438478" name="tempY" stackId="10" startPc="268438308"/>
+        <entry endPc="268438478" name="tempX" stackId="9" startPc="268438308"/>
+        <entry endPc="268438491" name="i" stackId="8" startPc="268438308"/>
+        <entry endPc="268438491" name="x" stackId="6" startPc="268437864"/>
+        <entry endPc="268438491" name="diameter" stackId="3" startPc="268437864"/>
+        <entry endPc="268438491" name="length" stackId="5" startPc="268437864"/>
+        <entry endPc="268438491" name="y" stackId="7" startPc="268437864"/>
+        <entry endPc="268438491" name="spacing" stackId="4" startPc="268437864"/>
+        <entry arg="true" endPc="268438492" name="selectedIndex" stackId="2" startPc="268437860"/>
+        <entry arg="true" endPc="268438492" name="dc" stackId="1" startPc="268437860"/>
+        <entry arg="true" endPc="268436337" name="dc" stackId="1" startPc="268435969"/>
+        <entry arg="true" endPc="268438588" name="the_app" stackId="1" startPc="268438493"/>
+        <entry arg="true" endPc="268438691" name="info" stackId="1" startPc="268438589"/>
+        <entry arg="true" endPc="268438872" name="dc" stackId="1" startPc="268438692"/>
+        <entry endPc="268439007" name="setting" stackId="1" startPc="268438898"/>
+        <entry endPc="268439221" name="this_y" stackId="12" startPc="268439145"/>
+        <entry endPc="268439221" name="this_x" stackId="11" startPc="268439145"/>
+        <entry endPc="268439234" name="i" stackId="10" startPc="268439145"/>
+        <entry endPc="268439234" name="last_x" stackId="8" startPc="268439013"/>
+        <entry endPc="268439234" name="h_f" stackId="6" startPc="268439013"/>
+        <entry endPc="268439234" name="start_x" stackId="7" startPc="268439013"/>
+        <entry endPc="268439234" name="last_y" stackId="9" startPc="268439013"/>
+        <entry arg="true" endPc="268439235" name="x" stackId="2" startPc="268439009"/>
+        <entry arg="true" endPc="268439235" name="w" stackId="4" startPc="268439009"/>
+        <entry arg="true" endPc="268439235" name="dc" stackId="1" startPc="268439009"/>
+        <entry arg="true" endPc="268439235" name="h" stackId="5" startPc="268439009"/>
+        <entry arg="true" endPc="268439235" name="y" stackId="3" startPc="268439009"/>
+        <entry endPc="268439789" name="h_label" stackId="19" startPc="268439507"/>
+        <entry endPc="268439822" name="this_y" stackId="18" startPc="268439407"/>
+        <entry endPc="268439822" name="l" stackId="17" startPc="268439407"/>
+        <entry endPc="268439822" name="this_x" stackId="16" startPc="268439407"/>
+        <entry endPc="268439835" name="i" stackId="15" startPc="268439407"/>
+        <entry endPc="268439835" name="height" stackId="13" startPc="268439240"/>
+        <entry endPc="268439835" name="duration_per_pixel" stackId="9" startPc="268439240"/>
+        <entry endPc="268439835" name="start_x" stackId="10" startPc="268439240"/>
+        <entry endPc="268439835" name="current_t" stackId="12" startPc="268439240"/>
+        <entry endPc="268439835" name="margin" stackId="8" startPc="268439240"/>
+        <entry endPc="268439835" name="last_y" stackId="14" startPc="268439240"/>
+        <entry endPc="268439835" name="last_label_x" stackId="11" startPc="268439240"/>
+        <entry arg="true" endPc="268439836" name="x" stackId="2" startPc="268439236"/>
+        <entry arg="true" endPc="268439836" name="end" stackId="7" startPc="268439236"/>
+        <entry arg="true" endPc="268439836" name="w" stackId="4" startPc="268439236"/>
+        <entry arg="true" endPc="268439836" name="dc" stackId="1" startPc="268439236"/>
+        <entry arg="true" endPc="268439836" name="h" stackId="5" startPc="268439236"/>
+        <entry arg="true" endPc="268439836" name="start" stackId="6" startPc="268439236"/>
+        <entry arg="true" endPc="268439836" name="y" stackId="3" startPc="268439236"/>
+        <entry endPc="268440054" name="i" stackId="7" startPc="268439899"/>
+        <entry endPc="268440176" name="h2" stackId="6" startPc="268439841"/>
+        <entry endPc="268440176" name="h1" stackId="5" startPc="268439841"/>
+        <entry endPc="268440176" name="t2" stackId="4" startPc="268439841"/>
+        <entry endPc="268440176" name="t1" stackId="3" startPc="268439841"/>
+        <entry arg="true" endPc="268440177" name="t" stackId="1" startPc="268439837"/>
+        <entry arg="true" endPc="268440177" name="d" stackId="2" startPc="268439837"/>
+        <entry endPc="268440413" name="i" stackId="10" startPc="268440266"/>
+        <entry endPc="268440645" name="D" stackId="15" startPc="268440182"/>
+        <entry endPc="268440645" name="C" stackId="14" startPc="268440182"/>
+        <entry endPc="268440645" name="d_" stackId="5" startPc="268440182"/>
+        <entry endPc="268440645" name="A" stackId="11" startPc="268440182"/>
+        <entry endPc="268440645" name="h" stackId="16" startPc="268440182"/>
+        <entry endPc="268440645" name="t2" stackId="7" startPc="268440182"/>
+        <entry endPc="268440645" name="t1" stackId="6" startPc="268440182"/>
+        <entry endPc="268440645" name="t_" stackId="4" startPc="268440182"/>
+        <entry endPc="268440645" name="B_n" stackId="12" startPc="268440182"/>
+        <entry endPc="268440645" name="h2" stackId="9" startPc="268440182"/>
+        <entry endPc="268440645" name="h1" stackId="8" startPc="268440182"/>
+        <entry endPc="268440645" name="B_d" stackId="13" startPc="268440182"/>
+        <entry arg="true" endPc="268440646" name="t" stackId="1" startPc="268440178"/>
+        <entry arg="true" endPc="268440646" name="p" stackId="3" startPc="268440178"/>
+        <entry arg="true" endPc="268440646" name="d" stackId="2" startPc="268440178"/>
+        <entry endPc="268440775" name="duration_8h" stackId="1" startPc="268440651"/>
+        <entry endPc="268440775" name="from_utc" stackId="3" startPc="268440651"/>
+        <entry endPc="268440775" name="from" stackId="2" startPc="268440651"/>
+        <entry endPc="268440930" name="to_utc" stackId="3" startPc="268440781"/>
+        <entry endPc="268440930" name="to" stackId="2" startPc="268440781"/>
+        <entry endPc="268440930" name="duration_7d_6h" stackId="1" startPc="268440781"/>
+        <entry endPc="268441203" name="hour" stackId="5" startPc="268440936"/>
+        <entry endPc="268441203" name="day" stackId="4" startPc="268440936"/>
+        <entry endPc="268441203" name="options" stackId="8" startPc="268440936"/>
+        <entry endPc="268441203" name="second" stackId="7" startPc="268440936"/>
+        <entry endPc="268441203" name="year" stackId="2" startPc="268440936"/>
+        <entry endPc="268441203" name="month" stackId="3" startPc="268440936"/>
+        <entry endPc="268441203" name="minute" stackId="6" startPc="268440936"/>
+        <entry arg="true" endPc="268441204" name="str" stackId="1" startPc="268440932"/>
+        <entry endPc="268441388" name="info" stackId="2" startPc="268441209"/>
+        <entry arg="true" endPc="268441389" name="moment" stackId="1" startPc="268441205"/>
+        <entry arg="true" endPc="268441559" name="info" stackId="1" startPc="268441390"/>
+        <entry endPc="268442030" name="loc" stackId="2" startPc="268441898"/>
+        <entry endPc="268442131" name="days" stackId="4" startPc="268442068"/>
+        <entry endPc="268442360" name="days" stackId="6" startPc="268442261"/>
+        <entry endPc="268442536" name="x1" stackId="7" startPc="268442468"/>
+        <entry endPc="268442860" name="height" stackId="11" startPc="268442709"/>
+        <entry endPc="268442860" name="units" stackId="10" startPc="268442709"/>
+        <entry endPc="268442863" name="duration_2h" stackId="8" startPc="268442451"/>
+        <entry endPc="268442863" name="duration_22h" stackId="9" startPc="268442451"/>
+        <entry endPc="268442937" name="now" stackId="3" startPc="268441564"/>
+        <entry endPc="268442937" name="dateInfo" stackId="5" startPc="268441564"/>
+        <entry arg="true" endPc="268442938" name="dc" stackId="1" startPc="268441560"/>
+        <entry endPc="268443169" name="i" stackId="3" startPc="268443086"/>
+        <entry endPc="268443169" name="keys" stackId="2" startPc="268443013"/>
+        <entry endPc="268443362" name="i" stackId="4" startPc="268443244"/>
+        <entry arg="true" endPc="268443398" name="args" stackId="1" startPc="268442939"/>
+        <entry arg="true" endPc="268443436" name="parent" stackId="1" startPc="268443404"/>
+        <entry endPc="268443815" name="subLabel" stackId="2" startPc="268443464"/>
+        <entry arg="true" endPc="268443891" name="item" stackId="1" startPc="268443437"/>
+        <entry arg="true" endPc="268443928" name="view" stackId="1" startPc="268443892"/>
+        <entry endPc="268444371" name="kits" stackId="2" startPc="268444151"/>
+        <entry endPc="268444371" name="options" stackId="1" startPc="268444151"/>
+        <entry endPc="268444371" name="vanc" stackId="3" startPc="268444151"/>
+        <entry arg="true" endPc="268444492" name="responseCode" stackId="1" startPc="268444373"/>
+        <entry arg="true" endPc="268444492" name="data" stackId="2" startPc="268444373"/>
+        <entry endPc="268444874" name="setting" stackId="3" startPc="268444497"/>
+        <entry endPc="268444874" name="delegate" stackId="2" startPc="268444497"/>
+        <entry endPc="268444874" name="unitsSub" stackId="4" startPc="268444497"/>
+        <entry endPc="268444874" name="menu" stackId="1" startPc="268444497"/>
+        <entry arg="true" endPc="268444896" name="state" stackId="1" startPc="268444876"/>
+        <entry endPc="268445346" name="rez_cmp_local_text_loc1" stackId="4" startPc="268444932"/>
+        <entry endPc="268445346" name="rez_cmp_local_text_loc0" stackId="3" startPc="268444932"/>
+        <entry endPc="268445346" name="rez_cmp_local_text_stationTitle" stackId="2" startPc="268444932"/>
+        <entry arg="true" endPc="268445347" name="dc" stackId="1" startPc="268444920"/>
+    </localVars>
+    <annotations>
+        <annotationEntry annotation="initialized" class="Drawables" module="globals/Rez" symbol="LauncherIcon"/>
+        <annotationEntry annotation="initialized" class="Strings" module="globals/Rez" symbol="unitsSettingPrompt"/>
+        <annotationEntry annotation="initialized" class="Strings" module="globals/Rez" symbol="MainMenuLabel_nearby"/>
+        <annotationEntry annotation="initialized" class="Strings" module="globals/Rez" symbol="unitsSettingTitle"/>
+        <annotationEntry annotation="initialized" class="Strings" module="globals/Rez" symbol="unitsSettingImperial"/>
+        <annotationEntry annotation="initialized" class="Strings" module="globals/Rez" symbol="unitsSettingMetric"/>
+        <annotationEntry annotation="initialized" class="Strings" module="globals/Rez" symbol="MainMenuLabel_favorites"/>
+        <annotationEntry annotation="initialized" class="Strings" module="globals/Rez" symbol="unitsSettingSystem"/>
+        <annotationEntry annotation="initialized" class="Strings" module="globals/Rez" symbol="appVersionTitle"/>
+        <annotationEntry annotation="initialized" class="Strings" module="globals/Rez" symbol="AppName"/>
+    </annotations>
+    <dataEntryOffsetMappings>
+        <dataEntry label="globals" offset="95" parentId="" symbolId="globals" type="module"/>
+        <dataEntry label="globals/MyGlanceView" offset="278" parentId="globals" symbolId="MyGlanceView" type="class"/>
+        <dataEntry label="globals/garmin_sampleApp" offset="333" parentId="globals" symbolId="garmin_sampleApp" type="class"/>
+        <dataEntry label="globals/garmin_sampleDelegate" offset="535" parentId="globals" symbolId="garmin_sampleDelegate" type="class"/>
+        <dataEntry label="globals/PageIndicatorRad" offset="646" parentId="globals" symbolId="PageIndicatorRad" type="class"/>
+        <dataEntry label="globals/BCTidesModel" offset="733" parentId="globals" symbolId="BCTidesModel" type="class"/>
+        <dataEntry label="globals/garmin_sampleView" offset="780" parentId="globals" symbolId="garmin_sampleView" type="class"/>
+        <dataEntry label="globals/garmin_sampleView/statics" offset="1027" parentId="globals" symbolId="globals/garmin_sampleView" type="class"/>
+        <dataEntry label="globals/Rez" offset="1066" parentId="globals" symbolId="Rez" type="module"/>
+        <dataEntry label="globals/Rez/Drawables" offset="1145" parentId="Rez" symbolId="Drawables" type="module"/>
+        <dataEntry label="globals/Rez/Menus" offset="1184" parentId="Rez" symbolId="Menus" type="module"/>
+        <dataEntry label="globals/Rez/Menus/MainMenu" offset="1223" parentId="Menus" symbolId="MainMenu" type="class"/>
+        <dataEntry label="globals/Rez/Fonts" offset="1270" parentId="Rez" symbolId="Fonts" type="module"/>
+        <dataEntry label="globals/Rez/Layouts" offset="1301" parentId="Rez" symbolId="Layouts" type="module"/>
+        <dataEntry label="globals/Rez/JsonData" offset="1340" parentId="Rez" symbolId="JsonData" type="module"/>
+        <dataEntry label="globals/Rez/Strings" offset="1371" parentId="Rez" symbolId="Strings" type="module"/>
+        <dataEntry label="globals/MainMenuDelegate" offset="1474" parentId="globals" symbolId="MainMenuDelegate" type="class"/>
+        <dataEntry label="globals/PageIndicatorArc" offset="1553" parentId="globals" symbolId="PageIndicatorArc" type="class"/>
+        <dataEntry label="globals/PageIndicator" offset="1640" parentId="globals" symbolId="PageIndicator" type="class"/>
+    </dataEntryOffsetMappings>
+    <functions>
+        <functionEntry accessMode="public" endPc="268435533" name="initialize" parent="garmin_sampleApp" startPc="268435456">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268435582" name="onStart" parent="garmin_sampleApp" startPc="268435534">
+            <param id="state"/>
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268435646" name="onStop" parent="garmin_sampleApp" startPc="268435583">
+            <param id="state"/>
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268435690" name="onSettingsChanged" parent="garmin_sampleApp" startPc="268435647">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268435903" name="getInitialView" parent="garmin_sampleApp" startPc="268435691">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268435945" name="getGlanceView" parent="garmin_sampleApp" startPc="268435904">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="protected" endPc="268436376" name="&lt;init&gt;" parent="garmin_sampleApp" startPc="268436358">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268436405" name="getApp" startPc="268436377">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268436450" name="initialize" parent="PageIndicatorArc" startPc="268436406">
+            <param id="size"/>
+            <param id="color"/>
+            <param id="alignment"/>
+            <param id="margin"/>
+            <documentation>
+                <![CDATA[<div class="description"> Constructor<br/> <div class="param"> size Number of pages</div><br/> <div class="param"> color Color to use for the selected page</div><br/> <div class="param"> alignment How to align the graphic</div><br/> <div class="param"> margin Amount of margin for the graphic</div><br/></div>]]>
+            </documentation>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268437098" name="draw" parent="PageIndicatorArc" startPc="268436451">
+            <param id="dc"/>
+            <param id="selectedIndex"/>
+            <documentation>
+                <![CDATA[<div class="description"> Draw the indicator<br/> <div class="param"> dc Device context</div><br/> <div class="param"> selectedIndex The index of the current page</div><br/></div>]]>
+            </documentation>
+        </functionEntry>
+        <functionEntry accessMode="protected" endPc="268445592" name="&lt;init&gt;" parent="PageIndicatorArc" startPc="268445592">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268437143" name="initialize" parent="PageIndicatorRad" startPc="268437099">
+            <param id="size"/>
+            <param id="color"/>
+            <param id="alignment"/>
+            <param id="margin"/>
+            <documentation>
+                <![CDATA[<div class="description"> Constructor<br/> <div class="param"> size Number of pages</div><br/> <div class="param"> color Color to use for the selected page</div><br/> <div class="param"> alignment How to align the graphic</div><br/> <div class="param"> margin Amount of margin for the graphic</div><br/></div>]]>
+            </documentation>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268437814" name="draw" parent="PageIndicatorRad" startPc="268437144">
+            <param id="dc"/>
+            <param id="selectedIndex"/>
+            <documentation>
+                <![CDATA[<div class="description"> Draw the indicator<br/> <div class="param"> dc Device context</div><br/> <div class="param"> selectedIndex The index of the current page</div><br/></div>]]>
+            </documentation>
+        </functionEntry>
+        <functionEntry accessMode="protected" endPc="268445502" name="&lt;init&gt;" parent="PageIndicatorRad" startPc="268445502">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268437859" name="initialize" parent="PageIndicator" startPc="268437815">
+            <param id="size"/>
+            <param id="color"/>
+            <param id="alignment"/>
+            <param id="margin"/>
+            <documentation>
+                <![CDATA[<div class="description"> Constructor<br/> <div class="param"> size Number of pages</div><br/> <div class="param"> color Color to use for the selected page</div><br/> <div class="param"> alignment How to align the graphic</div><br/> <div class="param"> margin Amount of margin for the graphic</div><br/></div>]]>
+            </documentation>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268438492" name="draw" parent="PageIndicator" startPc="268437860">
+            <param id="dc"/>
+            <param id="selectedIndex"/>
+            <documentation>
+                <![CDATA[<div class="description"> Draw the indicator<br/> <div class="param"> dc Device context</div><br/> <div class="param"> selectedIndex The index of the current page</div><br/></div>]]>
+            </documentation>
+        </functionEntry>
+        <functionEntry accessMode="protected" endPc="268445593" name="&lt;init&gt;" parent="PageIndicator" startPc="268445593">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268435968" name="initialize" parent="MyGlanceView" startPc="268435946">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268436337" name="onUpdate" parent="MyGlanceView" startPc="268435969">
+            <param id="dc"/>
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="protected" endPc="268436357" name="&lt;init&gt;" parent="MyGlanceView" startPc="268436339">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268438588" name="initialize" parent="garmin_sampleView" startPc="268438493">
+            <param id="the_app"/>
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268438691" name="onPosition" parent="garmin_sampleView" startPc="268438589">
+            <param id="info"/>
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268438872" name="onLayout" parent="garmin_sampleView" startPc="268438692">
+            <param id="dc"/>
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268438893" name="onShow" parent="garmin_sampleView" startPc="268438873">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268439008" name="getUnits" parent="garmin_sampleView" startPc="268438894">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268439235" name="drawSinusoid" parent="garmin_sampleView" startPc="268439009">
+            <param id="dc"/>
+            <param id="x"/>
+            <param id="y"/>
+            <param id="w"/>
+            <param id="h"/>
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268439836" name="graphTides" parent="garmin_sampleView" startPc="268439236">
+            <param id="dc"/>
+            <param id="x"/>
+            <param id="y"/>
+            <param id="w"/>
+            <param id="h"/>
+            <param id="start"/>
+            <param id="end"/>
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268440177" name="getLabelForT" parent="garmin_sampleView" startPc="268439837">
+            <param id="t"/>
+            <param id="d"/>
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268440646" name="getHeightAtT" parent="garmin_sampleView" startPc="268440178">
+            <param id="t"/>
+            <param id="d"/>
+            <param id="p"/>
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268440776" name="getFromDateString" parent="garmin_sampleView" startPc="268440647">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268440931" name="getToDateString" parent="garmin_sampleView" startPc="268440777">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268441204" name="parseDateString" parent="garmin_sampleView" startPc="268440932">
+            <param id="str"/>
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268441389" name="formatDateStringShort" parent="garmin_sampleView" startPc="268441205">
+            <param id="moment"/>
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268441559" name="formatDateString" parent="garmin_sampleView" startPc="268441390">
+            <param id="info"/>
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268442938" name="onUpdate" parent="garmin_sampleView" startPc="268441560">
+            <param id="dc"/>
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268443398" name="onReceive" parent="garmin_sampleView" startPc="268442939">
+            <param id="args"/>
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268443403" name="onHide" parent="garmin_sampleView" startPc="268443399">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="protected" endPc="268445523" name="&lt;init&gt;" parent="globals/garmin_sampleView" startPc="268445523">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="protected" endPc="268445522" name="&lt;init&gt;" parent="garmin_sampleView" startPc="268445504">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268443436" name="initialize" parent="MainMenuDelegate" startPc="268443404">
+            <param id="parent"/>
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268443891" name="onSelect" parent="MainMenuDelegate" startPc="268443437">
+            <param id="item"/>
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="protected" endPc="268445591" name="&lt;init&gt;" parent="MainMenuDelegate" startPc="268445573">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268443928" name="initialize" parent="garmin_sampleDelegate" startPc="268443892">
+            <param id="view"/>
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268444037" name="onNextPage" parent="garmin_sampleDelegate" startPc="268443929">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268444146" name="onPreviousPage" parent="garmin_sampleDelegate" startPc="268444038">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268444372" name="makeRequest" parent="garmin_sampleDelegate" startPc="268444147">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268444492" name="onReceive" parent="garmin_sampleDelegate" startPc="268444373">
+            <param id="responseCode"/>
+            <param id="data"/>
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268444875" name="onMenu" parent="garmin_sampleDelegate" startPc="268444493">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268444896" name="onStateUpdated" parent="garmin_sampleDelegate" startPc="268444876">
+            <param id="state"/>
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268444916" name="onSelect" parent="garmin_sampleDelegate" startPc="268444897">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="protected" endPc="268445501" name="&lt;init&gt;" parent="garmin_sampleDelegate" startPc="268445483">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="protected" endPc="268445503" name="&lt;init&gt;" parent="BCTidesModel" startPc="268445503">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268444919" name="initialize" parent="BCTidesModel" startPc="268444917">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="protected" endPc="268445548" name="&lt;init&gt;" parent="Drawables" startPc="268445548">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="protected" endPc="268445569" name="&lt;init&gt;" parent="Fonts" startPc="268445569">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="protected" endPc="268445571" name="&lt;init&gt;" parent="JsonData" startPc="268445571">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268445347" name="MainLayout" parent="Layouts" startPc="268444920">
+            <param id="dc"/>
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="protected" endPc="268445570" name="&lt;init&gt;" parent="Layouts" startPc="268445570">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268445482" name="initialize" parent="MainMenu" startPc="268445348">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="protected" endPc="268445568" name="&lt;init&gt;" parent="MainMenu" startPc="268445550">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="protected" endPc="268445549" name="&lt;init&gt;" parent="Menus" startPc="268445549">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="protected" endPc="268445572" name="&lt;init&gt;" parent="Strings" startPc="268445572">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="protected" endPc="268445547" name="&lt;init&gt;" parent="Rez" startPc="268445524">
+            <documentation/>
+        </functionEntry>
+    </functions>
+</debugInfo>

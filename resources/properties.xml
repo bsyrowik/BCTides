@@ -1,0 +1,29 @@
+<resources>
+    <properties>
+        <property id="unitsProp" type="number">0</property>
+        <property id="appVersion" type="string">0.1a</property>
+    </properties>
+
+    <strings>
+        <string id="unitsSettingTitle">Units</string>
+        <string id="unitsSettingPrompt">Select units to use</string>
+        <string id="unitsSettingSystem">System</string>
+        <string id="unitsSettingMetric">Metric</string>
+        <string id="unitsSettingImperial">Imperial</string>
+
+        <string id="appVersionTitle">Version</string>
+    </strings>
+
+    <settings>
+        <setting propertyKey="@Properties.appVersion" title="@Strings.appVersionTitle">
+            <settingConfig type="alphaNumeric" readonly="true"/>
+        </setting>
+        <setting propertyKey="@Properties.unitsProp" title="@Strings.unitsSettingTitle" prompt="@Strings.unitsSettingPrompt">
+            <settingConfig type="list">
+                <listEntry value="0">@Strings.unitsSettingSystem</listEntry>
+                <listEntry value="1">@Strings.unitsSettingMetric</listEntry>
+                <listEntry value="2">@Strings.unitsSettingImperial</listEntry>
+            </settingConfig>
+        </setting>
+    </settings>
+</resources>
