@@ -1,0 +1,44 @@
+import Toybox.Lang;
+using Toybox.WatchUi;
+using Toybox.WatchUi as Ui;
+using Toybox.Graphics;
+using Toybox.Graphics as Gfx;
+
+module Rez {
+    module Drawables {
+        (:initialized) var LauncherIcon as Symbol;
+    } // Drawables
+
+    module Fonts {
+    } // Fonts
+
+    module JsonData {
+    } // JsonData
+
+    module Layouts {
+        function MainLayout(dc as Graphics.Dc) as Array<WatchUi.Drawable> {
+            var rez_cmp_local_text_stationTitle = new WatchUi.Text({:identifier=>"stationTitle", :locX=>(240 * 0.5), :locY=>32, :text=>"Kitsilano", :justification=>Graphics.TEXT_JUSTIFY_CENTER, :font=>Graphics.FONT_XTINY});
+
+            var rez_cmp_local_text_loc0 = new WatchUi.Text({:identifier=>"loc0", :locX=>90, :locY=>180, :text=>"---", :justification=>Graphics.TEXT_JUSTIFY_CENTER, :font=>Graphics.FONT_XTINY});
+
+            var rez_cmp_local_text_loc1 = new WatchUi.Text({:identifier=>"loc1", :locX=>150, :locY=>180, :text=>"---", :justification=>Graphics.TEXT_JUSTIFY_CENTER, :font=>Graphics.FONT_XTINY});
+
+            return [rez_cmp_local_text_stationTitle, rez_cmp_local_text_loc0, rez_cmp_local_text_loc1] as Array<WatchUi.Drawable>;
+        }
+    } // Layouts
+
+    module Menus {
+    } // Menus
+
+    module Strings {
+        (:initialized) var unitsSettingPrompt as Symbol;
+        (:initialized) var MainMenuLabel_nearby as Symbol;
+        (:initialized) var unitsSettingTitle as Symbol;
+        (:initialized) var unitsSettingImperial as Symbol;
+        (:initialized) var unitsSettingMetric as Symbol;
+        (:initialized) var MainMenuLabel_favorites as Symbol;
+        (:initialized) var unitsSettingSystem as Symbol;
+        (:initialized) var appVersionTitle as Symbol;
+        (:initialized) var AppName as Symbol;
+    } // Strings
+} // Rez

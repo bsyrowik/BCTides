@@ -17,7 +17,7 @@ public enum Align {
 
 class PageIndicatorArc {
     private var _size as Number;
-    private var _color as ColorType;
+//    private var _color as ColorType;
     private var _alignment as Align;
     private var _margin as Number;
 
@@ -28,7 +28,7 @@ class PageIndicatorArc {
     //! @param margin Amount of margin for the graphic
     public function initialize(size as Number, color as ColorValue, alignment as Align, margin as Number) {
         _size = size;
-        _color = color;
+//        _color = color;
         _alignment = alignment;
         _margin = margin;
     }

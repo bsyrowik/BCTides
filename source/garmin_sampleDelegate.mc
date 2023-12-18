@@ -2,16 +2,84 @@
 using Toybox.WatchUi;
 using Toybox.Timer;
 import Toybox.Application.Properties;
+import Toybox.Lang;
+
+
+class StationMenuDelegate extends WatchUi.Menu2InputDelegate {
+    public enum {
+        MENU_STATION_NEAREST,
+        MENU_STATION_ALPHABETICAL,
+        MENU_STATION_SEARCH
+    }
+    function initialize() {
+        Menu2InputDelegate.initialize();
+    }
+
+    function onSelect(item) {
+        if (item.getId() == MENU_STATION_NEAREST) {
+            // TODO: dynamic list of stations
+        } else if (item.getId() == MENU_STATION_ALPHABETICAL) {
+            // TODO: dynamic list of stations
+            // DO this one first, it is easier.
+        } else if (item.getId() == MENU_STATION_SEARCH) {
+            // TODO: get text input
+        }
+    }
+}
 
 class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
     public enum {
         MENU_SETTINGS_UNITS_ID,
-        MENU_GET_DATA
+        MENU_GET_DATA,
+        MENU_SET_STATION
     }
     private var _parent;
     function initialize(parent) {
         _parent = parent;
         Menu2InputDelegate.initialize();
+    }
+
+    function stationMenu() {
+        var menu = new WatchUi.Menu2({:title=>"Station"});
+
+/*
+        var setting = Properties.getValue("unitsProp");
+        var unitsSub = Rez.Strings.unitsSettingSystem;
+        if (setting == UNITS_PROP_METRIC) {
+            unitsSub = Rez.Strings.unitsSettingMetric;
+        } else if (setting == UNITS_PROP_IMPERIAL) {
+            unitsSub = Rez.Strings.unitsSettingImperial;
+        }
+        */
+        menu.addItem(
+            new WatchUi.MenuItem(
+                "Nearest",
+                "", // Sub-Label
+                StationMenuDelegate.MENU_STATION_NEAREST, // identifier
+                {} // options
+            )
+        );
+        menu.addItem(
+            new WatchUi.MenuItem(
+                "Alphabetical",
+                "", // Sub-Label
+                StationMenuDelegate.MENU_STATION_ALPHABETICAL, // identifier
+                {} // options
+            )
+        );
+        menu.addItem(
+            new WatchUi.MenuItem(
+                "Search",
+                "", // Sub-Label
+                StationMenuDelegate.MENU_STATION_SEARCH, // identifier
+                {} // options
+            )
+        );
+
+        var delegate = new StationMenuDelegate();
+        WatchUi.pushView(menu, delegate, WatchUi.SLIDE_IMMEDIATE);
+
+        return true;
     }
 
     function onSelect(item) {
@@ -30,6 +98,8 @@ class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
         } else if (item.getId() == MENU_GET_DATA) {
             _parent.makeRequest();
             WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
+        } else if (item.getId() == MENU_SET_STATION) {
+            stationMenu();
         }
     }
 }
@@ -68,7 +138,7 @@ class garmin_sampleDelegate extends WatchUi.BehaviorDelegate {
             }
         };
         var kits = "5cebf1e43d0f4a073c4bc404";
-        var vanc = "5cebf1de3d0f4a073c4bb943";
+//        var vanc = "5cebf1de3d0f4a073c4bb943";
         Communications.makeWebRequest(
             "https://api-iwls.dfo-mpo.gc.ca/api/v1/stations/" + kits + "/data",
             {
@@ -118,6 +188,14 @@ class garmin_sampleDelegate extends WatchUi.BehaviorDelegate {
                 "Get Data",
                 "Kits: wlp-hilo",
                 MainMenuDelegate.MENU_GET_DATA,
+                {}
+            )
+        );
+        menu.addItem(
+            new WatchUi.MenuItem(
+                "Select Station",
+                "",
+                MainMenuDelegate.MENU_SET_STATION,
                 {}
             )
         );

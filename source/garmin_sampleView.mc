@@ -1,7 +1,11 @@
 import Toybox.Graphics;
 import Toybox.WatchUi;
+import Toybox.Lang;
 import Toybox.Application.Properties;
+import Toybox.System;
 using Toybox.Time;
+using Toybox.Position;
+using Toybox.System;
 using Toybox.Time.Gregorian;
 
 using Toybox.Graphics as Gfx;
@@ -52,10 +56,17 @@ class garmin_sampleView extends WatchUi.View {
     var app;
     static const FEET_PER_METER = 3.28084;
 
-    private var _time_str = "";
+//    private var _time_str = "";
 
     var mPage = 0;
     var mPageCount = 6;
+
+
+    // static variables for getHeightAtT
+    var last_i = null;
+    var t1 = null, t2 = null;
+    var h1 = 0.0f, h2 = 0.0f;
+    var A, B_n = Math.PI, B_d, C, D;
 
     function initialize(the_app) {
         app = the_app;
@@ -64,7 +75,7 @@ class garmin_sampleView extends WatchUi.View {
         mIndicatorL   = new PageIndicatorRad(mPageCount, Gfx.COLOR_WHITE, ALIGN_CENTER_LEFT, /*margin*/5);
     }
 
-    function onPosition(info) {
+    function onPosition(info as Position.Info) as Void {
         mPosition = info;
         if (mPosition == null || mPosition.accuracy < Position.QUALITY_POOR) {
             System.println("got position update but accuracy sucks!");
@@ -78,7 +89,7 @@ class garmin_sampleView extends WatchUi.View {
 		mPosition = Position.getInfo();
         if (mPosition == null || mPosition.accuracy < Position.QUALITY_POOR) {
             System.println("onLayout: requesting position!");
-            Position.enableLocationEvents(Position.LOCATION_CONTINUOUS, method(:onPosition));
+            Position.enableLocationEvents(Position.LOCATION_CONTINUOUS, self.method(:onPosition));
 		}
         setLayout(Rez.Layouts.MainLayout(dc));
     }
@@ -120,26 +131,29 @@ class garmin_sampleView extends WatchUi.View {
         //System.println("Graphing tides from " + formatDateStringShort(start) + " to " + formatDateStringShort(end));
         // graphs tide height 0 at bottom, tide height 6m at top
         var margin = 1;
-        var duration_per_pixel = end.subtract(start).divide(w - margin * 2);
+        var increment = 4;
+        var duration_per_increment = end.subtract(start).divide(w - margin * 2).multiply(increment).value();
 
         dc.setColor(Graphics.COLOR_BLUE, Graphics.COLOR_TRANSPARENT);
 
         var start_x = x + margin;
         var last_label_x = 0;
-        var current_t = start;
-        var height = getHeightAtT(current_t, duration_per_pixel, 0)[0];
+        var current_t = start.value();
+        var height = getHeightAtT(current_t, duration_per_increment, 0)[0];
         var last_y = y + h - (height / 6.0f) * h;
+        var last_x = start_x;
         //System.println("[" + start_x.toString() + "] height at " + formatDateStringShort(current_t) + " is " + height.toString());
-        for (var i = start_x + 1; i < x + w - margin; i++) {
+        //for (var i = start_x + 1; i < x + w - margin; i++) {
+        for (var i = start_x + 1; i < x + w - margin; i = i + 3) {
             var this_x = i;
-            current_t = current_t.add(duration_per_pixel);
-            var l = getHeightAtT(current_t, duration_per_pixel, 0);//(i > 115 && i < 125));
+            current_t += duration_per_increment;
+            var l = getHeightAtT(current_t, duration_per_increment, 0);//(i > 115 && i < 125));
             height = l[0];
             //if (i < 125 && i > 115) {
                 //System.println("[" + i.toString() + "] height at " + formatDateStringShort(current_t) + " is " + height.toString());
             //}
             var this_y = y + h - (height / 6.0f) * h;
-            //var l = getLabelForT(current_t, duration_per_pixel);
+            //var l = getLabelForT(current_t, duration_per_increment);
             if (l[1] != null && (this_x - last_label_x > 10)) {
                 dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
                 var h_label = l[2];
@@ -154,64 +168,50 @@ class garmin_sampleView extends WatchUi.View {
                 last_label_x = this_x;
                 dc.setColor(Graphics.COLOR_BLUE, Graphics.COLOR_TRANSPARENT);
             }
-            dc.drawLine(this_x - 1, last_y, this_x, this_y);
+            dc.drawLine(last_x, last_y, this_x, this_y);
             last_y = this_y;
+            last_x = this_x;
         }
     }
 
-    function getLabelForT(t as Time.Moment, d as Time.Duration) as Array or Null {
-        var t1 = t, t2 = t;
-        var h1 = 0.0f, h2 = 0.0f;
-        for (var i = 0; i < app._hilo.size(); i++) {
-            if (app._hilo[i][0].lessThan(t)) {
-                t1 = app._hilo[i][0];
-                h1 = app._hilo[i][1];
-            } else {
-                t2 = app._hilo[i][0];
-                h2 = app._hilo[i][1];
-                break;
-            }
-        }
-        if (t.subtract(t1).greaterThan(d)) {
-            return [(h1 > h2), h1];
-        } else if (t2.subtract(t).greaterThan(d)) {
-            return [(h1 < h2), h2];
-        }
-        return null;
-    }
-
-    function getHeightAtT(t as Time.Moment, d, p) as Array {
+    function getHeightAtT(t as Number, d as Number, p) as Array {
         // Compute h(t) = A * cos(B * (t - C)) + D
         // For: A = (h1 - h2) / 2
         //      B = PI / (t2 - t1)
         //      C = t1
         //      D = (h2 + h1) / 2
-        var t_ = t.value();
-        var d_ = d.value();
-        var t1 = t_, t2 = t_;
-        var h1 = 0.0f, h2 = 0.0f;
-        for (var i = 0; i < app._hilo.size(); i++) {
-            if (app._hilo[i][0] < t_) {
-                t1 = app._hilo[i][0];
-                h1 = app._hilo[i][1];
-            } else {
-                t2 = app._hilo[i][0];
-                h2 = app._hilo[i][1];
-                break;
+
+        if (t1 == null) { t1 = t; }
+        if (t2 == null) { t2 = t; }
+        //var t1 = t, t2 = t;
+        //var h1 = 0.0f, h2 = 0.0f;
+        if (last_i == null || t2 < t) {
+            var start_i = 0;
+            if (last_i != null) {
+                start_i = last_i;
             }
+            for (var i = start_i; i < app._hilo.size(); i++) {
+                if (app._hilo[i][0] < t) {
+                    t1 = app._hilo[i][0];
+                    h1 = app._hilo[i][1];
+                } else {
+                    t2 = app._hilo[i][0];
+                    h2 = app._hilo[i][1];
+                    break;
+                }
+            }
+            A = (h1 - h2) / 2.0f;
+            B_d = t2 - t1;
+            C = t1;
+            D = (h2 + h1) / 2.0f;
         }
-        var A = (h1 - h2) / 2.0f;
-        var B_n = Math.PI;
-        var B_d = t2 - t1;
-        var C = t1;
-        var D = (h2 + h1) / 2.0f;
-        var h = A * Math.cos(B_n * (t_ - C) / B_d) + D;
+        var h = A * Math.cos(B_n * (t - C) / B_d) + D;
         //if (p) { System.println("h1 = " + h1.toString() + "; h2 = " + h2.toString() + "; t1 = " + formatDateStringShort(t1) + "; t2 = " + formatDateStringShort(t2)); }
         //if (p) { System.println("h(t) = " + A.toString() + " * cos(" + B_n.toString() + " * (t - " + formatDateStringShort(C) + ") / " + B_d.toString() + ") + " + D.toString()); }
         //if (t.subtract(t1).greaterThan(d)) {
-        if (t_ - t1 < d_) {
+        if (t - t1 < d) {
             return [h, (h1 > h2), h1];
-        } else if (t2 - t_ < d_) {
+        } else if (t2 - t < d) {
             return [h, (h1 < h2), h2];
         }
         return [h, null, null];
@@ -238,7 +238,7 @@ class garmin_sampleView extends WatchUi.View {
         var day    = str.substring(8,10).toNumber();
         var hour   = str.substring(11,13).toNumber();
         var minute = str.substring(14,16).toNumber();
-        var second = str.substring(17,19).toNumber();
+//        var second = str.substring(17,19).toNumber();
         var options = {
             :year   => year,
             :month  => month,
@@ -251,7 +251,7 @@ class garmin_sampleView extends WatchUi.View {
     }
 
     function formatDateStringShort(moment as Time.Moment) as String {
-        var info = Gregorian.utcInfo(moment, Gregorian.FORMAT_SHORT);
+        var info = Gregorian.utcInfo(moment, Time.FORMAT_SHORT);
         // Moment should be in UTC; seconds zero'd
         return Lang.format("$1$-$2$ $3$:$4$",
             [
@@ -286,15 +286,17 @@ class garmin_sampleView extends WatchUi.View {
 			if (mPosition.accuracy != null && mPosition.accuracy != Position.QUALITY_NOT_AVAILABLE && mPosition.position != null) {
 				if (mPosition.accuracy >= Position.QUALITY_POOR) {
                     System.println("Got acceptable position; disabling callback");
-		            Position.enableLocationEvents(Position.LOCATION_DISABLE, method(:onPosition));
+		            Position.enableLocationEvents(Position.LOCATION_DISABLE, self.method(:onPosition));
 					needGPS = false;
 	    		}
 	    	}
 		}
         if (mPosition.position != null) {
-            var loc = mPosition.position.toDegrees();
-            View.findDrawableById("loc0").setText(loc[0].format("%.2f"));
-            View.findDrawableById("loc1").setText(loc[1].format("%.3f"));
+            var loc = mPosition.position.toDegrees() as Array;
+            var loc0 = View.findDrawableById("loc0") as Text;
+            loc0.setText(loc[0].format("%.2f"));
+            var loc1 = View.findDrawableById("loc1") as Text;
+            loc1.setText(loc[1].format("%.3f"));
         }
 
         // Date
@@ -303,7 +305,7 @@ class garmin_sampleView extends WatchUi.View {
             var days = new Time.Duration(Gregorian.SECONDS_PER_DAY * mPage);
             now = now.add(days);
         }
-        var dateInfo = Gregorian.info(now, Gregorian.FORMAT_MEDIUM);
+        var dateInfo = Gregorian.info(now, Time.FORMAT_MEDIUM);
         dc.drawText(120, 8, Graphics.FONT_TINY, dateInfo.month + " " + dateInfo.day.toString(), Graphics.TEXT_JUSTIFY_CENTER);
 
         if (mPage > 0) {
@@ -333,7 +335,7 @@ class garmin_sampleView extends WatchUi.View {
             if (mPage == 0) {
                 // Current height
                 var units = "m";
-                var height = getHeightAtT(now, duration_2h, 0)[0];
+                var height = getHeightAtT(now.value(), duration_2h.value(), 0)[0];
                 if (getUnits() == System.UNIT_STATUTE) {
                     units = "ft";
                     height *= FEET_PER_METER;

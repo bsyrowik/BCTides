@@ -1,0 +1,708 @@
+[ @file = "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc"; @line = 2; ]
+using Toybox.WatchUi;
+[ @file = "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc"; @line = 3; ]
+using Toybox.Timer;
+[ @file = "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc"; @line = 4; ]
+import Toybox.Application.Properties;
+[ @file = "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc"; @line = 7; ]
+class StationMenuDelegate extends WatchUi.Menu2InputDelegate{
+    [ @file = "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc"; @line = 7; ]
+    <init> {
+    }
+    [ @file = "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc"; @line = 7; ]
+    static
+    <init> {
+    }
+    [ @file = "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc"; @line = 8; ]
+    public static
+    enum {
+        [ @file = "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc"; @line = 9; @position = 8; ]
+        MENU_STATION_NEAREST,
+        [ @file = "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc"; @line = 10; @position = 8; ]
+        MENU_STATION_ALPHABETICAL,
+        [ @file = "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc"; @line = 11; @position = 8; ]
+        MENU_STATION_SEARCH
+    }
+    [ @file = "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc"; @line = 13; ]
+    function initialize() as Void {
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_13_26_start:
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 14 8 ]
+        %tmp.2 = getv ? :Menu2InputDelegate;
+        %tmp.3 = getv function %tmp.2 :initialize;
+        invoke %tmp.2 %tmp.3();
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_13_26_stop:
+    }
+    [ @file = "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc"; @line = 17; ]
+    function onSelect(item) {
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_17_28_start:
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 18 8 ]
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_18_8_if_stmt:
+        %tmp.1 = lgetv %item;
+        %tmp.2 = getv function %tmp.1 :getId;
+        %tmp.3 = invoke %tmp.1 %tmp.2();
+        %tmp.5 = getv ? :MENU_STATION_NEAREST;
+        %tmp.6 = eq %tmp.3 %tmp.5;
+        bf %tmp.6 @C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_18_8_if_false;
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_18_8_if_true:
+        goto @C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_18_8_if_end;
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_18_8_if_false:
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 20 15 ]
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_20_15_if_stmt:
+        %tmp.7 = lgetv %item;
+        %tmp.8 = getv function %tmp.7 :getId;
+        %tmp.9 = invoke %tmp.7 %tmp.8();
+        %tmp.11 = getv ? :MENU_STATION_ALPHABETICAL;
+        %tmp.12 = eq %tmp.9 %tmp.11;
+        bf %tmp.12 @C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_20_15_if_false;
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_20_15_if_true:
+        goto @C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_20_15_if_end;
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_20_15_if_false:
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 23 15 ]
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_23_15_if_stmt:
+        %tmp.13 = lgetv %item;
+        %tmp.14 = getv function %tmp.13 :getId;
+        %tmp.15 = invoke %tmp.13 %tmp.14();
+        %tmp.17 = getv ? :MENU_STATION_SEARCH;
+        %tmp.18 = eq %tmp.15 %tmp.17;
+        bf %tmp.18 @C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_23_15_if_end;
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_23_15_if_true:
+        goto @C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_23_15_if_end;
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_23_15_if_end:
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_20_15_if_end:
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_18_8_if_end:
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_17_28_stop:
+    }
+}
+[ @file = "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc"; @line = 29; ]
+class MainMenuDelegate extends WatchUi.Menu2InputDelegate{
+    [ @file = "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc"; @line = 29; ]
+    <init> {
+    }
+    [ @file = "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc"; @line = 29; ]
+    static
+    <init> {
+    }
+    [ @file = "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc"; @line = 30; ]
+    public static
+    enum {
+        [ @file = "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc"; @line = 31; @position = 8; ]
+        MENU_SETTINGS_UNITS_ID,
+        [ @file = "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc"; @line = 32; @position = 8; ]
+        MENU_GET_DATA,
+        [ @file = "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc"; @line = 33; @position = 8; ]
+        MENU_SET_STATION
+    }
+    [ @file = "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc"; @line = 35; @position = 16; ]
+    private
+    var _parent;
+    [ @file = "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc"; @line = 36; ]
+    function initialize(parent) as Void {
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_36_32_start:
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 37 8 ]
+        %tmp.2 = lgetv %parent;
+        putv self :_parent %tmp.2;
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 38 8 ]
+        %tmp.4 = getv ? :Menu2InputDelegate;
+        %tmp.5 = getv function %tmp.4 :initialize;
+        invoke %tmp.4 %tmp.5();
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_36_32_stop:
+    }
+    [ @file = "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc"; @line = 41; ]
+    function stationMenu() {
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_41_27_start:
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 42 8 ]
+        [ "C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_41_27_start" "C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_41_27_stop" ]
+        %menu.1 = local;
+        %tmp.3 = getm $.Toybox.WatchUi;
+        %tmp.4 = getv function ? %tmp.3 :Menu2;
+        %tmp.5 = newd 1;
+        %tmp.7 = const :title;
+        %tmp.8 = "Station";
+        %tmp.9 = dup %tmp.5;
+        %tmp.10 = aputv %tmp.9 %tmp.7 %tmp.8;
+        %tmp.1 = newc %tmp.4 (%tmp.10);
+        lputv %menu.1 %tmp.1;
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 53 8 ]
+        %tmp.11 = lgetv %menu.1;
+        %tmp.12 = getv function %tmp.11 :addItem;
+        %tmp.15 = getm $.Toybox.WatchUi;
+        %tmp.16 = getv function ? %tmp.15 :MenuItem;
+        %tmp.17 = "Nearest";
+        %tmp.18 = "";
+        %tmp.20 = getv ? :StationMenuDelegate;
+        %tmp.21 = getv %tmp.20 :MENU_STATION_NEAREST;
+        %tmp.22 = newd 0;
+        %tmp.13 = newc %tmp.16 (%tmp.17, %tmp.18, %tmp.21, %tmp.22);
+        invoke %tmp.11 %tmp.12(%tmp.13);
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 61 8 ]
+        %tmp.23 = lgetv %menu.1;
+        %tmp.24 = getv function %tmp.23 :addItem;
+        %tmp.27 = getm $.Toybox.WatchUi;
+        %tmp.28 = getv function ? %tmp.27 :MenuItem;
+        %tmp.29 = "Alphabetical";
+        %tmp.30 = "";
+        %tmp.32 = getv ? :StationMenuDelegate;
+        %tmp.33 = getv %tmp.32 :MENU_STATION_ALPHABETICAL;
+        %tmp.34 = newd 0;
+        %tmp.25 = newc %tmp.28 (%tmp.29, %tmp.30, %tmp.33, %tmp.34);
+        invoke %tmp.23 %tmp.24(%tmp.25);
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 69 8 ]
+        %tmp.35 = lgetv %menu.1;
+        %tmp.36 = getv function %tmp.35 :addItem;
+        %tmp.39 = getm $.Toybox.WatchUi;
+        %tmp.40 = getv function ? %tmp.39 :MenuItem;
+        %tmp.41 = "Search";
+        %tmp.42 = "";
+        %tmp.44 = getv ? :StationMenuDelegate;
+        %tmp.45 = getv %tmp.44 :MENU_STATION_SEARCH;
+        %tmp.46 = newd 0;
+        %tmp.37 = newc %tmp.40 (%tmp.41, %tmp.42, %tmp.45, %tmp.46);
+        invoke %tmp.35 %tmp.36(%tmp.37);
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 78 8 ]
+        [ "C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_41_27_start" "C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_41_27_stop" ]
+        %delegate.2 = local;
+        %tmp.50 = getv ? :StationMenuDelegate;
+        %tmp.47 = newc %tmp.50 ();
+        lputv %delegate.2 %tmp.47;
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 79 8 ]
+        %tmp.51 = getm $.Toybox.WatchUi;
+        %tmp.52 = getv function %tmp.51 :pushView;
+        %tmp.54 = lgetv %menu.1;
+        %tmp.56 = lgetv %delegate.2;
+        %tmp.57 = getm $.Toybox.WatchUi;
+        %tmp.58 = getv %tmp.57 :SLIDE_IMMEDIATE;
+        invoke %tmp.51 %tmp.52(%tmp.54, %tmp.56, %tmp.58);
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 81 8 ]
+        %tmp.59 = true;
+        ret %tmp.59;
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_41_27_stop:
+    }
+    [ @file = "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc"; @line = 84; ]
+    function onSelect(item) {
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_84_28_start:
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 85 8 ]
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_85_8_if_stmt:
+        %tmp.1 = lgetv %item;
+        %tmp.2 = getv function %tmp.1 :getId;
+        %tmp.3 = invoke %tmp.1 %tmp.2();
+        %tmp.5 = getv ? :MENU_SETTINGS_UNITS_ID;
+        %tmp.6 = eq %tmp.3 %tmp.5;
+        bf %tmp.6 @C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_85_8_if_false;
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_85_8_if_true:
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_85_52_start:
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 86 12 ]
+        [ "C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_85_52_start" "C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_85_52_stop" ]
+        %subLabel.1 = local;
+        %tmp.7 = lgetv %item;
+        %tmp.8 = getv function %tmp.7 :getSubLabel;
+        %tmp.9 = invoke %tmp.7 %tmp.8();
+        lputv %subLabel.1 %tmp.9;
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 87 12 ]
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_87_12_if_stmt:
+        %tmp.10 = lgetv %subLabel.1;
+        %tmp.11 = getv function %tmp.10 :equals;
+        %tmp.12 = getm $.Toybox.WatchUi;
+        %tmp.13 = getv function %tmp.12 :loadResource;
+        %tmp.15 = getv ? :Rez;
+        %tmp.16 = getv %tmp.15 :Strings;
+        %tmp.17 = getv %tmp.16 :unitsSettingSystem;
+        %tmp.18 = invoke %tmp.12 %tmp.13(%tmp.17);
+        %tmp.19 = invoke %tmp.10 %tmp.11(%tmp.18);
+        bf %tmp.19 @C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_87_12_if_false;
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_87_12_if_true:
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_87_87_start:
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 88 16 ]
+        %tmp.20 = lgetv %item;
+        %tmp.21 = getv function %tmp.20 :setSubLabel;
+        %tmp.23 = getv ? :Rez;
+        %tmp.24 = getv %tmp.23 :Strings;
+        %tmp.25 = getv %tmp.24 :unitsSettingMetric;
+        invoke %tmp.20 %tmp.21(%tmp.25);
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 89 16 ]
+        %tmp.26 = getm $.Toybox.Application.Properties;
+        %tmp.27 = getv function %tmp.26 :setValue;
+        %tmp.28 = "unitsProp";
+        %tmp.30 = getv ? :UNITS_PROP_METRIC;
+        invoke %tmp.26 %tmp.27(%tmp.28, %tmp.30);
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_87_87_stop:
+        goto @C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_87_12_if_end;
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_87_12_if_false:
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 90 19 ]
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_90_19_if_stmt:
+        %tmp.31 = lgetv %subLabel.1;
+        %tmp.32 = getv function %tmp.31 :equals;
+        %tmp.33 = getm $.Toybox.WatchUi;
+        %tmp.34 = getv function %tmp.33 :loadResource;
+        %tmp.36 = getv ? :Rez;
+        %tmp.37 = getv %tmp.36 :Strings;
+        %tmp.38 = getv %tmp.37 :unitsSettingMetric;
+        %tmp.39 = invoke %tmp.33 %tmp.34(%tmp.38);
+        %tmp.40 = invoke %tmp.31 %tmp.32(%tmp.39);
+        bf %tmp.40 @C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_90_19_if_false;
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_90_19_if_true:
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_90_94_start:
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 91 16 ]
+        %tmp.41 = lgetv %item;
+        %tmp.42 = getv function %tmp.41 :setSubLabel;
+        %tmp.44 = getv ? :Rez;
+        %tmp.45 = getv %tmp.44 :Strings;
+        %tmp.46 = getv %tmp.45 :unitsSettingImperial;
+        invoke %tmp.41 %tmp.42(%tmp.46);
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 92 16 ]
+        %tmp.47 = getm $.Toybox.Application.Properties;
+        %tmp.48 = getv function %tmp.47 :setValue;
+        %tmp.49 = "unitsProp";
+        %tmp.51 = getv ? :UNITS_PROP_IMPERIAL;
+        invoke %tmp.47 %tmp.48(%tmp.49, %tmp.51);
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_90_94_stop:
+        goto @C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_90_19_if_end;
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_90_19_if_false:
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 93 19 ]
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_93_19_if_stmt:
+        %tmp.52 = lgetv %subLabel.1;
+        %tmp.53 = getv function %tmp.52 :equals;
+        %tmp.54 = getm $.Toybox.WatchUi;
+        %tmp.55 = getv function %tmp.54 :loadResource;
+        %tmp.57 = getv ? :Rez;
+        %tmp.58 = getv %tmp.57 :Strings;
+        %tmp.59 = getv %tmp.58 :unitsSettingImperial;
+        %tmp.60 = invoke %tmp.54 %tmp.55(%tmp.59);
+        %tmp.61 = invoke %tmp.52 %tmp.53(%tmp.60);
+        bf %tmp.61 @C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_93_19_if_end;
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_93_19_if_true:
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_93_96_start:
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 94 16 ]
+        %tmp.62 = lgetv %item;
+        %tmp.63 = getv function %tmp.62 :setSubLabel;
+        %tmp.65 = getv ? :Rez;
+        %tmp.66 = getv %tmp.65 :Strings;
+        %tmp.67 = getv %tmp.66 :unitsSettingSystem;
+        invoke %tmp.62 %tmp.63(%tmp.67);
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 95 16 ]
+        %tmp.68 = getm $.Toybox.Application.Properties;
+        %tmp.69 = getv function %tmp.68 :setValue;
+        %tmp.70 = "unitsProp";
+        %tmp.72 = getv ? :UNITS_PROP_SYSTEM;
+        invoke %tmp.68 %tmp.69(%tmp.70, %tmp.72);
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_93_96_stop:
+        goto @C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_93_19_if_end;
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_93_19_if_end:
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_90_19_if_end:
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_87_12_if_end:
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_85_52_stop:
+        goto @C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_85_8_if_end;
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_85_8_if_false:
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 97 15 ]
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_97_15_if_stmt:
+        %tmp.73 = lgetv %item;
+        %tmp.74 = getv function %tmp.73 :getId;
+        %tmp.75 = invoke %tmp.73 %tmp.74();
+        %tmp.77 = getv ? :MENU_GET_DATA;
+        %tmp.78 = eq %tmp.75 %tmp.77;
+        bf %tmp.78 @C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_97_15_if_false;
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_97_15_if_true:
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_97_50_start:
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 98 12 ]
+        %tmp.80 = getv ? :_parent;
+        %tmp.81 = getv function %tmp.80 :makeRequest;
+        invoke %tmp.80 %tmp.81();
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 99 12 ]
+        %tmp.82 = getm $.Toybox.WatchUi;
+        %tmp.83 = getv function %tmp.82 :popView;
+        %tmp.84 = getm $.Toybox.WatchUi;
+        %tmp.85 = getv %tmp.84 :SLIDE_IMMEDIATE;
+        invoke %tmp.82 %tmp.83(%tmp.85);
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_97_50_stop:
+        goto @C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_97_15_if_end;
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_97_15_if_false:
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 100 15 ]
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_100_15_if_stmt:
+        %tmp.86 = lgetv %item;
+        %tmp.87 = getv function %tmp.86 :getId;
+        %tmp.88 = invoke %tmp.86 %tmp.87();
+        %tmp.90 = getv ? :MENU_SET_STATION;
+        %tmp.91 = eq %tmp.88 %tmp.90;
+        bf %tmp.91 @C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_100_15_if_end;
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_100_15_if_true:
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_100_53_start:
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 101 12 ]
+        %tmp.92 = self;
+        %tmp.93 = getv function %tmp.92 :stationMenu;
+        invoke %tmp.92 %tmp.93();
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_100_53_stop:
+        goto @C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_100_15_if_end;
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_100_15_if_end:
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_97_15_if_end:
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_85_8_if_end:
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_84_28_stop:
+    }
+}
+[ @file = "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc"; @line = 106; ]
+class garmin_sampleDelegate extends WatchUi.BehaviorDelegate{
+    [ @file = "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc"; @line = 106; ]
+    <init> {
+    }
+    [ @file = "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc"; @line = 106; ]
+    static
+    <init> {
+    }
+    [ @file = "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc"; @line = 107; @position = 8; ]
+    var mView = null;
+    [ @file = "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc"; @line = 108; ]
+    function initialize(view) as Void {
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_108_30_start:
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 109 8 ]
+        %tmp.2 = lgetv %view;
+        putv self :mView %tmp.2;
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 110 2 ]
+        %tmp.3 = getm $.Toybox.WatchUi;
+        %tmp.4 = getv %tmp.3 :BehaviorDelegate;
+        %tmp.5 = getv function %tmp.4 :initialize;
+        invoke %tmp.4 %tmp.5();
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_108_30_stop:
+    }
+    [ @file = "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc"; @line = 112; ]
+    function onNextPage() {
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_112_26_start:
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 113 8 ]
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_113_8_if_stmt:
+        %tmp.2 = getv ? :mView;
+        %tmp.3 = getv %tmp.2 :mPage;
+        %tmp.5 = getv ? :mView;
+        %tmp.6 = getv %tmp.5 :mPageCount;
+        %tmp.7 = 1;
+        %tmp.8 = sub %tmp.6 %tmp.7;
+        %tmp.9 = lt %tmp.3 %tmp.8;
+        bf %tmp.9 @C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_113_8_if_false;
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_113_8_if_true:
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_113_48_start:
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 114 12 ]
+        %tmp.10 = getv self :mView;
+        %tmp.11 = getv self :mView;
+        %tmp.12 = getv %tmp.11 :mPage;
+        %tmp.13 = 1;
+        %tmp.14 = add %tmp.12 %tmp.13;
+        putv %tmp.10 :mPage dup %tmp.14;
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_113_48_stop:
+        goto @C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_113_8_if_end;
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_113_8_if_false:
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_115_15_start:
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 116 12 ]
+        %tmp.15 = getv self :mView;
+        %tmp.16 = 0;
+        putv %tmp.15 :mPage %tmp.16;
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_115_15_stop:
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_113_8_if_end:
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 118 8 ]
+        %tmp.17 = getm $.Toybox.WatchUi;
+        %tmp.18 = getv function %tmp.17 :requestUpdate;
+        invoke %tmp.17 %tmp.18();
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 119 8 ]
+        %tmp.19 = true;
+        ret %tmp.19;
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_112_26_stop:
+    }
+    [ @file = "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc"; @line = 121; ]
+    function onPreviousPage() {
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_121_30_start:
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 122 8 ]
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_122_8_if_stmt:
+        %tmp.2 = getv ? :mView;
+        %tmp.3 = getv %tmp.2 :mPage;
+        %tmp.4 = 0;
+        %tmp.5 = gt %tmp.3 %tmp.4;
+        bf %tmp.5 @C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_122_8_if_false;
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_122_8_if_true:
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_122_29_start:
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 123 12 ]
+        %tmp.6 = getv self :mView;
+        %tmp.7 = getv self :mView;
+        %tmp.8 = getv %tmp.7 :mPage;
+        %tmp.9 = 1;
+        %tmp.10 = sub %tmp.8 %tmp.9;
+        putv %tmp.6 :mPage dup %tmp.10;
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_122_29_stop:
+        goto @C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_122_8_if_end;
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_122_8_if_false:
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_124_15_start:
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 125 12 ]
+        %tmp.11 = getv self :mView;
+        %tmp.13 = getv ? :mView;
+        %tmp.14 = getv %tmp.13 :mPageCount;
+        %tmp.15 = 1;
+        %tmp.16 = sub %tmp.14 %tmp.15;
+        putv %tmp.11 :mPage %tmp.16;
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_124_15_stop:
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_122_8_if_end:
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 127 8 ]
+        %tmp.17 = getm $.Toybox.WatchUi;
+        %tmp.18 = getv function %tmp.17 :requestUpdate;
+        invoke %tmp.17 %tmp.18();
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 128 8 ]
+        %tmp.19 = true;
+        ret %tmp.19;
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_121_30_stop:
+    }
+    [ @file = "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc"; @line = 131; ]
+    function makeRequest() as Void {
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_131_35_start:
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 132 8 ]
+        [ "C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_131_35_start" "C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_131_35_stop" ]
+        %options.1 = local;
+        %tmp.1 = newd 3;
+        %tmp.3 = const :method;
+        %tmp.5 = getv ? :Communications;
+        %tmp.6 = getv %tmp.5 :HTTP_REQUEST_METHOD_GET;
+        %tmp.7 = dup %tmp.1;
+        %tmp.8 = aputv %tmp.7 %tmp.3 %tmp.6;
+        %tmp.10 = const :responseType;
+        %tmp.12 = getv ? :Communications;
+        %tmp.13 = getv %tmp.12 :HTTP_RESPONSE_CONTENT_TYPE_JSON;
+        %tmp.14 = dup %tmp.8;
+        %tmp.15 = aputv %tmp.14 %tmp.10 %tmp.13;
+        %tmp.17 = const :headers;
+        %tmp.18 = newd 1;
+        %tmp.19 = "Content-Type";
+        %tmp.21 = getv ? :Communications;
+        %tmp.22 = getv %tmp.21 :REQUEST_CONTENT_TYPE_URL_ENCODED;
+        %tmp.23 = dup %tmp.18;
+        %tmp.24 = aputv %tmp.23 %tmp.19 %tmp.22;
+        %tmp.25 = dup %tmp.15;
+        %tmp.26 = aputv %tmp.25 %tmp.17 %tmp.24;
+        lputv %options.1 %tmp.26;
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 139 8 ]
+        [ "C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_131_35_start" "C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_131_35_stop" ]
+        %kits.2 = local;
+        %tmp.27 = "5cebf1e43d0f4a073c4bc404";
+        lputv %kits.2 %tmp.27;
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 141 8 ]
+        %tmp.29 = getv ? :Communications;
+        %tmp.30 = getv function %tmp.29 :makeWebRequest;
+        %tmp.31 = "https://api-iwls.dfo-mpo.gc.ca/api/v1/stations/";
+        %tmp.33 = lgetv %kits.2;
+        %tmp.34 = add %tmp.31 %tmp.33;
+        %tmp.35 = "/data";
+        %tmp.36 = add %tmp.34 %tmp.35;
+        %tmp.37 = newd 3;
+        %tmp.38 = "time-series-code";
+        %tmp.39 = "wlp-hilo";
+        %tmp.40 = dup %tmp.37;
+        %tmp.41 = aputv %tmp.40 %tmp.38 %tmp.39;
+        %tmp.42 = "from";
+        %tmp.44 = getv ? :mView;
+        %tmp.45 = getv function %tmp.44 :getFromDateString;
+        %tmp.46 = invoke %tmp.44 %tmp.45();
+        %tmp.47 = dup %tmp.41;
+        %tmp.48 = aputv %tmp.47 %tmp.42 %tmp.46;
+        %tmp.49 = "to";
+        %tmp.51 = getv ? :mView;
+        %tmp.52 = getv function %tmp.51 :getToDateString;
+        %tmp.53 = invoke %tmp.51 %tmp.52();
+        %tmp.54 = dup %tmp.48;
+        %tmp.55 = aputv %tmp.54 %tmp.49 %tmp.53;
+        %tmp.57 = lgetv %options.1;
+        %tmp.58 = self;
+        %tmp.59 = getv function %tmp.58 :method;
+        %tmp.61 = const :onReceive;
+        %tmp.62 = invoke %tmp.58 %tmp.59(%tmp.61);
+        invoke %tmp.29 %tmp.30(%tmp.36, %tmp.55, %tmp.57, %tmp.62);
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_131_35_stop:
+    }
+    [ @file = "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc"; @line = 153; ]
+    function onReceive(responseCode as Number, data as Dictionary or Null) as Void {
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_153_76_start:
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 156 8 ]
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_156_8_if_stmt:
+        %tmp.2 = lgetv %responseCode;
+        %tmp.3 = 200;
+        %tmp.4 = eq %tmp.2 %tmp.3;
+        bf %tmp.4 @C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_156_8_if_false;
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_156_8_if_true:
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_156_33_start:
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 157 12 ]
+        %tmp.6 = getv ? :mView;
+        %tmp.7 = getv function %tmp.6 :onReceive;
+        %tmp.9 = lgetv %data;
+        invoke %tmp.6 %tmp.7(%tmp.9);
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_156_33_stop:
+        goto @C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_156_8_if_end;
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_156_8_if_false:
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 158 15 ]
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_158_15_if_stmt:
+        %tmp.11 = lgetv %responseCode;
+        %tmp.13 = getv ? :Communications;
+        %tmp.14 = getv %tmp.13 :BLE_CONNECTION_UNAVAILABLE;
+        %tmp.15 = eq %tmp.11 %tmp.14;
+        bf %tmp.15 @C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_158_15_if_false;
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_158_15_if_true:
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_158_78_start:
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 160 12 ]
+        %tmp.17 = getv ? :mView;
+        %tmp.18 = getv function %tmp.17 :onReceive;
+        %tmp.19 = "Failed to load\nBLE connection\nunavailable";
+        invoke %tmp.17 %tmp.18(%tmp.19);
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_158_78_stop:
+        goto @C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_158_15_if_end;
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_158_15_if_false:
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_161_15_start:
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 162 12 ]
+        %tmp.21 = getv ? :mView;
+        %tmp.22 = getv function %tmp.21 :onReceive;
+        %tmp.23 = "Failed to load\nError: ";
+        %tmp.24 = lgetv %responseCode;
+        %tmp.25 = getv function %tmp.24 :toString;
+        %tmp.26 = invoke %tmp.24 %tmp.25();
+        %tmp.27 = add %tmp.23 %tmp.26;
+        invoke %tmp.21 %tmp.22(%tmp.27);
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_161_15_stop:
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_158_15_if_end:
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_156_8_if_end:
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_153_76_stop:
+    }
+    [ @file = "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc"; @line = 166; ]
+    function onMenu() {
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_166_22_start:
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 167 8 ]
+        [ "C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_166_22_start" "C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_166_22_stop" ]
+        %menu.1 = local;
+        %tmp.3 = getm $.Toybox.WatchUi;
+        %tmp.4 = getv function ? %tmp.3 :Menu2;
+        %tmp.5 = newd 1;
+        %tmp.7 = const :title;
+        %tmp.8 = "Settings";
+        %tmp.9 = dup %tmp.5;
+        %tmp.10 = aputv %tmp.9 %tmp.7 %tmp.8;
+        %tmp.1 = newc %tmp.4 (%tmp.10);
+        lputv %menu.1 %tmp.1;
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 168 8 ]
+        [ "C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_166_22_start" "C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_166_22_stop" ]
+        %delegate.2 = local;
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 170 8 ]
+        [ "C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_166_22_start" "C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_166_22_stop" ]
+        %setting.3 = local;
+        %tmp.11 = getm $.Toybox.Application.Properties;
+        %tmp.12 = getv function %tmp.11 :getValue;
+        %tmp.13 = "unitsProp";
+        %tmp.14 = invoke %tmp.11 %tmp.12(%tmp.13);
+        lputv %setting.3 %tmp.14;
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 171 8 ]
+        [ "C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_166_22_start" "C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_166_22_stop" ]
+        %unitsSub.4 = local;
+        %tmp.16 = getv ? :Rez;
+        %tmp.17 = getv %tmp.16 :Strings;
+        %tmp.18 = getv %tmp.17 :unitsSettingSystem;
+        lputv %unitsSub.4 %tmp.18;
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 172 8 ]
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_172_8_if_stmt:
+        %tmp.20 = lgetv %setting.3;
+        %tmp.22 = getv ? :UNITS_PROP_METRIC;
+        %tmp.23 = eq %tmp.20 %tmp.22;
+        bf %tmp.23 @C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_172_8_if_false;
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_172_8_if_true:
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_172_42_start:
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 173 12 ]
+        %tmp.25 = getv ? :Rez;
+        %tmp.26 = getv %tmp.25 :Strings;
+        %tmp.27 = getv %tmp.26 :unitsSettingMetric;
+        lputv %unitsSub.4 %tmp.27;
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_172_42_stop:
+        goto @C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_172_8_if_end;
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_172_8_if_false:
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 174 15 ]
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_174_15_if_stmt:
+        %tmp.29 = lgetv %setting.3;
+        %tmp.31 = getv ? :UNITS_PROP_IMPERIAL;
+        %tmp.32 = eq %tmp.29 %tmp.31;
+        bf %tmp.32 @C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_174_15_if_end;
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_174_15_if_true:
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_174_51_start:
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 175 12 ]
+        %tmp.34 = getv ? :Rez;
+        %tmp.35 = getv %tmp.34 :Strings;
+        %tmp.36 = getv %tmp.35 :unitsSettingImperial;
+        lputv %unitsSub.4 %tmp.36;
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_174_51_stop:
+        goto @C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_174_15_if_end;
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_174_15_if_end:
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_172_8_if_end:
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 177 8 ]
+        %tmp.37 = lgetv %menu.1;
+        %tmp.38 = getv function %tmp.37 :addItem;
+        %tmp.41 = getm $.Toybox.WatchUi;
+        %tmp.42 = getv function ? %tmp.41 :MenuItem;
+        %tmp.44 = getv ? :Rez;
+        %tmp.45 = getv %tmp.44 :Strings;
+        %tmp.46 = getv %tmp.45 :unitsSettingTitle;
+        %tmp.48 = lgetv %unitsSub.4;
+        %tmp.50 = getv ? :MainMenuDelegate;
+        %tmp.51 = getv %tmp.50 :MENU_SETTINGS_UNITS_ID;
+        %tmp.52 = newd 0;
+        %tmp.39 = newc %tmp.42 (%tmp.46, %tmp.48, %tmp.51, %tmp.52);
+        invoke %tmp.37 %tmp.38(%tmp.39);
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 185 8 ]
+        %tmp.53 = lgetv %menu.1;
+        %tmp.54 = getv function %tmp.53 :addItem;
+        %tmp.57 = getm $.Toybox.WatchUi;
+        %tmp.58 = getv function ? %tmp.57 :MenuItem;
+        %tmp.59 = "Get Data";
+        %tmp.60 = "Kits: wlp-hilo";
+        %tmp.62 = getv ? :MainMenuDelegate;
+        %tmp.63 = getv %tmp.62 :MENU_GET_DATA;
+        %tmp.64 = newd 0;
+        %tmp.55 = newc %tmp.58 (%tmp.59, %tmp.60, %tmp.63, %tmp.64);
+        invoke %tmp.53 %tmp.54(%tmp.55);
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 193 8 ]
+        %tmp.65 = lgetv %menu.1;
+        %tmp.66 = getv function %tmp.65 :addItem;
+        %tmp.69 = getm $.Toybox.WatchUi;
+        %tmp.70 = getv function ? %tmp.69 :MenuItem;
+        %tmp.71 = "Select Station";
+        %tmp.72 = "";
+        %tmp.74 = getv ? :MainMenuDelegate;
+        %tmp.75 = getv %tmp.74 :MENU_SET_STATION;
+        %tmp.76 = newd 0;
+        %tmp.67 = newc %tmp.70 (%tmp.71, %tmp.72, %tmp.75, %tmp.76);
+        invoke %tmp.65 %tmp.66(%tmp.67);
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 202 8 ]
+        %tmp.80 = getv ? :MainMenuDelegate;
+        %tmp.82 = lgetv %self;
+        %tmp.77 = newc %tmp.80 (%tmp.82);
+        lputv %delegate.2 %tmp.77;
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 203 8 ]
+        %tmp.83 = getm $.Toybox.WatchUi;
+        %tmp.84 = getv function %tmp.83 :pushView;
+        %tmp.86 = lgetv %menu.1;
+        %tmp.88 = lgetv %delegate.2;
+        %tmp.89 = getm $.Toybox.WatchUi;
+        %tmp.90 = getv %tmp.89 :SLIDE_IMMEDIATE;
+        invoke %tmp.83 %tmp.84(%tmp.86, %tmp.88, %tmp.90);
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 205 8 ]
+        %tmp.91 = true;
+        ret %tmp.91;
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_166_22_stop:
+    }
+    [ @file = "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc"; @line = 208; ]
+    function onStateUpdated(state) {
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_208_32_start:
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 209 2 ]
+        %tmp.1 = getm $.Toybox.WatchUi;
+        %tmp.2 = getv function %tmp.1 :requestUpdate;
+        invoke %tmp.1 %tmp.2();
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_208_32_stop:
+    }
+    [ @file = "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc"; @line = 212; ]
+    function onSelect() {
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_212_21_start:
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 213 2 ]
+        %tmp.1 = self;
+        %tmp.2 = getv function %tmp.1 :onMenu;
+        invoke %tmp.1 %tmp.2();
+[ "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc" 214 8 ]
+        %tmp.3 = true;
+        ret %tmp.3;
+C_Users_bains_Documents_garmin_test_garmin_sample_source_garmin_sampleDelegate_mc_212_21_stop:
+    }
+}
+[ @file = "C:\Users\bains\Documents\garmin_test\garmin_sample\source\garmin_sampleDelegate.mc"; @line = 2; ]
+<init> {
+}

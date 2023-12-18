@@ -1,9 +1,0 @@
-<menu id="MainMenu">
-    <menu-item id="nearby" label="@Strings.MainMenuLabel_nearby"/>
-    <menu-item id="favorites" label="@Strings.MainMenuLabel_favorites"/>
-</menu>
-
-<!--
-<menu id="Nearby">
-</menu>
--->
