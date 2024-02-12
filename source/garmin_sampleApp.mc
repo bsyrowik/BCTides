@@ -68,9 +68,9 @@ class garmin_sampleApp extends Application.AppBase {
     }
 */
 
-    (:glance)    
+    (:glance)
 	function getGlanceView() {
-        return [ new MyGlanceView() ];
+        return [ new MyGlanceView(me) ];
     }
 
 }

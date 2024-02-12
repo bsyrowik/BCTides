@@ -1,6 +1,7 @@
 <resources>
     <properties>
         <property id="unitsProp" type="number">0</property>
+        <property id="dataLabelProp" type="number">0</property>
         <property id="appVersion" type="string">0.1a</property>
     </properties>
 
@@ -10,6 +11,12 @@
         <string id="unitsSettingSystem">System</string>
         <string id="unitsSettingMetric">Metric</string>
         <string id="unitsSettingImperial">Imperial</string>
+
+        <string id="labelSettingTitle">Labels</string>
+        <string id="labelSettingPrompt">Select label to use</string>
+        <string id="labelSettingValHeight">Height</string>
+        <string id="labelSettingValTime">Time</string>
+
 
         <string id="appVersionTitle">Version</string>
     </strings>
@@ -23,6 +30,12 @@
                 <listEntry value="0">@Strings.unitsSettingSystem</listEntry>
                 <listEntry value="1">@Strings.unitsSettingMetric</listEntry>
                 <listEntry value="2">@Strings.unitsSettingImperial</listEntry>
+            </settingConfig>
+        </setting>
+        <setting propertyKey="@Properties.dataLabelProp" title="@Strings.labelSettingTitle" prompt="@Strings.labelSettingPrompt">
+            <settingConfig type="list">
+                <listEntry value="0">@Strings.labelSettingValHeight</listEntry>
+                <listEntry value="1">@Strings.labelSettingValTime</listEntry>
             </settingConfig>
         </setting>
     </settings>

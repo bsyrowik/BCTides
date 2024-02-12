@@ -30,8 +30,10 @@ class StationMenuDelegate extends WatchUi.Menu2InputDelegate {
 class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
     public enum {
         MENU_SETTINGS_UNITS_ID,
+        MENU_SETTINGS_DISP_TYPE_ID,
         MENU_GET_DATA,
-        MENU_SET_STATION
+        MENU_SET_STATION,
+        MENU_SETTINGS_GPS_ID
     }
     private var _parent;
     function initialize(parent) {
@@ -95,6 +97,19 @@ class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
                 item.setSubLabel(Rez.Strings.unitsSettingSystem);
                 Properties.setValue("unitsProp", UNITS_PROP_SYSTEM);
             }
+        } else if (item.getId() == MENU_SETTINGS_DISP_TYPE_ID) {
+            var subLabel = item.getSubLabel();
+            if (subLabel.equals(WatchUi.loadResource(Rez.Strings.labelSettingValHeight))) {
+                item.setSubLabel(Rez.Strings.labelSettingValTime);
+                Properties.setValue("dataLabelProp", DATA_LABEL_PROP_TIME);
+            } else if (subLabel.equals(WatchUi.loadResource(Rez.Strings.labelSettingValTime))) {
+                item.setSubLabel(Rez.Strings.labelSettingValHeight);
+                Properties.setValue("dataLabelProp", DATA_LABEL_PROP_HEIGHT);
+            }
+        } else if (item.getId() == MENU_SETTINGS_GPS_ID) {
+            item.setSubLabel("working");
+            _parent.getLocation();
+            WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
         } else if (item.getId() == MENU_GET_DATA) {
             _parent.makeRequest();
             WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
@@ -151,6 +166,10 @@ class garmin_sampleDelegate extends WatchUi.BehaviorDelegate {
         );
     }
 
+    function getLocation() as Void {
+        mView.onPosition(Toybox.Position.getInfo());
+    }
+
     function onReceive(responseCode as Number, data as Dictionary?) as Void {
         //System.println("onRecieve called....");
         //System.println("  responseCode:" + responseCode.toString());
@@ -168,6 +187,23 @@ class garmin_sampleDelegate extends WatchUi.BehaviorDelegate {
         var menu = new WatchUi.Menu2({:title=>"Settings"});
         var delegate;
 
+        // Data Label Type
+        var data_label_setting = Properties.getValue("dataLabelProp");
+        var data_label_sub = Rez.Strings.labelSettingValHeight;
+        if (data_label_setting == DATA_LABEL_PROP_TIME) {
+            data_label_sub = Rez.Strings.labelSettingValTime;
+        }
+        menu.addItem(
+            new WatchUi.MenuItem(
+                Rez.Strings.labelSettingTitle, // Label
+                data_label_sub, // Sub-Label
+                MainMenuDelegate.MENU_SETTINGS_DISP_TYPE_ID, // identifier
+                {} // options
+            )
+        );
+
+
+        // Units
         var setting = Properties.getValue("unitsProp");
         var unitsSub = Rez.Strings.unitsSettingSystem;
         if (setting == UNITS_PROP_METRIC) {
@@ -180,6 +216,16 @@ class garmin_sampleDelegate extends WatchUi.BehaviorDelegate {
                 Rez.Strings.unitsSettingTitle, // Label
                 unitsSub, // Sub-Label
                 MainMenuDelegate.MENU_SETTINGS_UNITS_ID, // identifier
+                {} // options
+            )
+        );
+
+
+        menu.addItem(
+            new WatchUi.MenuItem(
+                "Get Location", // Label
+                "Find GPS", // Sub-Label
+                MainMenuDelegate.MENU_SETTINGS_GPS_ID, // identifier
                 {} // options
             )
         );
