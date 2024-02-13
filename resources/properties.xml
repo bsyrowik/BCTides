@@ -3,6 +3,9 @@
         <property id="unitsProp" type="number">0</property>
         <property id="dataLabelProp" type="number">0</property>
         <property id="displayProp" type="number">0</property>
+        <property id="zoneProp" type="number">0</property>
+        <property id="selectedStationCode" type="number">7710</property>
+        <property id="selectedStationName" type="string">False Creek</property>
         <property id="appVersion" type="string">0.1a</property>
     </properties>
 
@@ -24,6 +27,11 @@
         <string id="displaySettingValGraph">Graph</string>
         <string id="displaySettingValTable">Table</string>
 
+        <string id="zoneSettingTitle">Zone</string>
+        <string id="zoneSettingPrompt">Select zone</string>
+        <string id="zoneSettingValSouth">South BC</string>
+        <string id="zoneSettingValNorth">North BC</string>
+        
         <string id="appVersionTitle">Version</string>
     </strings>
 
@@ -49,6 +57,12 @@
             <settingConfig type="list">
                 <listEntry value="0">@Strings.displaySettingValGraph</listEntry>
                 <listEntry value="1">@Strings.displaySettingValTable</listEntry>
+            </settingConfig>
+        </setting>
+        <setting propertyKey="@Properties.zoneProp" title="@Strings.zoneSettingTitle" prompt="@Strings.zoneSettingPrompt">
+            <settingConfig type="list">
+                <listEntry value="0">@Strings.zoneSettingValSouth</listEntry>
+                <listEntry value="1">@Strings.zoneSettingValNorth</listEntry>
             </settingConfig>
         </setting>
     </settings>

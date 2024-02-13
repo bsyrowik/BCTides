@@ -28,11 +28,16 @@ public enum displayPropSettings {
     DISPLAY_PROP_TABLE
 }
 
+public enum zonePropSettings {
+    ZONE_PROP_SOUTH,
+    ZONE_PROP_NORTH
+}
+
 (:glance)
 class tideUtil {
     static const FEET_PER_METER = 3.28084;
 
-    static var current_station_name = "Kitsilano";
+    static var current_station_name = getStationName();
 
     // static variables for getHeightAtT
     static var last_i = null;
@@ -422,6 +427,9 @@ class garmin_sampleView extends WatchUi.View {
             var loc1 = View.findDrawableById("loc1") as Text;
             loc1.setText(loc[1].format("%.3f"));
         }
+
+        var stationLabel = View.findDrawableById("stationTitle") as Text;
+        stationLabel.setText(getStationName());
 
         // Date
         var today = Time.today();  // Time-zone adjusted!

@@ -8,6 +8,16 @@ import Toybox.Lang;
 var screenMessage = "Press Menu to Enter Text";
 var lastText = "";
 
+function getStationCode() as String {
+    var code = Properties.getValue("selectedStationCode").format("%05i").toString();
+    return code;
+}
+
+(:glance)
+function getStationName() as String {
+    return Properties.getValue("selectedStationName");
+}
+
 class Pair {
     public var distance as Float = 0.0f;
     public var index as Number = -1;
@@ -145,6 +155,29 @@ class MyInputDelegate extends WatchUi.InputDelegate {
     }
 }
 
+class NearestStationMenuDelegate extends WatchUi.Menu2InputDelegate {
+    function initialize() {
+        Menu2InputDelegate.initialize();
+    }
+
+    function onSelect(item) {
+        var all_stations;
+        if (Properties.getValue("zoneProp") == ZONE_PROP_NORTH) {
+            all_stations = WatchUi.loadResource(Rez.JsonData.stationsNorth);
+        } else {
+            all_stations = WatchUi.loadResource(Rez.JsonData.stationsSouth);
+        }
+        var code = all_stations[item.getId()]["code"];
+        var name = item.getLabel();
+        var dist = item.getSubLabel();
+        System.println("Selected station " + name + " with code " + code + " and distance " + dist);
+        Properties.setValue("selectedStationCode", code);
+        Properties.setValue("selectedStationName", name);
+        WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
+    }
+}
+
+
 class StationMenuDelegate extends WatchUi.Menu2InputDelegate {
     public enum {
         MENU_STATION_NEAREST,
@@ -159,19 +192,16 @@ class StationMenuDelegate extends WatchUi.Menu2InputDelegate {
         return d * Math.PI / 180.0f;
     }
 
+    // All input values should be in radians.
+    // Retruns the 'distance squared', scaled to a 'unit' sized Earth.
+    // Pass through the distance() function to get a distance in kilometers.
+    // Only accurate for coordinates around 49 degrees latitude.
     function d2(lat1 as Float, lon1 as Float, lat2 as Float, lon2 as Float) as Float {
-//        lat1 = d2r(lat1);
-//        lon1 = d2r(lon1);
-//        lat2 = d2r(lat2);
-//        lon2 = d2r(lon2);
-
         var dlat = lat2 - lat1;
         var dlon = lon2 - lon1;
-        dlon = dlon * 0.652;
-
-        var d2 = dlat * dlat + dlon * dlon;
-
-        return d2;
+        var dlon_scale_factor = 0.652; // Should be `cos((lat1 + lat2) / 2)` ; optimized for ~49 deg N
+        dlon = dlon * dlon_scale_factor;
+        return dlat * dlat + dlon * dlon;
     }
 
     function distance(d2 as Float) as Float {
@@ -180,15 +210,48 @@ class StationMenuDelegate extends WatchUi.Menu2InputDelegate {
         return d * r;
     }
 
+    function nearestStationMenu(h as Heap, all_stations as Object) {
+        var menu = new WatchUi.Menu2({:title=>"Nearest"});
+
+        var count = 7;
+        for (var i = 0; i < count; i++) {
+            var p = h.heapExtractMin();
+            var dist = distance(p.distance);
+            var station = all_stations[p.index];
+            System.println(station["name"] + " " + dist.format("%.2f") + "km");
+            menu.addItem(
+                new WatchUi.MenuItem(
+                    station["name"],
+                    dist.format("%.2f") + "km",
+                    p.index,
+                    {}
+                )
+            );
+        }
+
+        var delegate = new NearestStationMenuDelegate();
+        WatchUi.pushView(menu, delegate, WatchUi.SLIDE_IMMEDIATE);
+
+        return true;
+    }
+
+
     function onSelect(item) {
 
         // TODO: search by coordinates?
 
         if (item.getId() == MENU_STATION_NEAREST) {
-            var home_lat = d2r(49.27);
-            var home_lon = d2r(-123.144);
+            var home_lat = d2r(49.267);
+            var home_lon = d2r(-123.114);
+            System.println("home coords: " + home_lat + "N " + home_lon + "W");
             // TODO: dynamic list of stations
-            var all_stations = WatchUi.loadResource(Rez.JsonData.stations);
+            // FIXME TODO: New menu option for choosing north or south list!!!!
+            var all_stations;
+            if (Properties.getValue("zoneProp") == ZONE_PROP_NORTH) {
+                all_stations = WatchUi.loadResource(Rez.JsonData.stationsNorth);
+            } else {
+                all_stations = WatchUi.loadResource(Rez.JsonData.stationsSouth);
+            }
             // TODO: use insertion sort or similar? What about a min heap?
             var size = all_stations.size();
             var h = new Heap(size);
@@ -202,7 +265,8 @@ class StationMenuDelegate extends WatchUi.Menu2InputDelegate {
                 h.minHeapInsert(d_squared, i);
             }
 //            h.print();
-            System.println("-----------------------");
+            nearestStationMenu(h, all_stations);
+/*            System.println("-----------------------");
             var count = 7;
             for (var i = 0; i < count; i++) {
                 var p = h.heapExtractMin();
@@ -210,6 +274,7 @@ class StationMenuDelegate extends WatchUi.Menu2InputDelegate {
                 var station = all_stations[p.index];
                 System.println(station["name"] + " " + dist.format("%.2f") + "km");
             }
+            */
             //h.print_destructive(7);
         } else if (item.getId() == MENU_STATION_ALPHABETICAL) {
             // TODO: dynamic list of stations
@@ -219,6 +284,7 @@ class StationMenuDelegate extends WatchUi.Menu2InputDelegate {
             var text_picker = new MyInputDelegate();
             text_picker.initialize();
         }
+//        WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);   
     }
 }
 
@@ -227,6 +293,7 @@ class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
         MENU_SETTINGS_UNITS_ID,
         MENU_SETTINGS_DISP_TYPE_ID,
         MENU_SETTINGS_DISP_MODE_ID,
+        MENU_SETTINGS_ZONE_ID,
         MENU_GET_DATA,
         MENU_SET_STATION,
         MENU_SETTINGS_GPS_ID
@@ -240,15 +307,6 @@ class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
     function stationMenu() {
         var menu = new WatchUi.Menu2({:title=>"Station"});
 
-/*
-        var setting = Properties.getValue("unitsProp");
-        var unitsSub = Rez.Strings.unitsSettingSystem;
-        if (setting == UNITS_PROP_METRIC) {
-            unitsSub = Rez.Strings.unitsSettingMetric;
-        } else if (setting == UNITS_PROP_IMPERIAL) {
-            unitsSub = Rez.Strings.unitsSettingImperial;
-        }
-        */
         menu.addItem(
             new WatchUi.MenuItem(
                 "Nearest",  // FIXME: only show N nearest?
@@ -313,6 +371,15 @@ class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
             } else if (subLabel.equals(WatchUi.loadResource(Rez.Strings.displaySettingValTable))) {
                 item.setSubLabel(Rez.Strings.displaySettingValGraph);
                 Properties.setValue("displayProp", DISPLAY_PROP_GRAPH);
+            }
+        } else if (item.getId() == MENU_SETTINGS_ZONE_ID) {
+            var subLabel = item.getSubLabel();
+            if (subLabel.equals(WatchUi.loadResource(Rez.Strings.zoneSettingValNorth))) {
+                item.setSubLabel(Rez.Strings.zoneSettingValSouth);
+                Properties.setValue("zoneProp", ZONE_PROP_SOUTH);
+            } else if (subLabel.equals(WatchUi.loadResource(Rez.Strings.zoneSettingValSouth))) {
+                item.setSubLabel(Rez.Strings.zoneSettingValNorth);
+                Properties.setValue("zoneProp", ZONE_PROP_NORTH);
             }
         } else if (item.getId() == MENU_SETTINGS_GPS_ID) {
             item.setSubLabel("working");
@@ -389,6 +456,8 @@ class garmin_sampleDelegate extends WatchUi.BehaviorDelegate {
         };
         var code = "07707"; // Kitsilano
         //code = "07010"; // Point no Point
+        code = getStationCode();
+        System.println("code: " + code);
         code = "07710"; // False Creek
         Communications.makeWebRequest(
             "https://api-iwls.dfo-mpo.gc.ca/api/v1/stations/",
@@ -499,8 +568,22 @@ class garmin_sampleDelegate extends WatchUi.BehaviorDelegate {
         menu.addItem(
             new WatchUi.MenuItem(
                 "Get Data",
-                "wlp-hilo",
+                getStationName(),
                 MainMenuDelegate.MENU_GET_DATA,
+                {}
+            )
+        );
+        
+        var zone_setting = Properties.getValue("zoneProp");
+        var zone_sub = Rez.Strings.zoneSettingValSouth;
+        if (zone_setting == ZONE_PROP_NORTH) {
+            zone_sub = Rez.Strings.zoneSettingValNorth;
+        }
+        menu.addItem(
+            new WatchUi.MenuItem(
+                Rez.Strings.zoneSettingTitle, // Label
+                zone_sub, // Sub-label
+                MainMenuDelegate.MENU_SETTINGS_ZONE_ID,
                 {}
             )
         );
