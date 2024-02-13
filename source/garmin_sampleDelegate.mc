@@ -31,6 +31,7 @@ class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
     public enum {
         MENU_SETTINGS_UNITS_ID,
         MENU_SETTINGS_DISP_TYPE_ID,
+        MENU_SETTINGS_DISP_MODE_ID,
         MENU_GET_DATA,
         MENU_SET_STATION,
         MENU_SETTINGS_GPS_ID
@@ -55,7 +56,7 @@ class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
         */
         menu.addItem(
             new WatchUi.MenuItem(
-                "Nearest",
+                "Nearest",  // FIXME: only show N nearest?
                 "", // Sub-Label
                 StationMenuDelegate.MENU_STATION_NEAREST, // identifier
                 {} // options
@@ -63,7 +64,7 @@ class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
         );
         menu.addItem(
             new WatchUi.MenuItem(
-                "Alphabetical",
+                "Alphabetical", // Remove?
                 "", // Sub-Label
                 StationMenuDelegate.MENU_STATION_ALPHABETICAL, // identifier
                 {} // options
@@ -71,7 +72,7 @@ class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
         );
         menu.addItem(
             new WatchUi.MenuItem(
-                "Search",
+                "Search", // Show top N results once we've got any input?
                 "", // Sub-Label
                 StationMenuDelegate.MENU_STATION_SEARCH, // identifier
                 {} // options
@@ -103,15 +104,28 @@ class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
                 item.setSubLabel(Rez.Strings.labelSettingValTime);
                 Properties.setValue("dataLabelProp", DATA_LABEL_PROP_TIME);
             } else if (subLabel.equals(WatchUi.loadResource(Rez.Strings.labelSettingValTime))) {
+                item.setSubLabel(Rez.Strings.labelSettingValNone);
+                Properties.setValue("dataLabelProp", DATA_LABEL_PROP_NONE);
+            } else if (subLabel.equals(WatchUi.loadResource(Rez.Strings.labelSettingValNone))) {
                 item.setSubLabel(Rez.Strings.labelSettingValHeight);
                 Properties.setValue("dataLabelProp", DATA_LABEL_PROP_HEIGHT);
+            }
+        } else if (item.getId() == MENU_SETTINGS_DISP_MODE_ID) {
+            var subLabel = item.getSubLabel();
+            if (subLabel.equals(WatchUi.loadResource(Rez.Strings.displaySettingValGraph))) {
+                item.setSubLabel(Rez.Strings.displaySettingValTable);
+                Properties.setValue("displayProp", DISPLAY_PROP_TABLE);
+            } else if (subLabel.equals(WatchUi.loadResource(Rez.Strings.displaySettingValTable))) {
+                item.setSubLabel(Rez.Strings.displaySettingValGraph);
+                Properties.setValue("displayProp", DISPLAY_PROP_GRAPH);
             }
         } else if (item.getId() == MENU_SETTINGS_GPS_ID) {
             item.setSubLabel("working");
             _parent.getLocation();
             WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
         } else if (item.getId() == MENU_GET_DATA) {
-            _parent.makeRequest();
+            //_parent.makeRequest();
+            _parent.getStationInfo();
             WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
         } else if (item.getId() == MENU_SET_STATION) {
             stationMenu();
@@ -145,6 +159,12 @@ class garmin_sampleDelegate extends WatchUi.BehaviorDelegate {
     }
 
     function makeRequest() as Void {
+        var kits = "5cebf1e43d0f4a073c4bc404";
+//      var vanc = "5cebf1de3d0f4a073c4bb943";
+        getStationData(kits);
+    }
+
+    function getStationData(station_id as String) as Void {
         var options = {
             :method => Communications.HTTP_REQUEST_METHOD_GET,
             :responseType => Communications.HTTP_RESPONSE_CONTENT_TYPE_JSON,
@@ -152,10 +172,8 @@ class garmin_sampleDelegate extends WatchUi.BehaviorDelegate {
                 "Content-Type" => Communications.REQUEST_CONTENT_TYPE_URL_ENCODED
             }
         };
-        var kits = "5cebf1e43d0f4a073c4bc404";
-//        var vanc = "5cebf1de3d0f4a073c4bb943";
         Communications.makeWebRequest(
-            "https://api-iwls.dfo-mpo.gc.ca/api/v1/stations/" + kits + "/data",
+            "https://api-iwls.dfo-mpo.gc.ca/api/v1/stations/" + station_id + "/data",
             {
                 "time-series-code" => "wlp-hilo",
                 "from" => mView.getFromDateString(),
@@ -166,8 +184,46 @@ class garmin_sampleDelegate extends WatchUi.BehaviorDelegate {
         );
     }
 
+    function getStationInfo() as Void {
+        var options = {
+            :method => Communications.HTTP_REQUEST_METHOD_GET,
+            :responseType => Communications.HTTP_RESPONSE_CONTENT_TYPE_JSON,
+            :headers => {
+                "Content-Type" => Communications.REQUEST_CONTENT_TYPE_URL_ENCODED
+            }
+        };
+        var code = "07707"; // Kitsilano
+        //code = "07010"; // Point no Point
+        code = "07710"; // False Creek
+        Communications.makeWebRequest(
+            "https://api-iwls.dfo-mpo.gc.ca/api/v1/stations/",
+            {
+                "code" => code
+            },
+            options,
+            method(:onReceiveStationInfo)
+        );
+    }
+
     function getLocation() as Void {
         mView.onPosition(Toybox.Position.getInfo());
+    }
+
+    function onReceiveStationInfo(responseCode as Number, data as Dictionary?) as Void {
+        //System.println("onRecieveStationInfo called....");
+        //System.println("  responseCode:" + responseCode.toString());
+        if (responseCode == 200) { // OK!
+            if (data instanceof Array) {
+                var station_id = data[0]["id"].toString();
+                var requested_station_data = data[0]["officialName"].toString();
+                getStationData(station_id);
+            }
+        } else if (responseCode == Communications.BLE_CONNECTION_UNAVAILABLE) {
+            // TODO: try Wi-Fi bulk download?
+            mView.onReceive("Failed to load\nBLE connection\nunavailable");
+        } else {
+            mView.onReceive("Failed to load\nError: " + responseCode.toString());
+        }
     }
 
     function onReceive(responseCode as Number, data as Dictionary?) as Void {
@@ -192,6 +248,8 @@ class garmin_sampleDelegate extends WatchUi.BehaviorDelegate {
         var data_label_sub = Rez.Strings.labelSettingValHeight;
         if (data_label_setting == DATA_LABEL_PROP_TIME) {
             data_label_sub = Rez.Strings.labelSettingValTime;
+        } else if (data_label_setting == DATA_LABEL_PROP_NONE) {
+            data_label_sub = Rez.Strings.labelSettingValNone;
         }
         menu.addItem(
             new WatchUi.MenuItem(
@@ -220,6 +278,20 @@ class garmin_sampleDelegate extends WatchUi.BehaviorDelegate {
             )
         );
 
+        // Display Mode
+        var display_setting = Properties.getValue("displayProp");
+        var display_sub = Rez.Strings.displaySettingValGraph;
+        if (display_setting == DISPLAY_PROP_TABLE) {
+            display_sub = Rez.Strings.displaySettingValTable;
+        }
+        menu.addItem(
+            new WatchUi.MenuItem(
+                Rez.Strings.displaySettingTitle, // Label
+                display_sub, // Sub-Label
+                MainMenuDelegate.MENU_SETTINGS_DISP_MODE_ID, // identifier
+                {} // options
+            )
+        );
 
         menu.addItem(
             new WatchUi.MenuItem(
@@ -232,7 +304,7 @@ class garmin_sampleDelegate extends WatchUi.BehaviorDelegate {
         menu.addItem(
             new WatchUi.MenuItem(
                 "Get Data",
-                "Kits: wlp-hilo",
+                "wlp-hilo",
                 MainMenuDelegate.MENU_GET_DATA,
                 {}
             )

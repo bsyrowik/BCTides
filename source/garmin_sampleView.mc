@@ -19,7 +19,13 @@ public enum unitsPropSettings {
 
 public enum dataLabelPropSettings {
     DATA_LABEL_PROP_HEIGHT,
-    DATA_LABEL_PROP_TIME
+    DATA_LABEL_PROP_TIME,
+    DATA_LABEL_PROP_NONE
+}
+
+public enum displayPropSettings {
+    DISPLAY_PROP_GRAPH,
+    DISPLAY_PROP_TABLE
 }
 
 (:glance)
@@ -45,16 +51,15 @@ class tideUtil {
         }
     }
 
-    static function displayTime() as Boolean {
-        var setting = Properties.getValue("dataLabelProp");
-        if (setting == DATA_LABEL_PROP_TIME) {
-            return true;
-        }
-        return false;
+    static function graphLabelType() as Number {
+        return Properties.getValue("dataLabelProp");
+    }
+
+    static function getDisplayType() as Number {
+        return Properties.getValue("displayProp");
     }
 
     static function getNextEvent(t as Number, app) as Array {
-        var last_t = 0;
         var last_h = 0;
         for (var i = 0; i < app._hilo.size(); i++) {
             var time = app._hilo[i][0];
@@ -66,7 +71,6 @@ class tideUtil {
                 }
                 return [time, height, event_type];
             }
-            last_t = time;
             last_h = height;
         }
         return [null, null, null];
@@ -201,6 +205,8 @@ class garmin_sampleView extends WatchUi.View {
         mPosition = info;
         if (mPosition == null || mPosition.accuracy < Position.QUALITY_POOR) {
             System.println("got position update but accuracy sucks!");
+        } else {
+            System.println("got position and accuracy is acceptable.");
         }
         WatchUi.requestUpdate();
     }
@@ -273,9 +279,11 @@ class garmin_sampleView extends WatchUi.View {
                     h_label *= tideUtil.FEET_PER_METER;
                 }
                 var label_string = h_label.format("%.1f");
-                if (tideUtil.displayTime()) {
+                if (tideUtil.graphLabelType() == DATA_LABEL_PROP_TIME) {
                     var m = new Time.Moment(l[3]);
                     label_string = formatTimeStringShort(m);
+                } else if (tideUtil.graphLabelType() == DATA_LABEL_PROP_NONE) {
+                    label_string = "";
                 }
                 if (l[1] || height < 1) {
                     dc.drawText(this_x, this_y - 22, Graphics.FONT_XTINY, label_string, Graphics.TEXT_JUSTIFY_CENTER);
@@ -291,6 +299,33 @@ class garmin_sampleView extends WatchUi.View {
         }
     }
 
+    function tableTides(dc as Dc, x as Number, y as Number, w as Number, h as Number, start as Time.Moment, end as Time.Moment) as Void {
+        var units = "m";
+        var height_multiplier = 1.0f;
+        if (tideUtil.getUnits() == System.UNIT_STATUTE) {
+            units = "ft";
+            height_multiplier = tideUtil.FEET_PER_METER;
+        }
+
+        dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
+        dc.drawText(x,       y, Graphics.FONT_SMALL, "Time PST", Graphics.TEXT_JUSTIFY_LEFT);
+        dc.drawText(x + 102, y, Graphics.FONT_SMALL, "Height (" + units + ")", Graphics.TEXT_JUSTIFY_LEFT);
+        y = y + 26;
+        for (var i = 0; i < app._hilo.size(); i++) {
+            var time = app._hilo[i][0];
+            var height = app._hilo[i][1];
+            if (time > end.value()) {
+                return;
+            }
+            if (time >= start.value()) {
+                // Add a row
+                var m = new Time.Moment(time);
+                dc.drawText(x + 30,  y, Graphics.FONT_TINY, formatTimeStringShort(m), Graphics.TEXT_JUSTIFY_LEFT);
+                dc.drawText(x + 162, y, Graphics.FONT_TINY, (height * height_multiplier).format("%.2f"), Graphics.TEXT_JUSTIFY_RIGHT);
+                y = y + 22;
+            }
+        }
+    }
 
 
     public function getFromDateString() as String {
@@ -298,6 +333,7 @@ class garmin_sampleView extends WatchUi.View {
         var duration_8h = new Time.Duration(8 * Time.Gregorian.SECONDS_PER_HOUR);
         var from = Time.today().subtract(duration_8h);
         var from_utc = Gregorian.utcInfo(from, Time.FORMAT_SHORT);
+        System.println(from.value());
         return formatDateString(from_utc);
     }
 
@@ -336,10 +372,6 @@ class garmin_sampleView extends WatchUi.View {
                 info.hour.format("%02d"),
                 info.min.format("%02d")
             ]);
-
-
-
-            
     }
 
     function formatDateStringShort(moment as Time.Moment) as String {
@@ -403,36 +435,41 @@ class garmin_sampleView extends WatchUi.View {
         var dateInfo = Gregorian.info(today, Time.FORMAT_MEDIUM);
         dc.drawText(120, 8, Graphics.FONT_TINY, dateInfo.month + " " + dateInfo.day.toString(), Graphics.TEXT_JUSTIFY_CENTER);
 
-        // Draw box
-        dc.setColor(Graphics.COLOR_DK_GRAY, Graphics.COLOR_TRANSPARENT);
-        dc.drawRectangle(30, 60, 180, 120);
 
         if (app._hilo != null) {
-            if (mPage == 0) {
-                // Draw 'now' line
-                var offset = (now.value() - today.value()) * (180 - 4) / Gregorian.SECONDS_PER_DAY;
-                dc.setColor(Graphics.COLOR_DK_BLUE, Graphics.COLOR_TRANSPARENT);
-//                var x1 = 30.0 + 2.0 + 2.0 / 24.0 * (180 - 4);
-                var x1 = 30.0 + 2.0 + offset;
-                dc.drawLine(x1, 61, x1, 179);
-            }
 
-            // Draw graph
-            // BS: make all days start at midnight, even today.
-            var duration_2h = new Time.Duration(Gregorian.SECONDS_PER_HOUR * 2);
-//            var duration_22h = new Time.Duration(Gregorian.SECONDS_PER_HOUR * 22);
-//            graphTides(dc, 30, 60, 180, 120, now.subtract(duration_2h), now.add(duration_22h));
-            var duration_24h = new Time.Duration(Gregorian.SECONDS_PER_HOUR * 24);
-            graphTides(dc, 30, 60, 180, 120, today, today.add(duration_24h));
+            if (tideUtil.getDisplayType() == DISPLAY_PROP_GRAPH) {
+                // Draw box
+                dc.setColor(Graphics.COLOR_DK_GRAY, Graphics.COLOR_TRANSPARENT);
+                dc.drawRectangle(30, 60, 180, 120);
+
+                // Draw graph
+                var duration_24h = new Time.Duration(Gregorian.SECONDS_PER_HOUR * 24);
+                graphTides(dc, 30, 60, 180, 120, today, today.add(duration_24h));
+
+                if (mPage == 0) {
+                    // Draw 'now' line
+                    var offset = (now.value() - today.value()) * (180 - 4) / Gregorian.SECONDS_PER_DAY;
+                    dc.setColor(Graphics.COLOR_DK_BLUE, Graphics.COLOR_TRANSPARENT);
+                    var x1 = 30.0 + 2.0 + offset;
+                    dc.drawLine(x1, 61, x1, 179);
+                }
+            } else {
+                // Draw table
+                var duration_24h = new Time.Duration(Gregorian.SECONDS_PER_HOUR * 24);
+                tableTides(dc, 22, 60, 180, 120, today, today.add(duration_24h));
+            }
 
             if (mPage == 0) {
                 // Current height
                 var units = "m";
+                var duration_2h = new Time.Duration(Gregorian.SECONDS_PER_HOUR * 2);
                 var height = tideUtil.getHeightAtT(now.value(), duration_2h.value(), 0, app)[0];
                 if (tideUtil.getUnits() == System.UNIT_STATUTE) {
                     units = "ft";
                     height *= tideUtil.FEET_PER_METER;
                 }
+                dc.setColor(Graphics.COLOR_DK_BLUE, Graphics.COLOR_TRANSPARENT);
                 dc.drawText(120, 200, Graphics.FONT_TINY, height.format("%.1f") + units, Graphics.TEXT_JUSTIFY_CENTER);
             }
         }
@@ -466,6 +503,16 @@ class garmin_sampleView extends WatchUi.View {
             }
             app.hilo_updated = true;
             //System.println(app._hilo.toString());
+
+
+            var message = "Got tide data";
+            var dialog = new WatchUi.Confirmation(message);
+            WatchUi.pushView(
+                dialog,
+                new ConfirmationDelegate(),
+                WatchUi.SLIDE_IMMEDIATE
+            );
+
         }
         WatchUi.requestUpdate();
     }
