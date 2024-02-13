@@ -58,8 +58,8 @@ class Heap {
         if (heapSize > 1) {
             A.add(new Pair());
         }
-        System.println("Size of A: " + A.size());
-        System.println("Trying to insert " + dist + "," + ndx + " at index " + (heapSize - 1));
+//        System.println("Size of A: " + A.size());
+//        System.println("Trying to insert " + dist + "," + ndx + " at index " + (heapSize - 1));
         A[heapSize-1].distance = 1e9; // FLOAT_MAX
         A[heapSize-1].index = ndx;
         heapDecreaseKey(heapSize-1, dist);
@@ -100,9 +100,8 @@ class Heap {
             System.println(A[i].distance + " " + A[i].index);
         }
     }
-    function print_destructive() as Void {
-        var end = heapSize;
-        for (var i = 0; i < end; i++) {
+    function print_destructive(count as Number) as Void {
+        for (var i = 0; i < count; i++) {
             var p = heapExtractMin();
             System.println(p.distance + " " + p.index);
         }
@@ -157,14 +156,14 @@ class StationMenuDelegate extends WatchUi.Menu2InputDelegate {
     }
 
     function d2r(d as Float) as Float {
-        return d * Math.PI / 180;
+        return d * Math.PI / 180.0f;
     }
 
     function d2(lat1 as Float, lon1 as Float, lat2 as Float, lon2 as Float) as Float {
-        lat1 = d2r(lat1);
-        lon1 = d2r(lon1);
-        lat2 = d2r(lat2);
-        lon2 = d2r(lon2);
+//        lat1 = d2r(lat1);
+//        lon1 = d2r(lon1);
+//        lat2 = d2r(lat2);
+//        lon2 = d2r(lon2);
 
         var dlat = lat2 - lat1;
         var dlon = lon2 - lon1;
@@ -186,21 +185,32 @@ class StationMenuDelegate extends WatchUi.Menu2InputDelegate {
         // TODO: search by coordinates?
 
         if (item.getId() == MENU_STATION_NEAREST) {
-            var home_lat = 49.27;
-            var home_lon = -123.144;
+            var home_lat = d2r(49.27);
+            var home_lon = d2r(-123.144);
             // TODO: dynamic list of stations
             var all_stations = WatchUi.loadResource(Rez.JsonData.stations);
             // TODO: use insertion sort or similar? What about a min heap?
-            var h = new Heap(20);
-            for(var i = 0; i < 20; i++) {
+            var size = all_stations.size();
+            var h = new Heap(size);
+            for(var i = 0; i < size; i++) {
                 var d_squared = d2(home_lat, home_lon, all_stations[i]["lat"], all_stations[i]["lon"]);
-                var dist = distance(d_squared);
-                System.println(all_stations[i]["name"] + " d2 " + d_squared + " distance " + dist + "km");
-                h.minHeapInsert(dist, i);
+//                var dist = distance(d_squared);
+//                System.println(all_stations[i]["name"] + " d2 " + d_squared + " distance " + dist + "km");
+//                h.minHeapInsert(dist, i);
+
+//                System.println(all_stations[i]["name"] + " d^2 " + d_squared);
+                h.minHeapInsert(d_squared, i);
             }
 //            h.print();
             System.println("-----------------------");
-            h.print_destructive();
+            var count = 7;
+            for (var i = 0; i < count; i++) {
+                var p = h.heapExtractMin();
+                var dist = distance(p.distance);
+                var station = all_stations[p.index];
+                System.println(station["name"] + " " + dist.format("%.2f") + "km");
+            }
+            //h.print_destructive(7);
         } else if (item.getId() == MENU_STATION_ALPHABETICAL) {
             // TODO: dynamic list of stations
             // DO this one first, it is easier.
