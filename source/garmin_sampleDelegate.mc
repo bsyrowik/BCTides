@@ -4,6 +4,147 @@ using Toybox.Timer;
 import Toybox.Application.Properties;
 import Toybox.Lang;
 
+// A string to display on the screen
+var screenMessage = "Press Menu to Enter Text";
+var lastText = "";
+
+class Pair {
+    public var distance as Float = 0.0f;
+    public var index as Number = -1;
+    function initialize() {}
+}
+
+class Heap {
+    var heapSize as Number;
+    var A as Array<Pair>;
+    function initialize(size as Number) {
+        A = [new Pair()];
+        heapSize = 0;
+    }
+
+    function parent(i as Number) as Number {
+        return (i + 1) / 2 - 1;
+    }
+    function left(i as Number) as Number {
+        return i * 2 + 1;
+    }
+    function right(i as Number) as Number {
+        return i * 2 + 2;
+    }
+
+    function swap(a as Number, b as Number) as Void {
+        var tmp_d = A[a].distance;
+        var tmp_i = A[a].index;
+        A[a].distance = A[b].distance;
+        A[a].index = A[b].index;
+        A[b].distance = tmp_d;
+        A[b].index = tmp_i;
+    }
+
+    function heapDecreaseKey(i as Number, key as Float) as Void {
+        if (key < A[i].distance) {
+            // ERROR
+            //throw Lang.InvalidKeyException;
+        }
+        A[i].distance = key;
+        while (i > 0 && A[parent(i)].distance > A[i].distance) {
+            swap(i, parent(i));
+            i = parent(i);
+        }
+    }
+
+    function minHeapInsert(dist as Float, ndx as Number) as Void {
+        heapSize += 1;
+        if (heapSize > 1) {
+            A.add(new Pair());
+        }
+        System.println("Size of A: " + A.size());
+        System.println("Trying to insert " + dist + "," + ndx + " at index " + (heapSize - 1));
+        A[heapSize-1].distance = 1e9; // FLOAT_MAX
+        A[heapSize-1].index = ndx;
+        heapDecreaseKey(heapSize-1, dist);
+    }
+
+    function minHeapify(i as Number) as Void {
+        var l = left(i);
+        var r = right(i);
+        var smallest;
+        if (l < heapSize && A[l].distance < A[i].distance) {
+            smallest = l;
+        } else {
+            smallest = i;
+        }
+        if (r < heapSize && A[r].distance < A[smallest].distance) {
+            smallest = r;
+        }
+        if (smallest != i) {
+            swap(smallest, i);
+            minHeapify(smallest);
+        }
+    }
+
+    function heapExtractMin() as Pair {
+        if (heapSize < 1) {
+            // ERROR
+            //throw Lang.InvalidRequestException;
+        }
+        var max = A[0];
+        A[0] = A[heapSize-1];
+        heapSize -= 1;
+        minHeapify(0);
+        return max;
+    }
+
+    function print() as Void {
+        for (var i = 0; i < heapSize; i++) {
+            System.println(A[i].distance + " " + A[i].index);
+        }
+    }
+    function print_destructive() as Void {
+        var end = heapSize;
+        for (var i = 0; i < end; i++) {
+            var p = heapExtractMin();
+            System.println(p.distance + " " + p.index);
+        }
+    }
+}
+
+class MyTextPickerDelegate extends WatchUi.TextPickerDelegate {
+
+    function initialize() {
+        TextPickerDelegate.initialize();
+    }
+
+    function onTextEntered(text, changed) as Boolean {
+        screenMessage = text + "\n" + "Changed: " + changed;
+        lastText = text;
+        return false;
+    }
+
+    function onCancel() as Boolean {
+        screenMessage = "Canceled";
+        return false;
+    }
+}
+
+class MyInputDelegate extends WatchUi.InputDelegate {
+    function initialize() {
+        InputDelegate.initialize();
+    }
+
+    function onKey(key) {
+        if (WatchUi has :TextPicker) {
+            if (key.getKey() == WatchUi.KEY_MENU) {
+                WatchUi.pushView(
+                    new WatchUi.TextPicker(lastText),
+                    new MyTextPickerDelegate(),
+                    WatchUi.SLIDE_DOWN
+                );
+            }
+        }
+        return true;
+    }
+}
 
 class StationMenuDelegate extends WatchUi.Menu2InputDelegate {
     public enum {
@@ -15,14 +156,58 @@ class StationMenuDelegate extends WatchUi.Menu2InputDelegate {
         Menu2InputDelegate.initialize();
     }
 
+    function d2r(d as Float) as Float {
+        return d * Math.PI / 180;
+    }
+
+    function d2(lat1 as Float, lon1 as Float, lat2 as Float, lon2 as Float) as Float {
+        lat1 = d2r(lat1);
+        lon1 = d2r(lon1);
+        lat2 = d2r(lat2);
+        lon2 = d2r(lon2);
+
+        var dlat = lat2 - lat1;
+        var dlon = lon2 - lon1;
+        dlon = dlon * 0.652;
+
+        var d2 = dlat * dlat + dlon * dlon;
+
+        return d2;
+    }
+
+    function distance(d2 as Float) as Float {
+        var d = Math.sqrt(d2);
+        var r = 6371;
+        return d * r;
+    }
+
     function onSelect(item) {
+
+        // TODO: search by coordinates?
+
         if (item.getId() == MENU_STATION_NEAREST) {
+            var home_lat = 49.27;
+            var home_lon = -123.144;
             // TODO: dynamic list of stations
+            var all_stations = WatchUi.loadResource(Rez.JsonData.stations);
+            // TODO: use insertion sort or similar? What about a min heap?
+            var h = new Heap(20);
+            for(var i = 0; i < 20; i++) {
+                var d_squared = d2(home_lat, home_lon, all_stations[i]["lat"], all_stations[i]["lon"]);
+                var dist = distance(d_squared);
+                System.println(all_stations[i]["name"] + " d2 " + d_squared + " distance " + dist + "km");
+                h.minHeapInsert(dist, i);
+            }
+//            h.print();
+            System.println("-----------------------");
+            h.print_destructive();
         } else if (item.getId() == MENU_STATION_ALPHABETICAL) {
             // TODO: dynamic list of stations
             // DO this one first, it is easier.
         } else if (item.getId() == MENU_STATION_SEARCH) {
             // TODO: get text input
+            var text_picker = new MyInputDelegate();
+            text_picker.initialize();
         }
     }
 }
