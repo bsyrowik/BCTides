@@ -4,6 +4,8 @@ using Toybox.Timer;
 import Toybox.Application.Properties;
 import Toybox.Lang;
 
+var getDataLabel;
+
 // A string to display on the screen
 var screenMessage = "Press Menu to Enter Text";
 var lastText = "";
@@ -68,8 +70,8 @@ class Heap {
         if (heapSize > 1) {
             A.add(new Pair());
         }
-//        System.println("Size of A: " + A.size());
-//        System.println("Trying to insert " + dist + "," + ndx + " at index " + (heapSize - 1));
+        //System.println("Size of A: " + A.size());
+        //System.println("Trying to insert " + dist + "," + ndx + " at index " + (heapSize - 1));
         A[heapSize-1].distance = 1e9; // FLOAT_MAX
         A[heapSize-1].index = ndx;
         heapDecreaseKey(heapSize-1, dist);
@@ -119,7 +121,6 @@ class Heap {
 }
 
 class MyTextPickerDelegate extends WatchUi.TextPickerDelegate {
-
     function initialize() {
         TextPickerDelegate.initialize();
     }
@@ -173,6 +174,7 @@ class NearestStationMenuDelegate extends WatchUi.Menu2InputDelegate {
         System.println("Selected station " + name + " with code " + code + " and distance " + dist);
         Properties.setValue("selectedStationCode", code);
         Properties.setValue("selectedStationName", name);
+        getDataLabel.setSubLabel(name);
         WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
     }
 }
@@ -218,7 +220,7 @@ class StationMenuDelegate extends WatchUi.Menu2InputDelegate {
             var p = h.heapExtractMin();
             var dist = distance(p.distance);
             var station = all_stations[p.index];
-            System.println(station["name"] + " " + dist.format("%.2f") + "km");
+//            System.println(station["name"] + " " + dist.format("%.2f") + "km");
             menu.addItem(
                 new WatchUi.MenuItem(
                     station["name"],
@@ -228,6 +230,8 @@ class StationMenuDelegate extends WatchUi.Menu2InputDelegate {
                 )
             );
         }
+
+        WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);   
 
         var delegate = new NearestStationMenuDelegate();
         WatchUi.pushView(menu, delegate, WatchUi.SLIDE_IMMEDIATE);
@@ -241,11 +245,12 @@ class StationMenuDelegate extends WatchUi.Menu2InputDelegate {
         // TODO: search by coordinates?
 
         if (item.getId() == MENU_STATION_NEAREST) {
-            var home_lat = d2r(49.267);
-            var home_lon = d2r(-123.114);
-            System.println("home coords: " + home_lat + "N " + home_lon + "W");
+            var home_pos = tideUtil.currentPosition.toRadians();
+            var home_lat = home_pos[0]; // d2r(49.267);
+            var home_lon = home_pos[1]; // d2r(-123.114);
+//            System.println("home coords: " + home_lat + "N " + home_lon + "W");
             // TODO: dynamic list of stations
-            // FIXME TODO: New menu option for choosing north or south list!!!!
+            // FIXME TODO: New menu level for choosing north or south list???
             var all_stations;
             if (Properties.getValue("zoneProp") == ZONE_PROP_NORTH) {
                 all_stations = WatchUi.loadResource(Rez.JsonData.stationsNorth);
@@ -257,25 +262,9 @@ class StationMenuDelegate extends WatchUi.Menu2InputDelegate {
             var h = new Heap(size);
             for(var i = 0; i < size; i++) {
                 var d_squared = d2(home_lat, home_lon, all_stations[i]["lat"], all_stations[i]["lon"]);
-//                var dist = distance(d_squared);
-//                System.println(all_stations[i]["name"] + " d2 " + d_squared + " distance " + dist + "km");
-//                h.minHeapInsert(dist, i);
-
-//                System.println(all_stations[i]["name"] + " d^2 " + d_squared);
                 h.minHeapInsert(d_squared, i);
             }
-//            h.print();
             nearestStationMenu(h, all_stations);
-/*            System.println("-----------------------");
-            var count = 7;
-            for (var i = 0; i < count; i++) {
-                var p = h.heapExtractMin();
-                var dist = distance(p.distance);
-                var station = all_stations[p.index];
-                System.println(station["name"] + " " + dist.format("%.2f") + "km");
-            }
-            */
-            //h.print_destructive(7);
         } else if (item.getId() == MENU_STATION_ALPHABETICAL) {
             // TODO: dynamic list of stations
             // DO this one first, it is easier.
@@ -434,7 +423,7 @@ class garmin_sampleDelegate extends WatchUi.BehaviorDelegate {
                 "Content-Type" => Communications.REQUEST_CONTENT_TYPE_URL_ENCODED
             }
         };
-        Communications.makeWebRequest(
+        Communications.makeWebRequest( 
             "https://api-iwls.dfo-mpo.gc.ca/api/v1/stations/" + station_id + "/data",
             {
                 "time-series-code" => "wlp-hilo",
@@ -456,9 +445,9 @@ class garmin_sampleDelegate extends WatchUi.BehaviorDelegate {
         };
         var code = "07707"; // Kitsilano
         //code = "07010"; // Point no Point
+        //code = "07710"; // False Creek
         code = getStationCode();
-        System.println("code: " + code);
-        code = "07710"; // False Creek
+        //System.println("code: " + code);
         Communications.makeWebRequest(
             "https://api-iwls.dfo-mpo.gc.ca/api/v1/stations/",
             {
@@ -565,14 +554,13 @@ class garmin_sampleDelegate extends WatchUi.BehaviorDelegate {
                 {} // options
             )
         );
-        menu.addItem(
-            new WatchUi.MenuItem(
+        getDataLabel = new WatchUi.MenuItem(
                 "Get Data",
                 getStationName(),
                 MainMenuDelegate.MENU_GET_DATA,
                 {}
-            )
-        );
+            );
+        menu.addItem(getDataLabel);
         
         var zone_setting = Properties.getValue("zoneProp");
         var zone_sub = Rez.Strings.zoneSettingValSouth;

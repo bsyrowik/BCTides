@@ -39,6 +39,8 @@ class tideUtil {
 
     static var current_station_name = getStationName();
 
+    static var currentPosition = null;
+
     // static variables for getHeightAtT
     static var last_i = null;
     static var t1 = null, t2 = null;
@@ -190,14 +192,9 @@ class garmin_sampleView extends WatchUi.View {
     hidden var needGPS = true;
     private var _message = "";
     var app;
-//    static const FEET_PER_METER = 3.28084;
-
-//    private var _time_str = "";
 
     var mPage = 0;
     var mPageCount = 6;
-
-
 
     function initialize(the_app) {
         app = the_app;
@@ -219,10 +216,10 @@ class garmin_sampleView extends WatchUi.View {
     // Load your resources here
     function onLayout(dc as Dc) as Void {
 
-		mPosition = Position.getInfo();
+		//mPosition = Position.getInfo();
         if (mPosition == null || mPosition.accuracy < Position.QUALITY_POOR) {
             System.println("onLayout: requesting position!");
-            Position.enableLocationEvents(Position.LOCATION_CONTINUOUS, self.method(:onPosition));
+            Position.enableLocationEvents(Position.LOCATION_CONTINUOUS, method(:onPosition));
 		}
         setLayout(Rez.Layouts.MainLayout(dc));
     }
@@ -332,13 +329,11 @@ class garmin_sampleView extends WatchUi.View {
         }
     }
 
-
     public function getFromDateString() as String {
         // Start from midnight this morning; add another 8 hours buffer
         var duration_8h = new Time.Duration(8 * Time.Gregorian.SECONDS_PER_HOUR);
         var from = Time.today().subtract(duration_8h);
         var from_utc = Gregorian.utcInfo(from, Time.FORMAT_SHORT);
-        System.println(from.value());
         return formatDateString(from_utc);
     }
 
@@ -356,7 +351,6 @@ class garmin_sampleView extends WatchUi.View {
         var day    = str.substring(8,10).toNumber();
         var hour   = str.substring(11,13).toNumber();
         var minute = str.substring(14,16).toNumber();
-//        var second = str.substring(17,19).toNumber();
         var options = {
             :year   => year,
             :month  => month,
@@ -403,6 +397,15 @@ class garmin_sampleView extends WatchUi.View {
             ]);
     }
 
+    function updateLocationText(position as Position.Location) as Void {
+        tideUtil.currentPosition = position;
+        var loc = position.toDegrees();
+        var loc0 = View.findDrawableById("loc0") as Text;
+        loc0.setText(loc[0].format("%.3f"));
+        var loc1 = View.findDrawableById("loc1") as Text;
+        loc1.setText(loc[1].format("%.3f"));
+    }
+
     // Update the view
     function onUpdate(dc as Dc) as Void {
         // Call the parent onUpdate function to redraw the layout
@@ -411,7 +414,10 @@ class garmin_sampleView extends WatchUi.View {
         if (needGPS) {
 	    	if (mPosition == null || mPosition.accuracy == null || mPosition.accuracy < Position.QUALITY_POOR) {
 		    	mPosition = Position.getInfo();
+                System.println("setting mPosition in onUpdate()");
 		    }
+            System.print("accuracy: " + mPosition.accuracy);
+            System.println(" position: " + mPosition.position.toDegrees());
 			if (mPosition.accuracy != null && mPosition.accuracy != Position.QUALITY_NOT_AVAILABLE && mPosition.position != null) {
 				if (mPosition.accuracy >= Position.QUALITY_POOR) {
                     System.println("Got acceptable position; disabling callback");
@@ -421,11 +427,19 @@ class garmin_sampleView extends WatchUi.View {
 	    	}
 		}
         if (mPosition.position != null) {
-            var loc = mPosition.position.toDegrees() as Array;
-            var loc0 = View.findDrawableById("loc0") as Text;
-            loc0.setText(loc[0].format("%.2f"));
-            var loc1 = View.findDrawableById("loc1") as Text;
-            loc1.setText(loc[1].format("%.3f"));
+            updateLocationText(mPosition.position);
+        }
+        if (mPosition == null || mPosition.position == null || mPosition.accuracy == Position.QUALITY_NOT_AVAILABLE) {
+            var cc = Toybox.Weather.getCurrentConditions() as Toybox.Weather.CurrentConditions;
+            //System.println("Trying to get position from weather...");
+            //System.println(cc);
+            if (cc != null) {
+                var pos = cc.observationLocationPosition as Position.Location;
+                if (pos != null) {
+                    updateLocationText(pos);
+                    System.println("Got position from weather: " + pos.toDegrees()[0] + " " + pos.toDegrees()[1]);
+                }
+            }
         }
 
         var stationLabel = View.findDrawableById("stationTitle") as Text;

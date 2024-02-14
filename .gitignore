@@ -1,2 +1,9 @@
 bin/**
 build/**
+bin\**
+build\**
+**.mir
+build/mir/source/garmin_sampleView.mir
+build/mir/source/garmin_sampleDelegate.mir
+build/mir/source/garmin_sampleApp.mir
+build/internal-mir/Rez.mir
