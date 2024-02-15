@@ -44,8 +44,8 @@ class garmin_sampleDelegate extends WatchUi.BehaviorDelegate {
             "https://api-iwls.dfo-mpo.gc.ca/api/v1/stations/" + station_id + "/data",
             {
                 "time-series-code" => "wlp-hilo",
-                "from" => mView.getFromDateString(),
-                "to" => mView.getToDateString()
+                "from" => DateUtil.getFromDateString(),
+                "to" => DateUtil.getToDateString()
             },
             options,
             method(:onReceive)

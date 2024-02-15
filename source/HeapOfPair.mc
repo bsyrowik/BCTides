@@ -95,7 +95,7 @@ class HeapOfPair {
 
 
 (:debug)
-function subTestParent(logger as Logger, method as Method(a as Number) as Number, s as String, i as Number, expected as Number) as Boolean {
+function subTestParent(logger as Logger, method as Method(a as Number) as Number, s as String, i as Number, expected as Number) as Boolean { // FIXME: rename
     var p = method.invoke(i);
     if (p != expected) {
         logger.error("Expected " + s + " of " + i + " to be " + expected + " - got " + p);

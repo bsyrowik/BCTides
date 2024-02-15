@@ -113,7 +113,7 @@ class garmin_sampleView extends WatchUi.View {
                 var label_string = h_label.format("%.1f");
                 if (PropUtil.graphLabelType() == PropUtil.DATA_LABEL_PROP_TIME) {
                     var m = new Time.Moment(l[3]);
-                    label_string = formatTimeStringShort(m);
+                    label_string = DateUtil.formatTimeStringShort(m);
                 } else if (PropUtil.graphLabelType() == PropUtil.DATA_LABEL_PROP_NONE) {
                     label_string = "";
                 }
@@ -152,80 +152,13 @@ class garmin_sampleView extends WatchUi.View {
             if (time >= start.value()) {
                 // Add a row
                 var m = new Time.Moment(time);
-                dc.drawText(x + 30,  y, Graphics.FONT_TINY, formatTimeStringShort(m), Graphics.TEXT_JUSTIFY_LEFT);
+                dc.drawText(x + 30,  y, Graphics.FONT_TINY, DateUtil.formatTimeStringShort(m), Graphics.TEXT_JUSTIFY_LEFT);
                 dc.drawText(x + 162, y, Graphics.FONT_TINY, (height * height_multiplier).format("%.2f"), Graphics.TEXT_JUSTIFY_RIGHT);
                 y = y + 22;
             }
         }
     }
 
-    public function getFromDateString() as String {
-        // Start from midnight this morning; add another 8 hours buffer
-        var duration_8h = new Time.Duration(8 * Time.Gregorian.SECONDS_PER_HOUR);
-        var from = Time.today().subtract(duration_8h);
-        var from_utc = Gregorian.utcInfo(from, Time.FORMAT_SHORT);
-        return formatDateString(from_utc);
-    }
-
-    public function getToDateString() as String {
-        var duration_7d_6h = new Time.Duration(7 * Time.Gregorian.SECONDS_PER_DAY + 6 * Time.Gregorian.SECONDS_PER_HOUR);
-        var to = Time.now().add(duration_7d_6h);
-        var to_utc = Gregorian.utcInfo(to, Time.FORMAT_SHORT);
-        return formatDateString(to_utc);
-    }
-
-    function parseDateString(str as String) as Time.Moment {
-        // e.g. 2022-04-15T17:37:22Z
-        var year   = str.substring(0,4).toNumber();
-        var month  = str.substring(5,7).toNumber();
-        var day    = str.substring(8,10).toNumber();
-        var hour   = str.substring(11,13).toNumber();
-        var minute = str.substring(14,16).toNumber();
-        var options = {
-            :year   => year,
-            :month  => month,
-            :day    => day,
-            :hour   => hour,
-            :minute => minute
-        };
-        //System.println("parsed to " + year.toString() + "-" + month.toString() + "-" + day.toString() + "T" + hour.toString() + ":" + minute.toString());
-        return Gregorian.moment(options);
-    }
-
-    function formatTimeStringShort(moment as Time.Moment) as String {
-        // Provides local time from a UTC moment
-        // https://developer.garmin.com/connect-iq/api-docs/Toybox/Time/Gregorian.html#info-instance_function
-        var info = Gregorian.info(moment, Time.FORMAT_SHORT);
-        return Lang.format("$1$:$2$",
-            [
-                info.hour.format("%02d"),
-                info.min.format("%02d")
-            ]);
-    }
-
-    function formatDateStringShort(moment as Time.Moment) as String {
-        var info = Gregorian.utcInfo(moment, Time.FORMAT_SHORT);
-        // Moment should be in UTC; seconds zero'd
-        return Lang.format("$1$-$2$ $3$:$4$",
-            [
-                info.month.format("%02d"),
-                info.day.format("%02d"),
-                info.hour.format("%02d"),
-                info.min.format("%02d")
-            ]);
-    }
-
-    function formatDateString(info as Gregorian.Info) as String {
-        // Moment should be in UTC; seconds zero'd
-        return Lang.format("$1$-$2$-$3$T$4$:$5$:00Z",
-            [
-                info.year,
-                info.month.format("%02d"),
-                info.day.format("%02d"),
-                info.hour.format("%02d"),
-                info.min.format("%02d")
-            ]);
-    }
 
     function updateLocationText(position as Position.Location) as Void {
         TideUtil.currentPosition = position;
@@ -351,7 +284,7 @@ class garmin_sampleView extends WatchUi.View {
             _message = "";
             for (var i = 0; i < args.size(); i++) {
                 var eventData = args[i] as Dictionary;
-                app._hilo.add([parseDateString(eventData["eventDate"].toString()).value(), eventData["value"].toFloat()]);
+                app._hilo.add([DateUtil.parseDateString(eventData["eventDate"].toString()).value(), eventData["value"].toFloat()]);
             }
             app.hilo_updated = true;
             //System.println(app._hilo.toString());
