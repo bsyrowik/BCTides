@@ -11,178 +11,8 @@ using Toybox.Time.Gregorian;
 using Toybox.Graphics as Gfx;
 using Toybox.Position as Position;
 
-public enum unitsPropSettings {
-    UNITS_PROP_SYSTEM,
-    UNITS_PROP_METRIC,
-    UNITS_PROP_IMPERIAL
-}
-
-public enum dataLabelPropSettings {
-    DATA_LABEL_PROP_HEIGHT,
-    DATA_LABEL_PROP_TIME,
-    DATA_LABEL_PROP_NONE
-}
-
-public enum displayPropSettings {
-    DISPLAY_PROP_GRAPH,
-    DISPLAY_PROP_TABLE
-}
-
-public enum zonePropSettings {
-    ZONE_PROP_SOUTH,
-    ZONE_PROP_NORTH
-}
-
-(:glance)
-class tideUtil {
-    static const FEET_PER_METER = 3.28084;
-
-    static var current_station_name = getStationName();
-
-    static var currentPosition = null;
-
-    // static variables for getHeightAtT
-    static var last_i = null;
-    static var t1 = null, t2 = null;
-    static var h1 = 0.0f, h2 = 0.0f;
-    static var A, B_n = Toybox.Math.PI, B_d, C, D;
-
-    static function getUnits() as System.UnitsSystem {
-        var setting = Properties.getValue("unitsProp");
-        if (setting == UNITS_PROP_SYSTEM) {
-            return System.getDeviceSettings().elevationUnits;
-        } else if (setting == UNITS_PROP_METRIC) {
-            return System.UNIT_METRIC;
-        } else {
-            return System.UNIT_STATUTE;
-        }
-    }
-
-    static function graphLabelType() as Number {
-        return Properties.getValue("dataLabelProp");
-    }
-
-    static function getDisplayType() as Number {
-        return Properties.getValue("displayProp");
-    }
-
-    static function getNextEvent(t as Number, app) as Array {
-        var last_h = 0;
-        for (var i = 0; i < app._hilo.size(); i++) {
-            var time = app._hilo[i][0];
-            var height = app._hilo[i][1];
-            if (time > t) {
-                var event_type = "H";
-                if (last_h > height) {
-                    event_type = "L";
-                }
-                return [time, height, event_type];
-            }
-            last_h = height;
-        }
-        return [null, null, null];
-    }
-
-    static function getHeightAtT(t as Number, d as Number, p, app) as Array {
-        // Compute h(t) = A * cos(B * (t - C)) + D
-        // For: A = (h1 - h2) / 2
-        //      B = PI / (t2 - t1)
-        //      C = t1
-        //      D = (h2 + h1) / 2
-
-        if (t1 == null) { t1 = t; }
-        if (t2 == null) { t2 = t; }
-        //var t1 = t, t2 = t;
-        //var h1 = 0.0f, h2 = 0.0f;
-        if (last_i == null || t2 < t) {
-            var start_i = 0;
-            if (last_i != null) {
-                start_i = last_i;
-            }
-            for (var i = start_i; i < app._hilo.size(); i++) {
-                if (app._hilo[i][0] < t) {
-                    t1 = app._hilo[i][0];
-                    h1 = app._hilo[i][1];
-                } else {
-                    t2 = app._hilo[i][0];
-                    h2 = app._hilo[i][1];
-                    break;
-                }
-            }
-            A = (h1 - h2) / 2.0f;
-            B_d = t2 - t1;
-            C = t1;
-            D = (h2 + h1) / 2.0f;
-        }
-        var h = A * Toybox.Math.cos(B_n * (t - C) / B_d) + D;
-        //if (p) { System.println("h1 = " + h1.toString() + "; h2 = " + h2.toString() + "; t1 = " + formatDateStringShort(t1) + "; t2 = " + formatDateStringShort(t2)); }
-        //if (p) { System.println("h(t) = " + A.toString() + " * cos(" + B_n.toString() + " * (t - " + formatDateStringShort(C) + ") / " + B_d.toString() + ") + " + D.toString()); }
-        //if (t.subtract(t1).greaterThan(d)) {
-        if (t - t1 < d) {
-            return [h, (h1 > h2), h1, t1];
-        } else if (t2 - t < d) {
-            return [h, (h1 < h2), h2, t2];
-        }
-        return [h, null, null, null];
-    }
-}
 
 
-(:glance)
-class MyGlanceView extends WatchUi.GlanceView {
-    var app;
-
-    function initialize(the_app) {
-        app = the_app;
-        GlanceView.initialize();    	         
-    }
-
-    function onUpdate(dc) {
-		dc.setColor(Graphics.COLOR_BLACK,Graphics.COLOR_BLACK);
-		dc.clear();
-		dc.setColor(Graphics.COLOR_WHITE,Graphics.COLOR_TRANSPARENT);
-        var units = "m";
-        var now = Time.now().value();
-
-        // TODO: get this data dynamically
-        var next_event = tideUtil.getNextEvent(now, app);
-        var current_height = 2.1;
-        var next_event_height = next_event[1];
-        var next_event_time = (next_event[0] - now) / 60; //"2H 27M";
-        var next_event_type = next_event[2]; //"H";
-        var current_direction = next_event_type.equals("H") ? "rising" : "falling";
-        var current_station = tideUtil.current_station_name;
-
-
-        if (app._hilo != null) {
-            current_height = tideUtil.getHeightAtT(now, 1200, 0, app)[0];
-        }
-
-
-        if (tideUtil.getUnits() == System.UNIT_STATUTE) {
-            units = "ft";
-            next_event_height *= tideUtil.FEET_PER_METER;
-            current_height *= tideUtil.FEET_PER_METER;
-        }
-
-		dc.drawText(0, 0, Graphics.FONT_GLANCE, next_event_height.format("%.1f") + units + " " + next_event_type + " in " + next_event_time + "min", Graphics.TEXT_JUSTIFY_LEFT);
-        // TODO
-        //dc.drawBitmap(0, 16, "location2.png");
-
-        // Draw position indicator
-        // Numbers are a bit odd; this is just what looks good.
-        dc.drawCircle(7, 26, 4);
-        dc.drawLine(1, 26, 14, 26); // horizontal
-        dc.drawLine(7, 20, 7, 33); // vertical line
-
-        dc.drawText(18, 16, Graphics.FONT_GLANCE, current_station, Graphics.TEXT_JUSTIFY_LEFT);
-		dc.setColor(Graphics.COLOR_BLUE,Graphics.COLOR_TRANSPARENT);
-        dc.drawText(0, 32, Graphics.FONT_GLANCE_NUMBER, current_height.format("%.1f") + units + " and " + current_direction, Graphics.TEXT_JUSTIFY_LEFT);
-        // The FONT_GLANCE_NUMBER is much larger!
-        //System.print("dc height: "); System.println(dc.getHeight());
-        // Height is 63 pixels
-    } 
-}
 
 class garmin_sampleView extends WatchUi.View {
 
@@ -259,7 +89,7 @@ class garmin_sampleView extends WatchUi.View {
         var start_x = x + margin;
         var last_label_x = 0;
         var current_t = start.value();
-        var height = tideUtil.getHeightAtT(current_t, duration_per_increment, 0, app)[0];
+        var height = TideUtil.getHeightAtT(current_t, duration_per_increment, 0, app)[0];
         var last_y = y + h - (height / 6.0f) * h;
         var last_x = start_x;
         //System.println("[" + start_x.toString() + "] height at " + formatDateStringShort(start) + " is " + height.toString());
@@ -267,7 +97,7 @@ class garmin_sampleView extends WatchUi.View {
         for (var i = start_x + 1; i < x + w - margin; i = i + increment) {
             var this_x = i;
             current_t += duration_per_increment;
-            var l = tideUtil.getHeightAtT(current_t, duration_per_increment, 0, app);//(i > 115 && i < 125));
+            var l = TideUtil.getHeightAtT(current_t, duration_per_increment, 0, app);//(i > 115 && i < 125));
             height = l[0];
             //if (i < 125 && i > 115) {
                 //System.println("[" + i.toString() + "] height at " + formatDateStringShort(current_t) + " is " + height.toString());
@@ -277,14 +107,14 @@ class garmin_sampleView extends WatchUi.View {
             if (l[1] != null && (this_x - last_label_x > 10)) {
                 dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
                 var h_label = l[2];
-                if (tideUtil.getUnits() == System.UNIT_STATUTE) {
-                    h_label *= tideUtil.FEET_PER_METER;
+                if (TideUtil.getUnits() == System.UNIT_STATUTE) {
+                    h_label *= TideUtil.FEET_PER_METER;
                 }
                 var label_string = h_label.format("%.1f");
-                if (tideUtil.graphLabelType() == DATA_LABEL_PROP_TIME) {
+                if (TideUtil.graphLabelType() == DATA_LABEL_PROP_TIME) {
                     var m = new Time.Moment(l[3]);
                     label_string = formatTimeStringShort(m);
-                } else if (tideUtil.graphLabelType() == DATA_LABEL_PROP_NONE) {
+                } else if (TideUtil.graphLabelType() == DATA_LABEL_PROP_NONE) {
                     label_string = "";
                 }
                 if (l[1] || height < 1) {
@@ -304,18 +134,18 @@ class garmin_sampleView extends WatchUi.View {
     function tableTides(dc as Dc, x as Number, y as Number, w as Number, h as Number, start as Time.Moment, end as Time.Moment) as Void {
         var units = "m";
         var height_multiplier = 1.0f;
-        if (tideUtil.getUnits() == System.UNIT_STATUTE) {
+        if (TideUtil.getUnits() == System.UNIT_STATUTE) {
             units = "ft";
-            height_multiplier = tideUtil.FEET_PER_METER;
+            height_multiplier = TideUtil.FEET_PER_METER;
         }
 
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
         dc.drawText(x,       y, Graphics.FONT_SMALL, "Time PST", Graphics.TEXT_JUSTIFY_LEFT);
         dc.drawText(x + 102, y, Graphics.FONT_SMALL, "Height (" + units + ")", Graphics.TEXT_JUSTIFY_LEFT);
         y = y + 26;
-        for (var i = 0; i < app._hilo.size(); i++) {
-            var time = app._hilo[i][0];
-            var height = app._hilo[i][1];
+        for (var i = 0; i < TideUtil.tideData(app).size(); i++) {
+            var time = TideUtil.tideData(app)[i][0];
+            var height = TideUtil.tideData(app)[i][1];
             if (time > end.value()) {
                 return;
             }
@@ -398,7 +228,7 @@ class garmin_sampleView extends WatchUi.View {
     }
 
     function updateLocationText(position as Position.Location) as Void {
-        tideUtil.currentPosition = position;
+        TideUtil.currentPosition = position;
         var loc = position.toDegrees();
         var loc0 = View.findDrawableById("loc0") as Text;
         loc0.setText(loc[0].format("%.3f"));
@@ -460,7 +290,7 @@ class garmin_sampleView extends WatchUi.View {
 
         if (app._hilo != null) {
 
-            if (tideUtil.getDisplayType() == DISPLAY_PROP_GRAPH) {
+            if (TideUtil.getDisplayType() == DISPLAY_PROP_GRAPH) {
                 // Draw box
                 dc.setColor(Graphics.COLOR_DK_GRAY, Graphics.COLOR_TRANSPARENT);
                 dc.drawRectangle(30, 60, 180, 120);
@@ -486,10 +316,10 @@ class garmin_sampleView extends WatchUi.View {
                 // Current height
                 var units = "m";
                 var duration_2h = new Time.Duration(Gregorian.SECONDS_PER_HOUR * 2);
-                var height = tideUtil.getHeightAtT(now.value(), duration_2h.value(), 0, app)[0];
-                if (tideUtil.getUnits() == System.UNIT_STATUTE) {
+                var height = TideUtil.getHeightAtT(now.value(), duration_2h.value(), 0, app)[0];
+                if (TideUtil.getUnits() == System.UNIT_STATUTE) {
                     units = "ft";
-                    height *= tideUtil.FEET_PER_METER;
+                    height *= TideUtil.FEET_PER_METER;
                 }
                 dc.setColor(Graphics.COLOR_DK_BLUE, Graphics.COLOR_TRANSPARENT);
                 dc.drawText(120, 200, Graphics.FONT_TINY, height.format("%.1f") + units, Graphics.TEXT_JUSTIFY_CENTER);
@@ -520,8 +350,8 @@ class garmin_sampleView extends WatchUi.View {
             app._hilo = [];
             _message = "";
             for (var i = 0; i < args.size(); i++) {
-                //_message += Lang.format("$1$: $2$\n", [args[i]["eventDate"].toString(), args[i]["value"].toString()]);
-                app._hilo.add([parseDateString(args[i]["eventDate"].toString()).value(), args[i]["value"].toFloat()]);
+                var eventData = args[i] as Dictionary;
+                app._hilo.add([parseDateString(eventData["eventDate"].toString()).value(), eventData["value"].toFloat()]);
             }
             app.hilo_updated = true;
             //System.println(app._hilo.toString());

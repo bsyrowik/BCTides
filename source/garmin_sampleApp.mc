@@ -25,10 +25,10 @@ class garmin_sampleApp extends Application.AppBase {
     // onStart() is called on application start up
     function onStart(state as Dictionary?) as Void {
         if (_hilo == null) {
-            _hilo = Storage.getValue("kits_hilo");
+            _hilo = Storage.getValue("kits_hilo") as Array<Array>;
         }
         //System.println("starting");
-  //      Position.enableLocationEvents( Position.LOCATION_CONTINUOUS, method( :onPosition ) );
+        //Position.enableLocationEvents( Position.LOCATION_CONTINUOUS, method( :onPosition ) );
     }
 
     // onStop() is called when your application is exiting
@@ -55,24 +55,23 @@ class garmin_sampleApp extends Application.AppBase {
             }
         }
         if (_hilo == null) {
-            _hilo = Storage.getValue("kits_hilo");
+            _hilo = Storage.getValue("kits_hilo") as Array<Array>;
         }
         view = new garmin_sampleView(me);
         delegate = new garmin_sampleDelegate(view);
         return [view, delegate] as Array<Views or InputDelegates>;
     }
 
-/*
+    /*
     function onPosition( info as Position.Info ) as Void {
         System.println( "Position " + info.position.toGeoString( Position.GEO_DM ) );
     }
-*/
+    */
 
     (:glance)
 	function getGlanceView() {
-        return [ new MyGlanceView(me) ];
+        return [ new BCTidesGlanceView(me) ];
     }
-
 }
 
 function getApp() as garmin_sampleApp {

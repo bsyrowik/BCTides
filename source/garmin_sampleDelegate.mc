@@ -20,106 +20,6 @@ function getStationName() as String {
     return Properties.getValue("selectedStationName");
 }
 
-class Pair {
-    public var distance as Float = 0.0f;
-    public var index as Number = -1;
-    function initialize() {}
-}
-
-class Heap {
-    var heapSize as Number;
-    var A as Array<Pair>;
-    function initialize(size as Number) {
-        A = [new Pair()];
-        heapSize = 0;
-    }
-
-    function parent(i as Number) as Number {
-        return (i + 1) / 2 - 1;
-    }
-    function left(i as Number) as Number {
-        return i * 2 + 1;
-    }
-    function right(i as Number) as Number {
-        return i * 2 + 2;
-    }
-
-    function swap(a as Number, b as Number) as Void {
-        var tmp_d = A[a].distance;
-        var tmp_i = A[a].index;
-        A[a].distance = A[b].distance;
-        A[a].index = A[b].index;
-        A[b].distance = tmp_d;
-        A[b].index = tmp_i;
-    }
-
-    function heapDecreaseKey(i as Number, key as Float) as Void {
-        if (key < A[i].distance) {
-            // ERROR
-            //throw Lang.InvalidKeyException;
-        }
-        A[i].distance = key;
-        while (i > 0 && A[parent(i)].distance > A[i].distance) {
-            swap(i, parent(i));
-            i = parent(i);
-        }
-    }
-
-    function minHeapInsert(dist as Float, ndx as Number) as Void {
-        heapSize += 1;
-        if (heapSize > 1) {
-            A.add(new Pair());
-        }
-        //System.println("Size of A: " + A.size());
-        //System.println("Trying to insert " + dist + "," + ndx + " at index " + (heapSize - 1));
-        A[heapSize-1].distance = 1e9; // FLOAT_MAX
-        A[heapSize-1].index = ndx;
-        heapDecreaseKey(heapSize-1, dist);
-    }
-
-    function minHeapify(i as Number) as Void {
-        var l = left(i);
-        var r = right(i);
-        var smallest;
-        if (l < heapSize && A[l].distance < A[i].distance) {
-            smallest = l;
-        } else {
-            smallest = i;
-        }
-        if (r < heapSize && A[r].distance < A[smallest].distance) {
-            smallest = r;
-        }
-        if (smallest != i) {
-            swap(smallest, i);
-            minHeapify(smallest);
-        }
-    }
-
-    function heapExtractMin() as Pair {
-        if (heapSize < 1) {
-            // ERROR
-            //throw Lang.InvalidRequestException;
-        }
-        var max = A[0];
-        A[0] = A[heapSize-1];
-        heapSize -= 1;
-        minHeapify(0);
-        return max;
-    }
-
-    function print() as Void {
-        for (var i = 0; i < heapSize; i++) {
-            System.println(A[i].distance + " " + A[i].index);
-        }
-    }
-    function print_destructive(count as Number) as Void {
-        for (var i = 0; i < count; i++) {
-            var p = heapExtractMin();
-            System.println(p.distance + " " + p.index);
-        }
-    }
-}
-
 class MyTextPickerDelegate extends WatchUi.TextPickerDelegate {
     function initialize() {
         TextPickerDelegate.initialize();
@@ -163,12 +63,13 @@ class NearestStationMenuDelegate extends WatchUi.Menu2InputDelegate {
 
     function onSelect(item) {
         var all_stations;
+        var id = item.getId() as Number;
         if (Properties.getValue("zoneProp") == ZONE_PROP_NORTH) {
-            all_stations = WatchUi.loadResource(Rez.JsonData.stationsNorth);
+            all_stations = WatchUi.loadResource(Rez.JsonData.stationsNorth) as Array<Dictionary>;
         } else {
-            all_stations = WatchUi.loadResource(Rez.JsonData.stationsSouth);
+            all_stations = WatchUi.loadResource(Rez.JsonData.stationsSouth) as Array<Dictionary>;
         }
-        var code = all_stations[item.getId()]["code"];
+        var code = all_stations[id]["code"];
         var name = item.getLabel();
         var dist = item.getSubLabel();
         System.println("Selected station " + name + " with code " + code + " and distance " + dist);
@@ -212,14 +113,14 @@ class StationMenuDelegate extends WatchUi.Menu2InputDelegate {
         return d * r;
     }
 
-    function nearestStationMenu(h as Heap, all_stations as Object) {
+    function nearestStationMenu(h as HeapOfPair, all_stations as Array<Dictionary>) {
         var menu = new WatchUi.Menu2({:title=>"Nearest"});
 
         var count = 7;
         for (var i = 0; i < count; i++) {
             var p = h.heapExtractMin();
             var dist = distance(p.distance);
-            var station = all_stations[p.index];
+            var station = all_stations[p.index] as Dictionary;
 //            System.println(station["name"] + " " + dist.format("%.2f") + "km");
             menu.addItem(
                 new WatchUi.MenuItem(
@@ -245,21 +146,21 @@ class StationMenuDelegate extends WatchUi.Menu2InputDelegate {
         // TODO: search by coordinates?
 
         if (item.getId() == MENU_STATION_NEAREST) {
-            var home_pos = tideUtil.currentPosition.toRadians();
+            var home_pos = TideUtil.currentPosition.toRadians() as Array;
             var home_lat = home_pos[0]; // d2r(49.267);
             var home_lon = home_pos[1]; // d2r(-123.114);
-//            System.println("home coords: " + home_lat + "N " + home_lon + "W");
+            //System.println("home coords: " + home_lat + "N " + home_lon + "W");
             // TODO: dynamic list of stations
             // FIXME TODO: New menu level for choosing north or south list???
             var all_stations;
             if (Properties.getValue("zoneProp") == ZONE_PROP_NORTH) {
-                all_stations = WatchUi.loadResource(Rez.JsonData.stationsNorth);
+                all_stations = WatchUi.loadResource(Rez.JsonData.stationsNorth) as Array<Dictionary>;
             } else {
-                all_stations = WatchUi.loadResource(Rez.JsonData.stationsSouth);
+                all_stations = WatchUi.loadResource(Rez.JsonData.stationsSouth) as Array<Dictionary>;
             }
             // TODO: use insertion sort or similar? What about a min heap?
             var size = all_stations.size();
-            var h = new Heap(size);
+            var h = new HeapOfPair(size);
             for(var i = 0; i < size; i++) {
                 var d_squared = d2(home_lat, home_lon, all_stations[i]["lat"], all_stations[i]["lon"]);
                 h.minHeapInsert(d_squared, i);
@@ -273,7 +174,7 @@ class StationMenuDelegate extends WatchUi.Menu2InputDelegate {
             var text_picker = new MyInputDelegate();
             text_picker.initialize();
         }
-//        WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);   
+        //WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);   
     }
 }
 
@@ -375,7 +276,6 @@ class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
             _parent.getLocation();
             WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
         } else if (item.getId() == MENU_GET_DATA) {
-            //_parent.makeRequest();
             _parent.getStationInfo();
             WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
         } else if (item.getId() == MENU_SET_STATION) {
@@ -409,12 +309,6 @@ class garmin_sampleDelegate extends WatchUi.BehaviorDelegate {
         return true;
     }
 
-    function makeRequest() as Void {
-        var kits = "5cebf1e43d0f4a073c4bc404";
-//      var vanc = "5cebf1de3d0f4a073c4bb943";
-        getStationData(kits);
-    }
-
     function getStationData(station_id as String) as Void {
         var options = {
             :method => Communications.HTTP_REQUEST_METHOD_GET,
@@ -443,15 +337,10 @@ class garmin_sampleDelegate extends WatchUi.BehaviorDelegate {
                 "Content-Type" => Communications.REQUEST_CONTENT_TYPE_URL_ENCODED
             }
         };
-        var code = "07707"; // Kitsilano
-        //code = "07010"; // Point no Point
-        //code = "07710"; // False Creek
-        code = getStationCode();
-        //System.println("code: " + code);
         Communications.makeWebRequest(
             "https://api-iwls.dfo-mpo.gc.ca/api/v1/stations/",
             {
-                "code" => code
+                "code" => getStationCode()
             },
             options,
             method(:onReceiveStationInfo)
@@ -467,8 +356,9 @@ class garmin_sampleDelegate extends WatchUi.BehaviorDelegate {
         //System.println("  responseCode:" + responseCode.toString());
         if (responseCode == 200) { // OK!
             if (data instanceof Array) {
-                var station_id = data[0]["id"].toString();
-                var requested_station_data = data[0]["officialName"].toString();
+                var station = data[0] as Dictionary;
+                var station_id = station["id"].toString();
+                //var requested_station_data = station["officialName"].toString();
                 getStationData(station_id);
             }
         } else if (responseCode == Communications.BLE_CONNECTION_UNAVAILABLE) {
