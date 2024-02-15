@@ -3,29 +3,6 @@ import Toybox.System;
 import Toybox.Application.Properties;
 
 
-public enum unitsPropSettings {
-    UNITS_PROP_SYSTEM,
-    UNITS_PROP_METRIC,
-    UNITS_PROP_IMPERIAL
-}
-
-public enum dataLabelPropSettings {
-    DATA_LABEL_PROP_HEIGHT,
-    DATA_LABEL_PROP_TIME,
-    DATA_LABEL_PROP_NONE
-}
-
-public enum displayPropSettings {
-    DISPLAY_PROP_GRAPH,
-    DISPLAY_PROP_TABLE
-}
-
-public enum zonePropSettings {
-    ZONE_PROP_SOUTH,
-    ZONE_PROP_NORTH
-}
-
-
 (:glance)
 class TideUtil {
     static const FEET_PER_METER = 3.28084;
@@ -40,24 +17,6 @@ class TideUtil {
     static var h1 = 0.0f, h2 = 0.0f;
     static var A, B_n = Toybox.Math.PI, B_d, C, D;
 
-    static function getUnits() as System.UnitsSystem {
-        var setting = Properties.getValue("unitsProp");
-        if (setting == UNITS_PROP_SYSTEM) {
-            return System.getDeviceSettings().elevationUnits;
-        } else if (setting == UNITS_PROP_METRIC) {
-            return System.UNIT_METRIC;
-        } else {
-            return System.UNIT_STATUTE;
-        }
-    }
-
-    static function graphLabelType() as Number {
-        return Properties.getValue("dataLabelProp");
-    }
-
-    static function getDisplayType() as Number {
-        return Properties.getValue("displayProp");
-    }
 
     static function tideData(app) as Array<Array> {
         return app._hilo as Array<Array>;
