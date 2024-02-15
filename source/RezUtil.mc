@@ -3,8 +3,8 @@ import Toybox.Lang;
 using Toybox.WatchUi;
 
 
-class RezUtil {
-    static function getStationData() as Array<Dictionary> {
+module RezUtil {
+    function getStationData() as Array<Dictionary> {
         if (PropUtil.getStationZone() == PropUtil.ZONE_PROP_NORTH) {
             return WatchUi.loadResource(Rez.JsonData.stationsNorth) as Array<Dictionary>;
         } else {

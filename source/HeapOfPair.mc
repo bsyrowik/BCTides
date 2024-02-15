@@ -1,4 +1,5 @@
 import Toybox.Lang;
+import Toybox.Test;
 
 class HeapOfPair {
     var heapSize as Number;
@@ -64,6 +65,9 @@ class HeapOfPair {
     }
 
     function heapExtractMin() as Pair {
+        if (heapSize < 1) {
+            Test.assertMessage(false, "Trying to extract elemnts from empty heap!");
+        }
         var max = A[0];
         A[0] = A[heapSize-1];
         heapSize -= 1;
@@ -85,4 +89,47 @@ class HeapOfPair {
         }
     }
 */
+
+
+}
+
+
+(:debug)
+function subTestParent(logger as Logger, method as Method(a as Number) as Number, s as String, i as Number, expected as Number) as Boolean {
+    var p = method.invoke(i);
+    if (p != expected) {
+        logger.error("Expected " + s + " of " + i + " to be " + expected + " - got " + p);
+        return false;
+    }
+    return true;
+}
+(:test)
+function testParent(logger as Logger) as Boolean {
+    var pass = true;
+    var h = new HeapOfPair(16);
+    var m = h.method(:parent);
+    pass &= subTestParent(logger, m, "parent", 2, 0);
+    pass &= subTestParent(logger, m, "parent", 4, 1);
+    pass &= subTestParent(logger, m, "parent", 7, 3);
+    return pass;
+}
+(:test)
+function testLeft(logger as Logger) as Boolean {
+    var pass = true;
+    var h = new HeapOfPair(16);
+    var m = h.method(:left);
+    pass &= subTestParent(logger, m, "left", 0, 1);
+    pass &= subTestParent(logger, m, "left", 1, 3);
+    pass &= subTestParent(logger, m, "left", 3, 7);
+    return pass;
+}
+(:test)
+function testRight(logger as Logger) as Boolean {
+    var pass = true;
+    var h = new HeapOfPair(16);
+    var m = h.method(:right);
+    pass &= subTestParent(logger, m, "right", 0, 2);
+    pass &= subTestParent(logger, m, "right", 1, 4);
+    pass &= subTestParent(logger, m, "right", 3, 8);
+    return pass;
 }

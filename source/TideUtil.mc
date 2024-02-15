@@ -4,25 +4,25 @@ import Toybox.Application.Properties;
 
 
 (:glance)
-class TideUtil {
-    static const FEET_PER_METER = 3.28084;
+module TideUtil {
+    const FEET_PER_METER = 3.28084;
 
-    static var current_station_name = PropUtil.getStationName();
+    var current_station_name = PropUtil.getStationName();
 
-    static var currentPosition = null;
+    var currentPosition = null;
 
     // static variables for getHeightAtT
-    static var last_i = null;
-    static var t1 = null, t2 = null;
-    static var h1 = 0.0f, h2 = 0.0f;
-    static var A, B_n = Toybox.Math.PI, B_d, C, D;
+    var last_i = null;
+    var t1 = null, t2 = null;
+    var h1 = 0.0f, h2 = 0.0f;
+    var A, B_n = Toybox.Math.PI, B_d, C, D;
 
 
-    static function tideData(app) as Array<Array> {
+    function tideData(app) as Array<Array> {
         return app._hilo as Array<Array>;
     }
 
-    static function getNextEvent(t as Number, app) as Array {
+    function getNextEvent(t as Number, app) as Array {
         var last_h = 0;
         for (var i = 0; i < app._hilo.size(); i++) {
             var time = tideData(app)[i][0];
@@ -39,7 +39,7 @@ class TideUtil {
         return [null, null, null];
     }
 
-    static function getHeightAtT(t as Number, d as Number, p, app) as Array {
+    function getHeightAtT(t as Number, d as Number, p, app) as Array {
         // Compute h(t) = A * cos(B * (t - C)) + D
         // For: A = (h1 - h2) / 2
         //      B = PI / (t2 - t1)

@@ -2,7 +2,7 @@ import Toybox.Application.Properties;
 import Toybox.Lang;
 import Toybox.System;
 
-class PropUtil {
+module PropUtil {
     public enum unitsPropSettings {
         UNITS_PROP_SYSTEM,
         UNITS_PROP_METRIC,
@@ -25,22 +25,22 @@ class PropUtil {
         ZONE_PROP_NORTH
     }
 
-    static function getStationCode() as String {
+    function getStationCode() as String {
         var code = Properties.getValue("selectedStationCode").format("%05i").toString();
         return code;
     }
 
-    static function getStationZone() as Number {
+    function getStationZone() as Number {
         return Properties.getValue("zoneProp");
     }
 
     (:glance)
-    static function getStationName() as String {
+    function getStationName() as String {
         return Properties.getValue("selectedStationName");
     }
 
     (:glance)
-    static function getUnits() as System.UnitsSystem {
+    function getUnits() as System.UnitsSystem {
         var setting = Properties.getValue("unitsProp");
         if (setting == UNITS_PROP_SYSTEM) {
             return System.getDeviceSettings().elevationUnits;
@@ -51,15 +51,15 @@ class PropUtil {
         }
     }
 
-    static function graphLabelType() as Number {
+    function graphLabelType() as Number {
         return Properties.getValue("dataLabelProp");
     }
 
-    static function getDisplayType() as Number {
+    function getDisplayType() as Number {
         return Properties.getValue("displayProp");
     }
 
-    static function getUnitsString() as String {
+    function getUnitsString() as String {
         var setting = Properties.getValue("unitsProp");
         var unitsSub = Rez.Strings.unitsSettingSystem as String;
         if (setting == UNITS_PROP_METRIC) {
@@ -70,7 +70,7 @@ class PropUtil {
         return unitsSub;
     }
 
-    static function getDisplayTypeString() as String {
+    function getDisplayTypeString() as String {
         var display_setting = Properties.getValue("displayProp");
         var display_sub = Rez.Strings.displaySettingValGraph as String;
         if (display_setting == DISPLAY_PROP_TABLE) {
@@ -79,7 +79,7 @@ class PropUtil {
         return display_sub;
     }
 
-    static function getZoneString() as String {
+    function getZoneString() as String {
         var zone_setting = Properties.getValue("zoneProp");
         var zone_sub = Rez.Strings.zoneSettingValSouth as String;
         if (zone_setting == ZONE_PROP_NORTH) {
