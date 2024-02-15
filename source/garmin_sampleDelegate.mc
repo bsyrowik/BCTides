@@ -63,7 +63,7 @@ class garmin_sampleDelegate extends WatchUi.BehaviorDelegate {
         Communications.makeWebRequest(
             "https://api-iwls.dfo-mpo.gc.ca/api/v1/stations/",
             {
-                "code" => getStationCode()
+                "code" => PropUtil.getStationCode()
             },
             options,
             method(:onReceiveStationInfo)
@@ -112,9 +112,9 @@ class garmin_sampleDelegate extends WatchUi.BehaviorDelegate {
         // Data Label Type
         var data_label_setting = Properties.getValue("dataLabelProp");
         var data_label_sub = Rez.Strings.labelSettingValHeight;
-        if (data_label_setting == DATA_LABEL_PROP_TIME) {
+        if (data_label_setting == PropUtil.DATA_LABEL_PROP_TIME) {
             data_label_sub = Rez.Strings.labelSettingValTime;
-        } else if (data_label_setting == DATA_LABEL_PROP_NONE) {
+        } else if (data_label_setting == PropUtil.DATA_LABEL_PROP_NONE) {
             data_label_sub = Rez.Strings.labelSettingValNone;
         }
         menu.addItem(
@@ -128,6 +128,7 @@ class garmin_sampleDelegate extends WatchUi.BehaviorDelegate {
 
 
         // Units
+        /*
         var setting = Properties.getValue("unitsProp");
         var unitsSub = Rez.Strings.unitsSettingSystem;
         if (setting == UNITS_PROP_METRIC) {
@@ -135,25 +136,27 @@ class garmin_sampleDelegate extends WatchUi.BehaviorDelegate {
         } else if (setting == UNITS_PROP_IMPERIAL) {
             unitsSub = Rez.Strings.unitsSettingImperial;
         }
+        */
         menu.addItem(
             new WatchUi.MenuItem(
                 Rez.Strings.unitsSettingTitle, // Label
-                unitsSub, // Sub-Label
+                PropUtil.getUnitsString(), // Sub-Label
                 MainMenuDelegate.MENU_SETTINGS_UNITS_ID, // identifier
                 {} // options
             )
         );
 
         // Display Mode
+        /*
         var display_setting = Properties.getValue("displayProp");
         var display_sub = Rez.Strings.displaySettingValGraph;
         if (display_setting == DISPLAY_PROP_TABLE) {
             display_sub = Rez.Strings.displaySettingValTable;
-        }
+        }*/
         menu.addItem(
             new WatchUi.MenuItem(
                 Rez.Strings.displaySettingTitle, // Label
-                display_sub, // Sub-Label
+                PropUtil.getDisplayTypeString(), // Sub-Label
                 MainMenuDelegate.MENU_SETTINGS_DISP_MODE_ID, // identifier
                 {} // options
             )
@@ -169,21 +172,23 @@ class garmin_sampleDelegate extends WatchUi.BehaviorDelegate {
         );
         getDataLabel = new WatchUi.MenuItem(
                 "Get Data",
-                getStationName(),
+                PropUtil.getStationName(),
                 MainMenuDelegate.MENU_GET_DATA,
                 {}
             );
         menu.addItem(getDataLabel);
         
+        /*
         var zone_setting = Properties.getValue("zoneProp");
         var zone_sub = Rez.Strings.zoneSettingValSouth;
         if (zone_setting == ZONE_PROP_NORTH) {
             zone_sub = Rez.Strings.zoneSettingValNorth;
         }
+        */
         menu.addItem(
             new WatchUi.MenuItem(
                 Rez.Strings.zoneSettingTitle, // Label
-                zone_sub, // Sub-label
+                PropUtil.getZoneString(), // Sub-label
                 MainMenuDelegate.MENU_SETTINGS_ZONE_ID,
                 {}
             )

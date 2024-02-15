@@ -72,12 +72,7 @@ class StationMenuDelegate extends WatchUi.Menu2InputDelegate {
             var home_lon = home_pos[1];
             // TODO: dynamic list of stations
             // FIXME TODO: New menu level for choosing north or south list???
-            var all_stations;
-            if (Properties.getValue("zoneProp") == ZONE_PROP_NORTH) {
-                all_stations = WatchUi.loadResource(Rez.JsonData.stationsNorth) as Array<Dictionary>;
-            } else {
-                all_stations = WatchUi.loadResource(Rez.JsonData.stationsSouth) as Array<Dictionary>;
-            }
+            var all_stations = RezUtil.getStationData() as Array<Dictionary>;
             // TODO: use insertion sort or similar? What about a min heap?
             var size = all_stations.size();
             var h = new HeapOfPair(size);

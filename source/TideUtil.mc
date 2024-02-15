@@ -7,7 +7,7 @@ import Toybox.Application.Properties;
 class TideUtil {
     static const FEET_PER_METER = 3.28084;
 
-    static var current_station_name = getStationName();
+    static var current_station_name = PropUtil.getStationName();
 
     static var currentPosition = null;
 

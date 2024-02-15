@@ -107,14 +107,14 @@ class garmin_sampleView extends WatchUi.View {
             if (l[1] != null && (this_x - last_label_x > 10)) {
                 dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
                 var h_label = l[2];
-                if (getUnits() == System.UNIT_STATUTE) {
+                if (PropUtil.getUnits() == System.UNIT_STATUTE) {
                     h_label *= TideUtil.FEET_PER_METER;
                 }
                 var label_string = h_label.format("%.1f");
-                if (graphLabelType() == DATA_LABEL_PROP_TIME) {
+                if (PropUtil.graphLabelType() == PropUtil.DATA_LABEL_PROP_TIME) {
                     var m = new Time.Moment(l[3]);
                     label_string = formatTimeStringShort(m);
-                } else if (graphLabelType() == DATA_LABEL_PROP_NONE) {
+                } else if (PropUtil.graphLabelType() == PropUtil.DATA_LABEL_PROP_NONE) {
                     label_string = "";
                 }
                 if (l[1] || height < 1) {
@@ -134,7 +134,7 @@ class garmin_sampleView extends WatchUi.View {
     function tableTides(dc as Dc, x as Number, y as Number, w as Number, h as Number, start as Time.Moment, end as Time.Moment) as Void {
         var units = "m";
         var height_multiplier = 1.0f;
-        if (getUnits() == System.UNIT_STATUTE) {
+        if (PropUtil.getUnits() == System.UNIT_STATUTE) {
             units = "ft";
             height_multiplier = TideUtil.FEET_PER_METER;
         }
@@ -273,7 +273,7 @@ class garmin_sampleView extends WatchUi.View {
         }
 
         var stationLabel = View.findDrawableById("stationTitle") as Text;
-        stationLabel.setText(getStationName());
+        stationLabel.setText(PropUtil.getStationName());
 
         // Date
         var today = Time.today();  // Time-zone adjusted!
@@ -290,7 +290,7 @@ class garmin_sampleView extends WatchUi.View {
 
         if (app._hilo != null) {
 
-            if (getDisplayType() == DISPLAY_PROP_GRAPH) {
+            if (PropUtil.getDisplayType() == PropUtil.DISPLAY_PROP_GRAPH) {
                 // Draw box
                 dc.setColor(Graphics.COLOR_DK_GRAY, Graphics.COLOR_TRANSPARENT);
                 dc.drawRectangle(30, 60, 180, 120);
@@ -317,7 +317,7 @@ class garmin_sampleView extends WatchUi.View {
                 var units = "m";
                 var duration_2h = new Time.Duration(Gregorian.SECONDS_PER_HOUR * 2);
                 var height = TideUtil.getHeightAtT(now.value(), duration_2h.value(), 0, app)[0];
-                if (getUnits() == System.UNIT_STATUTE) {
+                if (PropUtil.getUnits() == System.UNIT_STATUTE) {
                     units = "ft";
                     height *= TideUtil.FEET_PER_METER;
                 }

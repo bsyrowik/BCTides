@@ -8,13 +8,8 @@ class NearestStationMenuDelegate extends WatchUi.Menu2InputDelegate {
     }
 
     function onSelect(item) {
-        var all_stations;
+        var all_stations = RezUtil.getStationData() as Array<Dictionary>;
         var id = item.getId() as Number;
-        if (Properties.getValue("zoneProp") == ZONE_PROP_NORTH) {
-            all_stations = WatchUi.loadResource(Rez.JsonData.stationsNorth) as Array<Dictionary>;
-        } else {
-            all_stations = WatchUi.loadResource(Rez.JsonData.stationsSouth) as Array<Dictionary>;
-        }
         var code = all_stations[id]["code"];
         var name = item.getLabel();
         var dist = item.getSubLabel();

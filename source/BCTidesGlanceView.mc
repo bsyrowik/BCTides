@@ -31,7 +31,7 @@ class BCTidesGlanceView extends WatchUi.GlanceView {
         }
 
 
-        if (getUnits() == System.UNIT_STATUTE) {
+        if (PropUtil.getUnits() == System.UNIT_STATUTE) {
             units = "ft";
             next_event_height *= TideUtil.FEET_PER_METER;
             current_height *= TideUtil.FEET_PER_METER;
