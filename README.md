@@ -3,16 +3,24 @@
 A Garming Connect IQ Wdiget App for Tides in British Columbia.
 
 
-Example images:
 
-![Alt text](doc/img/yvr_tide_glance_full.png)
-![Alt text](doc/img/yvr_tide_graph_full.png)
+### Glance View
+
+![Glance view image](doc/img/yvr_tide_glance_full.png)
+
+### Graph View
+
+![Graph view image](doc/img/yvr_tide_graph_full.png)
+
+### Table View
+
+![Table view image](doc/img/yvr_tide_table_full.png)
 
 
 ## Permissions
 
-Communications
-Positioning
+ * Communications
+ * Positioning
 
 ## Device Support
 
