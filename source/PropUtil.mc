@@ -61,30 +61,30 @@ class PropUtil {
 
     static function getUnitsString() as String {
         var setting = Properties.getValue("unitsProp");
-        var unitsSub = Rez.Strings.unitsSettingSystem;
+        var unitsSub = Rez.Strings.unitsSettingSystem as String;
         if (setting == UNITS_PROP_METRIC) {
-            unitsSub = Rez.Strings.unitsSettingMetric;
+            unitsSub = Rez.Strings.unitsSettingMetric as String;
         } else if (setting == UNITS_PROP_IMPERIAL) {
-            unitsSub = Rez.Strings.unitsSettingImperial;
+            unitsSub = Rez.Strings.unitsSettingImperial as String;
         }
-        return unitsSub.toString();
+        return unitsSub;
     }
 
     static function getDisplayTypeString() as String {
         var display_setting = Properties.getValue("displayProp");
-        var display_sub = Rez.Strings.displaySettingValGraph;
+        var display_sub = Rez.Strings.displaySettingValGraph as String;
         if (display_setting == DISPLAY_PROP_TABLE) {
-            display_sub = Rez.Strings.displaySettingValTable;
+            display_sub = Rez.Strings.displaySettingValTable as String;
         }
-        return display_sub.toString();
+        return display_sub;
     }
 
     static function getZoneString() as String {
         var zone_setting = Properties.getValue("zoneProp");
-        var zone_sub = Rez.Strings.zoneSettingValSouth;
+        var zone_sub = Rez.Strings.zoneSettingValSouth as String;
         if (zone_setting == ZONE_PROP_NORTH) {
-            zone_sub = Rez.Strings.zoneSettingValNorth;
+            zone_sub = Rez.Strings.zoneSettingValNorth as String;
         }
-        return zone_sub.toString();
+        return zone_sub;
     }
 }
