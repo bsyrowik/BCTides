@@ -3,4 +3,6 @@
 
     <string id="MainMenuLabel_nearby">Nearby</string>
     <string id="MainMenuLabel_favorites">Favorites</string>
+
+    <string id="gotDataPrompt">Tide Data Received</string>
 </strings>
