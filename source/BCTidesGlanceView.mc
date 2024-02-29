@@ -1,4 +1,5 @@
 import Toybox.WatchUi;
+import Toybox.Graphics;
 
 (:glance)
 class BCTidesGlanceView extends WatchUi.GlanceView {
@@ -9,7 +10,14 @@ class BCTidesGlanceView extends WatchUi.GlanceView {
         GlanceView.initialize();    	         
     }
 
-    function onUpdate(dc) {
+    function drawNoDataMessage(dc as Dc) as Void {
+        dc.setColor(Graphics.COLOR_RED, Graphics.COLOR_TRANSPARENT);
+        dc.drawText(0, 10, Graphics.FONT_GLANCE_NUMBER, "No tide data available.", Graphics.TEXT_JUSTIFY_LEFT);
+        dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
+        dc.drawText(0, 30, Graphics.FONT_GLANCE, "Open app to load data.", Graphics.TEXT_JUSTIFY_LEFT);
+    }
+
+    function onUpdate(dc as Dc) {
 		dc.setColor(Graphics.COLOR_BLACK,Graphics.COLOR_BLACK);
 		dc.clear();
 		dc.setColor(Graphics.COLOR_WHITE,Graphics.COLOR_TRANSPARENT);
@@ -18,6 +26,10 @@ class BCTidesGlanceView extends WatchUi.GlanceView {
 
         // TODO: get this data dynamically
         var next_event = TideUtil.getNextEvent(now, app);
+        if (next_event[0] == null) {
+            drawNoDataMessage(dc);
+            return;
+        }
         var current_height = 2.1;
         var next_event_height = next_event[1];
         var next_event_time = (next_event[0] - now) / 60; //"2H 27M";
@@ -28,6 +40,10 @@ class BCTidesGlanceView extends WatchUi.GlanceView {
 
         if (app._hilo != null) {
             current_height = TideUtil.getHeightAtT(now, 1200, 0, app)[0];
+            if (current_height == null) {
+                drawNoDataMessage(dc);
+                return;
+            }
         }
 
 
