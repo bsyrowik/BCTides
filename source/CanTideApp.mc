@@ -3,7 +3,7 @@ import Toybox.Application.Storage;
 import Toybox.Lang;
 import Toybox.WatchUi;
 
-class garmin_sampleApp extends Application.AppBase {
+class CanTideApp extends Application.AppBase {
 
     var delegate;
     var view = null;
@@ -57,8 +57,8 @@ class garmin_sampleApp extends Application.AppBase {
         if (_hilo == null) {
             _hilo = Storage.getValue("kits_hilo") as Array<Array>;
         }
-        view = new garmin_sampleView(me);
-        delegate = new garmin_sampleDelegate(view);
+        view = new CanTideView(me);
+        delegate = new CanTideDelegate(view);
         return [view, delegate] as Array<Views or InputDelegates>;
     }
 
@@ -74,6 +74,6 @@ class garmin_sampleApp extends Application.AppBase {
     }
 }
 
-function getApp() as garmin_sampleApp {
-    return Application.getApp() as garmin_sampleApp;
+function getApp() as CanTideApp {
+    return Application.getApp() as CanTideApp;
 }

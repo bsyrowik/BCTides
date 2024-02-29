@@ -14,7 +14,7 @@ using Toybox.Position as Position;
 
 
 
-class garmin_sampleView extends WatchUi.View {
+class CanTideView extends WatchUi.View {
 
     hidden var mIndicatorRad;
     hidden var mIndicatorL;

@@ -1,4 +1,4 @@
- 
+
 using Toybox.WatchUi;
 using Toybox.Timer;
 import Toybox.Application.Properties;
@@ -7,7 +7,7 @@ import Toybox.Lang;
 var getDataLabel;
 
 
-class garmin_sampleDelegate extends WatchUi.BehaviorDelegate {
+class CanTideDelegate extends WatchUi.BehaviorDelegate {
     var mView = null;
     function initialize(view) {
         mView = view;
