@@ -1,5 +1,4 @@
 <layout id="GotDataPrompt">
     <!-- Prompt Body -->
-    <text-area id="mainLabel" text="@Strings.gotDataPrompt"
-    y="center" height="100" width="200" justification="Graphics.TEXT_JUSTIFY_CENTER" />
+    <text-area id="mainLabel" text="@Strings.gotDataPrompt" y="center" height="100" width="200" justification="Graphics.TEXT_JUSTIFY_CENTER" />
 </layout>

@@ -278,7 +278,9 @@ class CanTideView extends WatchUi.View {
         }
 
         var dateInfo = Gregorian.info(today, Time.FORMAT_MEDIUM);
-        dc.drawText(dc.getWidth() / 2, 8, Graphics.FONT_TINY, dateInfo.month + " " + dateInfo.day.toString(), Graphics.TEXT_JUSTIFY_CENTER);
+        var dateLabel = View.findDrawableById("date") as Text;
+        dateLabel.setText(dateInfo.month + " " + dateInfo.day.toString());
+        //dc.drawText(dc.getWidth() / 2, 8, Graphics.FONT_TINY, dateInfo.month + " " + dateInfo.day.toString(), Graphics.TEXT_JUSTIFY_CENTER);
 
 
         if (app._hilo != null) {
