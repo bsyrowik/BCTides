@@ -1,9 +1,4 @@
 <layout id="MainLayout">
-    <!--<bitmap id="id_monkey" x="100" y="100" filename="../drawables/monkey.png" />-->
-    <!--
-        <text-area id="BlockOfText" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit." x="10%" y="10%" width="80%" height="80%">
-        </text-area>
-    -->
     <label id="stationTitle" text="Kitsilano" x="center" y="32" justification="Graphics.TEXT_JUSTIFY_CENTER" font="Graphics.FONT_XTINY"/>
     <label id="loc0" text="---" x="90" y="180" justification="Graphics.TEXT_JUSTIFY_CENTER" font="Graphics.FONT_XTINY"/>
     <label id="loc1" text="---" x="150" y="180" justification="Graphics.TEXT_JUSTIFY_CENTER" font="Graphics.FONT_XTINY"/>

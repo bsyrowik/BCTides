@@ -1,8 +1,7 @@
 using Toybox.WatchUi;
 using Toybox.System;
 
-class DownloadDataConfirmationDelegate extends WatchUi.ConfirmationDelegate {
-    
+class DownloadDataConfirmationDelegate extends WatchUi.ConfirmationDelegate {    
     var mDelegate = null;
 
     function initialize(d as CanTideDelegate) {
@@ -11,10 +10,7 @@ class DownloadDataConfirmationDelegate extends WatchUi.ConfirmationDelegate {
     }
 
     function onResponse(response) {
-        if (response == WatchUi.CONFIRM_NO) {
-            System.println("Cancel");
-        } else {
-            System.println("Confirm");
+        if (response == WatchUi.CONFIRM_YES) {
             mDelegate.getStationInfo();
         }
         return true;

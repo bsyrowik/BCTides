@@ -63,12 +63,6 @@ class CanTideApp extends Application.AppBase {
         return [view, delegate] as Array<Views or InputDelegates>;
     }
 
-    /*
-    function onPosition( info as Position.Info ) as Void {
-        System.println( "Position " + info.position.toGeoString( Position.GEO_DM ) );
-    }
-    */
-
     (:glance)
 	function getGlanceView() {
         return [ new BCTidesGlanceView(me) ];
