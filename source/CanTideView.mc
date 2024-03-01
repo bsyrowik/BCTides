@@ -211,14 +211,22 @@ class CanTideView extends WatchUi.View {
         }
     }
 
-
+    (:debug)
     function updateLocationText(position as Position.Location) as Void {
         TideUtil.currentPosition = position;
         var loc = position.toDegrees();
         var loc0 = View.findDrawableById("loc0") as Text;
-        loc0.setText(loc[0].format("%.3f"));
+        loc0.setText(loc[0].format("%.2f"));
         var loc1 = View.findDrawableById("loc1") as Text;
-        loc1.setText(loc[1].format("%.3f"));
+        loc1.setText(loc[1].format("%.2f"));
+    }
+    
+    (:release)
+    function updateLocationText(position as Position.Location) as Void {
+        var loc0 = View.findDrawableById("loc0") as Text;
+        loc0.setText("");
+        var loc1 = View.findDrawableById("loc1") as Text;
+        loc1.setText("");
     }
 
     // Update the view
