@@ -79,10 +79,12 @@ class CanTideView extends WatchUi.View {
         }
     }
 
-    function drawNoDataWarning(dc as Dc, x as Number, y as Number) {
+    function drawNoDataWarning(dc as Dc, x as Number, y as Number, message as Array<String>) {
         dc.setColor(Graphics.COLOR_RED, Graphics.COLOR_TRANSPARENT);
-        dc.drawText(x, y, Graphics.FONT_SMALL, "No data available", Graphics.TEXT_JUSTIFY_LEFT);
-        dc.drawText(x, y + 30, Graphics.FONT_SMALL, "for date.", Graphics.TEXT_JUSTIFY_LEFT);
+        for (var i = 0; i < message.size(); i++) {
+            dc.drawText(x, y + (30 * i), Graphics.FONT_SMALL, message[i], Graphics.TEXT_JUSTIFY_LEFT);
+        }
+        // TODO: Change this to a confirmation dialog that optionally call CanTideDelegate.getStationInfo()
         return;
     }
 
@@ -99,6 +101,10 @@ class CanTideView extends WatchUi.View {
         var last_label_x = 0;
         var current_t = start.value();
         var height = TideUtil.getHeightAtT(current_t, duration_per_increment, 0, app)[0];
+        if (height == null) {
+            drawNoDataWarning(dc, x, y, ["No data available", "for date."]);
+            return false;
+        }
         var last_y = y + h - (height / 6.0f) * h;
         var last_x = start_x;
         //System.println("[" + start_x.toString() + "] height at " + formatDateStringShort(start) + " is " + height.toString());
@@ -108,6 +114,10 @@ class CanTideView extends WatchUi.View {
             current_t += duration_per_increment;
             var l = TideUtil.getHeightAtT(current_t, duration_per_increment, 0, app);//(i > 115 && i < 125));
             height = l[0];
+            if (height == null) {
+                drawNoDataWarning(dc, x, y, ["Ran out of data!"]);
+                return true;
+            }
             //if (i < 125 && i > 115) {
                 //System.println("[" + i.toString() + "] height at " + formatDateStringShort(current_t) + " is " + height.toString());
             //}
@@ -154,6 +164,7 @@ class CanTideView extends WatchUi.View {
         dc.drawText(x + 102, y, Graphics.FONT_SMALL, "Height (" + units + ")", Graphics.TEXT_JUSTIFY_LEFT);
         y = y + 26;
         var i;
+        var entries_for_date = 0;
         for (i = 0; i < TideUtil.tideData(app).size(); i++) {
             var time = TideUtil.tideData(app)[i][0];
             var height = TideUtil.tideData(app)[i][1];
@@ -166,7 +177,11 @@ class CanTideView extends WatchUi.View {
                 dc.drawText(x + 30,  y, Graphics.FONT_TINY, DateUtil.formatTimeStringShort(m), Graphics.TEXT_JUSTIFY_LEFT);
                 dc.drawText(x + 162, y, Graphics.FONT_TINY, (height * height_multiplier).format("%.2f"), Graphics.TEXT_JUSTIFY_RIGHT);
                 y = y + 22;
+                entries_for_date++;
             }
+        }
+        if (i >= TideUtil.tideData(app).size()) {
+            drawNoDataWarning(dc, x, y, (entries_for_date > 0 ? ["Ran out of data!"] : ["No data available", "for date."]));
         }
     }
 
@@ -261,12 +276,14 @@ class CanTideView extends WatchUi.View {
                 var units = "m";
                 var duration_2h = new Time.Duration(Gregorian.SECONDS_PER_HOUR * 2);
                 var height = TideUtil.getHeightAtT(now.value(), duration_2h.value(), 0, app)[0];
-                if (PropUtil.getUnits() == System.UNIT_STATUTE) {
-                    units = "ft";
-                    height *= TideUtil.FEET_PER_METER;
+                if (height != null) {
+                    if (PropUtil.getUnits() == System.UNIT_STATUTE) {
+                        units = "ft";
+                        height *= TideUtil.FEET_PER_METER;
+                    }
+                    dc.setColor(Graphics.COLOR_DK_BLUE, Graphics.COLOR_TRANSPARENT);
+                    dc.drawText(120, 200, Graphics.FONT_TINY, height.format("%.1f") + units, Graphics.TEXT_JUSTIFY_CENTER);
                 }
-                dc.setColor(Graphics.COLOR_DK_BLUE, Graphics.COLOR_TRANSPARENT);
-                dc.drawText(120, 200, Graphics.FONT_TINY, height.format("%.1f") + units, Graphics.TEXT_JUSTIFY_CENTER);
             }
         }
 
