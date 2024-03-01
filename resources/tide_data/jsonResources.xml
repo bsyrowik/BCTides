@@ -1,5 +1,4 @@
 <jsonDataResources>
-    <!--<jsonData id="stations" filename="stations_PAC_small_rad.json" />-->
     <jsonData id="stationsNorth" filename="stations_PAC_small_rad_north.json" />
     <jsonData id="stationsSouth" filename="stations_PAC_small_rad_south.json" />
 </jsonDataResources>
