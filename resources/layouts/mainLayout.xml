@@ -1,5 +1,5 @@
 <layout id="MainLayout">
-    <label id="stationTitle" text="Kitsilano" x="center" y="32" justification="Graphics.TEXT_JUSTIFY_CENTER" font="Graphics.FONT_XTINY"/>
-    <label id="loc0" text="---" x="90" y="180" justification="Graphics.TEXT_JUSTIFY_CENTER" font="Graphics.FONT_XTINY"/>
-    <label id="loc1" text="---" x="150" y="180" justification="Graphics.TEXT_JUSTIFY_CENTER" font="Graphics.FONT_XTINY"/>
+    <label id="stationTitle" text="Kitsilano" x="center" y="13%" justification="Graphics.TEXT_JUSTIFY_CENTER" font="Graphics.FONT_XTINY"/>
+    <label id="loc0" text="---" x="37%" y="75%" justification="Graphics.TEXT_JUSTIFY_CENTER" font="Graphics.FONT_XTINY"/>
+    <label id="loc1" text="---" x="63%" y="75%" justification="Graphics.TEXT_JUSTIFY_CENTER" font="Graphics.FONT_XTINY"/>
 </layout>

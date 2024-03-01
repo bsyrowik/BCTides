@@ -53,19 +53,28 @@ class BCTidesGlanceView extends WatchUi.GlanceView {
             current_height *= TideUtil.FEET_PER_METER;
         }
 
+        var lineHeight = dc.getFontHeight(Graphics.FONT_GLANCE); // FONT_GLANCE:  FR745: 19 FR965: 42     FONT_GLANCE_NUMBER:  FR745: 19 FR965: 53
+        lineHeight *= 0.85; // FR745: 16
+        //System.println("FontHeight FONT_GLANCE: " + lineHeight);
+        //System.println("FontHeight FONT_GLANCE_NUMBER: " + dc.getFontHeight(Graphics.FONT_GLANCE_NUMBER));
+
 		dc.drawText(0, 0, Graphics.FONT_GLANCE, next_event_height.format("%.1f") + units + " " + next_event_type + " in " + next_event_time + "min", Graphics.TEXT_JUSTIFY_LEFT);
         // TODO
         //dc.drawBitmap(0, 16, "location2.png");
 
         // Draw position indicator
         // Numbers are a bit odd; this is just what looks good.
-        dc.drawCircle(7, 26, 4);
-        dc.drawLine(1, 26, 14, 26); // horizontal
-        dc.drawLine(7, 20, 7, 33); // vertical line
+        var radius = lineHeight * .25;
+        var center_x = lineHeight * 0.4375;
+        var center_y = lineHeight * 1.61;
+        var line_length = lineHeight * .8125;
+        dc.drawCircle(center_x, center_y, radius);
+        dc.drawLine(1, center_y, line_length + 1, center_y); // horizontal
+        dc.drawLine(center_x, center_y - line_length / 2 + 1, center_x, center_y + line_length / 2 + 1); // vertical line
 
-        dc.drawText(18, 16, Graphics.FONT_GLANCE, current_station, Graphics.TEXT_JUSTIFY_LEFT);
+        dc.drawText(line_length * 1.3, lineHeight, Graphics.FONT_GLANCE, current_station, Graphics.TEXT_JUSTIFY_LEFT);
 		dc.setColor(Graphics.COLOR_BLUE,Graphics.COLOR_TRANSPARENT);
-        dc.drawText(0, 32, Graphics.FONT_GLANCE_NUMBER, current_height.format("%.1f") + units + " and " + current_direction, Graphics.TEXT_JUSTIFY_LEFT);
+        dc.drawText(0, lineHeight * 2, Graphics.FONT_GLANCE, current_height.format("%.1f") + units + " and " + current_direction, Graphics.TEXT_JUSTIFY_LEFT);
         // The FONT_GLANCE_NUMBER is much larger!
         //System.print("dc height: "); System.println(dc.getHeight());
         // Height is 63 pixels

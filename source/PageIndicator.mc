@@ -96,12 +96,12 @@ class PageIndicatorRad {
     //! @param dc Device context
     //! @param selectedIndex The index of the current page
     public function draw(dc as Dc, selectedIndex as Number) as Void {
-        var diameter = 8;
-        var spacing = 4;
+        var diameter = dc.getWidth() * 0.03334;
+        var spacing = diameter / 2;
         var x = 0;
         var y = 0;
 
-        var radius = 240 / 2 - _margin - diameter / 2;
+        var radius = dc.getWidth() / 2 - _margin - diameter / 2; // FIXME: what if width and height are not the same??  Probably want a way to support non-circular devices?
         var spacing_rad = Math.atan2(diameter + spacing, radius);
         var sweep_rad = spacing_rad * _size;
 

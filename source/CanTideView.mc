@@ -182,10 +182,13 @@ class CanTideView extends WatchUi.View {
             height_multiplier = TideUtil.FEET_PER_METER;
         }
 
+        //System.println("Font height FONT_SMALL: " + dc.getFontHeight(Graphics.FONT_SMALL));  // FR745: 29  FR965: 53
+        //System.println("Font height FONT_TINY:  " + dc.getFontHeight(Graphics.FONT_TINY));   // FR745: 26  FR965: 47
+
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
         dc.drawText(x,       y, Graphics.FONT_SMALL, "Time PST", Graphics.TEXT_JUSTIFY_LEFT);
-        dc.drawText(x + 102, y, Graphics.FONT_SMALL, "Height (" + units + ")", Graphics.TEXT_JUSTIFY_LEFT);
-        y = y + 26;
+        dc.drawText(x + dc.getWidth() * 0.425, y, Graphics.FONT_SMALL, "Height (" + units + ")", Graphics.TEXT_JUSTIFY_LEFT);
+        y = y + dc.getFontHeight(Graphics.FONT_SMALL) - 3;
         var i;
         var entries_for_date = 0;
         for (i = 0; i < TideUtil.tideData(app).size(); i++) {
@@ -197,9 +200,9 @@ class CanTideView extends WatchUi.View {
             if (time >= start.value()) {
                 // Add a row
                 var m = new Time.Moment(time);
-                dc.drawText(x + 30,  y, Graphics.FONT_TINY, DateUtil.formatTimeStringShort(m), Graphics.TEXT_JUSTIFY_LEFT);
-                dc.drawText(x + 162, y, Graphics.FONT_TINY, (height * height_multiplier).format("%.2f"), Graphics.TEXT_JUSTIFY_RIGHT);
-                y = y + 22;
+                dc.drawText(x + dc.getWidth() * 0.125,  y, Graphics.FONT_TINY, DateUtil.formatTimeStringShort(m), Graphics.TEXT_JUSTIFY_LEFT);
+                dc.drawText(x + dc.getWidth() * 0.675, y, Graphics.FONT_TINY, (height * height_multiplier).format("%.2f"), Graphics.TEXT_JUSTIFY_RIGHT);
+                y = y + dc.getFontHeight(Graphics.FONT_TINY) - 4; // 22 for FR745
                 entries_for_date++;
             }
         }
@@ -267,45 +270,49 @@ class CanTideView extends WatchUi.View {
         }
 
         var dateInfo = Gregorian.info(today, Time.FORMAT_MEDIUM);
-        dc.drawText(120, 8, Graphics.FONT_TINY, dateInfo.month + " " + dateInfo.day.toString(), Graphics.TEXT_JUSTIFY_CENTER);
+        dc.drawText(dc.getWidth() / 2, 8, Graphics.FONT_TINY, dateInfo.month + " " + dateInfo.day.toString(), Graphics.TEXT_JUSTIFY_CENTER);
 
 
         if (app._hilo != null) {
 
+            var width = dc.getWidth() * 3 / 4;
+            var height = dc.getHeight() / 2;
+            var offset_x = dc.getWidth() / 8;
+            var offset_y = dc.getHeight() / 4;
             if (PropUtil.getDisplayType() == PropUtil.DISPLAY_PROP_GRAPH) {
                 // Draw box
                 dc.setColor(Graphics.COLOR_DK_GRAY, Graphics.COLOR_TRANSPARENT);
-                dc.drawRectangle(30, 60, 180, 120);
+                dc.drawRectangle(offset_x, offset_y, width, height);
 
                 // Draw graph
                 var duration_24h = new Time.Duration(Gregorian.SECONDS_PER_HOUR * 24);
-                var success = graphTides(dc, 30, 60, 180, 120, today, today.add(duration_24h));
+                var success = graphTides(dc, offset_x, offset_y, width, height, today, today.add(duration_24h));
 
                 if (success && mPage == 0) {
                     // Draw 'now' line
-                    var offset = (now.value() - today.value()) * (180 - 4) / Gregorian.SECONDS_PER_DAY;
+                    var offset = (now.value() - today.value()) * (width - 4) / Gregorian.SECONDS_PER_DAY;
                     dc.setColor(Graphics.COLOR_DK_BLUE, Graphics.COLOR_TRANSPARENT);
-                    var x1 = 30.0 + 2.0 + offset;
-                    dc.drawLine(x1, 61, x1, 179);
+                    var x1 = offset_x + 2.0 + offset;
+                    dc.drawLine(x1, offset_y + 1, x1, offset_y + height - 2);
                 }
             } else {
                 // Draw table
                 var duration_24h = new Time.Duration(Gregorian.SECONDS_PER_HOUR * 24);
-                tableTides(dc, 22, 60, 180, 120, today, today.add(duration_24h));
+                tableTides(dc, offset_x - 8, offset_y, width, height, today, today.add(duration_24h));
             }
 
             if (mPage == 0) {
                 // Current height
                 var units = "m";
                 var duration_2h = new Time.Duration(Gregorian.SECONDS_PER_HOUR * 2);
-                var height = TideUtil.getHeightAtT(now.value(), duration_2h.value(), 0, app)[0];
-                if (height != null) {
+                var tideHeight = TideUtil.getHeightAtT(now.value(), duration_2h.value(), 0, app)[0];
+                if (tideHeight != null) {
                     if (PropUtil.getUnits() == System.UNIT_STATUTE) {
                         units = "ft";
-                        height *= TideUtil.FEET_PER_METER;
+                        tideHeight *= TideUtil.FEET_PER_METER;
                     }
                     dc.setColor(Graphics.COLOR_DK_BLUE, Graphics.COLOR_TRANSPARENT);
-                    dc.drawText(120, 200, Graphics.FONT_TINY, height.format("%.1f") + units, Graphics.TEXT_JUSTIFY_CENTER);
+                    dc.drawText(dc.getWidth() / 2, dc.getHeight() * 7 / 8, Graphics.FONT_TINY, tideHeight.format("%.1f") + units, Graphics.TEXT_JUSTIFY_CENTER);
                 }
             }
         }
