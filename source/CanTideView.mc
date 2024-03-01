@@ -337,9 +337,13 @@ class CanTideView extends WatchUi.View {
             for (var i = 0; i < args.size(); i++) {
                 var eventData = args[i] as Dictionary;
                 app._hilo.add([DateUtil.parseDateString(eventData["eventDate"].toString()).value(), eventData["value"].toFloat()]);
-            }
+                            }
             app.hilo_updated = true;
             //System.println(app._hilo.toString());
+
+            if (app._hilo != null) {
+                Storage.setValue("kits_hilo", app._hilo);
+            }
 
             var gotDataView = new GotDataView();
             WatchUi.pushView(
