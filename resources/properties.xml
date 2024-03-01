@@ -9,31 +9,7 @@
         <property id="appVersion" type="string">0.1a</property>
     </properties>
 
-    <strings>
-        <string id="unitsSettingTitle">Units</string>
-        <string id="unitsSettingPrompt">Select units to use</string>
-        <string id="unitsSettingSystem">System</string>
-        <string id="unitsSettingMetric">Metric</string>
-        <string id="unitsSettingImperial">Imperial</string>
 
-        <string id="labelSettingTitle">Graph Labels</string>
-        <string id="labelSettingPrompt">Select label to use</string>
-        <string id="labelSettingValHeight">Height</string>
-        <string id="labelSettingValTime">Time</string>
-        <string id="labelSettingValNone">None</string>
-
-        <string id="displaySettingTitle">Display</string>
-        <string id="displaySettingPrompt">Select display mode</string>
-        <string id="displaySettingValGraph">Graph</string>
-        <string id="displaySettingValTable">Table</string>
-
-        <string id="zoneSettingTitle">Zone</string>
-        <string id="zoneSettingPrompt">Select zone</string>
-        <string id="zoneSettingValSouth">South BC</string>
-        <string id="zoneSettingValNorth">North BC</string>
-        
-        <string id="appVersionTitle">Version</string>
-    </strings>
 
     <settings>
         <setting propertyKey="@Properties.appVersion" title="@Strings.appVersionTitle">
