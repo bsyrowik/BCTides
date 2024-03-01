@@ -8,6 +8,8 @@ using Toybox.Position;
 using Toybox.System;
 using Toybox.Time.Gregorian;
 
+import Toybox.Application.Storage;
+
 using Toybox.Graphics as Gfx;
 using Toybox.Position as Position;
 
@@ -77,7 +79,14 @@ class CanTideView extends WatchUi.View {
         }
     }
 
-    function graphTides(dc as Dc, x as Number, y as Number, w as Number, h as Number, start as Time.Moment, end as Time.Moment) as Void {
+    function drawNoDataWarning(dc as Dc, x as Number, y as Number) {
+        dc.setColor(Graphics.COLOR_RED, Graphics.COLOR_TRANSPARENT);
+        dc.drawText(x, y, Graphics.FONT_SMALL, "No data available", Graphics.TEXT_JUSTIFY_LEFT);
+        dc.drawText(x, y + 30, Graphics.FONT_SMALL, "for date.", Graphics.TEXT_JUSTIFY_LEFT);
+        return;
+    }
+
+    function graphTides(dc as Dc, x as Number, y as Number, w as Number, h as Number, start as Time.Moment, end as Time.Moment) as Boolean {
         //System.println("Graphing tides from " + formatDateStringShort(start) + " to " + formatDateStringShort(end));
         // graphs tide height 0 at bottom, tide height 6m at top
         var margin = 1;
@@ -129,6 +138,7 @@ class CanTideView extends WatchUi.View {
             last_y = this_y;
             last_x = this_x;
         }
+        return true;
     }
 
     function tableTides(dc as Dc, x as Number, y as Number, w as Number, h as Number, start as Time.Moment, end as Time.Moment) as Void {
@@ -143,7 +153,8 @@ class CanTideView extends WatchUi.View {
         dc.drawText(x,       y, Graphics.FONT_SMALL, "Time PST", Graphics.TEXT_JUSTIFY_LEFT);
         dc.drawText(x + 102, y, Graphics.FONT_SMALL, "Height (" + units + ")", Graphics.TEXT_JUSTIFY_LEFT);
         y = y + 26;
-        for (var i = 0; i < TideUtil.tideData(app).size(); i++) {
+        var i;
+        for (i = 0; i < TideUtil.tideData(app).size(); i++) {
             var time = TideUtil.tideData(app)[i][0];
             var height = TideUtil.tideData(app)[i][1];
             if (time > end.value()) {
@@ -230,9 +241,9 @@ class CanTideView extends WatchUi.View {
 
                 // Draw graph
                 var duration_24h = new Time.Duration(Gregorian.SECONDS_PER_HOUR * 24);
-                graphTides(dc, 30, 60, 180, 120, today, today.add(duration_24h));
+                var success = graphTides(dc, 30, 60, 180, 120, today, today.add(duration_24h));
 
-                if (mPage == 0) {
+                if (success && mPage == 0) {
                     // Draw 'now' line
                     var offset = (now.value() - today.value()) * (180 - 4) / Gregorian.SECONDS_PER_DAY;
                     dc.setColor(Graphics.COLOR_DK_BLUE, Graphics.COLOR_TRANSPARENT);
@@ -289,15 +300,12 @@ class CanTideView extends WatchUi.View {
             app.hilo_updated = true;
             //System.println(app._hilo.toString());
 
-
-            var message = "Got tide data";
-            var dialog = new WatchUi.Confirmation(message);
+            var gotDataView = new GotDataView();
             WatchUi.pushView(
-                dialog,
-                new ConfirmationDelegate(),
+                gotDataView,
+                new GotDataViewDelegate(gotDataView),
                 WatchUi.SLIDE_IMMEDIATE
             );
-
         }
         WatchUi.requestUpdate();
     }

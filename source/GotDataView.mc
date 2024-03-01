@@ -1,17 +1,37 @@
 import Toybox.WatchUi;
 import Toybox.Graphics;
 using Toybox.Timer;
+import Toybox.Lang;
 
 // Behaviour Delegate that pops the view on any input
 class GotDataViewDelegate extends WatchUi.BehaviorDelegate {
-    function initialize() { BehaviorDelegate.initialize(); }
-    function onKey(event) { WatchUi.popView(WatchUi.SLIDE_IMMEDIATE); return true; }
-    function onTap(event) { WatchUi.popView(WatchUi.SLIDE_IMMEDIATE); return true; }
-    function onFlick(event) { WatchUi.popView(WatchUi.SLIDE_IMMEDIATE); return true; }
-    function onSwipe(event) { WatchUi.popView(WatchUi.SLIDE_IMMEDIATE); return true; }
+
+    var mView;
+    
+    function initialize(view as GotDataView) {
+        mView = view;
+        BehaviorDelegate.initialize();
+        }
+    
+    private function processEvent(event) as Boolean {
+        mView.disableTimer();
+        WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
+        return true;
+    }
+    
+    function onKey(event) { return processEvent(event); }
+    function onTap(event) { return processEvent(event); }
+    function onFlick(event) { return processEvent(event); }
+    function onSwipe(event) { return processEvent(event); }
 }
 
 class GotDataView extends WatchUi.View {
+
+    var mTimer;
+
+    function disableTimer() as Void {
+        mTimer.stop();
+    }
 
     function timerCallback() as Void {
         WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
@@ -19,8 +39,8 @@ class GotDataView extends WatchUi.View {
 
     function initialize() {
         View.initialize();
-        var theTimer = new Timer.Timer();
-        theTimer.start(method(:timerCallback), 2000, false);
+        mTimer = new Timer.Timer();
+        mTimer.start(method(:timerCallback), 2000, false);
     }
 
     public function onLayout( dc as Dc ) as Void {
