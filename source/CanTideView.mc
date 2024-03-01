@@ -27,6 +27,13 @@ class CanTideView extends WatchUi.View {
 
     var mPage = 0;
     var mPageCount = 6;
+    var mPageUpdated = true;
+
+    var mDelegate = null;
+
+    function setDelegate(d as CanTideDelegate) as Void {
+        mDelegate = d;
+    }
 
     function initialize(the_app) {
         app = the_app;
@@ -84,7 +91,23 @@ class CanTideView extends WatchUi.View {
         for (var i = 0; i < message.size(); i++) {
             dc.drawText(x, y + (30 * i), Graphics.FONT_SMALL, message[i], Graphics.TEXT_JUSTIFY_LEFT);
         }
-        // TODO: Change this to a confirmation dialog that optionally call CanTideDelegate.getStationInfo()
+
+        if (!mPageUpdated) {
+            return;
+        }
+
+        var prompt = "";
+        for (var i = 0; i < message.size(); i++) {
+            prompt += message[i] + "\n";
+        }
+        prompt += "Download data?";
+        var dialog = new WatchUi.Confirmation(prompt);
+        WatchUi.pushView(
+            dialog,
+            new DownloadDataConfirmationDelegate(mDelegate),
+            WatchUi.SLIDE_IMMEDIATE
+        );
+
         return;
     }
 
@@ -292,6 +315,7 @@ class CanTideView extends WatchUi.View {
             //mIndicatorRad.draw(dc, mPage);
             mIndicatorL.draw(dc, mPage);
         }
+        mPageUpdated = false;
     }
 
     public function onReceive(args as Dictionary or String or Array or Null) as Void {

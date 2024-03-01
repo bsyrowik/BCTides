@@ -59,6 +59,7 @@ class CanTideApp extends Application.AppBase {
         }
         view = new CanTideView(me);
         delegate = new CanTideDelegate(view);
+        view.setDelegate(delegate);
         return [view, delegate] as Array<Views or InputDelegates>;
     }
 

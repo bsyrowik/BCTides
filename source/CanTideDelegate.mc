@@ -19,6 +19,7 @@ class CanTideDelegate extends WatchUi.BehaviorDelegate {
         } else {
             mView.mPage = 0;
         }
+        mView.mPageUpdated = true;
         WatchUi.requestUpdate();
         return true;
     }
@@ -28,6 +29,7 @@ class CanTideDelegate extends WatchUi.BehaviorDelegate {
         } else {
             mView.mPage = mView.mPageCount - 1;
         }
+        mView.mPageUpdated = true;
         WatchUi.requestUpdate();
         return true;
     }
