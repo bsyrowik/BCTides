@@ -7,15 +7,17 @@
     -->
     <iq:application id="628ff251-2d5f-4433-aab4-b5151c9755f1" type="widget" name="@Strings.AppName" entry="BCTidesApp" launcherIcon="@Drawables.LauncherIcon" minApiLevel="3.0.0">
         <!--
-            Use the following from the Visual Studio Code comand palette to edit
+            Use the following from the Visual Studio Code command palette to edit
             the build targets:
-            "Monkey C: Set Products by Version" - Lets you add all producs that meet the
+            "Monkey C: Set Products by Version" - Lets you add all products that meet the
                                                     minimum SDK version of the application
             "Monkey C: Edit Products" - Lets you add or remove any product
         -->
+        <!-- cSpell:disable -->
         <iq:products>
             <iq:product id="fr745"/>
         </iq:products>
+        <!-- cSpell:enable -->
         <!--
             Use "Monkey C: Edit Permissions" from the Visual Studio Code command
             palette to update permissions.
