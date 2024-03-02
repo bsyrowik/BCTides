@@ -353,17 +353,7 @@ class BCTidesView extends WatchUi.View {
 
     public function onReceive(args as Dictionary or String or Array or Null) as Void {
         //System.println("View:onReceive() \"" + args.toString() + "\"");
-        if (args instanceof String) {
-            System.println("string!");
-            _message = "String\n" + args;
-        } else if (args instanceof Dictionary) {
-            System.println("dict!");
-            var keys = args.keys();
-            _message = "Dict\n";
-            for (var i = 0; i < keys.size(); i++) {
-                _message += Lang.format("$1$: $2$\n", [keys[i], args[keys[i]]]);
-            }
-        } else if (args instanceof Array) {
+        if (args instanceof Array) {
             var maxTide = 0.0;
             //System.println("Got an array!");
             app._hilo = [];
@@ -384,6 +374,8 @@ class BCTidesView extends WatchUi.View {
             TideUtil.dataValid = true;
 
             Notification.showNotification(Rez.Strings.dataReceivedMessage as String, 2000);
+        } else {
+            System.println("Received unexpected data from API call.");
         }
         WatchUi.requestUpdate();
     }
