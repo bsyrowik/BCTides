@@ -4,7 +4,7 @@ using Toybox.System;
 class DownloadDataConfirmationDelegate extends WatchUi.ConfirmationDelegate {    
     var mDelegate = null;
 
-    function initialize(d as CanTideDelegate) {
+    function initialize(d as BCTidesDelegate) {
         mDelegate = d;
         ConfirmationDelegate.initialize();
     }

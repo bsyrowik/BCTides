@@ -5,14 +5,14 @@ import Toybox.Lang;
 
 // Behaviour Delegate that pops the view on any input
 class GotDataViewDelegate extends WatchUi.BehaviorDelegate {
-
-    var mView;
+    private var mView;
     
     function initialize(view as GotDataView) {
         mView = view;
         BehaviorDelegate.initialize();
-        }
+    }
     
+    // Helper function - all events produce same behaviour
     private function processEvent(event) as Boolean {
         mView.disableTimer();
         WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
@@ -26,8 +26,7 @@ class GotDataViewDelegate extends WatchUi.BehaviorDelegate {
 }
 
 class GotDataView extends WatchUi.View {
-
-    var mTimer;
+    private var mTimer;
 
     function disableTimer() as Void {
         mTimer.stop();
@@ -44,11 +43,10 @@ class GotDataView extends WatchUi.View {
     }
 
     public function onLayout( dc as Dc ) as Void {
-        setLayout( Rez.Layouts.GotDataPrompt( dc ) );
+        setLayout(Rez.Layouts.GotDataPrompt(dc));
     }
 
     public function onUpdate( dc as Dc) as Void {
-        // Call parent's onUpdate(dc) to redraw the layout
-        View.onUpdate( dc );
+        View.onUpdate(dc);
     }
 }

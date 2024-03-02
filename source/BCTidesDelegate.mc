@@ -7,7 +7,7 @@ import Toybox.Lang;
 var getDataLabel;
 
 
-class CanTideDelegate extends WatchUi.BehaviorDelegate {
+class BCTidesDelegate extends WatchUi.BehaviorDelegate {
     var mView = null;
     function initialize(view) {
         mView = view;

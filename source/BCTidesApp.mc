@@ -3,7 +3,7 @@ import Toybox.Application.Storage;
 import Toybox.Lang;
 import Toybox.WatchUi;
 
-class CanTideApp extends Application.AppBase {
+class BCTidesApp extends Application.AppBase {
 
     var delegate;
     var view = null;
@@ -57,8 +57,8 @@ class CanTideApp extends Application.AppBase {
         if (_hilo == null) {
             _hilo = Storage.getValue("kits_hilo") as Array<Array>;
         }
-        view = new CanTideView(me);
-        delegate = new CanTideDelegate(view);
+        view = new BCTidesView(me);
+        delegate = new BCTidesDelegate(view);
         view.setDelegate(delegate);
         return [view, delegate] as Array<Views or InputDelegates>;
     }
@@ -69,6 +69,6 @@ class CanTideApp extends Application.AppBase {
     }
 }
 
-function getApp() as CanTideApp {
-    return Application.getApp() as CanTideApp;
+function getApp() as BCTidesApp {
+    return Application.getApp() as BCTidesApp;
 }

@@ -16,7 +16,7 @@ using Toybox.Position as Position;
 
 
 
-class CanTideView extends WatchUi.View {
+class BCTidesView extends WatchUi.View {
 
     hidden var mIndicatorRad;
     hidden var mIndicatorL;
@@ -31,7 +31,7 @@ class CanTideView extends WatchUi.View {
 
     var mDelegate = null;
 
-    function setDelegate(d as CanTideDelegate) as Void {
+    function setDelegate(d as BCTidesDelegate) as Void {
         mDelegate = d;
     }
 
