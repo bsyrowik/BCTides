@@ -1,1 +1,49 @@
 project.manifest = manifest.xml
+
+
+epix2.resourcePath = resources;resources-60x60
+epix2pro42mm.resourcePath = resources;resources-60x60
+epix2pro47mm.resourcePath = resources;resources-60x60
+epix2pro47mmsystem7preview.resourcePath = resources;resources-60x60
+epix2pro51mm.resourcePath = resources;resources-60x60
+
+fenixchronos.resourcePath = resources;resources-36x36
+
+fr165.resourcePath = resources;resources-54x54
+fr165m.resourcePath = resources;resources-54x54
+fr265.resourcePath = resources;resources-60x60
+fr265s.resourcePath = resources;resources-60x60
+fr55.resourcePath = resources;resources-35x35
+fr965.resourcePath = resources;resources-65x65
+
+legacysagarey.resourcePath = resources;resources-30x30
+legacyherofirstavenger.resourcePath = resources;resources-35x35
+
+marq2.resourcePath = resources;resources-60x60
+marq2aviator.resourcePath = resources;resources-60x60
+
+venud.resourcePath = resources;resources-60x60
+
+venusq.resourcePath = resources;resources-36x36
+venusqm.resourcePath = resources;resources-36x36
+
+venusq2.resourcePath = resources;resources-40x40
+venusq2m.resourcePath = resources;resources-40x40
+
+venu.resourcePath = resources;resources-60x60
+
+venu2.resourcePath = resources;resources-70x70
+venu2plus.resourcePath = resources;resources-70x70
+venu2s.resourcePath = resources;resources-61x61
+
+venu3.resourcePath = resources;resources-70x70
+venu3s.resourcePath = resources;resources-70x70
+
+vivoactive3.resourcePath = resources;resources-40x33
+vivoactive3m.resourcePath = resources;resources-40x33
+vivoactive3mlte.resourcePath = resources;resources-40x33
+
+vivoactive4.resourcePath = resources;resources-35x35
+vivoactive4s.resourcePath = resources;resources-30x30
+
+vivoactive5.resourcePath = resources;resources-70x70
