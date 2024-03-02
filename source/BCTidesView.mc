@@ -91,7 +91,7 @@ class BCTidesView extends WatchUi.View {
         for (var i = 0; i < message.size(); i++) {
             prompt += message[i] + "\n";
         }
-        prompt += "Download data?";
+        prompt += WatchUi.loadResource(Rez.Strings.downloadDataPrompt) as String;
         var dialog = new WatchUi.Confirmation(prompt);
         WatchUi.pushView(
             dialog,
@@ -121,10 +121,12 @@ class BCTidesView extends WatchUi.View {
         var last_label_x = 0;
         var current_t = start.value();
         var height = TideUtil.getHeightAtT(current_t, duration_per_increment, 0, app)[0];
+        
         if (height == null) {
-            drawNoDataWarning(dc, x, y, ["No data available", "for date."]);
+            drawNoDataWarning(dc, x, y, RezUtil.getNoDataForDateString());
             return false;
         }
+        
         var last_y = y + h - (height / max_height) * h;
         var last_x = start_x;
         
@@ -135,10 +137,12 @@ class BCTidesView extends WatchUi.View {
             current_t += duration_per_increment;
             var l = TideUtil.getHeightAtT(current_t, duration_per_increment, 0, app);//(i > 115 && i < 125));
             height = l[0];
+            
             if (height == null) {
-                drawNoDataWarning(dc, x, y, ["Ran out of data!"]);
+                drawNoDataWarning(dc, x, y, RezUtil.getRanOutOfDataString());
                 return true;
             }
+            
             //if (i < 125 && i > 115) {
                 //System.println("[" + i.toString() + "] height at " + formatDateStringShort(current_t) + " is " + height.toString());
             //}
@@ -184,8 +188,8 @@ class BCTidesView extends WatchUi.View {
         //System.println("Font height FONT_TINY:  " + dc.getFontHeight(Graphics.FONT_TINY));   // FR745: 26  FR965: 47
 
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-        dc.drawText(x,       y, Graphics.FONT_SMALL, "Time PST", Graphics.TEXT_JUSTIFY_LEFT);
-        dc.drawText(x + dc.getWidth() * 0.425, y, Graphics.FONT_SMALL, "Height (" + units + ")", Graphics.TEXT_JUSTIFY_LEFT);
+        dc.drawText(x,       y, Graphics.FONT_SMALL, WatchUi.loadResource(Rez.Strings.tableHeadingTime) as String, Graphics.TEXT_JUSTIFY_LEFT);
+        dc.drawText(x + dc.getWidth() * 0.425, y, Graphics.FONT_SMALL, WatchUi.loadResource(Rez.Strings.tableHeadingHeight) as String + " (" + units + ")", Graphics.TEXT_JUSTIFY_LEFT);
         y = y + dc.getFontHeight(Graphics.FONT_SMALL) - 3;
         var i;
         var entries_for_date = 0;
@@ -205,7 +209,7 @@ class BCTidesView extends WatchUi.View {
             }
         }
         if (i >= TideUtil.tideData(app).size()) {
-            drawNoDataWarning(dc, x, y, (entries_for_date > 0 ? ["Ran out of data!"] : ["No data available", "for date."]));
+            drawNoDataWarning(dc, x, y, (entries_for_date > 0 ? RezUtil.getRanOutOfDataString() : RezUtil.getNoDataForDateString()));
         }
     }
 
@@ -325,7 +329,7 @@ class BCTidesView extends WatchUi.View {
                 }
             }
         } else {
-            drawNoDataWarning(dc, offset_x, offset_y, ["No data available", "for station."]);
+            drawNoDataWarning(dc, offset_x, offset_y, RezUtil.getNoDataForStationString());
         }
 
         // Draw page indicator

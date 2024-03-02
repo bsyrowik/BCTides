@@ -30,12 +30,28 @@
 
     <string id="mainMenuLabelGetData">Get Data</string>
 
+    <string id="mainMenuLabelGetLocation">Get Location</string>
+    <string id="mainMenuLabelGetLocationSub">Find GPS</string>
+
     <string id="mainMenuLabelSelectStation">Select Station</string>
     <string id="selectStationMenuTitle">Station</string>
     <string id="selectStationMenuNearest">Nearest</string>
     <string id="selectStationMenuRecent">Recent</string>
     <string id="selectStationMenuAlphabetical">Alphabetical</string>
     <string id="selectStationMenuSearch">Search</string>
+
+    <string id="noDataAvailableForStation0">No data available</string>
+    <string id="noDataAvailableForStation1">for station.</string>
+
+    <string id="noDataAvailableForDate0">No data available</string>
+    <string id="noDataAvailableForDate1">for date.</string>
+
+    <string id="ranOutOfData0">Ran out of data!</string>
+
+    <string id="downloadDataPrompt">Download data?</string>
+
+    <string id="tableHeadingTime">Time PST</string>
+    <string id="tableHeadingHeight">Height</string>
     
     <string id="appVersionTitle">Version</string>
 </strings>

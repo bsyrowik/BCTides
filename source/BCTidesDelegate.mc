@@ -142,8 +142,8 @@ class BCTidesDelegate extends WatchUi.BehaviorDelegate {
         // Get Location
         menu.addItem(
             new WatchUi.MenuItem(
-                "Get Location", // Label
-                "Find GPS", // Sub-Label
+                Rez.Strings.mainMenuLabelGetLocation, // Label
+                Rez.Strings.mainMenuLabelGetLocationSub, // Sub-Label
                 MainMenuDelegate.MENU_SETTINGS_GPS_ID, // identifier
                 {} // options
             )
