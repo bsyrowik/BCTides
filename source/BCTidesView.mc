@@ -308,11 +308,7 @@ class BCTidesView extends WatchUi.View {
                 dc.drawLine(offset_x + width * 6 / 8, offset_y + 8, offset_x + width * 6 / 8, offset_y);
                 dc.drawLine(offset_x + width * 7 / 8, offset_y + 5, offset_x + width * 7 / 8, offset_y);
 
-                // Draw graph
-                var duration_24h = new Time.Duration(Gregorian.SECONDS_PER_HOUR * 24);
-                var success = graphTides(dc, offset_x, offset_y, width, height, today, today.add(duration_24h));
-
-                if (success && mPage == 0) {
+                if (mPage == 0) {
                     // Draw 'now' line
                     var offset = (now.value() - today.value()) * (width - 4) / Gregorian.SECONDS_PER_DAY;
                     dc.setColor(Graphics.COLOR_DK_BLUE, Graphics.COLOR_TRANSPARENT);
@@ -320,6 +316,10 @@ class BCTidesView extends WatchUi.View {
                     dc.drawLine(x1, offset_y + 1, x1, offset_y + height - 1);
                     dc.drawLine(x1 - 1, offset_y + 1, x1 - 1, offset_y + height - 1);
                 }
+
+                // Draw graph
+                var duration_24h = new Time.Duration(Gregorian.SECONDS_PER_HOUR * 24);
+                graphTides(dc, offset_x, offset_y, width, height, today, today.add(duration_24h));
             } else {
                 // Draw table
                 var duration_24h = new Time.Duration(Gregorian.SECONDS_PER_HOUR * 24);
