@@ -1,0 +1,41 @@
+<strings>
+    <string id="AppName">BC Tides</string>
+
+    <string id="MainMenuLabel_nearby">La plus proche</string>
+    <string id="MainMenuLabel_favorites">Favoris</string>
+
+    <string id="dataReceivedMessage">Données de marée reçues</string>
+
+    <string id="unitsSettingTitle">Unités</string>
+    <string id="unitsSettingPrompt">Select units to use</string>
+    <string id="unitsSettingSystem">Système</string>
+    <string id="unitsSettingMetric">Métrique</string>
+    <string id="unitsSettingImperial">Impérial</string>
+
+    <string id="labelSettingTitle">Étiquettes de graphique</string>
+    <string id="labelSettingPrompt">Select label to use</string>
+    <string id="labelSettingValHeight">Hauteur</string>
+    <string id="labelSettingValTime">Temps</string>
+    <string id="labelSettingValNone">Aucun</string>
+
+    <string id="displaySettingTitle">Display</string>
+    <string id="displaySettingPrompt">Select display mode</string>
+    <string id="displaySettingValGraph">Graphique</string>
+    <string id="displaySettingValTable">Tableau</string>
+
+    <string id="zoneSettingTitle">Zone</string>
+    <string id="zoneSettingPrompt">Select zone</string>
+    <string id="zoneSettingValSouth">BC Sud</string>
+    <string id="zoneSettingValNorth">BC Nord</string>
+
+    <string id="mainMenuLabelGetData">Obtenir des données</string>
+
+    <string id="mainMenuLabelSelectStation">Sélectionner une station</string>
+    <string id="selectStationMenuTitle">Station</string>
+    <string id="selectStationMenuNearest">La plus proche</string>
+    <string id="selectStationMenuRecent">Récent</string>
+    <string id="selectStationMenuAlphabetical">Alphabétique</string>
+    <string id="selectStationMenuSearch">Recherche</string>
+    
+    <string id="appVersionTitle">Version</string>
+</strings>
