@@ -367,12 +367,7 @@ class BCTidesView extends WatchUi.View {
             Storage.setValue("maxTide", maxTide);
             TideUtil.dataValid = true;
 
-            var gotDataView = new GotDataView();
-            WatchUi.pushView(
-                gotDataView,
-                new GotDataViewDelegate(gotDataView),
-                WatchUi.SLIDE_IMMEDIATE
-            );
+            Notification.showNotification(Rez.Strings.dataReceivedMessage as String, 2000);
         }
         WatchUi.requestUpdate();
     }

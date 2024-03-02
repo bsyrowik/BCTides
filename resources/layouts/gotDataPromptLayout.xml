@@ -1,4 +1,0 @@
-<layout id="GotDataPrompt">
-    <!-- Prompt Body -->
-    <text-area id="mainLabel" text="@Strings.dataReceivedMessage" y="center" height="100" width="200" justification="Graphics.TEXT_JUSTIFY_CENTER" />
-</layout>
