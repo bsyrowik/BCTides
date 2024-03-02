@@ -120,6 +120,12 @@ class BCTidesView extends WatchUi.View {
 
         dc.setColor(Graphics.COLOR_BLUE, Graphics.COLOR_TRANSPARENT);
 
+        var max_tide = Storage.getValue("max_tide");
+        if (max_tide == null) {
+            max_tide = 6.0;
+        }
+        var max_height = max_tide * 1.1;
+
         var start_x = x + margin;
         var last_label_x = 0;
         var current_t = start.value();
@@ -128,8 +134,9 @@ class BCTidesView extends WatchUi.View {
             drawNoDataWarning(dc, x, y, ["No data available", "for date."]);
             return false;
         }
-        var last_y = y + h - (height / 6.0f) * h;
+        var last_y = y + h - (height / max_height) * h;
         var last_x = start_x;
+        
         //System.println("[" + start_x.toString() + "] height at " + formatDateStringShort(start) + " is " + height.toString());
         //for (var i = start_x + 1; i < x + w - margin; i++) {
         for (var i = start_x + 1; i < x + w - margin; i = i + increment) {
@@ -144,7 +151,7 @@ class BCTidesView extends WatchUi.View {
             //if (i < 125 && i > 115) {
                 //System.println("[" + i.toString() + "] height at " + formatDateStringShort(current_t) + " is " + height.toString());
             //}
-            var this_y = y + h - (height / 6.0f) * h;
+            var this_y = y + h - (height / max_height) * h;  // FIXME assumes max tide is 6m
             //var l = getLabelForT(current_t, duration_per_increment);
             if (l[1] != null && (this_x - last_label_x > 10)) {
                 dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
@@ -265,9 +272,10 @@ class BCTidesView extends WatchUi.View {
             }
         }
 
-        var stationLabel = View.findDrawableById("stationTitle") as Text;
-        stationLabel.setText(PropUtil.getStationName());
-
+        //var stationLabel = View.findDrawableById("stationTitle") as Text;
+        //stationLabel.setText(PropUtil.getStationName());
+        dc.drawText(dc.getWidth() / 2, dc.getWidth() * 0.13, Graphics.FONT_XTINY, PropUtil.getStationName(), Graphics.TEXT_JUSTIFY_CENTER);
+        
         // Date
         var today = Time.today();  // Time-zone adjusted!
         var now = Time.now();
@@ -278,17 +286,17 @@ class BCTidesView extends WatchUi.View {
         }
 
         var dateInfo = Gregorian.info(today, Time.FORMAT_MEDIUM);
-        var dateLabel = View.findDrawableById("date") as Text;
-        dateLabel.setText(dateInfo.month + " " + dateInfo.day.toString());
-        //dc.drawText(dc.getWidth() / 2, 8, Graphics.FONT_TINY, dateInfo.month + " " + dateInfo.day.toString(), Graphics.TEXT_JUSTIFY_CENTER);
+        //var dateLabel = View.findDrawableById("date") as Text;
+        //dateLabel.setText(dateInfo.month + " " + dateInfo.day.toString());
+        dc.drawText(dc.getWidth() / 2, 8, Graphics.FONT_TINY, dateInfo.month + " " + dateInfo.day.toString(), Graphics.TEXT_JUSTIFY_CENTER);
 
 
-        if (app._hilo != null) {
+        var offset_x = dc.getWidth() / 8;
+        var offset_y = dc.getHeight() / 4;
+        if (app._hilo != null && TideUtil.dataValid) {
 
             var width = dc.getWidth() * 3 / 4;
             var height = dc.getHeight() / 2;
-            var offset_x = dc.getWidth() / 8;
-            var offset_y = dc.getHeight() / 4;
             if (PropUtil.getDisplayType() == PropUtil.DISPLAY_PROP_GRAPH) {
                 // Draw box
                 dc.setColor(Graphics.COLOR_DK_GRAY, Graphics.COLOR_TRANSPARENT);
@@ -322,9 +330,11 @@ class BCTidesView extends WatchUi.View {
                         tideHeight *= TideUtil.FEET_PER_METER;
                     }
                     dc.setColor(Graphics.COLOR_DK_BLUE, Graphics.COLOR_TRANSPARENT);
-                    dc.drawText(dc.getWidth() / 2, dc.getHeight() * 7 / 8, Graphics.FONT_TINY, tideHeight.format("%.1f") + units, Graphics.TEXT_JUSTIFY_CENTER);
+                    dc.drawText(dc.getWidth() / 2, dc.getHeight() * 0.8, Graphics.FONT_SMALL, tideHeight.format("%.1f") + units, Graphics.TEXT_JUSTIFY_CENTER);
                 }
             }
+        } else {
+            drawNoDataWarning(dc, offset_x, offset_y, ["No data available", "for station."]);
         }
 
         // Draw page indicator
@@ -348,19 +358,24 @@ class BCTidesView extends WatchUi.View {
                 _message += Lang.format("$1$: $2$\n", [keys[i], args[keys[i]]]);
             }
         } else if (args instanceof Array) {
+            var max_tide = 0.0;
             //System.println("Got an array!");
             app._hilo = [];
             _message = "";
             for (var i = 0; i < args.size(); i++) {
                 var eventData = args[i] as Dictionary;
-                app._hilo.add([DateUtil.parseDateString(eventData["eventDate"].toString()).value(), eventData["value"].toFloat()]);
-                            }
+                var height = eventData["value"].toFloat();
+                if (height > max_tide) {
+                    max_tide = height;
+                }
+                app._hilo.add([DateUtil.parseDateString(eventData["eventDate"].toString()).value(), height]);
+            }
             app.hilo_updated = true;
             //System.println(app._hilo.toString());
 
-            if (app._hilo != null) {
-                Storage.setValue("kits_hilo", app._hilo);
-            }
+            Storage.setValue("kits_hilo", app._hilo);
+            Storage.setValue("max_tide", max_tide);
+            TideUtil.dataValid = true;
 
             var gotDataView = new GotDataView();
             WatchUi.pushView(

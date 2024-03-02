@@ -14,8 +14,9 @@ class NearestStationMenuDelegate extends WatchUi.Menu2InputDelegate {
         var name = item.getLabel();
         var dist = item.getSubLabel();
         System.println("Selected station " + name + " with code " + code + " and distance " + dist);
-        Properties.setValue("selectedStationCode", code);
+        Properties.setValue("selectedStationCode", code);  // FIXME: #9 These should be in "Storage", not "Properties"
         Properties.setValue("selectedStationName", name);
+        TideUtil.dataValid = false; // FIXME: #8 only invalidate when we're actually changing the station!
         getDataLabel.setSubLabel(name);
         WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
     }

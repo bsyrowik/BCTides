@@ -16,6 +16,7 @@ module TideUtil {
     var h1 = 0.0f, h2 = 0.0f;
     var A, B_n = Toybox.Math.PI, B_d, C, D;
 
+    var dataValid = false;
 
     function tideData(app) as Array<Array> {
         return app._hilo as Array<Array>;

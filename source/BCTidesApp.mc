@@ -26,6 +26,9 @@ class BCTidesApp extends Application.AppBase {
     function onStart(state as Dictionary?) as Void {
         if (_hilo == null) {
             _hilo = Storage.getValue("kits_hilo") as Array<Array>;
+            if (_hilo != null) {
+                TideUtil.dataValid = true;
+            }
         }
         //System.println("starting");
         //Position.enableLocationEvents( Position.LOCATION_CONTINUOUS, method( :onPosition ) );
@@ -56,6 +59,9 @@ class BCTidesApp extends Application.AppBase {
         }
         if (_hilo == null) {
             _hilo = Storage.getValue("kits_hilo") as Array<Array>;
+            if (_hilo != null) {
+                TideUtil.dataValid = true;
+            }
         }
         view = new BCTidesView(me);
         delegate = new BCTidesDelegate(view);
