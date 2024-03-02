@@ -14,7 +14,6 @@ class BCTidesView extends WatchUi.View {
     hidden var mIndicatorL;
     hidden var mPosition = null;
     hidden var needGPS = true;
-    private var _message = "";
     var app;
 
     var mPage = 0;
@@ -36,7 +35,7 @@ class BCTidesView extends WatchUi.View {
     function onPosition(info as Position.Info) as Void {
         mPosition = info;
         if (mPosition == null || mPosition.accuracy < Position.QUALITY_POOR) {
-            System.println("got position update but accuracy sucks!");
+            System.println("got position update but accuracy not good!");
         } else {
             System.println("got position and accuracy is acceptable.");
         }
@@ -45,8 +44,6 @@ class BCTidesView extends WatchUi.View {
 
     // Load your resources here
     function onLayout(dc as Dc) as Void {
-
-		//mPosition = Position.getInfo();
         if (mPosition == null || mPosition.accuracy < Position.QUALITY_POOR) {
             System.println("onLayout: requesting position!");
             Position.enableLocationEvents(Position.LOCATION_CONTINUOUS, method(:onPosition));
@@ -96,8 +93,7 @@ class BCTidesView extends WatchUi.View {
     }
 
     function graphTides(dc as Dc, x as Number, y as Number, w as Number, h as Number, start as Time.Moment, end as Time.Moment) as Boolean {
-        //System.println("Graphing tides from " + formatDateStringShort(start) + " to " + formatDateStringShort(end));
-        // graphs tide height 0 at bottom, tide height 6m at top
+        // graphs tide height 0 at bottom, tide height "maxTide" at top
         var margin = 1;
         var increment = 4;
         var duration_per_increment = end.subtract(start).divide(w - margin * 2).multiply(increment).value();       
@@ -114,33 +110,23 @@ class BCTidesView extends WatchUi.View {
         var last_label_x = 0;
         var current_t = start.value();
         var height = TideUtil.getHeightAtT(current_t, duration_per_increment, 0, app)[0];
-        
         if (height == null) {
             drawNoDataWarning(dc, x, y, RezUtil.getNoDataForDateString(), true);
             return false;
         }
-        
         var last_y = y + h - (height / max_height) * h;
         var last_x = start_x;
         
-        //System.println("[" + start_x.toString() + "] height at " + formatDateStringShort(start) + " is " + height.toString());
-        //for (var i = start_x + 1; i < x + w - margin; i++) {
         for (var i = start_x + 1; i < x + w - margin; i = i + increment) {
             var this_x = i;
             current_t += duration_per_increment;
-            var l = TideUtil.getHeightAtT(current_t, duration_per_increment, 0, app);//(i > 115 && i < 125));
-            height = l[0];
-            
+            var l = TideUtil.getHeightAtT(current_t, duration_per_increment, 0, app);
+            height = l[0];       
             if (height == null) {
                 drawNoDataWarning(dc, x, y, RezUtil.getRanOutOfDataString(), true);
                 return true;
             }
-            
-            //if (i < 125 && i > 115) {
-                //System.println("[" + i.toString() + "] height at " + formatDateStringShort(current_t) + " is " + height.toString());
-            //}
-            var this_y = y + h - (height / max_height) * h;  // FIXME assumes max tide is 6m
-            //var l = getLabelForT(current_t, duration_per_increment);
+            var this_y = y + h - (height / max_height) * h;
             if (l[1] != null && (this_x - last_label_x > 10)) {
                 dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
                 var h_label = l[2];
@@ -277,8 +263,6 @@ class BCTidesView extends WatchUi.View {
             }
         }
 
-        //var stationLabel = View.findDrawableById("stationTitle") as Text;
-        //stationLabel.setText(PropUtil.getStationName());
         dc.drawText(dc.getWidth() / 2, dc.getWidth() * 0.13, Graphics.FONT_XTINY, PropUtil.getStationName(), Graphics.TEXT_JUSTIFY_CENTER);
         
         // Date
@@ -291,8 +275,6 @@ class BCTidesView extends WatchUi.View {
         }
 
         var dateInfo = Gregorian.info(today, Time.FORMAT_MEDIUM);
-        //var dateLabel = View.findDrawableById("date") as Text;
-        //dateLabel.setText(dateInfo.month + " " + dateInfo.day.toString());
         dc.drawText(dc.getWidth() / 2, 8, Graphics.FONT_TINY, dateInfo.month + " " + dateInfo.day.toString(), Graphics.TEXT_JUSTIFY_CENTER);
 
 
@@ -357,7 +339,6 @@ class BCTidesView extends WatchUi.View {
             var maxTide = 0.0;
             //System.println("Got an array!");
             app._hilo = [];
-            _message = "";
             for (var i = 0; i < args.size(); i++) {
                 var eventData = args[i] as Dictionary;
                 var height = eventData["value"].toFloat();
@@ -378,13 +359,5 @@ class BCTidesView extends WatchUi.View {
             System.println("Received unexpected data from API call.");
         }
         WatchUi.requestUpdate();
-    }
-
-    // Called when this View is removed from the screen. Save the
-    // state of this View here. This includes freeing resources from
-    // memory.
-    function onHide() as Void {
-        //System.println("onHide called");
-        //Position.enableLocationEvents(Position.LOCATION_DISABLE, method(:onPosition));
     }
 }

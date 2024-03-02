@@ -90,10 +90,7 @@ class BCTidesGlanceView extends WatchUi.GlanceView {
     }
 
     function onUpdate(dc as Dc) {
-		//dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_BLACK);
-		//dc.clear();
-		//dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-        var now = Time.now().value();
+		var now = Time.now().value();
 
         var next_event = TideUtil.getNextEvent(now, app);
         if (next_event[0] == null) {

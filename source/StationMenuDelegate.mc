@@ -106,8 +106,10 @@ class StationMenuDelegate extends WatchUi.Menu2InputDelegate {
             buildRecentStationMenu();
         } else if (item.getId() == MENU_STATION_SEARCH) {
             // TODO: get text input
+            /*
             var text_picker = new MyInputDelegate();
             text_picker.initialize();
+            */
         }
     }
 }
