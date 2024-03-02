@@ -75,7 +75,7 @@ class BCTidesDelegate extends WatchUi.BehaviorDelegate {
     }
 
     function onReceiveStationInfo(responseCode as Number, data as Dictionary?) as Void {
-        //System.println("onRecieveStationInfo called....");
+        //System.println("onReceiveStationInfo called....");
         //System.println("  responseCode:" + responseCode.toString());
         if (responseCode == 200) { // OK!
             if (data instanceof Array) {
@@ -93,7 +93,7 @@ class BCTidesDelegate extends WatchUi.BehaviorDelegate {
     }
 
     function onReceive(responseCode as Number, data as Dictionary?) as Void {
-        //System.println("onRecieve called....");
+        //System.println("onReceive called....");
         //System.println("  responseCode:" + responseCode.toString());
         if (responseCode == 200) { // OK!
             mView.onReceive(data);

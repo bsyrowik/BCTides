@@ -336,7 +336,7 @@ class BCTidesView extends WatchUi.View {
     }
 
     public function onReceive(args as Dictionary or String or Array or Null) as Void {
-        //System.println("View:onRecieve() \"" + args.toString() + "\"");
+        //System.println("View:onReceive() \"" + args.toString() + "\"");
         if (args instanceof String) {
             System.println("string!");
             _message = "String\n" + args;

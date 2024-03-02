@@ -4,7 +4,7 @@
     <string id="MainMenuLabel_nearby">Nearby</string>
     <string id="MainMenuLabel_favorites">Favorites</string>
 
-    <string id="gotDataPrompt">Tide data received</string>
+    <string id="dataReceivedMessage">Tide data received</string>
 
     <string id="unitsSettingTitle">Units</string>
     <string id="unitsSettingPrompt">Select units to use</string>

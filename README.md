@@ -1,6 +1,6 @@
 # BC Tides
 
-A Garming Connect IQ Widget App for Tides in British Columbia.
+A Garmin Connect IQ Widget App for Tides in British Columbia.
 
 
 

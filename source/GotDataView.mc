@@ -12,7 +12,7 @@ class GotDataViewDelegate extends WatchUi.BehaviorDelegate {
         BehaviorDelegate.initialize();
     }
     
-    // Helper function - all events produce same behaviour
+    // Helper function - all events produce same behavior
     private function processEvent(event) as Boolean {
         mView.disableTimer();
         WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);

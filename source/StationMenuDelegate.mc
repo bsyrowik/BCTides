@@ -15,15 +15,15 @@ class StationMenuDelegate extends WatchUi.Menu2InputDelegate {
     }
 
     // All input values should be in radians.
-    // Retruns the 'distance squared', scaled to a 'unit' sized Earth.
+    // Returns the 'distance squared', scaled to a 'unit' sized Earth.
     // Pass through the distance() function to get a distance in kilometers.
     // Only accurate for coordinates around 49 degrees latitude.
     function distanceSquaredApproximation(lat1 as Float, lon1 as Float, lat2 as Float, lon2 as Float) as Float {
-        var dlat = lat2 - lat1;
-        var dlon = lon2 - lon1;
-        var dlon_scale_factor = 0.652; // FIXME: Should be `cos((lat1 + lat2) / 2)`, but optimized for ~49 deg N to save computation time.
-        dlon = dlon * dlon_scale_factor;
-        return dlat * dlat + dlon * dlon;
+        var dLat = lat2 - lat1;
+        var dLon = lon2 - lon1;
+        var dLon_scale_factor = 0.652; // FIXME: Should be `cos((lat1 + lat2) / 2)`, but optimized for ~49 deg N to save computation time.
+        dLon = dLon * dLon_scale_factor;
+        return dLat * dLat + dLon * dLon;
     }
 
     // Convert a result produced by distanceSquaredApproximation() to a distance in km
