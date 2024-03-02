@@ -7,8 +7,8 @@ using Toybox.Time.Gregorian;
 module DateUtil {
     function getFromDateString() as String {
         // Start from midnight this morning; add another 8 hours buffer
-        var duration_8h = new Time.Duration(8 * Time.Gregorian.SECONDS_PER_HOUR);
-        var from = Time.today().subtract(duration_8h);
+        var duration_14h = new Time.Duration(14 * Time.Gregorian.SECONDS_PER_HOUR);
+        var from = Time.today().subtract(duration_14h);
         var from_utc = Gregorian.utcInfo(from, Time.FORMAT_SHORT);
         return formatDateString(from_utc);
     }

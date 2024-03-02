@@ -48,9 +48,8 @@ module TideUtil {
 
         if (t1 == null) { t1 = t; }
         if (t2 == null) { t2 = t; }
-        var start_i = 0;
         var found = false;
-        for (var i = start_i; i < tideData(app).size(); i++) {
+        for (var i = 0; i < tideData(app).size(); i++) {
             if (tideData(app)[i][0] < t) {
                 t1 = tideData(app)[i][0];
                 h1 = tideData(app)[i][1];
@@ -68,6 +67,15 @@ module TideUtil {
         B_d = t2 - t1;
         C = t1;
         D = (h2 + h1) / 2.0f;
+        if (B_d == null || B_d == 0) {
+            /*
+            System.println("Failed to find an early enough time!");
+            System.println("h1: " + h1 + " h2: " + h2);
+            System.println("t: " + t + " t1: " + t1 + " t2: " + t2);
+            System.println("A: " + A + " B_n: " + B_n + " t: " + t + " C: " + C + " B_d: " + B_d + " D: " + D);
+            */
+            return [null, null, null, null];
+        }
         var h = A * Toybox.Math.cos(B_n * (t - C) / B_d) + D;
         //if (p) { System.println("h1 = " + h1.toString() + "; h2 = " + h2.toString() + "; t1 = " + formatDateStringShort(t1) + "; t2 = " + formatDateStringShort(t2)); }
         //if (p) { System.println("h(t) = " + A.toString() + " * cos(" + B_n.toString() + " * (t - " + formatDateStringShort(C) + ") / " + B_d.toString() + ") + " + D.toString()); }
