@@ -1,6 +1,6 @@
-import Toybox.WatchUi;
 import Toybox.Graphics;
 import Toybox.Lang;
+import Toybox.WatchUi;
 
 (:glance)
 class BCTidesGlanceView extends WatchUi.GlanceView {
@@ -33,25 +33,26 @@ class BCTidesGlanceView extends WatchUi.GlanceView {
 
         var numHeight = dc.getFontHeight(Graphics.FONT_NUMBER_MEDIUM);
 
+
+		dc.setColor(Graphics.COLOR_BLUE, Graphics.COLOR_TRANSPARENT);
+
+        // Height with units
+        var heightString = current_height.format("%.1f");
+        dc.drawText(0, - numHeight * 0.19, Graphics.FONT_NUMBER_MEDIUM, heightString, Graphics.TEXT_JUSTIFY_LEFT);
+        dc.drawText(dc.getTextWidthInPixels(heightString, Graphics.FONT_NUMBER_MEDIUM), numHeight * 0.72 - dc.getFontHeight(Graphics.FONT_LARGE), Graphics.FONT_LARGE, units, Graphics.TEXT_JUSTIFY_LEFT);
+
+		dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
+
         // Draw position indicator
         var radius = lineHeight * .25;
         var center_x = lineHeight * 0.4375;
         var center_y = numHeight * 0.66 + lineHeight * .5;
         var line_length = lineHeight * .8125;
-
-
-		dc.setColor(Graphics.COLOR_BLUE,Graphics.COLOR_TRANSPARENT);
-
-        var heightString = current_height.format("%.1f");
-        dc.drawText(0, - numHeight * 0.19, Graphics.FONT_NUMBER_MEDIUM, heightString, Graphics.TEXT_JUSTIFY_LEFT);
-        dc.drawText(dc.getTextWidthInPixels(heightString, Graphics.FONT_NUMBER_MEDIUM), numHeight * 0.72 - dc.getFontHeight(Graphics.FONT_LARGE), Graphics.FONT_LARGE, units, Graphics.TEXT_JUSTIFY_LEFT);
-
-		dc.setColor(Graphics.COLOR_WHITE,Graphics.COLOR_TRANSPARENT);
-
         dc.drawCircle(center_x, center_y, radius);
         dc.drawLine(1, center_y, line_length + 1, center_y); // horizontal
         dc.drawLine(center_x, center_y - line_length / 2, center_x, center_y + line_length / 2); // vertical line
 
+        // Station Name
         dc.drawText(line_length * 1.3, numHeight * 0.66, Graphics.FONT_GLANCE, current_station, Graphics.TEXT_JUSTIFY_LEFT);
     }
 
@@ -89,33 +90,30 @@ class BCTidesGlanceView extends WatchUi.GlanceView {
     }
 
     function onUpdate(dc as Dc) {
-		dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_BLACK);
-		dc.clear();
-		dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
+		//dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_BLACK);
+		//dc.clear();
+		//dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
         var now = Time.now().value();
 
-        // TODO: get this data dynamically
         var next_event = TideUtil.getNextEvent(now, app);
         if (next_event[0] == null) {
             drawNoDataMessage(dc);
             return;
         }
 
-        var current_height = 0.0;
-        var next_event_height = next_event[1];
-        var next_event_time = (next_event[0] - now) / 60;
-        var next_event_type = next_event[2]; // "H" or "L"
-        var current_station = TideUtil.current_station_name;
-
-
         if (app._hilo != null) {
-            current_height = TideUtil.getHeightAtT(now, 1200, 0, app)[0];
+            var current_height = TideUtil.getHeightAtT(now, 1200, 0, app)[0];
             if (current_height == null) {
                 drawNoDataMessage(dc);
                 return;
             }
-        }
 
-        drawGlanceNew(dc, current_height, next_event_height, next_event_time, next_event_type, current_station);
+            var next_event_height = next_event[1];
+            var next_event_time = (next_event[0] - now) / 60;
+            var next_event_type = next_event[2]; // "H" or "L"
+            var current_station = TideUtil.current_station_name;
+
+            drawGlanceNew(dc, current_height, next_event_height, next_event_time, next_event_type, current_station);
+        }
     } 
 }

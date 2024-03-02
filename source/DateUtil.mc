@@ -1,7 +1,8 @@
 import Toybox.Lang;
+import Toybox.Test;
+
 using Toybox.Time;
 using Toybox.Time.Gregorian;
-import Toybox.Test;
 
 module DateUtil {
     function getFromDateString() as String {

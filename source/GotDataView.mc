@@ -1,7 +1,7 @@
-import Toybox.WatchUi;
 import Toybox.Graphics;
-using Toybox.Timer;
 import Toybox.Lang;
+import Toybox.Timer;
+import Toybox.WatchUi;
 
 // Behaviour Delegate that pops the view on any input
 class GotDataViewDelegate extends WatchUi.BehaviorDelegate {

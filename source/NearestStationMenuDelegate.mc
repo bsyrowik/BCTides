@@ -1,6 +1,7 @@
-using Toybox.WatchUi;
 import Toybox.Lang;
 import Toybox.Application.Properties;
+
+using Toybox.WatchUi;
 
 class NearestStationMenuDelegate extends WatchUi.Menu2InputDelegate {
     function initialize() {
@@ -21,4 +22,3 @@ class NearestStationMenuDelegate extends WatchUi.Menu2InputDelegate {
         WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
     }
 }
-

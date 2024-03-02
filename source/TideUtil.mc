@@ -2,7 +2,6 @@ import Toybox.Lang;
 import Toybox.System;
 import Toybox.Application.Properties;
 
-
 (:glance)
 module TideUtil {
     const FEET_PER_METER = 3.28084;

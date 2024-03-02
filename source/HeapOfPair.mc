@@ -1,6 +1,12 @@
 import Toybox.Lang;
 import Toybox.Test;
 
+class Pair {
+    public var distance as Float = 0.0f;
+    public var index as Number = -1;
+    function initialize() {}
+}
+
 class HeapOfPair {
     var heapSize as Number;
     var A as Array<Pair>;
@@ -89,8 +95,6 @@ class HeapOfPair {
         }
     }
 */
-
-
 }
 
 

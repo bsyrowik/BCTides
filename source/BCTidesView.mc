@@ -1,24 +1,16 @@
-import Toybox.Graphics;
-import Toybox.WatchUi;
-import Toybox.Lang;
 import Toybox.Application.Properties;
+import Toybox.Application.Storage;
+import Toybox.Graphics;
+import Toybox.Lang;
 import Toybox.System;
-using Toybox.Time;
+import Toybox.WatchUi;
+
 using Toybox.Position;
 using Toybox.System;
+using Toybox.Time;
 using Toybox.Time.Gregorian;
 
-import Toybox.Application.Storage;
-
-using Toybox.Graphics as Gfx;
-using Toybox.Position as Position;
-
-
-
-
 class BCTidesView extends WatchUi.View {
-
-    hidden var mIndicatorRad;
     hidden var mIndicatorL;
     hidden var mPosition = null;
     hidden var needGPS = true;
@@ -38,8 +30,7 @@ class BCTidesView extends WatchUi.View {
     function initialize(the_app) {
         app = the_app;
         View.initialize();
-        //mIndicatorRad = new PageIndicatorArc(mPageCount, Gfx.COLOR_WHITE, ALIGN_CENTER_RIGHT, /*margin*/3);
-        mIndicatorL   = new PageIndicatorRad(mPageCount, Gfx.COLOR_WHITE, ALIGN_CENTER_LEFT, /*margin*/5);
+        mIndicatorL = new PageIndicatorRad(mPageCount, Graphics.COLOR_WHITE, ALIGN_CENTER_LEFT, /*margin*/5);
     }
 
     function onPosition(info as Position.Info) as Void {
@@ -339,7 +330,6 @@ class BCTidesView extends WatchUi.View {
 
         // Draw page indicator
         if (mPage >= 0 && mPage < mPageCount) {
-            //mIndicatorRad.draw(dc, mPage);
             mIndicatorL.draw(dc, mPage);
         }
         mPageUpdated = false;

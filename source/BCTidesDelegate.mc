@@ -1,11 +1,9 @@
-
-using Toybox.WatchUi;
-using Toybox.Timer;
 import Toybox.Application.Properties;
 import Toybox.Lang;
 
-var getDataLabel;
+using Toybox.WatchUi;
 
+var getDataLabel;
 
 class BCTidesDelegate extends WatchUi.BehaviorDelegate {
     var mView = null;

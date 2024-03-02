@@ -1,5 +1,6 @@
-using Toybox.WatchUi;
 import Toybox.Lang;
+
+using Toybox.WatchUi;
 
 // A string to display on the screen
 var screenMessage = "Press Menu to Enter Text";

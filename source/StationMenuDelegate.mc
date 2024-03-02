@@ -1,6 +1,6 @@
-using Toybox.WatchUi;
 import Toybox.Lang;
-import Toybox.Application.Properties;
+
+using Toybox.WatchUi;
 
 class StationMenuDelegate extends WatchUi.Menu2InputDelegate {
     public enum {

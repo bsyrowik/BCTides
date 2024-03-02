@@ -1,7 +1,6 @@
-
 import Toybox.Lang;
-using Toybox.WatchUi;
 
+using Toybox.WatchUi;
 
 module RezUtil {
     function getStationData() as Array<Dictionary> {

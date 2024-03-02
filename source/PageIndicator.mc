@@ -17,7 +17,6 @@ public enum Align {
 
 class PageIndicatorArc {
     private var _size as Number;
-//    private var _color as ColorType;
     private var _alignment as Align;
     private var _margin as Number;
 
@@ -28,7 +27,6 @@ class PageIndicatorArc {
     //! @param margin Amount of margin for the graphic
     public function initialize(size as Number, color as ColorValue, alignment as Align, margin as Number) {
         _size = size;
-//        _color = color;
         _alignment = alignment;
         _margin = margin;
     }
@@ -74,6 +72,7 @@ class PageIndicatorArc {
     }
 
 }
+
 class PageIndicatorRad {
     private var _size as Number;
     private var _color as ColorType;
@@ -101,7 +100,7 @@ class PageIndicatorRad {
         var x = 0;
         var y = 0;
 
-        var radius = dc.getWidth() / 2 - _margin - diameter / 2; // FIXME: what if width and height are not the same??  Probably want a way to support non-circular devices?
+        var radius = dc.getWidth() / 2 - _margin - diameter / 2;
         var spacing_rad = Math.atan2(diameter + spacing, radius);
         var sweep_rad = spacing_rad * _size;
 
@@ -129,8 +128,8 @@ class PageIndicatorRad {
             }
         }
     }
-
 }
+
 //! Draws a graphic indicating which page the user is currently on
 class PageIndicator {
     private var _size as Number;
@@ -190,5 +189,4 @@ class PageIndicator {
             }
         }
     }
-
 }

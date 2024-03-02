@@ -1,5 +1,4 @@
 using Toybox.WatchUi;
-using Toybox.System;
 
 class DownloadDataConfirmationDelegate extends WatchUi.ConfirmationDelegate {    
     var mDelegate = null;

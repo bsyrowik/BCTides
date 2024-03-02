@@ -1,5 +1,6 @@
-using Toybox.WatchUi;
 import Toybox.Application.Properties;
+
+using Toybox.WatchUi;
 
 class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
     public enum {
