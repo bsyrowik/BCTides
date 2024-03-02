@@ -4,91 +4,110 @@ using Toybox.WatchUi;
 
 class StationMenuDelegate extends WatchUi.Menu2InputDelegate {
     public enum {
+        MENU_STATION_RECENT,
         MENU_STATION_NEAREST,
         MENU_STATION_ALPHABETICAL,
         MENU_STATION_SEARCH
     }
+
     function initialize() {
         Menu2InputDelegate.initialize();
-    }
-
-    function d2r(d as Float) as Float {
-        return d * Math.PI / 180.0f;
     }
 
     // All input values should be in radians.
     // Retruns the 'distance squared', scaled to a 'unit' sized Earth.
     // Pass through the distance() function to get a distance in kilometers.
     // Only accurate for coordinates around 49 degrees latitude.
-    function d2(lat1 as Float, lon1 as Float, lat2 as Float, lon2 as Float) as Float {
+    function distanceSquaredApproximation(lat1 as Float, lon1 as Float, lat2 as Float, lon2 as Float) as Float {
         var dlat = lat2 - lat1;
         var dlon = lon2 - lon1;
-        var dlon_scale_factor = 0.652; // Should be `cos((lat1 + lat2) / 2)` ; optimized for ~49 deg N
+        var dlon_scale_factor = 0.652; // FIXME: Should be `cos((lat1 + lat2) / 2)`, but optimized for ~49 deg N to save computation time.
         dlon = dlon * dlon_scale_factor;
         return dlat * dlat + dlon * dlon;
     }
 
+    // Convert a result produced by distanceSquaredApproximation() to a distance in km
     function distance(d2 as Float) as Float {
         var d = Math.sqrt(d2);
-        var r = 6371;
+        var r = 6371;  // Radius of earth in km
         return d * r;
     }
 
-    function nearestStationMenu(h as HeapOfPair, all_stations as Array<Dictionary>) {
-        var menu = new WatchUi.Menu2({:title=>"Nearest"});
+    function buildNearestStationHeap(all_stations as Array<Dictionary>) as HeapOfPair {
+        var position = TideUtil.currentPosition.toRadians() as Array;
+        var myLatitude = position[0];
+        var myLongitude = position[1];
+        var size = all_stations.size();
+        var h = new HeapOfPair(size);
+        for(var i = 0; i < size; i++) {
+            var d_squared = distanceSquaredApproximation(myLatitude, myLongitude, all_stations[i]["lat"], all_stations[i]["lon"]);
+            h.minHeapInsert(d_squared, i);
+        }
+        return h;
+    }
 
-        var count = 7;
-        for (var i = 0; i < count; i++) {
+    function buildNearestStationMenu() as Void {
+        var stationList = RezUtil.getStationData() as Array<Dictionary>;
+        var h = buildNearestStationHeap(stationList);
+
+        var stationsToShow = 7;
+        var menu = new WatchUi.Menu2({:title=>Rez.Strings.selectStationMenuNearest});
+        for (var i = 0; i < stationsToShow; i++) {
             var p = h.heapExtractMin();
             var dist = distance(p.distance);
-            var station = all_stations[p.index] as Dictionary;
-            //System.println(station["name"] + " " + dist.format("%.2f") + "km");
             menu.addItem(
                 new WatchUi.MenuItem(
-                    station["name"],
+                    stationList[p.index]["name"],
                     dist.format("%.2f") + "km",
                     p.index,
-                    {}
+                    {} // options
                 )
             );
         }
 
+        // Get rid of the station selection strategy menu so when we finish here we go back to the main menu
         WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);   
 
         var delegate = new NearestStationMenuDelegate();
         WatchUi.pushView(menu, delegate, WatchUi.SLIDE_IMMEDIATE);
-
-        return true;
     }
 
+    function buildRecentStationMenu() as Void {
+        var recents = PropUtil.getRecentStations();
+        if (recents == null) {
+            return;
+        }
+        var menu = new WatchUi.Menu2({:title=>Rez.Strings.selectStationMenuRecent});
+        for (var i = recents.size() - 1; i >= 0; i--) {
+            menu.addItem(
+                new WatchUi.MenuItem(
+                    recents[i][1], // Station Name
+                    "",
+                    recents[i][0], // Station Code
+                    {} // options
+                )
+            );
+        }
 
-    function onSelect(item) {
+        // Get rid of the station selection strategy menu so when we finish here we go back to the main menu
+        WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);   
 
+        var delegate = new RecentStationMenuDelegate();
+        WatchUi.pushView(menu, delegate, WatchUi.SLIDE_IMMEDIATE);
+    }
+
+    function onSelect(item) as Void {
         // TODO: search by coordinates?
-
         if (item.getId() == MENU_STATION_NEAREST) {
-            var home_pos = TideUtil.currentPosition.toRadians() as Array;
-            var home_lat = home_pos[0];
-            var home_lon = home_pos[1];
-            // TODO: dynamic list of stations
-            // FIXME TODO: New menu level for choosing north or south list???
-            var all_stations = RezUtil.getStationData() as Array<Dictionary>;
-            // TODO: use insertion sort or similar? What about a min heap?
-            var size = all_stations.size();
-            var h = new HeapOfPair(size);
-            for(var i = 0; i < size; i++) {
-                var d_squared = d2(home_lat, home_lon, all_stations[i]["lat"], all_stations[i]["lon"]);
-                h.minHeapInsert(d_squared, i);
-            }
-            nearestStationMenu(h, all_stations);
+            buildNearestStationMenu();
         } else if (item.getId() == MENU_STATION_ALPHABETICAL) {
             // TODO: dynamic list of stations
-            // DO this one first, it is easier.
+        } else if (item.getId() == MENU_STATION_RECENT) {
+            buildRecentStationMenu();
         } else if (item.getId() == MENU_STATION_SEARCH) {
             // TODO: get text input
             var text_picker = new MyInputDelegate();
             text_picker.initialize();
         }
-        //WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);   
     }
 }

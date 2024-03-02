@@ -1,4 +1,5 @@
 import Toybox.Application.Properties;
+import Toybox.Application.Storage;
 import Toybox.Lang;
 import Toybox.System;
 
@@ -25,18 +26,47 @@ module PropUtil {
         ZONE_PROP_NORTH
     }
 
-    function getStationCode() as String {
-        var code = Properties.getValue("selectedStationCode").format("%05i").toString();
-        return code;
+    function addRecentStation(code as Number, name as String) as Void {
+        var recents = getRecentStations();
+        if (recents == null) {
+            Storage.setValue("recentStations", [[code, name]]);
+            return;
+        }
+        
+        for (var i = 0; i < recents.size(); i++) {
+            if (code == recents[i][0]) {
+                return; // Already have this one in the list
+            }
+        }
+        recents.add([code, name]);
+        if (recents.size() > 5) {
+            recents = recents.slice(1, null);
+        }
+        Storage.setValue("recentStations", recents);
     }
 
-    function getStationZone() as Number {
-        return Properties.getValue("zoneProp");
+    function getRecentStations() as Array<Array<Number or String>> {
+        return Storage.getValue("recentStations");
+    }
+
+    function setStation(code as Number, name as String) as Void {
+        if (code == Storage.getValue("selectedStationCode")) {
+            return;
+        }
+        Storage.setValue("selectedStationCode", code);
+        Storage.setValue("selectedStationName", name);
+        addRecentStation(code, name);
+        TideUtil.dataValid = false;
+    }
+
+    function getStationCode() as String {
+        var code = Storage.getValue("selectedStationCode").format("%05i").toString();
+        return code;
     }
 
     (:glance)
     function getStationName() as String {
-        return Properties.getValue("selectedStationName");
+        return Storage.getValue("selectedStationName");
     }
 
     (:glance)
@@ -51,14 +81,6 @@ module PropUtil {
         }
     }
 
-    function graphLabelType() as Number {
-        return Properties.getValue("dataLabelProp");
-    }
-
-    function getDisplayType() as Number {
-        return Properties.getValue("displayProp");
-    }
-
     function getUnitsString() as String {
         var setting = Properties.getValue("unitsProp");
         var unitsSub = Rez.Strings.unitsSettingSystem as String;
@@ -70,6 +92,25 @@ module PropUtil {
         return unitsSub;
     }
 
+    function graphLabelType() as Number {
+        return Properties.getValue("dataLabelProp");
+    }
+
+    function getDataLabelString() as String {
+        var data_label_setting = Properties.getValue("dataLabelProp");
+        var data_label_sub = Rez.Strings.labelSettingValHeight as String;
+        if (data_label_setting == PropUtil.DATA_LABEL_PROP_TIME) {
+            data_label_sub = Rez.Strings.labelSettingValTime as String;
+        } else if (data_label_setting == PropUtil.DATA_LABEL_PROP_NONE) {
+            data_label_sub = Rez.Strings.labelSettingValNone as String;
+        }
+        return data_label_sub;
+    }
+
+    function getDisplayType() as Number {
+        return Properties.getValue("displayProp");
+    }
+
     function getDisplayTypeString() as String {
         var display_setting = Properties.getValue("displayProp");
         var display_sub = Rez.Strings.displaySettingValGraph as String;
@@ -77,6 +118,10 @@ module PropUtil {
             display_sub = Rez.Strings.displaySettingValTable as String;
         }
         return display_sub;
+    }
+
+    function getStationZone() as Number {
+        return Properties.getValue("zoneProp");
     }
 
     function getZoneString() as String {

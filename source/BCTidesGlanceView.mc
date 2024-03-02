@@ -101,7 +101,7 @@ class BCTidesGlanceView extends WatchUi.GlanceView {
             return;
         }
 
-        if (app._hilo != null) {
+        if (TideUtil.tideData(app) != null) {
             var current_height = TideUtil.getHeightAtT(now, 1200, 0, app)[0];
             if (current_height == null) {
                 drawNoDataMessage(dc);

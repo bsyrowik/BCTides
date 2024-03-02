@@ -111,11 +111,11 @@ class BCTidesView extends WatchUi.View {
 
         dc.setColor(Graphics.COLOR_BLUE, Graphics.COLOR_TRANSPARENT);
 
-        var max_tide = Storage.getValue("max_tide");
+        var max_tide = Storage.getValue("maxTide");
         if (max_tide == null) {
             max_tide = 6.0;
         }
-        var max_height = max_tide * 1.1;
+        var max_height = max_tide * 1.15;
 
         var start_x = x + margin;
         var last_label_x = 0;
@@ -284,7 +284,7 @@ class BCTidesView extends WatchUi.View {
 
         var offset_x = dc.getWidth() / 8;
         var offset_y = dc.getHeight() / 4;
-        if (app._hilo != null && TideUtil.dataValid) {
+        if (TideUtil.tideData(app) != null && TideUtil.dataValid) {
 
             var width = dc.getWidth() * 3 / 4;
             var height = dc.getHeight() / 2;
@@ -348,23 +348,23 @@ class BCTidesView extends WatchUi.View {
                 _message += Lang.format("$1$: $2$\n", [keys[i], args[keys[i]]]);
             }
         } else if (args instanceof Array) {
-            var max_tide = 0.0;
+            var maxTide = 0.0;
             //System.println("Got an array!");
             app._hilo = [];
             _message = "";
             for (var i = 0; i < args.size(); i++) {
                 var eventData = args[i] as Dictionary;
                 var height = eventData["value"].toFloat();
-                if (height > max_tide) {
-                    max_tide = height;
+                if (height > maxTide) {
+                    maxTide = height;
                 }
                 app._hilo.add([DateUtil.parseDateString(eventData["eventDate"].toString()).value(), height]);
             }
             app.hilo_updated = true;
             //System.println(app._hilo.toString());
 
-            Storage.setValue("kits_hilo", app._hilo);
-            Storage.setValue("max_tide", max_tide);
+            Storage.setValue("hiloData", app._hilo);
+            Storage.setValue("maxTide", maxTide);
             TideUtil.dataValid = true;
 
             var gotDataView = new GotDataView();

@@ -4,8 +4,6 @@
         <property id="dataLabelProp" type="number">0</property>
         <property id="displayProp" type="number">0</property>
         <property id="zoneProp" type="number">0</property>
-        <property id="selectedStationCode" type="number">7710</property>
-        <property id="selectedStationName" type="string">False Creek</property>
         <property id="appVersion" type="string">0.1a</property>
     </properties>
 

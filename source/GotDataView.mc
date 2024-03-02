@@ -39,7 +39,7 @@ class GotDataView extends WatchUi.View {
     function initialize() {
         View.initialize();
         mTimer = new Timer.Timer();
-        mTimer.start(method(:timerCallback), 2000, false);
+        mTimer.start(method(:timerCallback), 2000, false);  // Auto-dismiss after 2 seconds
     }
 
     public function onLayout( dc as Dc ) as Void {

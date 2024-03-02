@@ -4,7 +4,7 @@
     <string id="MainMenuLabel_nearby">Nearby</string>
     <string id="MainMenuLabel_favorites">Favorites</string>
 
-    <string id="gotDataPrompt">Tide Data Received</string>
+    <string id="gotDataPrompt">Tide data received</string>
 
     <string id="unitsSettingTitle">Units</string>
     <string id="unitsSettingPrompt">Select units to use</string>
@@ -27,6 +27,15 @@
     <string id="zoneSettingPrompt">Select zone</string>
     <string id="zoneSettingValSouth">South BC</string>
     <string id="zoneSettingValNorth">North BC</string>
+
+    <string id="mainMenuLabelGetData">Get Data</string>
+
+    <string id="mainMenuLabelSelectStation">Select Station</string>
+    <string id="selectStationMenuTitle">Station</string>
+    <string id="selectStationMenuNearest">Nearest</string>
+    <string id="selectStationMenuRecent">Recent</string>
+    <string id="selectStationMenuAlphabetical">Alphabetical</string>
+    <string id="selectStationMenuSearch">Search</string>
     
     <string id="appVersionTitle">Version</string>
 </strings>

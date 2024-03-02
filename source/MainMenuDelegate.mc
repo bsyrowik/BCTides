@@ -19,11 +19,19 @@ class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
     }
 
     function stationMenu() {
-        var menu = new WatchUi.Menu2({:title=>"Station"});
+        var menu = new WatchUi.Menu2({:title=>Rez.Strings.selectStationMenuTitle});
 
         menu.addItem(
             new WatchUi.MenuItem(
-                "Nearest",  // FIXME: only show N nearest?
+                Rez.Strings.selectStationMenuRecent,
+                "", // Sub-Label
+                StationMenuDelegate.MENU_STATION_RECENT, // identifier
+                {} // options
+            )
+        );
+        menu.addItem(
+            new WatchUi.MenuItem(
+                Rez.Strings.selectStationMenuNearest,
                 "", // Sub-Label
                 StationMenuDelegate.MENU_STATION_NEAREST, // identifier
                 {} // options
@@ -31,7 +39,7 @@ class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
         );
         menu.addItem(
             new WatchUi.MenuItem(
-                "Alphabetical", // Remove?
+                Rez.Strings.selectStationMenuAlphabetical,
                 "", // Sub-Label
                 StationMenuDelegate.MENU_STATION_ALPHABETICAL, // identifier
                 {} // options
@@ -39,7 +47,7 @@ class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
         );
         menu.addItem(
             new WatchUi.MenuItem(
-                "Search", // Show top N results once we've got any input?
+                Rez.Strings.selectStationMenuSearch,
                 "", // Sub-Label
                 StationMenuDelegate.MENU_STATION_SEARCH, // identifier
                 {} // options
@@ -97,7 +105,6 @@ class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
                 Properties.setValue("zoneProp", PropUtil.ZONE_PROP_NORTH);
             }
         } else if (item.getId() == MENU_SETTINGS_GPS_ID) {
-            item.setSubLabel("working");
             _parent.getLocation();
             WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
         } else if (item.getId() == MENU_GET_DATA) {

@@ -23,7 +23,7 @@ module TideUtil {
 
     function getNextEvent(t as Number, app) as Array {
         var last_h = 0;
-        for (var i = 0; i < app._hilo.size(); i++) {
+        for (var i = 0; i < tideData(app).size(); i++) {
             var time = tideData(app)[i][0];
             var height = tideData(app)[i][1];
             if (time > t) {
@@ -38,6 +38,7 @@ module TideUtil {
         return [null, null, null];
     }
 
+    // Predict the tide height at a given time using first-order sinusoidal interpolation.
     function getHeightAtT(t as Number, d as Number, p, app) as Array {
         // Compute h(t) = A * cos(B * (t - C)) + D
         // For: A = (h1 - h2) / 2
