@@ -1,5 +1,7 @@
 project.manifest = manifest.xml
 
+# See: https://developer.garmin.com/connect-iq/core-topics/build-configuration/
+
 approachs7042mm.resourcePath = resources;resources-70x70
 
 descentmk351mm.resourcePath = resources;resources-60x60
@@ -27,7 +29,6 @@ fr965.resourcePath = resources;resources-65x65
 legacysagarey.resourcePath = resources;resources-30x30
 legacyherofirstavenger.resourcePath = resources;resources-35x35
 legacyherocaptainmarvel.resourcePath = resources;resources-30x30
-
 
 marq2.resourcePath = resources;resources-60x60
 marq2aviator.resourcePath = resources;resources-60x60
