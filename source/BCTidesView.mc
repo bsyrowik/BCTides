@@ -184,30 +184,45 @@ class BCTidesView extends WatchUi.View {
             height_multiplier = TideUtil.FEET_PER_METER;
         }
 
-        //System.println("Font height FONT_SMALL: " + dc.getFontHeight(Graphics.FONT_SMALL));  // FR745: 29  FR965: 53
-        //System.println("Font height FONT_TINY:  " + dc.getFontHeight(Graphics.FONT_TINY));   // FR745: 26  FR965: 47
+        var col1 = x + w / 4;
+        var col2 = x + 3 * w / 4;
+        var startY = y;
 
+        // Heading
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-        dc.drawText(x,       y, Graphics.FONT_SMALL, WatchUi.loadResource(Rez.Strings.tableHeadingTime) as String, Graphics.TEXT_JUSTIFY_LEFT);
-        dc.drawText(x + dc.getWidth() * 0.425, y, Graphics.FONT_SMALL, WatchUi.loadResource(Rez.Strings.tableHeadingHeight) as String + " (" + units + ")", Graphics.TEXT_JUSTIFY_LEFT);
-        y = y + dc.getFontHeight(Graphics.FONT_SMALL) - 3;
+        dc.drawText(col1, y, Graphics.FONT_SMALL, WatchUi.loadResource(Rez.Strings.tableHeadingTime) as String, Graphics.TEXT_JUSTIFY_CENTER);
+        dc.drawText(col2, y, Graphics.FONT_SMALL, WatchUi.loadResource(Rez.Strings.tableHeadingHeight) as String, Graphics.TEXT_JUSTIFY_CENTER);
+        y += dc.getFontHeight(Graphics.FONT_SMALL) - 3;
+
+        // Sub-heading
+        dc.drawText(col1, y, Graphics.FONT_XTINY, WatchUi.loadResource(Rez.Strings.tableHeadingTimeSpecifier) as String, Graphics.TEXT_JUSTIFY_CENTER);
+        dc.drawText(col2, y, Graphics.FONT_XTINY, "(" + units + ")", Graphics.TEXT_JUSTIFY_CENTER);
+        y += dc.getFontHeight(Graphics.FONT_XTINY);
+
+        // Heading underline
+        dc.drawLine(x, y - 1, x + w, y - 1);
+        
         var i;
         var entries_for_date = 0;
         for (i = 0; i < TideUtil.tideData(app).size(); i++) {
             var time = TideUtil.tideData(app)[i][0];
             var height = TideUtil.tideData(app)[i][1];
             if (time > end.value()) {
-                return;
+                break;
             }
             if (time >= start.value()) {
                 // Add a row
                 var m = new Time.Moment(time);
-                dc.drawText(x + dc.getWidth() * 0.125,  y, Graphics.FONT_TINY, DateUtil.formatTimeStringShort(m), Graphics.TEXT_JUSTIFY_LEFT);
-                dc.drawText(x + dc.getWidth() * 0.675, y, Graphics.FONT_TINY, (height * height_multiplier).format("%.2f"), Graphics.TEXT_JUSTIFY_RIGHT);
+                dc.drawText(col1,  y, Graphics.FONT_TINY, DateUtil.formatTimeStringShort(m), Graphics.TEXT_JUSTIFY_CENTER);
+                dc.drawText(col2, y, Graphics.FONT_TINY, (height * height_multiplier).format("%.2f"), Graphics.TEXT_JUSTIFY_CENTER);
                 y = y + dc.getFontHeight(Graphics.FONT_TINY) - 4; // 22 for FR745
                 entries_for_date++;
             }
         }
+
+        // Center line
+        dc.drawLine(x + w / 2, startY + 5, x + w / 2, y);
+
         if (i >= TideUtil.tideData(app).size()) {
             drawNoDataWarning(dc, x, y, (entries_for_date > 0 ? RezUtil.getRanOutOfDataString() : RezUtil.getNoDataForDateString()));
         }
@@ -221,6 +236,8 @@ class BCTidesView extends WatchUi.View {
         loc0.setText(loc[0].format("%.2f"));
         var loc1 = View.findDrawableById("loc1") as Text;
         loc1.setText(loc[1].format("%.2f"));
+        loc0.setText(""); // FIXME
+        loc1.setText(""); // FIXME
     }
     
     (:release)
@@ -286,11 +303,11 @@ class BCTidesView extends WatchUi.View {
         dc.drawText(dc.getWidth() / 2, 8, Graphics.FONT_TINY, dateInfo.month + " " + dateInfo.day.toString(), Graphics.TEXT_JUSTIFY_CENTER);
 
 
-        var offset_x = dc.getWidth() / 8;
+        var offset_x = dc.getWidth() * 0.1 as Number;
         var offset_y = dc.getHeight() / 4;
         if (TideUtil.tideData(app) != null && TideUtil.dataValid) {
 
-            var width = dc.getWidth() * 3 / 4;
+            var width = dc.getWidth() * 0.8 as Number;
             var height = dc.getHeight() / 2;
             if (PropUtil.getDisplayType() == PropUtil.DISPLAY_PROP_GRAPH) {
                 // Draw box
@@ -311,7 +328,7 @@ class BCTidesView extends WatchUi.View {
             } else {
                 // Draw table
                 var duration_24h = new Time.Duration(Gregorian.SECONDS_PER_HOUR * 24);
-                tableTides(dc, offset_x - 8, offset_y, width, height, today, today.add(duration_24h));
+                tableTides(dc, offset_x, offset_y - 10, width, height, today, today.add(duration_24h));
             }
 
             if (mPage == 0) {

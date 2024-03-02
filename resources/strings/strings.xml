@@ -50,7 +50,8 @@
 
     <string id="downloadDataPrompt">Download data?</string>
 
-    <string id="tableHeadingTime">Time PST</string>
+    <string id="tableHeadingTime">Time</string>
+    <string id="tableHeadingTimeSpecifier">(local)</string>
     <string id="tableHeadingHeight">Height</string>
     
     <string id="appVersionTitle">Version</string>

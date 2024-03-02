@@ -51,7 +51,9 @@
 
     <string id="downloadDataPrompt">Télécharger des données?</string>
 
-    <string id="tableHeadingTime">Temps PST</string>
+    <string id="tableHeadingTime">Temps</string>
+    <string id="tableHeadingTimeSpecifier">(local)</string>
+
     <string id="tableHeadingHeight">Hauteur</string>
 
     <string id="appVersionTitle">Version</string>
