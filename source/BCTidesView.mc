@@ -290,6 +290,24 @@ class BCTidesView extends WatchUi.View {
                 dc.setColor(Graphics.COLOR_DK_GRAY, Graphics.COLOR_TRANSPARENT);
                 dc.drawRectangle(offset_x, offset_y, width, height);
 
+                // Draw time ticks
+                // Bottom
+                dc.drawLine(offset_x + width * 1 / 8, offset_y + height - 5, offset_x + width * 1 / 8, offset_y + height);
+                dc.drawLine(offset_x + width * 2 / 8, offset_y + height - 8, offset_x + width * 2 / 8, offset_y + height);
+                dc.drawLine(offset_x + width * 3 / 8, offset_y + height - 5, offset_x + width * 3 / 8, offset_y + height);
+                dc.drawLine(offset_x + width * 4 / 8, offset_y + height - 8, offset_x + width * 4 / 8, offset_y + height);
+                dc.drawLine(offset_x + width * 5 / 8, offset_y + height - 5, offset_x + width * 5 / 8, offset_y + height);
+                dc.drawLine(offset_x + width * 6 / 8, offset_y + height - 8, offset_x + width * 6 / 8, offset_y + height);
+                dc.drawLine(offset_x + width * 7 / 8, offset_y + height - 5, offset_x + width * 7 / 8, offset_y + height);
+                // Top
+                dc.drawLine(offset_x + width * 1 / 8, offset_y + 5, offset_x + width * 1 / 8, offset_y);
+                dc.drawLine(offset_x + width * 2 / 8, offset_y + 8, offset_x + width * 2 / 8, offset_y);
+                dc.drawLine(offset_x + width * 3 / 8, offset_y + 5, offset_x + width * 3 / 8, offset_y);
+                dc.drawLine(offset_x + width * 4 / 8, offset_y + 8, offset_x + width * 4 / 8, offset_y);
+                dc.drawLine(offset_x + width * 5 / 8, offset_y + 5, offset_x + width * 5 / 8, offset_y);
+                dc.drawLine(offset_x + width * 6 / 8, offset_y + 8, offset_x + width * 6 / 8, offset_y);
+                dc.drawLine(offset_x + width * 7 / 8, offset_y + 5, offset_x + width * 7 / 8, offset_y);
+
                 // Draw graph
                 var duration_24h = new Time.Duration(Gregorian.SECONDS_PER_HOUR * 24);
                 var success = graphTides(dc, offset_x, offset_y, width, height, today, today.add(duration_24h));
@@ -299,7 +317,8 @@ class BCTidesView extends WatchUi.View {
                     var offset = (now.value() - today.value()) * (width - 4) / Gregorian.SECONDS_PER_DAY;
                     dc.setColor(Graphics.COLOR_DK_BLUE, Graphics.COLOR_TRANSPARENT);
                     var x1 = offset_x + 2.0 + offset;
-                    dc.drawLine(x1, offset_y + 1, x1, offset_y + height - 2);
+                    dc.drawLine(x1, offset_y + 1, x1, offset_y + height - 1);
+                    dc.drawLine(x1 - 1, offset_y + 1, x1 - 1, offset_y + height - 1);
                 }
             } else {
                 // Draw table
@@ -317,8 +336,8 @@ class BCTidesView extends WatchUi.View {
                         units = "ft";
                         tideHeight *= TideUtil.FEET_PER_METER;
                     }
-                    dc.setColor(Graphics.COLOR_DK_BLUE, Graphics.COLOR_TRANSPARENT);
-                    dc.drawText(dc.getWidth() / 2, dc.getHeight() * 0.8, Graphics.FONT_SMALL, tideHeight.format("%.1f") + units, Graphics.TEXT_JUSTIFY_CENTER);
+                    dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
+                    dc.drawText(dc.getWidth() / 2, dc.getHeight() * 0.88, Graphics.FONT_MEDIUM, tideHeight.format("%.1f") + units, Graphics.TEXT_JUSTIFY_CENTER | Graphics. TEXT_JUSTIFY_VCENTER);
                 }
             }
         } else if (PropUtil.getStationCode() == null) {
