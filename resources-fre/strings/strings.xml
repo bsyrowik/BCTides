@@ -6,6 +6,7 @@
     <string id="MainMenuLabel_favorites">Favoris</string>
 
     <string id="dataReceivedMessage">Données de marée reçues.</string>
+    <string id="noStationSelectedMessage">Sélectionnez d'abord une station!</string>
 
     <string id="unitsSettingTitle">Unités</string>
     <string id="unitsSettingPrompt">Sélectionnez les unités à utiliser</string>

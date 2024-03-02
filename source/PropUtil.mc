@@ -59,14 +59,18 @@ module PropUtil {
         TideUtil.dataValid = false;
     }
 
-    function getStationCode() as String {
-        var code = Storage.getValue("selectedStationCode").format("%05i").toString();
-        return code;
+    function getStationCode() as String or Null {
+        var code = Storage.getValue("selectedStationCode");
+        if (code == null) {
+            return null;
+        }
+        return code.format("%05i").toString();
     }
 
     (:glance)
     function getStationName() as String {
-        return Storage.getValue("selectedStationName");
+        var name = Storage.getValue("selectedStationName");
+        return name == null ? "No station selected" : name;
     }
 
     (:glance)

@@ -5,6 +5,7 @@
     <string id="MainMenuLabel_favorites">Favorites</string>
 
     <string id="dataReceivedMessage">Tide data received.</string>
+    <string id="noStationSelectedMessage">Select a station first!</string>
 
     <string id="unitsSettingTitle">Units</string>
     <string id="unitsSettingPrompt">Select units to use</string>

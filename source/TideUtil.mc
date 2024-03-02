@@ -23,9 +23,10 @@ module TideUtil {
 
     function getNextEvent(t as Number, app) as Array {
         var last_h = 0;
-        for (var i = 0; i < tideData(app).size(); i++) {
-            var time = tideData(app)[i][0];
-            var height = tideData(app)[i][1];
+        var data = tideData(app);
+        for (var i = 0; data != null && i < data.size(); i++) {
+            var time = data[i][0];
+            var height = data[i][1];
             if (time > t) {
                 var event_type = "H";
                 if (last_h > height) {
@@ -49,13 +50,14 @@ module TideUtil {
         if (t1 == null) { t1 = t; }
         if (t2 == null) { t2 = t; }
         var found = false;
-        for (var i = 0; i < tideData(app).size(); i++) {
-            if (tideData(app)[i][0] < t) {
-                t1 = tideData(app)[i][0];
-                h1 = tideData(app)[i][1];
+        var data = tideData(app);
+        for (var i = 0; data != null && i < data.size(); i++) {
+            if (data[i][0] < t) {
+                t1 = data[i][0];
+                h1 = data[i][1];
             } else {
-                t2 = tideData(app)[i][0];
-                h2 = tideData(app)[i][1];
+                t2 = data[i][0];
+                h2 = data[i][1];
                 found = true;
                 break;
             }

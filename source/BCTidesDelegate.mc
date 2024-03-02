@@ -53,6 +53,9 @@ class BCTidesDelegate extends WatchUi.BehaviorDelegate {
     }
 
     function getStationInfo() as Void {
+        if (PropUtil.getStationCode() == null) {
+            return;
+        }
         var options = {
             :method => Communications.HTTP_REQUEST_METHOD_GET,
             :responseType => Communications.HTTP_RESPONSE_CONTENT_TYPE_JSON,

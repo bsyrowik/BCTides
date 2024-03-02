@@ -110,6 +110,9 @@ class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
         } else if (item.getId() == MENU_GET_DATA) {
             _parent.getStationInfo();
             WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
+            if (PropUtil.getStationCode() == null) {
+                Notification.showNotification(WatchUi.loadResource(Rez.Strings.noStationSelectedMessage), 2000);
+            }
         } else if (item.getId() == MENU_SET_STATION) {
             stationMenu();
         }
