@@ -34,7 +34,7 @@ class StationMenuDelegate extends WatchUi.Menu2InputDelegate {
     }
 
     function buildNearestStationHeap(all_stations as Array<Dictionary>) as HeapOfPair {
-        var position = TideUtil.currentPosition.toRadians() as Array;
+        var position = TideUtil.currentPosition.toRadians() as Array;  // FIXME: deal with case where currentPosition is still null
         var myLatitude = position[0];
         var myLongitude = position[1];
         var size = all_stations.size();
@@ -51,7 +51,7 @@ class StationMenuDelegate extends WatchUi.Menu2InputDelegate {
         var h = buildNearestStationHeap(stationList);
 
         var stationsToShow = 7;
-        var menu = new WatchUi.Menu2({:title=>Rez.Strings.selectStationMenuNearest});
+        var menu = new WatchUi.Menu2({:title=>WatchUi.loadResource(Rez.Strings.selectStationMenuNearest)});
         for (var i = 0; i < stationsToShow; i++) {
             var p = h.heapExtractMin();
             var dist = distance(p.distance);

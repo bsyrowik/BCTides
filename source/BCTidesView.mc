@@ -221,6 +221,7 @@ class BCTidesView extends WatchUi.View {
     
     (:release)
     function updateLocationText(position as Position.Location) as Void {
+        TideUtil.currentPosition = position;
         var loc0 = View.findDrawableById("loc0") as Text;
         loc0.setText("");
         var loc1 = View.findDrawableById("loc1") as Text;
