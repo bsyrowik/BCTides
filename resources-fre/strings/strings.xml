@@ -5,7 +5,7 @@
     <string id="MainMenuLabel_nearby">La plus proche</string>
     <string id="MainMenuLabel_favorites">Favoris</string>
 
-    <string id="dataReceivedMessage">Données de marée reçues</string>
+    <string id="dataReceivedMessage">Données de marée reçues.</string>
 
     <string id="unitsSettingTitle">Unités</string>
     <string id="unitsSettingPrompt">Sélectionnez les unités à utiliser</string>
@@ -41,15 +41,17 @@
     <string id="selectStationMenuAlphabetical">Alphabétique</string>
     <string id="selectStationMenuSearch">Recherche</string>
 
-    <string id="noDataAvailableForStation0">Aucune donnée disponible</string>
-    <string id="noDataAvailableForStation1">pour la station.</string>
+    <string id="noDataAvailableForStation0">Aucune donnée</string>
+    <string id="noDataAvailableForStation1">disponible pour</string>
+    <string id="noDataAvailableForStation2">la station.</string>
 
-    <string id="noDataAvailableForDate0">Aucune donnée disponible</string>
-    <string id="noDataAvailableForDate1">pour la date.</string>
+    <string id="noDataAvailableForDate0">Aucune donnée</string>
+    <string id="noDataAvailableForDate1">disponible pour</string>
+    <string id="noDataAvailableForDate2">la date.</string>
 
     <string id="ranOutOfData0">N'ai plus de données!</string>
 
-    <string id="downloadDataPrompt">Télécharger des données?</string>
+    <string id="downloadDataPrompt">Télécharger des données de marée?</string>
 
     <string id="tableHeadingTime">Temps</string>
     <string id="tableHeadingTimeSpecifier">(local)</string>

@@ -4,7 +4,7 @@
     <string id="MainMenuLabel_nearby">Nearby</string>
     <string id="MainMenuLabel_favorites">Favorites</string>
 
-    <string id="dataReceivedMessage">Tide data received</string>
+    <string id="dataReceivedMessage">Tide data received.</string>
 
     <string id="unitsSettingTitle">Units</string>
     <string id="unitsSettingPrompt">Select units to use</string>
@@ -42,13 +42,15 @@
 
     <string id="noDataAvailableForStation0">No data available</string>
     <string id="noDataAvailableForStation1">for station.</string>
+    <string id="noDataAvailableForStation2"> </string>
 
     <string id="noDataAvailableForDate0">No data available</string>
     <string id="noDataAvailableForDate1">for date.</string>
+    <string id="noDataAvailableForDate2"> </string>
 
     <string id="ranOutOfData0">Ran out of data!</string>
 
-    <string id="downloadDataPrompt">Download data?</string>
+    <string id="downloadDataPrompt">Download tide data?</string>
 
     <string id="tableHeadingTime">Time</string>
     <string id="tableHeadingTimeSpecifier">(local)</string>

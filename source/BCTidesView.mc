@@ -80,7 +80,8 @@ class BCTidesView extends WatchUi.View {
     function drawNoDataWarning(dc as Dc, x as Number, y as Number, message as Array<String>) {
         dc.setColor(Graphics.COLOR_RED, Graphics.COLOR_TRANSPARENT);
         for (var i = 0; i < message.size(); i++) {
-            dc.drawText(x, y + (30 * i), Graphics.FONT_SMALL, message[i], Graphics.TEXT_JUSTIFY_LEFT);
+            dc.drawText(x, y, Graphics.FONT_SMALL, message[i], Graphics.TEXT_JUSTIFY_LEFT);
+            y += dc.getFontHeight(Graphics.FONT_SMALL) * 0.8 as Number;
         }
 
         if (!mPageUpdated) {
@@ -89,9 +90,9 @@ class BCTidesView extends WatchUi.View {
 
         var prompt = "";
         for (var i = 0; i < message.size(); i++) {
-            prompt += message[i] + "\n";
+            prompt += message[i] + " ";
         }
-        prompt += WatchUi.loadResource(Rez.Strings.downloadDataPrompt) as String;
+        prompt = WatchUi.loadResource(Rez.Strings.downloadDataPrompt) as String;
         var dialog = new WatchUi.Confirmation(prompt);
         WatchUi.pushView(
             dialog,
