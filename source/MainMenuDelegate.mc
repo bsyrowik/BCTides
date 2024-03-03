@@ -10,7 +10,8 @@ class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
         MENU_SETTINGS_ZONE_ID,
         MENU_GET_DATA,
         MENU_SET_STATION,
-        MENU_SETTINGS_GPS_ID
+        MENU_SETTINGS_GPS_ID,
+        MENU_SETTINGS_ENABLE_BACKGROUND_DL
     }
     private var _parent;
     function initialize(parent) {
@@ -107,6 +108,16 @@ class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
         } else if (item.getId() == MENU_SETTINGS_GPS_ID) {
             _parent.getLocation();
             WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
+        } else if (item.getId() == MENU_SETTINGS_ENABLE_BACKGROUND_DL) {
+            var subLabel = item.getSubLabel();
+            if (subLabel.equals(WatchUi.loadResource(Rez.Strings.yes))) {
+                item.setSubLabel(Rez.Strings.no);
+                Properties.setValue("backgroundDownloadProp", false);
+            } else if (subLabel.equals(WatchUi.loadResource(Rez.Strings.no))) {
+                item.setSubLabel(Rez.Strings.yes);
+                Properties.setValue("backgroundDownloadProp", true);
+            }
+            // TODO
         } else if (item.getId() == MENU_GET_DATA) {
             WebRequests.getStationInfo();
             WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);

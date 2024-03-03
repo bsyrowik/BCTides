@@ -89,4 +89,17 @@ module PropUtil {
         }
         return zone_sub;
     }
+
+    function getBackgroundDownload() as Boolean {
+        return Properties.getValue("backgroundDownloadProp");
+    }
+
+    function getBackgroundDownloadString() as String {
+        var zone_setting = Properties.getValue("backgroundDownloadProp");
+        var zone_sub = Rez.Strings.no as String;
+        if (zone_setting == true) {
+            zone_sub = Rez.Strings.yes as String;
+        }
+        return zone_sub;
+    }
 }

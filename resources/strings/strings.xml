@@ -59,6 +59,8 @@
     
     <string id="backgroundDownloadSettingTitle">Auto-Update Data</string>
     <string id="backgroundDownloadSettingPrompt">Keep tide data updated by downloading in the background.</string>
+    <string id="yes">Yes</string>
+    <string id="no">No</string>
 
     <string id="appVersionTitle">Version</string>
 </strings>

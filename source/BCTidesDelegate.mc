@@ -94,7 +94,17 @@ class BCTidesDelegate extends WatchUi.BehaviorDelegate {
                 {}
             );
         menu.addItem(mGetDataMenuItem);
-        
+
+        // Background Download
+        menu.addItem(
+            new WatchUi.MenuItem(
+                Rez.Strings.backgroundDownloadSettingTitle,
+                PropUtil.getBackgroundDownloadString(),
+                MainMenuDelegate.MENU_SETTINGS_ENABLE_BACKGROUND_DL,
+                {}
+            )
+        );
+
         // Zone
         menu.addItem(
             new WatchUi.MenuItem(
