@@ -31,7 +31,7 @@ module WebRequests {
 
     function getStationInfo() as Void {
         //System.println("Getting station info...");
-        if (PropUtil.getStationCode() == null) {
+        if (StorageUtil.getStationCode() == null) {
             return;
         }
         var options = {
@@ -44,7 +44,7 @@ module WebRequests {
         Communications.makeWebRequest(
             "https://api-iwls.dfo-mpo.gc.ca/api/v1/stations/",
             {
-                "code" => PropUtil.getStationCode()
+                "code" => StorageUtil.getStationCode()
             },
             options,
             new Method(WebRequests, :onReceiveStationInfo)

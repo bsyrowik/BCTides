@@ -89,7 +89,7 @@ class BCTidesDelegate extends WatchUi.BehaviorDelegate {
         // Get Data
         mGetDataMenuItem = new WatchUi.MenuItem(
                 Rez.Strings.mainMenuLabelGetData,
-                PropUtil.getStationName(),
+                StorageUtil.getStationName(),
                 MainMenuDelegate.MENU_GET_DATA,
                 {}
             );

@@ -11,7 +11,7 @@ class SelectStationMenuDelegate extends WatchUi.Menu2InputDelegate {
     function onSelect(item) {
         var code = item.getId() as Number;
         var name = item.getLabel();
-        PropUtil.setStation(code, name);
+        StorageUtil.setStation(code, name);
         WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
     }
 }

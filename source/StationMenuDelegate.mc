@@ -73,7 +73,7 @@ class StationMenuDelegate extends WatchUi.Menu2InputDelegate {
     }
 
     function buildRecentStationMenu() as Void {
-        var recents = PropUtil.getRecentStations();
+        var recents = StorageUtil.getRecentStations();
         if (recents == null) {
             return;
         }

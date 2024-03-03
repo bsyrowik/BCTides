@@ -258,7 +258,7 @@ class BCTidesView extends WatchUi.View {
             }
         }
 
-        dc.drawText(dc.getWidth() / 2, dc.getWidth() * 0.13, Graphics.FONT_XTINY, PropUtil.getStationName(), Graphics.TEXT_JUSTIFY_CENTER);
+        dc.drawText(dc.getWidth() / 2, dc.getWidth() * 0.13, Graphics.FONT_XTINY, StorageUtil.getStationName(), Graphics.TEXT_JUSTIFY_CENTER);
         
         // Date
         var today = Time.today();  // Time-zone adjusted!
@@ -334,7 +334,7 @@ class BCTidesView extends WatchUi.View {
                     dc.drawText(dc.getWidth() / 2, dc.getHeight() * 0.88, Graphics.FONT_MEDIUM, tideHeight.format("%.1f") + units, Graphics.TEXT_JUSTIFY_CENTER | Graphics. TEXT_JUSTIFY_VCENTER);
                 }
             }
-        } else if (PropUtil.getStationCode() == null) {
+        } else if (StorageUtil.getStationCode() == null) {
             drawNoDataWarning(dc, offset_x, offset_y, [WatchUi.loadResource(Rez.Strings.noStationSelectedMessage) as String], false);
         } else {
             drawNoDataWarning(dc, offset_x, offset_y, RezUtil.getNoDataForStationString(), true);
