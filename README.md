@@ -3,6 +3,10 @@
 [![GitHub issues](https://img.shields.io/github/issues/bain-syrowik/bc_tides.svg)](https://GitHub.com/bain-syrowik/bc_tides/issues/)
 [![GitHub pull-requests](https://img.shields.io/github/issues-pr/bain-syrowik/bc_tides.svg)](https://GitHub.com/bain-syrowik/bc_tides/pulls/)
 
+[![GitHub watchers](https://img.shields.io/github/watchers/bain-syrowik/bc_tides.svg?style=social&label=Watch)](https://GitHub.com/bain-syrowik/bc_tides/watchers/)
+[![GitHub forks](https://img.shields.io/github/forks/bain-syrowik/bc_tides.svg?style=social&label=Fork)](https://GitHub.com/bain-syrowik/bc_tides/network/)
+[![GitHub stars](https://img.shields.io/github/stars/bain-syrowik/bc_tides.svg?style=social&label=Star)](https://GitHub.com/bain-syrowik/bc_tides/stargazers/)
+
 # BC Tides
 
 A Garmin Connect IQ Widget App for Tides in British Columbia.
