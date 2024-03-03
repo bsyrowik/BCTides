@@ -117,7 +117,9 @@ class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
                 item.setSubLabel(Rez.Strings.yes);
                 Properties.setValue("backgroundDownloadProp", true);
             }
-            // TODO
+            // TODO: some action here to control whether or not we download background data?
+            // Can actually just check before we enable the timer.  Here, if we set it to "no", we can disable any existing timer?
+            // If we set it to "yes", should start the timer...
         } else if (item.getId() == MENU_GET_DATA) {
             WebRequests.getStationInfo();
             WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);

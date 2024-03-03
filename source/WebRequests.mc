@@ -63,9 +63,9 @@ module WebRequests {
             }
         } else if (responseCode == Communications.BLE_CONNECTION_UNAVAILABLE) {
             // TODO: try Wi-Fi bulk download?
-            System.println("Failed to load\nBLE connection\nunavailable");
+            System.println("Failed to load - BLE connection unavailable");
         } else {
-            System.println("Failed to load\nError: " + responseCode.toString());
+            System.println("Failed to load - Error: " + responseCode.toString());
         }
     }
 
@@ -76,9 +76,9 @@ module WebRequests {
             onReceiveData(data);
         } else if (responseCode == Communications.BLE_CONNECTION_UNAVAILABLE) {
             // TODO: try Wi-Fi bulk download?
-            System.println("Failed to load\nBLE connection\nunavailable");
+            System.println("Failed to load - BLE connection unavailable");
         } else {
-            System.println("Failed to load\nError: " + responseCode.toString());
+            System.println("Failed to load - Error: " + responseCode.toString());
         }
     }
 
