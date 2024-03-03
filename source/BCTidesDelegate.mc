@@ -43,91 +43,105 @@ class BCTidesDelegate extends WatchUi.BehaviorDelegate {
     }
 
     function onMenu() {
-        var menu = new WatchUi.Menu2({:title=>"Settings"});
-        var delegate;
-
+        var menu = new WatchUi.CustomMenu(90, Graphics.COLOR_WHITE, {
+                :foreground=>new Rez.Drawables.MenuForeground(),
+                :title => new CustomMenuTitle("Settings")
+            });
+        
         // Data Label
         menu.addItem(
-            new WatchUi.MenuItem(
-                Rez.Strings.labelSettingTitle, // Label
-                PropUtil.getDataLabelString(), // Sub-Label
-                MainMenuDelegate.MENU_SETTINGS_DISP_TYPE_ID, // identifier
-                {} // options
+            new MultiToggleMenuItem(
+                Rez.Strings.labelSettingTitle,
+                [
+                    Rez.Strings.labelSettingValHeight,
+                    Rez.Strings.labelSettingValTime,
+                    Rez.Strings.labelSettingValNone
+                ],
+                MainMenuDelegate.MENU_SETTINGS_DISP_TYPE_ID,
+                "dataLabelProp"
             )
         );
 
         // Units
         menu.addItem(
-            new WatchUi.MenuItem(
-                Rez.Strings.unitsSettingTitle, // Label
-                PropUtil.getUnitsString(), // Sub-Label
-                MainMenuDelegate.MENU_SETTINGS_UNITS_ID, // identifier
-                {} // options
+            new MultiToggleMenuItem(
+                Rez.Strings.unitsSettingTitle,
+                [
+                    Rez.Strings.unitsSettingSystem,
+                    Rez.Strings.unitsSettingMetric,
+                    Rez.Strings.unitsSettingImperial
+                ],
+                MainMenuDelegate.MENU_SETTINGS_UNITS_ID,
+                "unitsProp"
             )
         );
 
         // Display Mode
         menu.addItem(
-            new WatchUi.MenuItem(
-                Rez.Strings.displaySettingTitle, // Label
-                PropUtil.getDisplayTypeString(), // Sub-Label
-                MainMenuDelegate.MENU_SETTINGS_DISP_MODE_ID, // identifier
-                {} // options
+            new MultiToggleMenuItem(
+                Rez.Strings.displaySettingTitle,
+                [
+                    Rez.Strings.displaySettingValGraph,
+                    Rez.Strings.displaySettingValTable
+                ],
+                MainMenuDelegate.MENU_SETTINGS_DISP_MODE_ID,
+                "displayProp"
             )
         );
 
         // Get Location
         menu.addItem(
-            new WatchUi.MenuItem(
-                Rez.Strings.mainMenuLabelGetLocation, // Label
-                Rez.Strings.mainMenuLabelGetLocationSub, // Sub-Label
+            new BasicCustomMenuItem(
                 MainMenuDelegate.MENU_SETTINGS_GPS_ID, // identifier
-                {} // options
+                Rez.Strings.mainMenuLabelGetLocation, // Label
+                Rez.Strings.mainMenuLabelGetLocationSub // Sub-Label
             )
         );
 
         // Get Data
-        mGetDataMenuItem = new WatchUi.MenuItem(
-                Rez.Strings.mainMenuLabelGetData,
-                StorageUtil.getStationName(),
+        mGetDataMenuItem = new BasicCustomMenuItem(
                 MainMenuDelegate.MENU_GET_DATA,
-                {}
+                Rez.Strings.mainMenuLabelGetData,
+                StorageUtil.getStationName()
             );
         menu.addItem(mGetDataMenuItem);
 
         // Background Download
         menu.addItem(
-            new WatchUi.MenuItem(
+            new MultiToggleMenuItem(
                 Rez.Strings.backgroundDownloadSettingTitle,
-                PropUtil.getBackgroundDownloadString(),
+                [
+                    Rez.Strings.no,
+                    Rez.Strings.yes
+                ],
                 MainMenuDelegate.MENU_SETTINGS_ENABLE_BACKGROUND_DL,
-                {}
+                "backgroundDownloadProp"
             )
         );
 
         // Zone
         menu.addItem(
-            new WatchUi.MenuItem(
+            new MultiToggleMenuItem(
                 Rez.Strings.zoneSettingTitle,
-                PropUtil.getZoneString(),
+                [
+                    Rez.Strings.zoneSettingValSouth,
+                    Rez.Strings.zoneSettingValNorth
+                ],
                 MainMenuDelegate.MENU_SETTINGS_ZONE_ID,
-                {}
+                "zoneProp"
             )
         );
 
         // Select Station
         menu.addItem(
-            new WatchUi.MenuItem(
-                Rez.Strings.mainMenuLabelSelectStation,
-                "",
+            new BasicCustomMenuItem(
                 MainMenuDelegate.MENU_SET_STATION,
-                {}
+                Rez.Strings.mainMenuLabelSelectStation,
+                null
             )
         );
 
-        delegate = new MainMenuDelegate(self);
-        WatchUi.pushView(menu, delegate, WatchUi.SLIDE_IMMEDIATE);
-
+        WatchUi.pushView(menu, new MainMenuDelegate(self), WatchUi.SLIDE_IMMEDIATE);
         return true;
     }
 

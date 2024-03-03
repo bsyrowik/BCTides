@@ -51,16 +51,18 @@ class StationMenuDelegate extends WatchUi.Menu2InputDelegate {
         var h = buildNearestStationHeap(stationList);
 
         var stationsToShow = 7;
-        var menu = new WatchUi.Menu2({:title=>WatchUi.loadResource(Rez.Strings.selectStationMenuNearest)});
+        var menu = new LoadMoreMenu(WatchUi.loadResource(Rez.Strings.selectStationMenuNearest) as String,
+            "Page 2", 90, Graphics.COLOR_WHITE, {
+                :foreground=>new Rez.Drawables.MenuForeground()
+            });
         for (var i = 0; i < stationsToShow; i++) {
             var p = h.heapExtractMin();
             var dist = distance(p.distance);
             menu.addItem(
-                new WatchUi.MenuItem(
-                    stationList[p.index]["name"],
-                    dist.format("%.2f") + "km",
+                new BasicCustomMenuItem(
                     stationList[p.index]["code"],
-                    {} // options
+                    stationList[p.index]["name"],
+                    dist.format("%.2f") + "km"
                 )
             );
         }
@@ -68,7 +70,7 @@ class StationMenuDelegate extends WatchUi.Menu2InputDelegate {
         // Get rid of the station selection strategy menu so when we finish here we go back to the main menu
         WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);   
 
-        var delegate = new SelectStationMenuDelegate();
+        var delegate = new WrapTopCustomDelegate(h, 1, true);
         WatchUi.pushView(menu, delegate, WatchUi.SLIDE_IMMEDIATE);
     }
 

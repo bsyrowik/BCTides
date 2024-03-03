@@ -1,3 +1,4 @@
 <drawables>
     <bitmap id="LauncherIcon" filename="sine.png" />
+    <drawable-list id="MenuForeground" background="Gfx.COLOR_TRANSPARENT" />
 </drawables>

@@ -26,6 +26,10 @@ module PropUtil {
         ZONE_PROP_NORTH
     }
 
+    function toggle(propName as String) as Void {
+        Properties.setValue(propName, !Properties.getValue(propName));
+    }
+
     (:glance)
     function getUnits() as System.UnitsSystem {
         var setting = Properties.getValue("unitsProp");
@@ -89,17 +93,12 @@ module PropUtil {
         }
         return zone_sub;
     }
+    
+    function toggleBackgroundDownload() {
+        toggle("backgroundDownloadProp");
+    }
 
     function getBackgroundDownload() as Boolean {
         return Properties.getValue("backgroundDownloadProp");
-    }
-
-    function getBackgroundDownloadString() as String {
-        var zone_setting = Properties.getValue("backgroundDownloadProp");
-        var zone_sub = Rez.Strings.no as String;
-        if (zone_setting == true) {
-            zone_sub = Rez.Strings.yes as String;
-        }
-        return zone_sub;
     }
 }
