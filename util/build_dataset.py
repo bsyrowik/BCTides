@@ -14,6 +14,8 @@ raw_data_file = "stations_PAC_wlp-hilo.json"
 output_file = "stations_PAC_small_rad.json"
 #output_file = "stations_PAC_small_startDate.json"
 
+output_dir = "../resources/data/"
+
 use_radians = True
 
 def get_raw_data():
@@ -88,7 +90,7 @@ with open(raw_data_file) as f:
     print(len(new_data), " stations")
     print("Max name length: ", max_name_len, " ", longest_name)
 
-    with open(output_file, 'w') as out_file:
+    with open(output_dir + output_file, 'w') as out_file:
         #json.dump(pretty_floats(new_data), out_file, indent=2)
         #json.dump(new_data, out_file, indent=2)
         #out_file.write(json.dumps(pretty_floats(new_data), indent=1))
