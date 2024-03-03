@@ -7,6 +7,7 @@ class Pair {
     function initialize() {}
 }
 
+// Min-heap used to find the N nearest tide stations
 class HeapOfPair {
     var heapSize as Number;
     var A as Array<Pair>;

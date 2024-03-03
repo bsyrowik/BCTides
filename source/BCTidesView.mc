@@ -45,7 +45,7 @@ class BCTidesView extends WatchUi.View {
     // Load your resources here
     function onLayout(dc as Dc) as Void {
         if (mPosition == null || mPosition.accuracy < Position.QUALITY_POOR) {
-            System.println("onLayout: requesting position!");
+            //System.println("onLayout: requesting position!");
             Position.enableLocationEvents(Position.LOCATION_CONTINUOUS, method(:onPosition));
 		}
         setLayout(Rez.Layouts.MainLayout(dc));
@@ -236,13 +236,13 @@ class BCTidesView extends WatchUi.View {
         if (needGPS) {
 	    	if (mPosition == null || mPosition.accuracy == null || mPosition.accuracy < Position.QUALITY_POOR) {
 		    	mPosition = Position.getInfo();
-                System.println("setting mPosition in onUpdate()");
+                //System.println("setting mPosition in onUpdate()");
 		    }
-            System.print("accuracy: " + mPosition.accuracy);
-            System.println(" position: " + mPosition.position.toDegrees());
+            //System.print("accuracy: " + mPosition.accuracy);
+            //System.println(" position: " + mPosition.position.toDegrees());
 			if (mPosition.accuracy != null && mPosition.accuracy != Position.QUALITY_NOT_AVAILABLE && mPosition.position != null) {
 				if (mPosition.accuracy >= Position.QUALITY_POOR) {
-                    System.println("Got acceptable position; disabling callback");
+                    //System.println("Got acceptable position; disabling callback");
 		            Position.enableLocationEvents(Position.LOCATION_DISABLE, self.method(:onPosition));
 					needGPS = false;
 	    		}
