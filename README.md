@@ -2,18 +2,14 @@
 
 A Garmin Connect IQ Widget App for Tides in British Columbia.
 
-[![Size]][tag_url]
+## Features
 
-### Glance View
+Support for all tide stations that provide tide predictions in British Columbia.
+
+Glance, graph, and table views:
 
 ![Glance view image](doc/img/yvr_tide_glance_full.png)
-
-### Graph View
-
 ![Graph view image](doc/img/yvr_tide_graph_full.png)
-
-### Table View
-
 ![Table view image](doc/img/yvr_tide_table_full.png)
 
 
@@ -25,7 +21,7 @@ The following permissions are required for complete functionality of the app:
  * Communications
    - Used to obtain tide data from the online APIs, see [Data Sources](#data-sources).
  * Positioning
-   - Used to find the nearest stations to your current position.
+   - Used to find the tide stations nearest to your current position.
 
 ## Device Support
 
@@ -132,6 +128,10 @@ This app was primarily designed with the Forerunner 745 in mind.  However, the f
  * vívoactive® 4
  * vívoactive® 4S, GarminActive S
  * vívoactive® 5*
+
+## Language Support
+
+The main language is English.  A Google-translate version of French localization strings is included as well.
 
 ## Data Sources
 List of tide stations:
