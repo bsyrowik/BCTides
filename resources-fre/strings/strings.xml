@@ -59,5 +59,10 @@
 
     <string id="tableHeadingHeight">Hauteur</string>
 
+    <string id="backgroundDownloadSettingTitle">Mise à jour automatique</string>
+    <string id="backgroundDownloadSettingPrompt">Gardez les données de marée à jour en les téléchargeant en arrière-plan.</string>
+    <string id="yes">Oui</string>
+    <string id="no">Non</string>
+
     <string id="appVersionTitle">Version</string>
 </strings>
