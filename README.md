@@ -127,7 +127,7 @@ This app was primarily designed with the Forerunner 745 in mind.  However, the f
  * vívoactive® 3 Music
  * vívoactive® 4
  * vívoactive® 4S, GarminActive S
- * vívoactive® 5*
+ * vívoactive® 5
 
 ## Language Support
 
