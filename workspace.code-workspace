@@ -12,6 +12,7 @@
 			"Heapify",
 			"hilo",
 			"instanceof",
+			"Persistable",
 			"println",
 			"recents",
 			"Toybox",
