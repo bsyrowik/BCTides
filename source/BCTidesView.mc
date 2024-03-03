@@ -353,31 +353,5 @@ class BCTidesView extends WatchUi.View {
         mPageUpdated = false;
     }
 
-    public function onReceive(args as Dictionary or String or Array or Null) as Void {
-        //System.println("View:onReceive() \"" + args.toString() + "\"");
-        if (args instanceof Array) {
-            var maxTide = 0.0;
-            //System.println("Got an array!");
-            app._hilo = [];
-            for (var i = 0; i < args.size(); i++) {
-                var eventData = args[i] as Dictionary;
-                var height = eventData["value"].toFloat();
-                if (height > maxTide) {
-                    maxTide = height;
-                }
-                app._hilo.add([DateUtil.parseDateString(eventData["eventDate"].toString()).value(), height]);
-            }
-            app.hilo_updated = true;
-            //System.println(app._hilo.toString());
 
-            Storage.setValue("hiloData", app._hilo);
-            Storage.setValue("maxTide", maxTide);
-            TideUtil.dataValid = true;
-
-            Notification.showNotification(Rez.Strings.dataReceivedMessage as String, 2000);
-        } else {
-            System.println("Received unexpected data from API call.");
-        }
-        WatchUi.requestUpdate();
-    }
 }

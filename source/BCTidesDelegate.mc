@@ -3,7 +3,7 @@ import Toybox.Lang;
 
 using Toybox.WatchUi;
 
-var getDataLabel;
+var getDataLabel;  // FIXME: need to remove this!
 
 class BCTidesDelegate extends WatchUi.BehaviorDelegate {
     var mView = null;
@@ -32,80 +32,8 @@ class BCTidesDelegate extends WatchUi.BehaviorDelegate {
         return true;
     }
 
-    function getStationData(station_id as String) as Void {
-        var options = {
-            :method => Communications.HTTP_REQUEST_METHOD_GET,
-            :responseType => Communications.HTTP_RESPONSE_CONTENT_TYPE_JSON,
-            :headers => {
-                "Content-Type" => Communications.REQUEST_CONTENT_TYPE_URL_ENCODED
-            }
-        };
-        Communications.makeWebRequest( 
-            "https://api-iwls.dfo-mpo.gc.ca/api/v1/stations/" + station_id + "/data",
-            {
-                "time-series-code" => "wlp-hilo",
-                "from" => DateUtil.getFromDateString(),
-                "to" => DateUtil.getToDateString()
-            },
-            options,
-            method(:onReceive)
-        );
-    }
-
-    function getStationInfo() as Void {
-        if (PropUtil.getStationCode() == null) {
-            return;
-        }
-        var options = {
-            :method => Communications.HTTP_REQUEST_METHOD_GET,
-            :responseType => Communications.HTTP_RESPONSE_CONTENT_TYPE_JSON,
-            :headers => {
-                "Content-Type" => Communications.REQUEST_CONTENT_TYPE_URL_ENCODED
-            }
-        };
-        Communications.makeWebRequest(
-            "https://api-iwls.dfo-mpo.gc.ca/api/v1/stations/",
-            {
-                "code" => PropUtil.getStationCode()
-            },
-            options,
-            method(:onReceiveStationInfo)
-        );
-    }
-
     function getLocation() as Void {
         mView.onPosition(Toybox.Position.getInfo());
-    }
-
-    function onReceiveStationInfo(responseCode as Number, data as Dictionary?) as Void {
-        //System.println("onReceiveStationInfo called....");
-        //System.println("  responseCode:" + responseCode.toString());
-        if (responseCode == 200) { // OK!
-            if (data instanceof Array) {
-                var station = data[0] as Dictionary;
-                var station_id = station["id"].toString();
-                //var requested_station_data = station["officialName"].toString();
-                getStationData(station_id);
-            }
-        } else if (responseCode == Communications.BLE_CONNECTION_UNAVAILABLE) {
-            // TODO: try Wi-Fi bulk download?
-            mView.onReceive("Failed to load\nBLE connection\nunavailable");
-        } else {
-            mView.onReceive("Failed to load\nError: " + responseCode.toString());
-        }
-    }
-
-    function onReceive(responseCode as Number, data as Dictionary?) as Void {
-        //System.println("onReceive called....");
-        //System.println("  responseCode:" + responseCode.toString());
-        if (responseCode == 200) { // OK!
-            mView.onReceive(data);
-        } else if (responseCode == Communications.BLE_CONNECTION_UNAVAILABLE) {
-            // TODO: try Wi-Fi bulk download?
-            mView.onReceive("Failed to load\nBLE connection\nunavailable");
-        } else {
-            mView.onReceive("Failed to load\nError: " + responseCode.toString());
-        }
     }
 
     function onMenu() {
