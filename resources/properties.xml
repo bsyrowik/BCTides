@@ -4,7 +4,7 @@
         <property id="dataLabelProp" type="number">0</property>
         <property id="displayProp" type="number">0</property>
         <property id="zoneProp" type="number">0</property>
+        <property id="backgroundDownloadProp" type="boolean">1</property>
         <property id="appVersion" type="string">0.1a</property>
     </properties>
-
 </resources>

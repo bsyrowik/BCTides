@@ -57,5 +57,8 @@
     <string id="tableHeadingTimeSpecifier">(local)</string>
     <string id="tableHeadingHeight">Height</string>
     
+    <string id="backgroundDownloadSettingTitle">Auto-Update Data</string>
+    <string id="backgroundDownloadSettingPrompt">Keep tide data updated by downloading in the background.</string>
+
     <string id="appVersionTitle">Version</string>
 </strings>

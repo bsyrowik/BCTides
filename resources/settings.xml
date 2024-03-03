@@ -28,4 +28,7 @@
             <listEntry value="1">@Strings.zoneSettingValNorth</listEntry>
         </settingConfig>
     </setting>
+    <setting propertyKey="@Properties.backgroundDownloadProp" title="@Strings.backgroundDownloadSettingTitle" prompt="@Strings.backgroundDownloadSettingPrompt">
+        <settingConfig type="boolean"/>
+    </setting>
 </settings>
