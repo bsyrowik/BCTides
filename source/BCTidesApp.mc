@@ -13,7 +13,7 @@ class BCTidesApp extends Application.AppBase {
     var view = null;
     var _hilo = null;
     var hilo_updated = false;
-    var dataValid = false;
+    var tideDataValid = false;
     var background = false;
 
     function initialize() {
@@ -24,7 +24,7 @@ class BCTidesApp extends Application.AppBase {
         if (_hilo == null) {
             _hilo = Storage.getValue("hiloData") as Array<Array>;
             if (_hilo != null) {
-                dataValid = true;
+                tideDataValid = true;
             }
         }
     }
@@ -49,10 +49,8 @@ class BCTidesApp extends Application.AppBase {
     // Return the initial view of your application here
     function getInitialView() as Array<Views or InputDelegates>? {
         loadData();
-        TideUtil.dataValid = dataValid;
         view = new BCTidesView(me);
         delegate = new BCTidesDelegate(view);
-        view.setDelegate(delegate);
         return [view, delegate] as Array<Views or InputDelegates>;
     }
 

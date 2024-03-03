@@ -98,19 +98,18 @@ module WebRequests {
                 app._hilo.add([DateUtil.parseDateString(eventData["eventDate"].toString()).value(), height]);
             }
             app.hilo_updated = true;
+            app.tideDataValid = true;
             //System.println(app._hilo.toString());
 
             Storage.setValue("hiloData", app._hilo);
             Storage.setValue("maxTide", maxTide);
             
             System.println("Successfully updated station data");
-
+                
             if (app.background) {
-                app.dataValid = true;
                 Background.exit(true);
             } else {
                 Notification.showNotification(Rez.Strings.dataReceivedMessage as String, 2000);
-                TideUtil.dataValid = true;
                 WatchUi.requestUpdate();
             }
         } else {

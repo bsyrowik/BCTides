@@ -20,12 +20,6 @@ class BCTidesView extends WatchUi.View {
     var mPageCount = 6;
     var mPageUpdated = true;
 
-    var mDelegate = null;
-
-    function setDelegate(d as BCTidesDelegate) as Void {
-        mDelegate = d;
-    }
-
     function initialize(the_app) {
         app = the_app;
         View.initialize();
@@ -87,7 +81,7 @@ class BCTidesView extends WatchUi.View {
 
         WatchUi.pushView(
             new WatchUi.Confirmation(WatchUi.loadResource(Rez.Strings.downloadDataPrompt) as String),
-            new DownloadDataConfirmationDelegate(mDelegate),
+            new DownloadDataConfirmationDelegate(),
             WatchUi.SLIDE_IMMEDIATE
         );
     }
@@ -281,7 +275,7 @@ class BCTidesView extends WatchUi.View {
 
         var offset_x = dc.getWidth() * 0.1 as Number;
         var offset_y = dc.getHeight() / 4;
-        if (TideUtil.tideData(app) != null && TideUtil.dataValid) {
+        if (TideUtil.tideData(app) != null && app.tideDataValid) {
 
             var width = dc.getWidth() * 0.8 as Number;
             var height = dc.getHeight() / 2;

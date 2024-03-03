@@ -57,7 +57,7 @@ module PropUtil {
         Storage.setValue("selectedStationCode", code);
         Storage.setValue("selectedStationName", name);
         addRecentStation(code, name);
-        TideUtil.dataValid = false;
+        getApp().tideDataValid = false;
         getApp().delegate.setGetDataMenuItemSubLabel(name);
     }
 
