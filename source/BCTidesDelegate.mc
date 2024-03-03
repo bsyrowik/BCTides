@@ -3,14 +3,15 @@ import Toybox.Lang;
 
 using Toybox.WatchUi;
 
-var getDataLabel;  // FIXME: need to remove this!
-
 class BCTidesDelegate extends WatchUi.BehaviorDelegate {
     var mView = null;
+    private var mGetDataMenuItem = null;
+
     function initialize(view) {
         mView = view;
 		WatchUi.BehaviorDelegate.initialize();
 	}
+
     function onNextPage() {
         if (mView.mPage < mView.mPageCount - 1) {
             mView.mPage += 1;
@@ -21,6 +22,7 @@ class BCTidesDelegate extends WatchUi.BehaviorDelegate {
         WatchUi.requestUpdate();
         return true;
     }
+
     function onPreviousPage() {
         if (mView.mPage > 0) {
             mView.mPage -= 1;
@@ -34,6 +36,10 @@ class BCTidesDelegate extends WatchUi.BehaviorDelegate {
 
     function getLocation() as Void {
         mView.onPosition(Toybox.Position.getInfo());
+    }
+
+    function setGetDataMenuItemSubLabel(name as String) as Void {
+        mGetDataMenuItem.setSubLabel(name);
     }
 
     function onMenu() {
@@ -81,13 +87,13 @@ class BCTidesDelegate extends WatchUi.BehaviorDelegate {
         );
 
         // Get Data
-        getDataLabel = new WatchUi.MenuItem(
+        mGetDataMenuItem = new WatchUi.MenuItem(
                 Rez.Strings.mainMenuLabelGetData,
                 PropUtil.getStationName(),
                 MainMenuDelegate.MENU_GET_DATA,
                 {}
             );
-        menu.addItem(getDataLabel);
+        menu.addItem(mGetDataMenuItem);
         
         // Zone
         menu.addItem(

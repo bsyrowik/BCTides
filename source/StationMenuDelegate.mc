@@ -59,7 +59,7 @@ class StationMenuDelegate extends WatchUi.Menu2InputDelegate {
                 new WatchUi.MenuItem(
                     stationList[p.index]["name"],
                     dist.format("%.2f") + "km",
-                    p.index,
+                    stationList[p.index]["code"],
                     {} // options
                 )
             );
@@ -68,7 +68,7 @@ class StationMenuDelegate extends WatchUi.Menu2InputDelegate {
         // Get rid of the station selection strategy menu so when we finish here we go back to the main menu
         WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);   
 
-        var delegate = new NearestStationMenuDelegate();
+        var delegate = new SelectStationMenuDelegate();
         WatchUi.pushView(menu, delegate, WatchUi.SLIDE_IMMEDIATE);
     }
 
@@ -92,7 +92,7 @@ class StationMenuDelegate extends WatchUi.Menu2InputDelegate {
         // Get rid of the station selection strategy menu so when we finish here we go back to the main menu
         WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);   
 
-        var delegate = new RecentStationMenuDelegate();
+        var delegate = new SelectStationMenuDelegate();
         WatchUi.pushView(menu, delegate, WatchUi.SLIDE_IMMEDIATE);
     }
 

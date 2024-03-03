@@ -58,6 +58,7 @@ module PropUtil {
         Storage.setValue("selectedStationName", name);
         addRecentStation(code, name);
         TideUtil.dataValid = false;
+        getApp().delegate.setGetDataMenuItemSubLabel(name);
     }
 
     function getStationCode() as String or Null {
