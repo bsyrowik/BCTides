@@ -1,13 +1,20 @@
 import Toybox.Application;
 import Toybox.Application.Storage;
 import Toybox.Lang;
+import Toybox.System;
 import Toybox.WatchUi;
 
+using Toybox.Background;
+using Toybox.Time;
+
+(:background)
 class BCTidesApp extends Application.AppBase {
     var delegate = null;
     var view = null;
     var _hilo = null;
     var hilo_updated = false;
+    var dataValid = false;
+    var background = false;
 
     function initialize() {
         AppBase.initialize();
@@ -17,14 +24,14 @@ class BCTidesApp extends Application.AppBase {
         if (_hilo == null) {
             _hilo = Storage.getValue("hiloData") as Array<Array>;
             if (_hilo != null) {
-                TideUtil.dataValid = true;
+                dataValid = true;
             }
         }
     }
 
     // onStart() is called on application start up
     function onStart(state as Dictionary?) as Void {
-        loadData();
+        loadData();  // Needed for Glance View
     }
 
     // onStop() is called when your application is exiting
@@ -42,6 +49,7 @@ class BCTidesApp extends Application.AppBase {
     // Return the initial view of your application here
     function getInitialView() as Array<Views or InputDelegates>? {
         loadData();
+        TideUtil.dataValid = dataValid;
         view = new BCTidesView(me);
         delegate = new BCTidesDelegate(view);
         view.setDelegate(delegate);
@@ -52,8 +60,21 @@ class BCTidesApp extends Application.AppBase {
 	function getGlanceView() {
         return [ new BCTidesGlanceView(me) ];
     }
+
+    // Get service delegates to run background tasks for the app
+    public function getServiceDelegate() as Array<ServiceDelegate> {
+        background = true;
+        
+        var duration26h = new Time.Duration(Time.Gregorian.SECONDS_PER_DAY + 2 * Time.Gregorian.SECONDS_PER_HOUR);
+        var eventTime = Time.today().add(duration26h);  // ~2am
+        Background.registerForTemporalEvent(eventTime);
+        System.println("Setting background timer for " + eventTime.value());
+
+        return [new BackgroundTimerServiceDelegate()] as Array<ServiceDelegate>;
+    }
 }
 
+(:background)
 function getApp() as BCTidesApp {
     return Application.getApp() as BCTidesApp;
 }
