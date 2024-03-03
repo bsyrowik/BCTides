@@ -3,6 +3,7 @@ import Toybox.Application.Storage;
 import Toybox.Lang;
 import Toybox.System;
 
+(:background)
 module PropUtil {
     public enum unitsPropSettings {
         UNITS_PROP_SYSTEM,

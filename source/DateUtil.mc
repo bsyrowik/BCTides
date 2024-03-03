@@ -4,6 +4,7 @@ import Toybox.Test;
 using Toybox.Time;
 using Toybox.Time.Gregorian;
 
+(:background)
 module DateUtil {
     function getFromDateString() as String {
         // Start from midnight this morning; add another 14 hours buffer (some stations only have 2 tides per day)
