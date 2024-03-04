@@ -138,7 +138,7 @@ class BasicCustomMenuItem extends WatchUi.CustomMenuItem {
         if (getApp().screenHeight > 400) {
             justifyLR = Graphics.TEXT_JUSTIFY_LEFT;
             font -= 1;
-            xOffset = 0;
+            xOffset = 5;
         }
 
         // Text
