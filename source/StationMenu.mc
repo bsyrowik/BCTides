@@ -5,8 +5,8 @@ using Toybox.WatchUi;
 
 module StationMenu {
     function pushMenu() {
-        var menu = new WatchUi.CustomMenu(90, Graphics.COLOR_WHITE, {
-                :title => new CustomMenuTitle(Rez.Strings.selectStationMenuTitle)});
+        var menu = new WatchUi.CustomMenu(getApp().screenHeight / 3, Graphics.COLOR_WHITE, {
+                :title => new CustomMenuTitle(Rez.Strings.selectStationMenuTitle), :theme => null});
 
         menu.addItem(
             new BasicCustomMenuItem(

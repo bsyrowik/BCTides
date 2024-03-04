@@ -132,14 +132,23 @@ class BasicCustomMenuItem extends WatchUi.CustomMenuItem {
         dc.drawLine(0, 0, dc.getWidth(), 0);
         dc.drawLine(0, dc.getHeight() - 1, dc.getWidth(), dc.getHeight() - 1);
 
+        // Some adjustments for FR965, etc.
+        var justifyLR = Graphics.TEXT_JUSTIFY_CENTER;
+        var xOffset = dc.getWidth() / 2;
+        if (getApp().screenHeight > 400) {
+            justifyLR = Graphics.TEXT_JUSTIFY_LEFT;
+            font -= 1;
+            xOffset = 0;
+        }
+
         // Text
         // FIXME: use a TextArea instead so we get auto-wrapping!!!  Especially important for localizations.
         dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
         if (isFocused() && _subLabel != null) {
-            dc.drawText(dc.getWidth() / 2, dc.getHeight() * .3, font, sLabel, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
-            dc.drawText(dc.getWidth() / 2, dc.getHeight() * .7, Graphics.FONT_SMALL, _subLabel, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
+            dc.drawText(xOffset, dc.getHeight() * .3, font, sLabel, justifyLR | Graphics.TEXT_JUSTIFY_VCENTER);
+            dc.drawText(xOffset, dc.getHeight() * .7, Graphics.FONT_SMALL, _subLabel, justifyLR | Graphics.TEXT_JUSTIFY_VCENTER);
         } else {
-            dc.drawText(dc.getWidth() / 2, dc.getHeight() / 2, font, sLabel, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
+            dc.drawText(xOffset, dc.getHeight() / 2, font, sLabel, justifyLR | Graphics.TEXT_JUSTIFY_VCENTER);
         }
     }
 

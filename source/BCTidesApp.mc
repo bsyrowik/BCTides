@@ -15,6 +15,7 @@ class BCTidesApp extends Application.AppBase {
     var hilo_updated = false;
     var tideDataValid = false;
     var background = false;
+    var screenHeight = null;
 
     function initialize() {
         AppBase.initialize();
@@ -51,6 +52,8 @@ class BCTidesApp extends Application.AppBase {
         loadData();
         view = new BCTidesView(me);
         delegate = new BCTidesDelegate(view);
+        var mySettings = System.getDeviceSettings();
+        screenHeight = mySettings.screenHeight;
         return [view, delegate] as Array<Views or InputDelegates>;
     }
 

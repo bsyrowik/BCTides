@@ -41,9 +41,7 @@ module NearestStationMenu {
             h = buildHeap(stationList);
         }
         
-        var menu = new LoadMoreMenu(title, "Page " + (depth + 1), 90, Graphics.COLOR_WHITE, {
-                //:foreground=>new Rez.Drawables.MenuForeground()
-            });
+        var menu = new LoadMoreMenu(title, "Page " + (depth + 1), getApp().screenHeight / 3, Graphics.COLOR_WHITE, {:theme => null});
 
         var allowWrap = true;
         var stationsToShow = 7;

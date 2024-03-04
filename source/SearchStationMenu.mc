@@ -52,9 +52,9 @@ module SearchStationMenu {
 
     function pushListMenuHelper(title as String, startIndex as Number, depth as Number) as Void {
         var stationList = RezUtil.getStationData() as Array<Dictionary>;
-        var stationsToShow = 1;
+        var stationsToShow = 7;
 
-        var menu = new LoadMoreMenu(title, "Page " + (depth + 1), 90, Graphics.COLOR_WHITE, {});
+        var menu = new LoadMoreMenu(title, "Page " + (depth + 1), getApp().screenHeight / 3, Graphics.COLOR_WHITE, {:theme => null});
 
         var i = startIndex;
         var stationsAdded = 0;

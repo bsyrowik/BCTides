@@ -45,8 +45,9 @@ class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
 
 module MainMenu {
     function pushMenu() {
-        var menu = new WatchUi.CustomMenu(90, Graphics.COLOR_WHITE, {
-                :title => new CustomMenuTitle(Rez.Strings.mainMenuTitle)
+        var menu = new WatchUi.CustomMenu(getApp().screenHeight / 3, Graphics.COLOR_WHITE, {
+                :title => new CustomMenuTitle(Rez.Strings.mainMenuTitle),
+                :theme => null
             });
         
         // Data Label

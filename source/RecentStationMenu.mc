@@ -9,8 +9,8 @@ module RecentStationMenu {
         if (recents == null) {
             return;
         }
-        var menu = new WatchUi.CustomMenu(90, Graphics.COLOR_WHITE, {
-                :title => new CustomMenuTitle(Rez.Strings.selectStationMenuRecent)});
+        var menu = new WatchUi.CustomMenu(getApp().screenHeight / 3, Graphics.COLOR_WHITE, {
+                :title => new CustomMenuTitle(Rez.Strings.selectStationMenuRecent), :theme => null});
         for (var i = recents.size() - 1; i >= 0; i--) {
             menu.addItem(
                 new BasicCustomMenuItem(
