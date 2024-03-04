@@ -34,100 +34,12 @@ class BCTidesDelegate extends WatchUi.BehaviorDelegate {
         return true;
     }
 
-    function getLocation() as Void {
-        mView.onPosition(Toybox.Position.getInfo());
-    }
-
     function setGetDataMenuItemSubLabel(name as String) as Void {
         mGetDataMenuItem.setSubLabel(name);
     }
 
     function onMenu() {
-        var menu = new WatchUi.Menu2({:title=>"Settings"});
-        var delegate;
-
-        // Data Label
-        menu.addItem(
-            new WatchUi.MenuItem(
-                Rez.Strings.labelSettingTitle, // Label
-                PropUtil.getDataLabelString(), // Sub-Label
-                MainMenuDelegate.MENU_SETTINGS_DISP_TYPE_ID, // identifier
-                {} // options
-            )
-        );
-
-        // Units
-        menu.addItem(
-            new WatchUi.MenuItem(
-                Rez.Strings.unitsSettingTitle, // Label
-                PropUtil.getUnitsString(), // Sub-Label
-                MainMenuDelegate.MENU_SETTINGS_UNITS_ID, // identifier
-                {} // options
-            )
-        );
-
-        // Display Mode
-        menu.addItem(
-            new WatchUi.MenuItem(
-                Rez.Strings.displaySettingTitle, // Label
-                PropUtil.getDisplayTypeString(), // Sub-Label
-                MainMenuDelegate.MENU_SETTINGS_DISP_MODE_ID, // identifier
-                {} // options
-            )
-        );
-
-        // Get Location
-        menu.addItem(
-            new WatchUi.MenuItem(
-                Rez.Strings.mainMenuLabelGetLocation, // Label
-                Rez.Strings.mainMenuLabelGetLocationSub, // Sub-Label
-                MainMenuDelegate.MENU_SETTINGS_GPS_ID, // identifier
-                {} // options
-            )
-        );
-
-        // Get Data
-        mGetDataMenuItem = new WatchUi.MenuItem(
-                Rez.Strings.mainMenuLabelGetData,
-                StorageUtil.getStationName(),
-                MainMenuDelegate.MENU_GET_DATA,
-                {}
-            );
-        menu.addItem(mGetDataMenuItem);
-
-        // Background Download
-        menu.addItem(
-            new WatchUi.MenuItem(
-                Rez.Strings.backgroundDownloadSettingTitle,
-                PropUtil.getBackgroundDownloadString(),
-                MainMenuDelegate.MENU_SETTINGS_ENABLE_BACKGROUND_DL,
-                {}
-            )
-        );
-
-        // Zone
-        menu.addItem(
-            new WatchUi.MenuItem(
-                Rez.Strings.zoneSettingTitle,
-                PropUtil.getZoneString(),
-                MainMenuDelegate.MENU_SETTINGS_ZONE_ID,
-                {}
-            )
-        );
-
-        // Select Station
-        menu.addItem(
-            new WatchUi.MenuItem(
-                Rez.Strings.mainMenuLabelSelectStation,
-                "",
-                MainMenuDelegate.MENU_SET_STATION,
-                {}
-            )
-        );
-
-        delegate = new MainMenuDelegate(self);
-        WatchUi.pushView(menu, delegate, WatchUi.SLIDE_IMMEDIATE);
-
+        mGetDataMenuItem = MainMenu.pushMenu();
         return true;
     }
 

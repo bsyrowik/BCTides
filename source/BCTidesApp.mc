@@ -15,6 +15,7 @@ class BCTidesApp extends Application.AppBase {
     var hilo_updated = false;
     var tideDataValid = false;
     var background = false;
+    var screenHeight = null;
 
     function initialize() {
         AppBase.initialize();
@@ -51,6 +52,8 @@ class BCTidesApp extends Application.AppBase {
         loadData();
         view = new BCTidesView(me);
         delegate = new BCTidesDelegate(view);
+        var mySettings = System.getDeviceSettings();
+        screenHeight = mySettings.screenHeight;
         return [view, delegate] as Array<Views or InputDelegates>;
     }
 
@@ -62,11 +65,12 @@ class BCTidesApp extends Application.AppBase {
     // Get service delegates to run background tasks for the app
     public function getServiceDelegate() as Array<ServiceDelegate> {
         background = true;
-        
-        var duration26h = new Time.Duration(Time.Gregorian.SECONDS_PER_DAY + 2 * Time.Gregorian.SECONDS_PER_HOUR);
-        var eventTime = Time.today().add(duration26h);  // ~2am
-        Background.registerForTemporalEvent(eventTime);
-        System.println("Setting background timer for " + eventTime.value());
+        if (PropUtil.getBackgroundDownload()) {
+            var duration26h = new Time.Duration(Time.Gregorian.SECONDS_PER_DAY + 2 * Time.Gregorian.SECONDS_PER_HOUR);
+            var eventTime = Time.today().add(duration26h);  // ~2am
+            Background.registerForTemporalEvent(eventTime);
+            System.println("Setting background timer for " + eventTime.value());
+        }
 
         return [new BackgroundTimerServiceDelegate()] as Array<ServiceDelegate>;
     }
