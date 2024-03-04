@@ -1,7 +1,0 @@
-<layout id="MainLayout">
-    <!--<label id="date" text="Jan 1" x="center" y="3.3%" justification="Graphics.TEXT_JUSTIFY_CENTER" font="Graphics.FONT_TINY"/>-->
-    <!--<label id="stationTitle" text="Vancouver" x="center" y="13%" justification="Graphics.TEXT_JUSTIFY_CENTER" font="Graphics.FONT_XTINY"/>-->
-    <label id="loc0" text="-" x="37%" y="75%" justification="Graphics.TEXT_JUSTIFY_CENTER" font="Graphics.FONT_XTINY"/>
-    <label id="loc1" text="-" x="63%" y="75%" justification="Graphics.TEXT_JUSTIFY_CENTER" font="Graphics.FONT_XTINY"/>
-    <!--<label id="todayHeight" text="-" x="center" y="85%" justification="Graphics.TEXT_JUSTIFY_CENTER" font="Graphics.FONT_TINY" color="Graphics.COLOR_DK_BLUE" visible="false"/>-->
-</layout>

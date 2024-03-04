@@ -14,11 +14,29 @@ class BCTidesView extends WatchUi.View {
     hidden var mIndicatorL;
     hidden var mPosition = null;
     hidden var needGPS = true;
-    var app;
+    hidden var app;
 
-    var mPage = 0;
-    var mPageCount = 6;
-    var mPageUpdated = true;
+    private var mPage = 0;
+    private var mPageCount = 7;
+    private var mPageUpdated = true;
+
+    public function nextPage() as Void {
+        if (mPage < mPageCount - 1) {
+            mPage += 1;
+        } else {
+            mPage = 0;
+        }
+        mPageUpdated = true;
+    }
+
+    public function prevPage() as Void {
+        if (mPage > 0) {
+            mPage -= 1;
+        } else {
+            mPage = mPageCount - 1;
+        }
+        mPageUpdated = true;
+    }
 
     function initialize(the_app) {
         app = the_app;
@@ -42,7 +60,6 @@ class BCTidesView extends WatchUi.View {
             //System.println("onLayout: requesting position!");
             Position.enableLocationEvents(Position.LOCATION_CONTINUOUS, method(:onPosition));
 		}
-        setLayout(Rez.Layouts.MainLayout(dc));
     }
 
     // Called when this View is brought to the foreground. Restore
@@ -68,13 +85,21 @@ class BCTidesView extends WatchUi.View {
         }
     }
 
-    function drawNoDataWarning(dc as Dc, x as Number, y as Number, message as Array<String>, showConfirmation as Boolean) as Void {
-        dc.setColor(Graphics.COLOR_RED, Graphics.COLOR_TRANSPARENT);
-        for (var i = 0; i < message.size(); i++) {
-            dc.drawText(x, y, Graphics.FONT_SMALL, message[i], Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
-            y += dc.getFontHeight(Graphics.FONT_SMALL) * 0.8 as Number;
-        }
-
+    function drawNoDataWarning(dc as Dc, x as Number, y as Number, w as Number, h as Number, message as String or Symbol, showConfirmation as Boolean) as Void {
+        message = message instanceof String ? message : WatchUi.loadResource(message) as String;
+        var textArea = new WatchUi.TextArea({
+            :text => message,
+            :color => Graphics.COLOR_RED,
+            :backgroundColor => Graphics.COLOR_TRANSPARENT,
+            :font => Graphics.FONT_SMALL,
+            :justification => Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER,
+            :locX => x,
+            :locY => y,
+            :width => w,
+            :height => h
+            });
+        textArea.draw(dc);
+        
         if (!mPageUpdated || !showConfirmation) {
             return;
         }
@@ -105,7 +130,7 @@ class BCTidesView extends WatchUi.View {
         var current_t = start.value();
         var height = TideUtil.getHeightAtT(current_t, duration_per_increment, 0, app)[0];
         if (height == null) {
-            drawNoDataWarning(dc, x + w / 2, y + h / 2, RezUtil.getNoDataForDateString(), true);
+            drawNoDataWarning(dc, x, y, w, h, Rez.Strings.noDataAvailableForDate, true);
             return false;
         }
         var last_y = y + h - (height / max_height) * h;
@@ -117,7 +142,7 @@ class BCTidesView extends WatchUi.View {
             var l = TideUtil.getHeightAtT(current_t, duration_per_increment, 0, app);
             height = l[0];       
             if (height == null) {
-                drawNoDataWarning(dc, x + w / 2, y + h / 2, RezUtil.getRanOutOfDataString(), true);
+                drawNoDataWarning(dc, x, y, w, h, Rez.Strings.ranOutOfData, true);
                 return true;
             }
             var this_y = y + h - (height / max_height) * h;
@@ -197,36 +222,83 @@ class BCTidesView extends WatchUi.View {
         dc.drawLine(x + w / 2, startY + 5, x + w / 2, y);
 
         if (i >= TideUtil.tideData(app).size()) {
-            drawNoDataWarning(dc, x + w / 2, y + h / 2, (entries_for_date > 0 ? RezUtil.getRanOutOfDataString() : RezUtil.getNoDataForDateString()), true);
+            System.println("h: " + h + " y: " + y + " startY: " + startY);
+            var maxY = getApp().screenHeight * 0.57;
+            y = y > maxY ? maxY : y;
+            drawNoDataWarning(dc, x, y, w, h, (entries_for_date > 0 ? Rez.Strings.ranOutOfData : Rez.Strings.noDataAvailableForDate), true);
         }
     }
 
-    (:debug)
-    function updateLocationText(position as Position.Location) as Void {
-        TideUtil.currentPosition = position;
-        var loc = position.toDegrees();
-        var loc0 = View.findDrawableById("loc0") as Text;
-        loc0.setText(loc[0].format("%.2f"));
-        var loc1 = View.findDrawableById("loc1") as Text;
-        loc1.setText(loc[1].format("%.2f"));
-        loc0.setText(""); // FIXME
-        loc1.setText(""); // FIXME
-    }
-    
-    (:release)
-    function updateLocationText(position as Position.Location) as Void {
-        TideUtil.currentPosition = position;
-        var loc0 = View.findDrawableById("loc0") as Text;
-        loc0.setText("");
-        var loc1 = View.findDrawableById("loc1") as Text;
-        loc1.setText("");
+    function drawTableTimeTicks(dc as Dc, offset_x as Number, width as Number, offset_y as Number, height as Number) {
+        // Bottom
+        dc.drawLine(offset_x + width * 1 / 8, offset_y + height - 5, offset_x + width * 1 / 8, offset_y + height);
+        dc.drawLine(offset_x + width * 2 / 8, offset_y + height - 8, offset_x + width * 2 / 8, offset_y + height);
+        dc.drawLine(offset_x + width * 3 / 8, offset_y + height - 5, offset_x + width * 3 / 8, offset_y + height);
+        dc.drawLine(offset_x + width * 4 / 8, offset_y + height - 8, offset_x + width * 4 / 8, offset_y + height);
+        dc.drawLine(offset_x + width * 5 / 8, offset_y + height - 5, offset_x + width * 5 / 8, offset_y + height);
+        dc.drawLine(offset_x + width * 6 / 8, offset_y + height - 8, offset_x + width * 6 / 8, offset_y + height);
+        dc.drawLine(offset_x + width * 7 / 8, offset_y + height - 5, offset_x + width * 7 / 8, offset_y + height);
+        // Top
+        dc.drawLine(offset_x + width * 1 / 8, offset_y + 5, offset_x + width * 1 / 8, offset_y);
+        dc.drawLine(offset_x + width * 2 / 8, offset_y + 8, offset_x + width * 2 / 8, offset_y);
+        dc.drawLine(offset_x + width * 3 / 8, offset_y + 5, offset_x + width * 3 / 8, offset_y);
+        dc.drawLine(offset_x + width * 4 / 8, offset_y + 8, offset_x + width * 4 / 8, offset_y);
+        dc.drawLine(offset_x + width * 5 / 8, offset_y + 5, offset_x + width * 5 / 8, offset_y);
+        dc.drawLine(offset_x + width * 6 / 8, offset_y + 8, offset_x + width * 6 / 8, offset_y);
+        dc.drawLine(offset_x + width * 7 / 8, offset_y + 5, offset_x + width * 7 / 8, offset_y);
     }
 
-    // Update the view
-    function onUpdate(dc as Dc) as Void {
-        // Call the parent onUpdate function to redraw the layout
-        View.onUpdate(dc);
+    function drawTideGraphBox(dc as Dc, offset_x as Number, offset_y as Number, width as Number, height as Number) {
+        dc.setColor(Graphics.COLOR_DK_GRAY, Graphics.COLOR_TRANSPARENT);
+        dc.drawRectangle(offset_x, offset_y, width, height);
 
+        drawTableTimeTicks(dc, offset_x, width, offset_y, height);
+    }
+
+    function drawCurrentHeight(dc as Dc) {
+        // Current height
+        if (mPage != 0) {
+            return; // Only display current height on today's page
+        }
+        var units = "m";
+        var duration_2h = new Time.Duration(Gregorian.SECONDS_PER_HOUR * 2);
+        var tideHeight = TideUtil.getHeightAtT(Time.now().value(), duration_2h.value(), 0, app)[0];
+        if (tideHeight != null) {
+            if (PropUtil.getUnits() == System.UNIT_STATUTE) {
+                units = "ft";
+                tideHeight *= TideUtil.FEET_PER_METER;
+            }
+            dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
+            dc.drawText(dc.getWidth() / 2, dc.getHeight() * 0.88, Graphics.FONT_MEDIUM, tideHeight.format("%.1f") + units, Graphics.TEXT_JUSTIFY_CENTER | Graphics. TEXT_JUSTIFY_VCENTER);
+        }
+    }
+
+    function drawNowLine(dc as Dc, today as Time.Moment, offset_x as Number, offset_y as Number, width as Number, height as Number) {
+        // Draw 'now' line
+        if (mPage != 0) {
+            return; // Only draw 'now' line on today's page
+        }
+        var offset = (Time.now().value() - today.value()) * (width - 4) / Gregorian.SECONDS_PER_DAY;
+        dc.setColor(Graphics.COLOR_DK_BLUE, Graphics.COLOR_TRANSPARENT);
+        var x1 = offset_x + 2.0 + offset;
+        dc.drawLine(x1, offset_y + 1, x1, offset_y + height - 1);
+        dc.drawLine(x1 - 1, offset_y + 1, x1 - 1, offset_y + height - 1);
+    }
+
+    function drawDateString(dc as Dc, selectedDay as Time.Moment) {
+        var dateInfo = Gregorian.info(selectedDay, Time.FORMAT_MEDIUM);
+        dc.drawText(dc.getWidth() / 2, 8, Graphics.FONT_TINY, dateInfo.month + " " + dateInfo.day.toString(), Graphics.TEXT_JUSTIFY_CENTER);
+    }
+
+    function drawStationName(dc as Dc) {
+        dc.drawText(dc.getWidth() / 2, dc.getWidth() * 0.13, Graphics.FONT_XTINY, StorageUtil.getStationName(), Graphics.TEXT_JUSTIFY_CENTER);
+    }
+
+    function updateLocation(position as Position.Location) as Void {
+        TideUtil.currentPosition = position;
+    }
+
+    function dealWithPosition() {
         if (needGPS) {
 	    	if (mPosition == null || mPosition.accuracy == null || mPosition.accuracy < Position.QUALITY_POOR) {
 		    	mPosition = Position.getInfo();
@@ -243,7 +315,7 @@ class BCTidesView extends WatchUi.View {
 	    	}
 		}
         if (mPosition.position != null) {
-            updateLocationText(mPosition.position);
+            updateLocation(mPosition.position);
         }
         if (mPosition == null || mPosition.position == null || mPosition.accuracy == Position.QUALITY_NOT_AVAILABLE) {
             var cc = Toybox.Weather.getCurrentConditions() as Toybox.Weather.CurrentConditions;
@@ -252,100 +324,51 @@ class BCTidesView extends WatchUi.View {
             if (cc != null) {
                 var pos = cc.observationLocationPosition as Position.Location;
                 if (pos != null) {
-                    updateLocationText(pos);
+                    updateLocation(pos);
                     System.println("Got position from weather: " + pos.toDegrees()[0] + " " + pos.toDegrees()[1]);
                 }
             }
         }
+    }
 
-        dc.drawText(dc.getWidth() / 2, dc.getWidth() * 0.13, Graphics.FONT_XTINY, StorageUtil.getStationName(), Graphics.TEXT_JUSTIFY_CENTER);
-        
+    // Update the view
+    function onUpdate(dc as Dc) as Void {
+        // Call the parent onUpdate function to redraw the layout
+        View.onUpdate(dc);
+        dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
+
+        dealWithPosition();
+
         // Date
-        var today = Time.today();  // Time-zone adjusted!
-        var now = Time.now();
+        var selectedDay = Time.today().add(new Time.Duration(Gregorian.SECONDS_PER_DAY * mPage));
+        drawDateString(dc, selectedDay);
 
-        if (mPage > 0) {
-            var days = new Time.Duration(Gregorian.SECONDS_PER_DAY * mPage);
-            today = today.add(days);
-        }
+        // Station Name
+        drawStationName(dc);
 
-        var dateInfo = Gregorian.info(today, Time.FORMAT_MEDIUM);
-        dc.drawText(dc.getWidth() / 2, 8, Graphics.FONT_TINY, dateInfo.month + " " + dateInfo.day.toString(), Graphics.TEXT_JUSTIFY_CENTER);
-
+        // Draw page indicator
+        mIndicatorL.draw(dc, mPage);
 
         var offset_x = dc.getWidth() * 0.1 as Number;
         var offset_y = dc.getHeight() / 4;
+        var width = dc.getWidth() * 0.8 as Number;
+        var height = dc.getHeight() / 2;
         if (TideUtil.tideData(app) != null && app.tideDataValid) {
-
-            var width = dc.getWidth() * 0.8 as Number;
-            var height = dc.getHeight() / 2;
+            var duration_24h = new Time.Duration(Gregorian.SECONDS_PER_HOUR * 24);
             if (PropUtil.getDisplayType() == PropUtil.DISPLAY_PROP_GRAPH) {
-                // Draw box
-                dc.setColor(Graphics.COLOR_DK_GRAY, Graphics.COLOR_TRANSPARENT);
-                dc.drawRectangle(offset_x, offset_y, width, height);
-
-                // Draw time ticks
-                // Bottom
-                dc.drawLine(offset_x + width * 1 / 8, offset_y + height - 5, offset_x + width * 1 / 8, offset_y + height);
-                dc.drawLine(offset_x + width * 2 / 8, offset_y + height - 8, offset_x + width * 2 / 8, offset_y + height);
-                dc.drawLine(offset_x + width * 3 / 8, offset_y + height - 5, offset_x + width * 3 / 8, offset_y + height);
-                dc.drawLine(offset_x + width * 4 / 8, offset_y + height - 8, offset_x + width * 4 / 8, offset_y + height);
-                dc.drawLine(offset_x + width * 5 / 8, offset_y + height - 5, offset_x + width * 5 / 8, offset_y + height);
-                dc.drawLine(offset_x + width * 6 / 8, offset_y + height - 8, offset_x + width * 6 / 8, offset_y + height);
-                dc.drawLine(offset_x + width * 7 / 8, offset_y + height - 5, offset_x + width * 7 / 8, offset_y + height);
-                // Top
-                dc.drawLine(offset_x + width * 1 / 8, offset_y + 5, offset_x + width * 1 / 8, offset_y);
-                dc.drawLine(offset_x + width * 2 / 8, offset_y + 8, offset_x + width * 2 / 8, offset_y);
-                dc.drawLine(offset_x + width * 3 / 8, offset_y + 5, offset_x + width * 3 / 8, offset_y);
-                dc.drawLine(offset_x + width * 4 / 8, offset_y + 8, offset_x + width * 4 / 8, offset_y);
-                dc.drawLine(offset_x + width * 5 / 8, offset_y + 5, offset_x + width * 5 / 8, offset_y);
-                dc.drawLine(offset_x + width * 6 / 8, offset_y + 8, offset_x + width * 6 / 8, offset_y);
-                dc.drawLine(offset_x + width * 7 / 8, offset_y + 5, offset_x + width * 7 / 8, offset_y);
-
-                if (mPage == 0) {
-                    // Draw 'now' line
-                    var offset = (now.value() - today.value()) * (width - 4) / Gregorian.SECONDS_PER_DAY;
-                    dc.setColor(Graphics.COLOR_DK_BLUE, Graphics.COLOR_TRANSPARENT);
-                    var x1 = offset_x + 2.0 + offset;
-                    dc.drawLine(x1, offset_y + 1, x1, offset_y + height - 1);
-                    dc.drawLine(x1 - 1, offset_y + 1, x1 - 1, offset_y + height - 1);
-                }
-
-                // Draw graph
-                var duration_24h = new Time.Duration(Gregorian.SECONDS_PER_HOUR * 24);
-                graphTides(dc, offset_x, offset_y, width, height, today, today.add(duration_24h));
+                drawTideGraphBox(dc, offset_x, offset_y, width, height);
+                drawNowLine(dc, selectedDay, offset_x, offset_y, width, height);
+                graphTides(dc, offset_x, offset_y, width, height, selectedDay, selectedDay.add(duration_24h));
             } else {
-                // Draw table
-                var duration_24h = new Time.Duration(Gregorian.SECONDS_PER_HOUR * 24);
-                tableTides(dc, offset_x, offset_y - 10, width, height, today, today.add(duration_24h));
+                tableTides(dc, offset_x, offset_y - 10, width, height, selectedDay, selectedDay.add(duration_24h));
             }
-
-            if (mPage == 0) {
-                // Current height
-                var units = "m";
-                var duration_2h = new Time.Duration(Gregorian.SECONDS_PER_HOUR * 2);
-                var tideHeight = TideUtil.getHeightAtT(now.value(), duration_2h.value(), 0, app)[0];
-                if (tideHeight != null) {
-                    if (PropUtil.getUnits() == System.UNIT_STATUTE) {
-                        units = "ft";
-                        tideHeight *= TideUtil.FEET_PER_METER;
-                    }
-                    dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-                    dc.drawText(dc.getWidth() / 2, dc.getHeight() * 0.88, Graphics.FONT_MEDIUM, tideHeight.format("%.1f") + units, Graphics.TEXT_JUSTIFY_CENTER | Graphics. TEXT_JUSTIFY_VCENTER);
-                }
-            }
+            drawCurrentHeight(dc);
         } else if (StorageUtil.getStationCode() == null) {
-            drawNoDataWarning(dc, dc.getWidth() / 2, dc.getHeight() / 2, [WatchUi.loadResource(Rez.Strings.noStationSelectedMessage) as String], false);
+            drawNoDataWarning(dc, offset_x, offset_y, width, height, Rez.Strings.noStationSelectedMessage, false);
         } else {
-            drawNoDataWarning(dc, dc.getWidth() / 2, dc.getHeight() / 2, RezUtil.getNoDataForStationString(), true);
+            drawNoDataWarning(dc, offset_x, offset_y, width, height, Rez.Strings.noDataAvailableForStation, true);
         }
 
-        // Draw page indicator
-        if (mPage >= 0 && mPage < mPageCount) {
-            mIndicatorL.draw(dc, mPage);
-        }
         mPageUpdated = false;
     }
-
-
 }

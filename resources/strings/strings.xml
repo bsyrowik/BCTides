@@ -1,13 +1,11 @@
 <strings>
     <string id="AppName">BC Tides</string>
+    <string id="appVersionTitle">Version</string>
 
     <string id="mainMenuTitle">Settings</string>
 
     <string id="MainMenuLabel_nearby">Nearby</string>
     <string id="MainMenuLabel_favorites">Favorites</string>
-
-    <string id="dataReceivedMessage">Tide data received.</string>
-    <string id="noStationSelectedMessage">Select a station first!</string>
 
     <string id="unitsSettingTitle">Units</string>
     <string id="unitsSettingPrompt">Select units to use</string>
@@ -36,33 +34,30 @@
     <string id="mainMenuLabelGetLocation">Get Location</string>
     <string id="mainMenuLabelGetLocationSub">Find GPS</string>
 
-    <string id="mainMenuLabelSelectStation">Select Station</string>
-    <string id="selectStationMenuTitle">Station</string>
-    <string id="selectStationMenuNearest">Nearest</string>
-    <string id="selectStationMenuRecent">Recent</string>
-    <string id="selectStationMenuAlphabetical">Alphabetical</string>
-    <string id="selectStationMenuSearch">Search</string>
-
-    <string id="noDataAvailableForStation0">No data available</string>
-    <string id="noDataAvailableForStation1">for station.</string>
-    <string id="noDataAvailableForStation2"> </string>
-
-    <string id="noDataAvailableForDate0">No data available</string>
-    <string id="noDataAvailableForDate1">for date.</string>
-    <string id="noDataAvailableForDate2"> </string>
-
-    <string id="ranOutOfData0">Ran out of data!</string>
-
-    <string id="downloadDataPrompt">Download tide data?</string>
-
-    <string id="tableHeadingTime">Time</string>
-    <string id="tableHeadingTimeSpecifier">(local)</string>
-    <string id="tableHeadingHeight">Height</string>
-    
     <string id="backgroundDownloadSettingTitle">Auto-Update Data</string>
     <string id="backgroundDownloadSettingPrompt">Keep tide data updated by downloading in the background.</string>
     <string id="yes">Yes</string>
     <string id="no">No</string>
 
-    <string id="appVersionTitle">Version</string>
+    <string id="mainMenuLabelSelectStation">Select Station</string>
+    <string id="selectStationMenuTitle">Station</string>
+    <string id="selectStationMenuNearest">Nearest</string>
+    <string id="selectStationMenuRecent">Recent</string>
+    <string id="selectStationMenuSearch">Search</string>
+
+    <!-- Warning/Error/Info Messages -->
+    <string id="noDataAvailableForStation">No data available for station.</string>
+    <string id="noDataAvailableForDate">No data available for date.</string>
+    <string id="ranOutOfData">Ran out of data!</string>
+    <string id="dataReceivedMessage">Tide data received.</string>
+    <string id="noStationSelectedMessage">Select a station first!</string>
+
+    <!-- Prompt Messages -->
+    <string id="downloadDataPrompt">Download tide data?</string>
+
+    <!-- Tide Table Headings -->
+    <string id="tableHeadingTime">Time</string>
+    <string id="tableHeadingTimeSpecifier">(local)</string>
+    <string id="tableHeadingHeight">Height</string>
+
 </strings>
