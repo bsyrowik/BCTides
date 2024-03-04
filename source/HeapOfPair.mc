@@ -71,9 +71,9 @@ class HeapOfPair {
         }
     }
 
-    function heapExtractMin() as Pair {
+    function heapExtractMin() as Pair or Null {
         if (heapSize < 1) {
-            Test.assertMessage(false, "Trying to extract elements from empty heap!");
+            return null;
         }
         var max = A[0];
         A[0] = A[heapSize-1];
