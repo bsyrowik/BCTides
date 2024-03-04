@@ -87,6 +87,10 @@ class BCTidesView extends WatchUi.View {
 
     function drawNoDataWarning(dc as Dc, x as Number, y as Number, w as Number, h as Number, message as String or Symbol, showConfirmation as Boolean) as Void {
         message = message instanceof String ? message : WatchUi.loadResource(message) as String;
+
+        var maxY = getApp().screenHeight * 0.57;
+        y = y > maxY ? maxY : y;
+
         var textArea = new WatchUi.TextArea({
             :text => message,
             :color => Graphics.COLOR_RED,
@@ -116,6 +120,7 @@ class BCTidesView extends WatchUi.View {
         var margin = 1;
         var increment = 4;
         var duration_per_increment = end.subtract(start).divide(w - margin * 2).multiply(increment).value();       
+        var heightMultiplier = PropUtil.heightMultiplier();
 
         dc.setColor(Graphics.COLOR_BLUE, Graphics.COLOR_TRANSPARENT);
 
@@ -148,10 +153,7 @@ class BCTidesView extends WatchUi.View {
             var this_y = y + h - (height / max_height) * h;
             if (l[1] != null && (this_x - last_label_x > 10)) {
                 dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-                var h_label = l[2];
-                if (PropUtil.getUnits() == System.UNIT_STATUTE) {
-                    h_label *= TideUtil.FEET_PER_METER;
-                }
+                var h_label = l[2] * heightMultiplier;
                 var label_string = h_label.format("%.1f");
                 if (PropUtil.graphLabelType() == PropUtil.DATA_LABEL_PROP_TIME) {
                     var m = new Time.Moment(l[3]);
@@ -175,19 +177,16 @@ class BCTidesView extends WatchUi.View {
     }
 
     function tableTides(dc as Dc, x as Number, y as Number, w as Number, h as Number, start as Time.Moment, end as Time.Moment) as Void {
-        var units = "m";
-        var height_multiplier = 1.0f;
-        if (PropUtil.getUnits() == System.UNIT_STATUTE) {
-            units = "ft";
-            height_multiplier = TideUtil.FEET_PER_METER;
-        }
+        dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
+        
+        var units = PropUtil.units();
+        var heightMultiplier = PropUtil.heightMultiplier();
 
         var col1 = x + w / 4;
         var col2 = x + 3 * w / 4;
         var startY = y;
 
         // Heading
-        dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
         dc.drawText(col1, y, Graphics.FONT_SMALL, WatchUi.loadResource(Rez.Strings.tableHeadingTime) as String, Graphics.TEXT_JUSTIFY_CENTER);
         dc.drawText(col2, y, Graphics.FONT_SMALL, WatchUi.loadResource(Rez.Strings.tableHeadingHeight) as String, Graphics.TEXT_JUSTIFY_CENTER);
         y += dc.getFontHeight(Graphics.FONT_SMALL) - 3;
@@ -212,19 +211,17 @@ class BCTidesView extends WatchUi.View {
                 // Add a row
                 var m = new Time.Moment(time);
                 dc.drawText(col1,  y, Graphics.FONT_TINY, DateUtil.formatTimeStringShort(m), Graphics.TEXT_JUSTIFY_CENTER);
-                dc.drawText(col2, y, Graphics.FONT_TINY, (height * height_multiplier).format("%.2f"), Graphics.TEXT_JUSTIFY_CENTER);
+                dc.drawText(col2, y, Graphics.FONT_TINY, (height * heightMultiplier).format("%.2f"), Graphics.TEXT_JUSTIFY_CENTER);
                 y = y + dc.getFontHeight(Graphics.FONT_TINY) - 4; // 22 for FR745
                 entries_for_date++;
             }
         }
 
-        // Center line
+        // Center line between columns
         dc.drawLine(x + w / 2, startY + 5, x + w / 2, y);
 
+        // Issue out of data warning
         if (i >= TideUtil.tideData(app).size()) {
-            System.println("h: " + h + " y: " + y + " startY: " + startY);
-            var maxY = getApp().screenHeight * 0.57;
-            y = y > maxY ? maxY : y;
             drawNoDataWarning(dc, x, y, w, h, (entries_for_date > 0 ? Rez.Strings.ranOutOfData : Rez.Strings.noDataAvailableForDate), true);
         }
     }
@@ -256,18 +253,15 @@ class BCTidesView extends WatchUi.View {
     }
 
     function drawCurrentHeight(dc as Dc) {
-        // Current height
+        // Current height string
         if (mPage != 0) {
             return; // Only display current height on today's page
         }
-        var units = "m";
+        var units = PropUtil.units();
         var duration_2h = new Time.Duration(Gregorian.SECONDS_PER_HOUR * 2);
         var tideHeight = TideUtil.getHeightAtT(Time.now().value(), duration_2h.value(), 0, app)[0];
         if (tideHeight != null) {
-            if (PropUtil.getUnits() == System.UNIT_STATUTE) {
-                units = "ft";
-                tideHeight *= TideUtil.FEET_PER_METER;
-            }
+            tideHeight *= PropUtil.heightMultiplier();
             dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
             dc.drawText(dc.getWidth() / 2, dc.getHeight() * 0.88, Graphics.FONT_MEDIUM, tideHeight.format("%.1f") + units, Graphics.TEXT_JUSTIFY_CENTER | Graphics. TEXT_JUSTIFY_VCENTER);
         }
@@ -320,7 +314,6 @@ class BCTidesView extends WatchUi.View {
         if (mPosition == null || mPosition.position == null || mPosition.accuracy == Position.QUALITY_NOT_AVAILABLE) {
             var cc = Toybox.Weather.getCurrentConditions() as Toybox.Weather.CurrentConditions;
             //System.println("Trying to get position from weather...");
-            //System.println(cc);
             if (cc != null) {
                 var pos = cc.observationLocationPosition as Position.Location;
                 if (pos != null) {
@@ -331,9 +324,7 @@ class BCTidesView extends WatchUi.View {
         }
     }
 
-    // Update the view
     function onUpdate(dc as Dc) as Void {
-        // Call the parent onUpdate function to redraw the layout
         View.onUpdate(dc);
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
 
