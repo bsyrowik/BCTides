@@ -71,7 +71,7 @@ class BCTidesView extends WatchUi.View {
     function drawNoDataWarning(dc as Dc, x as Number, y as Number, message as Array<String>, showConfirmation as Boolean) as Void {
         dc.setColor(Graphics.COLOR_RED, Graphics.COLOR_TRANSPARENT);
         for (var i = 0; i < message.size(); i++) {
-            dc.drawText(x, y, Graphics.FONT_SMALL, message[i], Graphics.TEXT_JUSTIFY_LEFT);
+            dc.drawText(x, y, Graphics.FONT_SMALL, message[i], Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
             y += dc.getFontHeight(Graphics.FONT_SMALL) * 0.8 as Number;
         }
 
@@ -105,7 +105,7 @@ class BCTidesView extends WatchUi.View {
         var current_t = start.value();
         var height = TideUtil.getHeightAtT(current_t, duration_per_increment, 0, app)[0];
         if (height == null) {
-            drawNoDataWarning(dc, x, y, RezUtil.getNoDataForDateString(), true);
+            drawNoDataWarning(dc, x + w / 2, y + h / 2, RezUtil.getNoDataForDateString(), true);
             return false;
         }
         var last_y = y + h - (height / max_height) * h;
@@ -117,7 +117,7 @@ class BCTidesView extends WatchUi.View {
             var l = TideUtil.getHeightAtT(current_t, duration_per_increment, 0, app);
             height = l[0];       
             if (height == null) {
-                drawNoDataWarning(dc, x, y, RezUtil.getRanOutOfDataString(), true);
+                drawNoDataWarning(dc, x + w / 2, y + h / 2, RezUtil.getRanOutOfDataString(), true);
                 return true;
             }
             var this_y = y + h - (height / max_height) * h;
@@ -197,7 +197,7 @@ class BCTidesView extends WatchUi.View {
         dc.drawLine(x + w / 2, startY + 5, x + w / 2, y);
 
         if (i >= TideUtil.tideData(app).size()) {
-            drawNoDataWarning(dc, x, y, (entries_for_date > 0 ? RezUtil.getRanOutOfDataString() : RezUtil.getNoDataForDateString()), true);
+            drawNoDataWarning(dc, x + w / 2, y + h / 2, (entries_for_date > 0 ? RezUtil.getRanOutOfDataString() : RezUtil.getNoDataForDateString()), true);
         }
     }
 
@@ -335,9 +335,9 @@ class BCTidesView extends WatchUi.View {
                 }
             }
         } else if (StorageUtil.getStationCode() == null) {
-            drawNoDataWarning(dc, offset_x, offset_y, [WatchUi.loadResource(Rez.Strings.noStationSelectedMessage) as String], false);
+            drawNoDataWarning(dc, dc.getWidth() / 2, dc.getHeight() / 2, [WatchUi.loadResource(Rez.Strings.noStationSelectedMessage) as String], false);
         } else {
-            drawNoDataWarning(dc, offset_x, offset_y, RezUtil.getNoDataForStationString(), true);
+            drawNoDataWarning(dc, dc.getWidth() / 2, dc.getHeight() / 2, RezUtil.getNoDataForStationString(), true);
         }
 
         // Draw page indicator

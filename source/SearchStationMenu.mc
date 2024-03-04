@@ -12,7 +12,7 @@ class MyTextPickerDelegate extends WatchUi.TextPickerDelegate {
 
     function onTextEntered(text as String, changed as Boolean) as Boolean {
         SearchStationMenu.enteredText = text;
-        if (text.length() < 3) {        
+        if (text.length() < 2) {        
             // 1) Get rid of this picker view
             // 2) Add a new picker initialized with this text
             // 3) add notification

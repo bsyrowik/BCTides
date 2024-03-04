@@ -104,7 +104,7 @@ module WebRequests {
             Storage.setValue("hiloData", app._hilo);
             Storage.setValue("maxTide", maxTide);
             
-            System.println("Successfully updated station data");
+            System.println("Successfully updated station data at " + Toybox.Time.now().value());
                 
             if (app.background) {
                 Background.exit(true);
