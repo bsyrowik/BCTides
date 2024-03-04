@@ -8,13 +8,15 @@ class LoadMoreMenuDelegate extends SelectStationMenuDelegate {
     private var _depth as Number;
     private var _wrap as Boolean;
     private var _callback as Method;
+    private var _allowBack as Boolean;
 
-    public function initialize(callback as Method, data as Object, depth as Number, wrap as Boolean) {
+    public function initialize(callback as Method, data as Object, depth as Number, wrap as Boolean, allowBack as Boolean) {
         SelectStationMenuDelegate.initialize();
         _callback = callback;
         _data = data;
         _depth = depth;
         _wrap = wrap;
+        _allowBack = allowBack;
     }
 
     public function onBack() as Void {
@@ -27,6 +29,8 @@ class LoadMoreMenuDelegate extends SelectStationMenuDelegate {
     public function onWrap(key as Key) as Boolean {
         if (key == WatchUi.KEY_DOWN) {
             onFooter();
+        } else if (_allowBack && _depth > 1 && key == WatchUi.KEY_UP) {
+            WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
         }
         return false;
     }
@@ -42,6 +46,11 @@ class LoadMoreMenuDelegate extends SelectStationMenuDelegate {
     public function onFooter() as Void {
         if (_wrap) {
             _callback.invoke("Page " + (_depth + 1), _data, _depth + 1);
+        }
+    }
+    public function onTitle() as Void {
+        if (_allowBack && _depth > 1) {
+            WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
         }
     }
 }

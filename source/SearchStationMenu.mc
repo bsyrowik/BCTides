@@ -84,7 +84,7 @@ module SearchStationMenu {
         }
 
         if (stationsAdded > 0) {
-            var delegate = new LoadMoreMenuDelegate(new Lang.Method(SearchStationMenu, :pushListMenuHelper), i, depth, allowWrap);
+            var delegate = new LoadMoreMenuDelegate(new Lang.Method(SearchStationMenu, :pushListMenuHelper), i, depth, allowWrap, true);
             WatchUi.pushView(menu, delegate, WatchUi.SLIDE_IMMEDIATE);
         } else {
             if (depth == 1) {
