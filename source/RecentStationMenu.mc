@@ -1,4 +1,5 @@
 import Toybox.Lang;
+import Toybox.Graphics;
 
 using Toybox.WatchUi;
 
@@ -8,14 +9,14 @@ module RecentStationMenu {
         if (recents == null) {
             return;
         }
-        var menu = new WatchUi.Menu2({:title=>Rez.Strings.selectStationMenuRecent});
+        var menu = new WatchUi.CustomMenu(90, Graphics.COLOR_WHITE, {
+                :title => new CustomMenuTitle(Rez.Strings.selectStationMenuRecent)});
         for (var i = recents.size() - 1; i >= 0; i--) {
             menu.addItem(
-                new WatchUi.MenuItem(
+                new BasicCustomMenuItem(
+                    recents[i][0], // ID (station code)
                     recents[i][1], // Station Name
-                    "",
-                    recents[i][0], // Station Code
-                    {} // options
+                    ""
                 )
             );
         }

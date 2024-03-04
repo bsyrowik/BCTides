@@ -1,41 +1,39 @@
 import Toybox.Lang;
+import Toybox.Graphics;
 
 using Toybox.WatchUi;
 
 module StationMenu {
     function pushMenu() {
-        var menu = new WatchUi.Menu2({:title=>Rez.Strings.selectStationMenuTitle});
+        var menu = new WatchUi.CustomMenu(90, Graphics.COLOR_WHITE, {
+                :title => new CustomMenuTitle(Rez.Strings.selectStationMenuTitle)});
 
         menu.addItem(
-            new WatchUi.MenuItem(
-                Rez.Strings.selectStationMenuRecent,
-                "", // Sub-Label
+            new BasicCustomMenuItem(
                 StationMenuDelegate.MENU_STATION_RECENT, // identifier
-                {} // options
+                Rez.Strings.selectStationMenuRecent,
+                "" // Sub-Label
             )
         );
         menu.addItem(
-            new WatchUi.MenuItem(
-                Rez.Strings.selectStationMenuNearest,
-                "", // Sub-Label
+            new BasicCustomMenuItem(
                 StationMenuDelegate.MENU_STATION_NEAREST, // identifier
-                {} // options
+                Rez.Strings.selectStationMenuNearest,
+                "" // Sub-Label
             )
         );
         menu.addItem(
-            new WatchUi.MenuItem(
-                Rez.Strings.selectStationMenuAlphabetical,
-                "", // Sub-Label
+            new BasicCustomMenuItem(
                 StationMenuDelegate.MENU_STATION_ALPHABETICAL, // identifier
-                {} // options
+                Rez.Strings.selectStationMenuAlphabetical,
+                "" // Sub-Label
             )
         );
         menu.addItem(
-            new WatchUi.MenuItem(
-                Rez.Strings.selectStationMenuSearch,
-                "", // Sub-Label
+            new BasicCustomMenuItem(
                 StationMenuDelegate.MENU_STATION_SEARCH, // identifier
-                {} // options
+                Rez.Strings.selectStationMenuSearch,
+                "" // Sub-Label
             )
         );
 

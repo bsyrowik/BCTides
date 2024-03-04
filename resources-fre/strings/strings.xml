@@ -2,6 +2,8 @@
     <!-- cSpell:disable -->
     <string id="AppName">BC Tides</string>
 
+    <string id="mainMenuTitle">Paramètres</string>
+
     <string id="MainMenuLabel_nearby">La plus proche</string>
     <string id="MainMenuLabel_favorites">Favoris</string>
 

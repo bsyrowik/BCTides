@@ -27,7 +27,7 @@ class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
         } else if (item.getId() == MENU_SETTINGS_ENABLE_BACKGROUND_DL) {
             (item as MultiToggleMenuItem).next();
             // TODO: some action here to control whether or not we download background data?
-            // Can actually just check before we enable the timer.  Here, if we set it to "no", we can disable any existing timer?
+            // Here, if we set it to "no", we can disable any existing timer?
             // If we set it to "yes", should start the timer...
         } else if (item.getId() == MENU_GET_DATA) {
             WebRequests.getStationInfo();
@@ -46,7 +46,7 @@ class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
 module MainMenu {
     function pushMenu() {
         var menu = new WatchUi.CustomMenu(90, Graphics.COLOR_WHITE, {
-                :title => new CustomMenuTitle("Settings")
+                :title => new CustomMenuTitle(Rez.Strings.mainMenuTitle)
             });
         
         // Data Label

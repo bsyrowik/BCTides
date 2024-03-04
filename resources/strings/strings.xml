@@ -1,6 +1,8 @@
 <strings>
     <string id="AppName">BC Tides</string>
 
+    <string id="mainMenuTitle">Settings</string>
+
     <string id="MainMenuLabel_nearby">Nearby</string>
     <string id="MainMenuLabel_favorites">Favorites</string>
 

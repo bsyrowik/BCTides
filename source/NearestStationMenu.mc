@@ -96,6 +96,13 @@ class LoadMoreMenuDelegate extends SelectStationMenuDelegate {
         return false;
     }
 
+    public function onSelect(item) {
+        SelectStationMenuDelegate.onSelect(item);
+        for (var i = 0; i < _depth - 1; i++) {
+            WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
+        }
+    }
+
     // Handle footer being selected
     public function onFooter() as Void {
         if (_wrap) {

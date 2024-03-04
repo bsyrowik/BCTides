@@ -51,9 +51,13 @@ class LoadMoreMenu extends WatchUi.CustomMenu {
 class CustomMenuTitle extends WatchUi.Drawable {
     private var _title as String;
 
-    public function initialize(title as String) {
+    public function initialize(title as String or Symbol) {
         Drawable.initialize({});
-        _title = title;
+        if (title instanceof String) {
+            _title = title;
+        } else {
+            _title = WatchUi.loadResource(title) as String;
+        }
     }
 
     public function draw(dc as Dc) as Void {
@@ -97,11 +101,18 @@ class BasicCustomMenuItem extends WatchUi.CustomMenuItem {
         }
     }
 
+    public function getLabel() as String {
+        return _label instanceof String ? _label : WatchUi.loadResource(_label) as String;
+    }
+
     public function setSubLabel(subLabel as String or Symbol or Null) {
         if (subLabel == null || subLabel instanceof String) {
             _subLabel = subLabel;
         } else {
-            _subLabel = WatchUi.loadResource(subLabel);
+            _subLabel = WatchUi.loadResource(subLabel) as String;
+        }
+        if (_subLabel != null && _subLabel.length() == 0) {
+            _subLabel = null;
         }
     }
 }
