@@ -3,7 +3,6 @@ import Toybox.Lang;
 import Toybox.WatchUi;
 
 module NearestStationMenu {
-
     // All input values should be in radians.
     // Returns the 'distance squared', scaled to a 'unit' sized Earth.
     // Pass through the distance() function to get a distance in kilometers.
@@ -65,48 +64,7 @@ module NearestStationMenu {
             );
         }
 
-        var delegate = new LoadMoreMenuDelegate(h, depth, allowWrap);
+        var delegate = new LoadMoreMenuDelegate(new Lang.Method(NearestStationMenu, :pushNextMenu), h, depth, allowWrap);
         WatchUi.pushView(menu, delegate, WatchUi.SLIDE_IMMEDIATE);
-    }
-}
-
-class LoadMoreMenuDelegate extends SelectStationMenuDelegate {
-    private var _h as HeapOfPair;
-    private var _depth as Number;
-    private var _wrap as Boolean;
-
-    public function initialize(h as HeapOfPair, depth as Number, wrap as Boolean) {
-        SelectStationMenuDelegate.initialize();
-        _h = h;
-        _depth = depth;
-        _wrap = wrap;
-    }
-
-    public function onBack() as Void {
-        for (var i = 0; i < _depth; i++) {
-            WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
-        }
-    }
-
-    // Handle navigating off the end of the menu
-    public function onWrap(key as Key) as Boolean {
-        if (key == WatchUi.KEY_DOWN) {
-            onFooter();
-        }
-        return false;
-    }
-
-    public function onSelect(item) {
-        SelectStationMenuDelegate.onSelect(item);
-        for (var i = 0; i < _depth - 1; i++) {
-            WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
-        }
-    }
-
-    // Handle footer being selected
-    public function onFooter() as Void {
-        if (_wrap) {
-            NearestStationMenu.pushNextMenu("Page " + (_depth + 1), _h, _depth + 1);
-        }
     }
 }

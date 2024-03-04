@@ -3,7 +3,48 @@ import Toybox.Lang;
 import Toybox.WatchUi;
 import Toybox.Application.Properties;
 
+class LoadMoreMenuDelegate extends SelectStationMenuDelegate {
+    private var _data as Object;
+    private var _depth as Number;
+    private var _wrap as Boolean;
+    private var _callback as Method;
 
+    public function initialize(callback as Method, data as Object, depth as Number, wrap as Boolean) {
+        SelectStationMenuDelegate.initialize();
+        _callback = callback;
+        _data = data;
+        _depth = depth;
+        _wrap = wrap;
+    }
+
+    public function onBack() as Void {
+        for (var i = 0; i < _depth; i++) {
+            WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
+        }
+    }
+
+    // Handle navigating off the end of the menu
+    public function onWrap(key as Key) as Boolean {
+        if (key == WatchUi.KEY_DOWN) {
+            onFooter();
+        }
+        return false;
+    }
+
+    public function onSelect(item) {
+        SelectStationMenuDelegate.onSelect(item);
+        for (var i = 0; i < _depth - 1; i++) {
+            WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
+        }
+    }
+
+    // Handle footer being selected
+    public function onFooter() as Void {
+        if (_wrap) {
+            _callback.invoke("Page " + (_depth + 1), _data, _depth + 1);
+        }
+    }
+}
 
 class LoadMoreMenu extends WatchUi.CustomMenu {
     private var _title;
@@ -92,6 +133,7 @@ class BasicCustomMenuItem extends WatchUi.CustomMenuItem {
         dc.drawLine(0, dc.getHeight() - 1, dc.getWidth(), dc.getHeight() - 1);
 
         // Text
+        // FIXME: use a TextArea instead so we get auto-wrapping!!!  Especially important for localizations.
         dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
         if (isFocused() && _subLabel != null) {
             dc.drawText(dc.getWidth() / 2, dc.getHeight() * .3, font, sLabel, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);

@@ -24,13 +24,6 @@ module StationMenu {
         );
         menu.addItem(
             new BasicCustomMenuItem(
-                StationMenuDelegate.MENU_STATION_ALPHABETICAL, // identifier
-                Rez.Strings.selectStationMenuAlphabetical,
-                "" // Sub-Label
-            )
-        );
-        menu.addItem(
-            new BasicCustomMenuItem(
                 StationMenuDelegate.MENU_STATION_SEARCH, // identifier
                 Rez.Strings.selectStationMenuSearch,
                 "" // Sub-Label
@@ -48,7 +41,6 @@ class StationMenuDelegate extends WatchUi.Menu2InputDelegate {
     public enum {
         MENU_STATION_RECENT,
         MENU_STATION_NEAREST,
-        MENU_STATION_ALPHABETICAL,
         MENU_STATION_SEARCH
     }
 
@@ -62,14 +54,8 @@ class StationMenuDelegate extends WatchUi.Menu2InputDelegate {
             NearestStationMenu.pushNextMenu("Nearest", null, 1);
         } else if (item.getId() == MENU_STATION_RECENT) {
             RecentStationMenu.pushMenu();
-        } else if (item.getId() == MENU_STATION_ALPHABETICAL) {
-            // TODO: dynamic list of stations
         } else if (item.getId() == MENU_STATION_SEARCH) {
-            // TODO: get text input
-            /*
-            var text_picker = new MyInputDelegate();
-            text_picker.initialize();
-            */
+            SearchStationMenu.pushView("");
         }
     }
 }
