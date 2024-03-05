@@ -4,31 +4,40 @@ import Toybox.Graphics;
 using Toybox.WatchUi;
 
 module StationMenu {
-    function pushMenu() {
+    function pushMenu(pageNumber as Number, includeDelete as Boolean) {
         var menu = new WatchUi.CustomMenu(getApp().screenHeight / 3, Graphics.COLOR_WHITE, {
                 :title => new CustomMenuTitle(Rez.Strings.selectStationMenuTitle), :theme => null});
 
         menu.addItem(
             new BasicCustomMenuItem(
-                StationMenuDelegate.MENU_STATION_RECENT, // identifier
+                [StationMenuDelegate.MENU_STATION_RECENT, pageNumber], // identifier
                 Rez.Strings.selectStationMenuRecent,
                 "" // Sub-Label
             )
         );
         menu.addItem(
             new BasicCustomMenuItem(
-                StationMenuDelegate.MENU_STATION_NEAREST, // identifier
+                [StationMenuDelegate.MENU_STATION_NEAREST, pageNumber], // identifier
                 Rez.Strings.selectStationMenuNearest,
                 "" // Sub-Label
             )
         );
         menu.addItem(
             new BasicCustomMenuItem(
-                StationMenuDelegate.MENU_STATION_SEARCH, // identifier
+                [StationMenuDelegate.MENU_STATION_SEARCH, pageNumber], // identifier
                 Rez.Strings.selectStationMenuSearch,
                 "" // Sub-Label
             )
         );
+        if (includeDelete) {
+            menu.addItem(
+                new BasicCustomMenuItem(
+                    [StationMenuDelegate.MENU_STATION_DELETE, pageNumber], // identifier
+                    "Delete",
+                    "" // Sub-Label
+                )
+            );
+        }
 
         var delegate = new StationMenuDelegate();
         WatchUi.pushView(menu, delegate, WatchUi.SLIDE_IMMEDIATE);
@@ -41,7 +50,8 @@ class StationMenuDelegate extends WatchUi.Menu2InputDelegate {
     public enum {
         MENU_STATION_RECENT,
         MENU_STATION_NEAREST,
-        MENU_STATION_SEARCH
+        MENU_STATION_SEARCH,
+        MENU_STATION_DELETE
     }
 
     function initialize() {
@@ -50,12 +60,17 @@ class StationMenuDelegate extends WatchUi.Menu2InputDelegate {
 
     function onSelect(item) as Void {
         // TODO: search by coordinates?
-        if (item.getId() == MENU_STATION_NEAREST) {
+        var id = item.getId() as Array<Number>;
+        if (id[0] == MENU_STATION_NEAREST) {
             NearestStationMenu.pushNextMenu("Nearest", null, 1);
-        } else if (item.getId() == MENU_STATION_RECENT) {
+        } else if (id[0] == MENU_STATION_RECENT) {
             RecentStationMenu.pushMenu();
-        } else if (item.getId() == MENU_STATION_SEARCH) {
+        } else if (id[0] == MENU_STATION_SEARCH) {
             SearchStationMenu.pushView("");
+        } else if (id[0] == MENU_STATION_DELETE) {
+            // TODO
+            // Push confirmation?
+            WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
         }
     }
 }

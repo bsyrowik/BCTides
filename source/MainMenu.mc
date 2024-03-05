@@ -11,6 +11,7 @@ class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
         MENU_SETTINGS_DISP_MODE_ID,
         MENU_SETTINGS_ZONE_ID,
         MENU_GET_DATA,
+        MENU_MANAGE_STATIONS,
         MENU_SET_STATION,
         MENU_SETTINGS_GPS_ID,
         MENU_SETTINGS_ENABLE_BACKGROUND_DL
@@ -35,8 +36,10 @@ class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
             if (StorageUtil.getStationCode() == null) {
                 Notification.showNotification(WatchUi.loadResource(Rez.Strings.noStationSelectedMessage), 2000);
             }
+        } else if (item.getId() == MENU_MANAGE_STATIONS) {
+            ManageStationsMenu.pushMenu();
         } else if (item.getId() == MENU_SET_STATION) {
-            StationMenu.pushMenu();
+            StationMenu.pushMenu(/*pageNumber*/0, /*includeDelete*/true);
         } else if (item instanceof MultiToggleMenuItem) {
             item.next();
         }
@@ -49,7 +52,16 @@ module MainMenu {
                 :title => new CustomMenuTitle(Rez.Strings.mainMenuTitle),
                 :theme => null
             });
-        
+
+        // Select Station
+        menu.addItem(
+            new BasicCustomMenuItem(
+                MainMenuDelegate.MENU_MANAGE_STATIONS,
+                "Manage Stations",
+                null
+            )
+        );
+
         // Data Label
         menu.addItem(
             new MultiToggleMenuItem(
