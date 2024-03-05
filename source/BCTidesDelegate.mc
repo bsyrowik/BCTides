@@ -38,7 +38,7 @@ class BCTidesDelegate extends WatchUi.BehaviorDelegate {
 	}
 
 	function onSelect() {
-		onMenu();
+		//onMenu();
         return true;
 	}
 }   

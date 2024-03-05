@@ -123,7 +123,7 @@ class BasicCustomMenuItem extends WatchUi.CustomMenuItem {
     private var _label as String or Symbol;
     private var _subLabel as String or Null;
 
-    public function initialize(id as Number, label as String or Symbol, subLabel as String or Symbol or Null) {
+    public function initialize(id as Object or Null, label as String or Symbol, subLabel as String or Symbol or Null) {
         CustomMenuItem.initialize(id, {});
         _label = label;
         setSubLabel(subLabel);
@@ -184,7 +184,7 @@ class MultiToggleMenuItem extends BasicCustomMenuItem {
 
     public function initialize(label as Symbol,
                                subLabelOptions as Array<Symbol>,
-                               identifier as Number,
+                               identifier as Object or Null,
                                propName as String) {
         BasicCustomMenuItem.initialize(identifier, label, null);
         _subLabelOptions = subLabelOptions;
