@@ -1,14 +1,12 @@
 <strings>
     <!-- cSpell:disable -->
     <string id="AppName">BC Tides</string>
+    <string id="appVersionTitle">Version</string>
 
     <string id="mainMenuTitle">Paramètres</string>
 
     <string id="MainMenuLabel_nearby">La plus proche</string>
     <string id="MainMenuLabel_favorites">Favoris</string>
-
-    <string id="dataReceivedMessage">Données de marée reçues.</string>
-    <string id="noStationSelectedMessage">Sélectionnez d'abord une station!</string>
 
     <string id="unitsSettingTitle">Unités</string>
     <string id="unitsSettingPrompt">Sélectionnez les unités à utiliser</string>
@@ -37,34 +35,30 @@
     <string id="mainMenuLabelGetLocation">Obtenir l'emplacement</string>
     <string id="mainMenuLabelGetLocationSub">Trouver un GPS</string>
 
-    <string id="mainMenuLabelSelectStation">Sélectionner une station</string>
-    <string id="selectStationMenuTitle">Station</string>
-    <string id="selectStationMenuNearest">La plus proche</string>
-    <string id="selectStationMenuRecent">Récent</string>
-    <string id="selectStationMenuAlphabetical">Alphabétique</string>
-    <string id="selectStationMenuSearch">Recherche</string>
-
-    <string id="noDataAvailableForStation0">Aucune donnée</string>
-    <string id="noDataAvailableForStation1">disponible pour</string>
-    <string id="noDataAvailableForStation2">la station.</string>
-
-    <string id="noDataAvailableForDate0">Aucune donnée</string>
-    <string id="noDataAvailableForDate1">disponible pour</string>
-    <string id="noDataAvailableForDate2">la date.</string>
-
-    <string id="ranOutOfData0">N'ai plus de données!</string>
-
-    <string id="downloadDataPrompt">Télécharger des données de marée?</string>
-
-    <string id="tableHeadingTime">Temps</string>
-    <string id="tableHeadingTimeSpecifier">(local)</string>
-
-    <string id="tableHeadingHeight">Hauteur</string>
-
     <string id="backgroundDownloadSettingTitle">Mise à jour automatique</string>
     <string id="backgroundDownloadSettingPrompt">Gardez les données de marée à jour en les téléchargeant en arrière-plan.</string>
     <string id="yes">Oui</string>
     <string id="no">Non</string>
 
-    <string id="appVersionTitle">Version</string>
+    <string id="mainMenuLabelSelectStation">Sélectionner une station</string>
+    <string id="selectStationMenuTitle">Station</string>
+    <string id="selectStationMenuNearest">La plus proche</string>
+    <string id="selectStationMenuRecent">Récent</string>
+    <string id="selectStationMenuSearch">Recherche</string>
+
+    <!-- Warning/Error/Info Messages -->
+    <string id="noDataAvailableForStation">Aucune donnée disponible pour la station.</string>
+    <string id="noDataAvailableForDate">Aucune donnée disponible pour la date.</string>
+    <string id="ranOutOfData">N'ai plus de données!</string>
+    <string id="dataReceivedMessage">Données de marée reçues.</string>
+    <string id="noStationSelectedMessage">Sélectionnez d'abord une station!</string>
+
+    <!-- Prompt Messages -->
+    <string id="downloadDataPrompt">Télécharger des données de marée?</string>
+
+    <!-- Tide Table Headings -->
+    <string id="tableHeadingTime">Temps</string>
+    <string id="tableHeadingTimeSpecifier">(local)</string>
+    <string id="tableHeadingHeight">Hauteur</string>
+
 </strings>

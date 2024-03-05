@@ -42,6 +42,22 @@ module PropUtil {
         }
     }
 
+    (:glance)
+    function units() as String {
+        if (getUnits() == System.UNIT_STATUTE) {
+            return "ft";
+        }
+        return "m";
+    }
+
+    (:glance)
+    function heightMultiplier() as Float {
+        if (getUnits() == System.UNIT_STATUTE) {
+            return 3.28084;
+        }
+        return 1.0f;
+    }
+
     function getUnitsString() as String {
         var setting = Properties.getValue("unitsProp");
         var unitsSub = Rez.Strings.unitsSettingSystem as String;

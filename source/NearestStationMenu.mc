@@ -62,6 +62,8 @@ module NearestStationMenu {
             );
         }
 
+        // TODO: maybe cache each menu we push so we can scroll through them?
+        //  --> The min heap is destroyed after creating each subsequent menu...
         var delegate = new LoadMoreMenuDelegate(new Lang.Method(NearestStationMenu, :pushNextMenu), h, depth, allowWrap, false);
         WatchUi.pushView(menu, delegate, WatchUi.SLIDE_IMMEDIATE);
     }

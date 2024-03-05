@@ -13,23 +13,13 @@ class BCTidesDelegate extends WatchUi.BehaviorDelegate {
 	}
 
     function onNextPage() {
-        if (mView.mPage < mView.mPageCount - 1) {
-            mView.mPage += 1;
-        } else {
-            mView.mPage = 0;
-        }
-        mView.mPageUpdated = true;
+        mView.nextPage();
         WatchUi.requestUpdate();
         return true;
     }
 
     function onPreviousPage() {
-        if (mView.mPage > 0) {
-            mView.mPage -= 1;
-        } else {
-            mView.mPage = mView.mPageCount - 1;
-        }
-        mView.mPageUpdated = true;
+        mView.prevPage();
         WatchUi.requestUpdate();
         return true;
     }

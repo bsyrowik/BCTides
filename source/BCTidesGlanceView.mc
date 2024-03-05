@@ -21,12 +21,10 @@ class BCTidesGlanceView extends WatchUi.GlanceView {
     function drawGlanceNew(dc as Dc, current_height as Number, next_event_height as Number, next_event_time as Number, next_event_type as String, current_station as String) as Void {
         //var current_direction = next_event_type.equals("H") ? "rising" : "falling";
         
-        var units = "m";
-        if (PropUtil.getUnits() == System.UNIT_STATUTE) {
-            units = "ft";
-            next_event_height *= TideUtil.FEET_PER_METER;
-            current_height *= TideUtil.FEET_PER_METER;
-        }
+        var units = PropUtil.units();
+        var heightMultiplier = PropUtil.heightMultiplier();
+        next_event_height *= heightMultiplier;
+        current_height *= heightMultiplier;
 
         var lineHeight = dc.getFontHeight(Graphics.FONT_GLANCE); // FONT_GLANCE:  FR745: 19 FR965: 42     FONT_GLANCE_NUMBER:  FR745: 19 FR965: 53
         lineHeight *= 0.85; // FR745: 16
@@ -59,12 +57,10 @@ class BCTidesGlanceView extends WatchUi.GlanceView {
     function drawGlance(dc as Dc, current_height as Number, next_event_height as Number, next_event_time as Number, next_event_type as String, current_station as String) as Void {
         var current_direction = next_event_type.equals("H") ? "rising" : "falling";
         
-        var units = "m";
-        if (PropUtil.getUnits() == System.UNIT_STATUTE) {
-            units = "ft";
-            next_event_height *= TideUtil.FEET_PER_METER;
-            current_height *= TideUtil.FEET_PER_METER;
-        }
+        var units = PropUtil.units();
+        var heightMultiplier = PropUtil.heightMultiplier();
+        next_event_height *= heightMultiplier;
+        current_height *= heightMultiplier;
 
         var lineHeight = dc.getFontHeight(Graphics.FONT_GLANCE); // FONT_GLANCE:  FR745: 19 FR965: 42     FONT_GLANCE_NUMBER:  FR745: 19 FR965: 53
         lineHeight *= 0.85; // FR745: 16
