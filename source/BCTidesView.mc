@@ -21,20 +21,12 @@ class BCTidesView extends WatchUi.View {
     private var mPageUpdated = true;
 
     public function nextPage() as Void {
-        if (mPage < mPageCount - 1) {
-            mPage += 1;
-        } else {
-            mPage = 0;
-        }
+        mPage = (mPage + 1) % mPageCount;
         mPageUpdated = true;
     }
 
     public function prevPage() as Void {
-        if (mPage > 0) {
-            mPage -= 1;
-        } else {
-            mPage = mPageCount - 1;
-        }
+        mPage = (mPage + mPageCount - 1) % mPageCount;
         mPageUpdated = true;
     }
 
