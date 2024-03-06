@@ -35,7 +35,7 @@ module NearestStationMenu {
         return h;
     }
 
-    function pushNextMenu(title as String, h as HeapOfPair or Null, depth as Number) as Void {
+    function pushNextMenu(title as String, h as HeapOfPair or Null, ndx as Number, depth as Number) as Void {
         var stationList = RezUtil.getStationData() as Array<Dictionary>;
         if (h == null) {
             h = buildHeap(stationList);
@@ -55,7 +55,7 @@ module NearestStationMenu {
             var dist = distance(p.distance);
             menu.addItem(
                 new BasicCustomMenuItem(
-                    stationList[p.index]["code"],
+                    [ndx, stationList[p.index]["code"]],
                     stationList[p.index]["name"],
                     dist.format("%.2f") + "km"
                 )
@@ -64,7 +64,7 @@ module NearestStationMenu {
 
         // TODO: maybe cache each menu we push so we can scroll through them?
         //  --> The min heap is destroyed after creating each subsequent menu...
-        var delegate = new LoadMoreMenuDelegate(new Lang.Method(NearestStationMenu, :pushNextMenu), h, depth, allowWrap, false);
+        var delegate = new LoadMoreMenuDelegate(new Lang.Method(NearestStationMenu, :pushNextMenu), h, ndx, depth, allowWrap, false);
         WatchUi.pushView(menu, delegate, WatchUi.SLIDE_IMMEDIATE);
     }
 }

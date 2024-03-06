@@ -62,15 +62,17 @@ class StationMenuDelegate extends WatchUi.Menu2InputDelegate {
         // TODO: search by coordinates?
         var id = item.getId() as Array<Number>;
         if (id[0] == MENU_STATION_NEAREST) {
-            NearestStationMenu.pushNextMenu("Nearest", null, 1);
+            NearestStationMenu.pushNextMenu("Nearest", null, id[1], 1);
         } else if (id[0] == MENU_STATION_RECENT) {
-            RecentStationMenu.pushMenu();
+            RecentStationMenu.pushMenu(id[1]);
         } else if (id[0] == MENU_STATION_SEARCH) {
-            SearchStationMenu.pushView("");
+            SearchStationMenu.pushView("", id[1]);
         } else if (id[0] == MENU_STATION_DELETE) {
-            // TODO
-            // Push confirmation?
+            // TODO Push confirmation before deleting?
+            StorageUtil.setStation(null, null, id[1]);
             WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
+            WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
+            ManageStationsMenu.pushMenu();
         }
     }
 }
