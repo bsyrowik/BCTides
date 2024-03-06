@@ -15,16 +15,16 @@ module Notification {
 
     // Behavior Delegate that pops the view on any input
     class NotificationViewDelegate extends WatchUi.BehaviorDelegate {
-        private var mView;
+        private var _view;
         
         function initialize(view as NotificationView) {
-            mView = view;
+            _view = view;
             BehaviorDelegate.initialize();
         }
         
         // Helper function - all events produce same behavior
         private function processEvent(event) as Boolean {
-            mView.disableTimer();
+            _view.disableTimer();
             WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
             return true;
         }
@@ -37,12 +37,12 @@ module Notification {
 
     // View to display a message
     class NotificationView extends WatchUi.View {
-        private var mTimer = null;
-        private var mText;
+        private var _timer = null;
+        private var _text;
 
         function disableTimer() as Void {
-            if (mTimer != null) {
-                mTimer.stop();
+            if (_timer != null) {
+                _timer.stop();
             }
         }
 
@@ -52,17 +52,17 @@ module Notification {
 
         function initialize(message as String, timeout as Number or Null) {
             View.initialize();
-            mText = message;
+            _text = message;
             if (timeout != null) {
-                mTimer = new Timer.Timer();
-                mTimer.start(method(:timerCallback), timeout, false);  // Auto-dismiss after 'timeout' milliseconds
+                _timer = new Timer.Timer();
+                _timer.start(method(:timerCallback), timeout, false);  // Auto-dismiss after 'timeout' milliseconds
             }
         }
 
         public function onLayout( dc as Dc ) as Void {
             setLayout(Rez.Layouts.NotificationLayout(dc));
             var notificationText = View.findDrawableById("notificationText") as Text;
-            notificationText.setText(mText);
+            notificationText.setText(_text);
         }
 
         public function onUpdate( dc as Dc) as Void {

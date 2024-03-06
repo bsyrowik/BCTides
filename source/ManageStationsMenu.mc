@@ -37,6 +37,7 @@ class ManageStationsMenuDelegate extends WatchUi.Menu2InputDelegate {
 
     function onSelect(item) as Void {
         System.println("Configuring station " + item.getId());
-        StationMenu.pushMenu(/*pageNumber*/item.getId() as Number, /* includeDelete */(StorageUtil.getStationCode(item.getId() as Number) != null));
+        var addDeleteOption = StorageUtil.getStationCode(item.getId() as Number) != null;
+        StationMenu.pushMenu(/*stationIndex*/item.getId() as Number, addDeleteOption);
     }
 }

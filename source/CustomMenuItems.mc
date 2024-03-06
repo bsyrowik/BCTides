@@ -6,16 +6,16 @@ import Toybox.Application.Properties;
 class LoadMoreMenuDelegate extends SelectStationMenuDelegate {
     private var _data as Object;
     private var _depth as Number;
-    private var _ndx as Number;
+    private var _stationIndex as Number;
     private var _wrap as Boolean;
     private var _callback as Method;
     private var _allowBack as Boolean;
 
-    public function initialize(callback as Method, data as Object, ndx as Number, depth as Number, wrap as Boolean, allowBack as Boolean) {
+    public function initialize(callback as Method, data as Object, stationIndex as Number, depth as Number, wrap as Boolean, allowBack as Boolean) {
         SelectStationMenuDelegate.initialize();
         _callback = callback;
         _data = data;
-        _ndx = ndx;
+        _stationIndex = stationIndex;
         _depth = depth;
         _wrap = wrap;
         _allowBack = allowBack;
@@ -47,7 +47,7 @@ class LoadMoreMenuDelegate extends SelectStationMenuDelegate {
     // Handle footer being selected
     public function onFooter() as Void {
         if (_wrap) {
-            _callback.invoke("Page " + (_depth + 1), _data, _ndx, _depth + 1);
+            _callback.invoke("Page " + (_depth + 1), _data, _stationIndex, _depth + 1); // Fixme: Rez.Strings
         }
     }
     public function onTitle() as Void {

@@ -9,11 +9,11 @@ class Pair {
 
 // Min-heap used to find the N nearest tide stations
 class HeapOfPair {
-    var heapSize as Number;
-    var A as Array<Pair>;
+    private var _heapSize as Number;
+    private var _A as Array<Pair>;
     function initialize(size as Number) {
-        A = [new Pair()];
-        heapSize = 0;
+        _A = [new Pair()];
+        _heapSize = 0;
     }
 
     function parent(i as Number) as Number {
@@ -27,42 +27,42 @@ class HeapOfPair {
     }
 
     function swap(a as Number, b as Number) as Void {
-        var tmp_d = A[a].distance;
-        var tmp_i = A[a].index;
-        A[a].distance = A[b].distance;
-        A[a].index = A[b].index;
-        A[b].distance = tmp_d;
-        A[b].index = tmp_i;
+        var tmp_d = _A[a].distance;
+        var tmp_i = _A[a].index;
+        _A[a].distance = _A[b].distance;
+        _A[a].index = _A[b].index;
+        _A[b].distance = tmp_d;
+        _A[b].index = tmp_i;
     }
 
     function heapDecreaseKey(i as Number, key as Float) as Void {
-        A[i].distance = key;
-        while (i > 0 && A[parent(i)].distance > A[i].distance) {
+        _A[i].distance = key;
+        while (i > 0 && _A[parent(i)].distance > _A[i].distance) {
             swap(i, parent(i));
             i = parent(i);
         }
     }
 
     function minHeapInsert(dist as Float, ndx as Number) as Void {
-        heapSize += 1;
-        if (heapSize > 1) {
-            A.add(new Pair());
+        _heapSize += 1;
+        if (_heapSize > 1) {
+            _A.add(new Pair());
         }
-        A[heapSize-1].distance = 1e12; // FIXME: Use FLOAT_MAX ??
-        A[heapSize-1].index = ndx;
-        heapDecreaseKey(heapSize-1, dist);
+        _A[_heapSize-1].distance = 1e12; // FIXME: Use FLOAT_MAX ??
+        _A[_heapSize-1].index = ndx;
+        heapDecreaseKey(_heapSize-1, dist);
     }
 
     function minHeapify(i as Number) as Void {
         var l = left(i);
         var r = right(i);
         var smallest;
-        if (l < heapSize && A[l].distance < A[i].distance) {
+        if (l < _heapSize && _A[l].distance < _A[i].distance) {
             smallest = l;
         } else {
             smallest = i;
         }
-        if (r < heapSize && A[r].distance < A[smallest].distance) {
+        if (r < _heapSize && _A[r].distance < _A[smallest].distance) {
             smallest = r;
         }
         if (smallest != i) {
@@ -72,12 +72,12 @@ class HeapOfPair {
     }
 
     function heapExtractMin() as Pair or Null {
-        if (heapSize < 1) {
+        if (_heapSize < 1) {
             return null;
         }
-        var max = A[0];
-        A[0] = A[heapSize-1];
-        heapSize -= 1;
+        var max = _A[0];
+        _A[0] = _A[_heapSize-1];
+        _heapSize -= 1;
         minHeapify(0);
         return max;
     }
@@ -86,7 +86,7 @@ class HeapOfPair {
     // For Debug
     function print() as Void {
         for (var i = 0; i < heapSize; i++) {
-            System.println(A[i].distance + " " + A[i].index);
+            System.println(_A[i].distance + " " + _A[i].index);
         }
     }
     function print_destructive(count as Number) as Void {

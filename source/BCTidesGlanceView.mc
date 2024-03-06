@@ -4,10 +4,10 @@ import Toybox.WatchUi;
 
 (:glance)
 class BCTidesGlanceView extends WatchUi.GlanceView {
-    var app;
+    private var _app as BCTidesApp;
 
-    function initialize(the_app) {
-        app = the_app;
+    function initialize(the_app as BCTidesApp) {
+        _app = the_app;
         GlanceView.initialize();
     }
 
@@ -88,14 +88,14 @@ class BCTidesGlanceView extends WatchUi.GlanceView {
     function onUpdate(dc as Dc) {
 		var now = Time.now().value();
 
-        var next_event = TideUtil.getNextEvent(now, app, 0);
+        var next_event = TideUtil.getNextEvent(now, _app, 0);
         if (next_event[0] == null) {
             drawNoDataMessage(dc);
             return;
         }
 
-        if (TideUtil.tideData(app, 0) != null) {
-            var current_height = TideUtil.getHeightAtT(now, 1200, 0, app, 0)[0];
+        if (TideUtil.tideData(_app, 0) != null) {
+            var current_height = TideUtil.getHeightAtT(now, 1200, 0, _app, 0)[0];
             if (current_height == null) {
                 drawNoDataMessage(dc);
                 return;

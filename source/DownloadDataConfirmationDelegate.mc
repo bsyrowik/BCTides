@@ -3,15 +3,15 @@ import Toybox.Lang;
 using Toybox.WatchUi;
 
 class DownloadDataConfirmationDelegate extends WatchUi.ConfirmationDelegate {
-    var stationIndex = 0;
-    function initialize(ndx as Number) {
+    private var _stationIndex as Number;
+    function initialize(stationIndex as Number) {
         ConfirmationDelegate.initialize();
-        stationIndex = ndx;
+        _stationIndex = stationIndex;
     }
 
     function onResponse(response) {
         if (response == WatchUi.CONFIRM_YES) {
-            WebRequests.getStationInfo(stationIndex);
+            WebRequests.getStationInfo(_stationIndex);
         }
         return true;
     }

@@ -4,7 +4,7 @@ import Toybox.Graphics;
 using Toybox.WatchUi;
 
 module RecentStationMenu {
-    function pushMenu(ndx as Number) as Void {
+    function pushMenu(stationIndex as Number) as Void {
         var recents = StorageUtil.getRecentStations();
         if (recents == null) {
             return;
@@ -14,7 +14,7 @@ module RecentStationMenu {
         for (var i = recents.size() - 1; i >= 0; i--) {
             menu.addItem(
                 new BasicCustomMenuItem(
-                    [ndx, recents[i][0]], // ID (station code)
+                    [stationIndex, recents[i][0]], // ID (station code)
                     recents[i][1], // Station Name
                     ""
                 )
