@@ -8,27 +8,20 @@ module ManageStationsMenu {
         var menu = new WatchUi.CustomMenu(getApp().screenHeight / 3, Graphics.COLOR_WHITE, {
                 :title => new CustomMenuTitle(Rez.Strings.selectStationMenuTitle), :theme => null});
 
-        menu.addItem(
-            new BasicCustomMenuItem(
-                0, // identifier
-                StorageUtil.getStationName(),
-                "" // Sub-Label
-            )
-        );
-        menu.addItem(
-            new BasicCustomMenuItem(
-                1, // identifier
-                "+ Add",
-                "" // Sub-Label
-            )
-        );
-        menu.addItem(
-            new BasicCustomMenuItem(
-                2, // identifier
-                "+ Add",
-                "" // Sub-Label
-            )
-        );
+        for (var i = 0; i < 3; i++) { // FIXME: don't hardcode 3 here
+            var stationName = StorageUtil.getStationName(i);
+            var stationCode = StorageUtil.getStationCode(i);
+            menu.addItem(
+                new BasicCustomMenuItem(
+                    i, // identifier
+                    stationCode == null ? "+ Add" : stationName,
+                    "" // Sub-Label
+                )
+            );
+            if (stationCode == null) {
+                break;
+            }
+        }
 
         var delegate = new ManageStationsMenuDelegate();
         WatchUi.pushView(menu, delegate, WatchUi.SLIDE_IMMEDIATE);
@@ -44,6 +37,6 @@ class ManageStationsMenuDelegate extends WatchUi.Menu2InputDelegate {
 
     function onSelect(item) as Void {
         System.println("Configuring station " + item.getId());
-        StationMenu.pushMenu(/*pageNumber*/item.getId() as Number, /* includeDelete */(item.getId() == 0));
+        StationMenu.pushMenu(/*pageNumber*/item.getId() as Number, /* includeDelete */(StorageUtil.getStationCode(item.getId() as Number) != null));
     }
 }

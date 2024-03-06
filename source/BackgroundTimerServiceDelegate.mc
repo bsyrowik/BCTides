@@ -15,6 +15,8 @@ class BackgroundTimerServiceDelegate extends System.ServiceDelegate {
 
     public function onTemporalEvent() as Void {
         System.println("Attempting to retrieve tide data at " + Time.now().value());
-        WebRequests.getStationInfo();
+        for (var i = 0; i < StorageUtil.getNumValidStationCodes(); i++) {
+            WebRequests.getStationInfo(i); // null items always at end of array, so don't need to worry about which ones to load
+        }
     }
 }

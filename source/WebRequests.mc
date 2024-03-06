@@ -8,14 +8,15 @@ using Toybox.WatchUi;
 
 (:background)
 module WebRequests {    
-    function getStationData(station_id as String) as Void {
+    function getStationData(station_id as String, ndx as Number) as Void {
         //System.println("Getting station data...");
         var options = {
             :method => Communications.HTTP_REQUEST_METHOD_GET,
             :responseType => Communications.HTTP_RESPONSE_CONTENT_TYPE_JSON,
             :headers => {
                 "Content-Type" => Communications.REQUEST_CONTENT_TYPE_URL_ENCODED
-            }
+            },
+            :context => ndx
         };
         Communications.makeWebRequest( 
             "https://api-iwls.dfo-mpo.gc.ca/api/v1/stations/" + station_id + "/data",
@@ -29,9 +30,9 @@ module WebRequests {
         );
     }
 
-    function getStationInfo() as Void {
+    function getStationInfo(ndx as Number) as Void {
         //System.println("Getting station info...");
-        if (StorageUtil.getStationCode() == null) {
+        if (StorageUtil.getStationCode(ndx) == null) {
             return;
         }
         var options = {
@@ -39,19 +40,20 @@ module WebRequests {
             :responseType => Communications.HTTP_RESPONSE_CONTENT_TYPE_JSON,
             :headers => {
                 "Content-Type" => Communications.REQUEST_CONTENT_TYPE_URL_ENCODED
-            }
+            },
+            :context => ndx
         };
         Communications.makeWebRequest(
             "https://api-iwls.dfo-mpo.gc.ca/api/v1/stations/",
             {
-                "code" => StorageUtil.getStationCode()
+                "code" => StorageUtil.getStationCode(ndx)
             },
             options,
             new Method(WebRequests, :onReceiveStationInfo)
         );
     }
 
-    function onReceiveStationInfo(responseCode as Number, data as Dictionary?) as Void {
+    function onReceiveStationInfo(responseCode as Number, data as Dictionary?, context as Object) as Void {
         //System.println("onReceiveStationInfo called....");
         //System.println("  responseCode:" + responseCode.toString());
         if (responseCode == 200) { // OK!
@@ -59,7 +61,7 @@ module WebRequests {
                 var station = data[0] as Dictionary;
                 var station_id = station["id"].toString();
                 //var requested_station_data = station["officialName"].toString();
-                getStationData(station_id);
+                getStationData(station_id, context as Number);
             }
         } else if (responseCode == Communications.BLE_CONNECTION_UNAVAILABLE) {
             // TODO: try Wi-Fi bulk download?
@@ -69,11 +71,11 @@ module WebRequests {
         }
     }
 
-    function onReceive(responseCode as Number, data as Dictionary?) as Void {
+    function onReceive(responseCode as Number, data as Dictionary?, context as Object) as Void {
         //System.println("onReceive called....");
         //System.println("  responseCode:" + responseCode.toString());
         if (responseCode == 200) { // OK!
-            onReceiveData(data);
+            onReceiveData(data, context as Number);
         } else if (responseCode == Communications.BLE_CONNECTION_UNAVAILABLE) {
             // TODO: try Wi-Fi bulk download?
             System.println("Failed to load - BLE connection unavailable");
@@ -82,8 +84,9 @@ module WebRequests {
         }
     }
 
-    public function onReceiveData(args as Dictionary or String or Array or Null) as Void {
+    public function onReceiveData(args as Dictionary or String or Array or Null, ndx as Number) as Void {
         //System.println("View:onReceive() \"" + args.toString() + "\"");
+        // FIXME: deal with ndx!!!!
         if (args instanceof Array) {
             var app = getApp();
             var maxTide = 0.0;
@@ -104,7 +107,7 @@ module WebRequests {
             Storage.setValue("hiloData", app._hilo);
             Storage.setValue("maxTide", maxTide);
             
-            System.println("Successfully updated station data at " + Toybox.Time.now().value());
+            System.println("Successfully updated station '" + StorageUtil.getStationName(ndx) + "' data at " + Toybox.Time.now().value());
                 
             if (app.background) {
                 Background.exit(true);

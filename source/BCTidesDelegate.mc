@@ -5,7 +5,6 @@ using Toybox.WatchUi;
 
 class BCTidesDelegate extends WatchUi.BehaviorDelegate {
     var mView = null;
-    private var mGetDataMenuItem = null;
 
     function initialize(view) {
         mView = view;
@@ -24,12 +23,8 @@ class BCTidesDelegate extends WatchUi.BehaviorDelegate {
         return true;
     }
 
-    function setGetDataMenuItemSubLabel(name as String) as Void {
-        mGetDataMenuItem.setSubLabel(name);
-    }
-
     function onMenu() {
-        mGetDataMenuItem = MainMenu.pushMenu();
+        MainMenu.pushMenu();
         return true;
     }
 
@@ -38,7 +33,8 @@ class BCTidesDelegate extends WatchUi.BehaviorDelegate {
 	}
 
 	function onSelect() {
-		//onMenu();
+        mView.cycleStations();
+        WatchUi.requestUpdate();
         return true;
 	}
 }   

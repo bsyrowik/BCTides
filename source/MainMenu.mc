@@ -31,11 +31,7 @@ class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
             // Here, if we set it to "no", we can disable any existing timer?
             // If we set it to "yes", should start the timer...
         } else if (item.getId() == MENU_GET_DATA) {
-            WebRequests.getStationInfo();
-            WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
-            if (StorageUtil.getStationCode() == null) {
-                Notification.showNotification(WatchUi.loadResource(Rez.Strings.noStationSelectedMessage), 2000);
-            }
+            GetDataMenu.pushMenu();
         } else if (item.getId() == MENU_MANAGE_STATIONS) {
             ManageStationsMenu.pushMenu();
         } else if (item.getId() == MENU_SET_STATION) {
@@ -113,12 +109,13 @@ module MainMenu {
         );
 
         // Get Data
-        var getDataMenuItem = new BasicCustomMenuItem(
+        menu.addItem(
+            new BasicCustomMenuItem(
                 MainMenuDelegate.MENU_GET_DATA,
                 Rez.Strings.mainMenuLabelGetData,
-                StorageUtil.getStationName()
-            );
-        menu.addItem(getDataMenuItem);
+                ""
+            )
+        );
 
         // Background Download
         menu.addItem(
@@ -146,17 +143,7 @@ module MainMenu {
             )
         );
 
-        // Select Station
-        menu.addItem(
-            new BasicCustomMenuItem(
-                MainMenuDelegate.MENU_SET_STATION,
-                Rez.Strings.mainMenuLabelSelectStation,
-                null
-            )
-        );
-
         WatchUi.pushView(menu, new MainMenuDelegate(), WatchUi.SLIDE_IMMEDIATE);
-        return getDataMenuItem;
     }
 }
 

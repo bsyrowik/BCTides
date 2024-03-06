@@ -19,6 +19,14 @@ class BCTidesView extends WatchUi.View {
     private var mPage = 0;
     private var mPageCount = 7;
     private var mPageUpdated = true;
+    private var stationIndex = 0; // which station we're displaying for on the screen
+
+    public function cycleStations() as Void {
+        do {
+            stationIndex = (stationIndex + 1) % 3;
+        } while (stationIndex != 0 && StorageUtil.getStationCode(stationIndex) == null);
+        mPageUpdated = true;
+    }
 
     public function nextPage() as Void {
         mPage = (mPage + 1) % mPageCount;
@@ -102,7 +110,7 @@ class BCTidesView extends WatchUi.View {
 
         WatchUi.pushView(
             new WatchUi.Confirmation(WatchUi.loadResource(Rez.Strings.downloadDataPrompt) as String),
-            new DownloadDataConfirmationDelegate(),
+            new DownloadDataConfirmationDelegate(stationIndex),
             WatchUi.SLIDE_IMMEDIATE
         );
     }
@@ -277,7 +285,7 @@ class BCTidesView extends WatchUi.View {
     }
 
     function drawStationName(dc as Dc) {
-        dc.drawText(dc.getWidth() / 2, dc.getWidth() * 0.13, Graphics.FONT_XTINY, StorageUtil.getStationName(), Graphics.TEXT_JUSTIFY_CENTER);
+        dc.drawText(dc.getWidth() / 2, dc.getWidth() * 0.13, Graphics.FONT_XTINY, StorageUtil.getStationName(stationIndex), Graphics.TEXT_JUSTIFY_CENTER);
     }
 
     function updateLocation(position as Position.Location) as Void {
@@ -346,7 +354,7 @@ class BCTidesView extends WatchUi.View {
                 tableTides(dc, offset_x, offset_y - 10, width, height, selectedDay, selectedDay.add(duration_24h));
             }
             drawCurrentHeight(dc);
-        } else if (StorageUtil.getStationCode() == null) {
+        } else if (StorageUtil.getStationCode(stationIndex) == null) {
             drawNoDataWarning(dc, offset_x, offset_y, width, height, Rez.Strings.noStationSelectedMessage, false);
         } else {
             drawNoDataWarning(dc, offset_x, offset_y, width, height, Rez.Strings.noDataAvailableForStation, true);
