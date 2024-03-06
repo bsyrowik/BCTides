@@ -4,21 +4,21 @@ import Toybox.Lang;
 using Toybox.WatchUi;
 
 class BCTidesDelegate extends WatchUi.BehaviorDelegate {
-    var mView = null;
+    var view as BCTidesView;
 
-    function initialize(view) {
-        mView = view;
+    function initialize(associatedView as BCTidesView) {
+        view = associatedView;
 		WatchUi.BehaviorDelegate.initialize();
 	}
 
     function onNextPage() {
-        mView.nextPage();
+        view.nextPage();
         WatchUi.requestUpdate();
         return true;
     }
 
     function onPreviousPage() {
-        mView.prevPage();
+        view.prevPage();
         WatchUi.requestUpdate();
         return true;
     }
@@ -33,7 +33,7 @@ class BCTidesDelegate extends WatchUi.BehaviorDelegate {
 	}
 
 	function onSelect() {
-        mView.cycleStations();
+        view.cycleStations();
         WatchUi.requestUpdate();
         return true;
 	}

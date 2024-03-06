@@ -5,11 +5,11 @@ import Toybox.System;
 using Toybox.WatchUi;
 
 class MyTextPickerDelegate extends WatchUi.TextPickerDelegate {
-    var _ndx as Number;
+    private var _stationIndex as Number;
 
-    function initialize(ndx) {
+    function initialize(stationIndex) {
         TextPickerDelegate.initialize();
-        _ndx = ndx;
+        _stationIndex = stationIndex;
     }
 
     function onTextEntered(text as String, changed as Boolean) as Boolean {
@@ -20,7 +20,7 @@ class MyTextPickerDelegate extends WatchUi.TextPickerDelegate {
             // 3) add notification
             // 4) add sacrificial view that will get dismissed when we exit this function
             WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
-            SearchStationMenu.pushView(text, _ndx);
+            SearchStationMenu.pushView(text, _stationIndex);
             Notification.showNotification("Must be at least 2 characters.", 2000);
             WatchUi.pushView(new WatchUi.View(), new WatchUi.BehaviorDelegate(), WatchUi.SLIDE_IMMEDIATE); // Sacrificial view
         } else {
@@ -28,7 +28,7 @@ class MyTextPickerDelegate extends WatchUi.TextPickerDelegate {
             // 2) Add search results menu
             // 3) add sacrificial view that will get dismissed when we exit this function
             WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
-            SearchStationMenu.pushListMenu(_ndx);
+            SearchStationMenu.pushListMenu(_stationIndex);
             WatchUi.pushView(new WatchUi.View(), new WatchUi.BehaviorDelegate(), WatchUi.SLIDE_IMMEDIATE); // Sacrificial view
         }
         return false;
@@ -43,16 +43,16 @@ class MyTextPickerDelegate extends WatchUi.TextPickerDelegate {
 module SearchStationMenu {
     var enteredText = "" as String;
     var needle;
-    function pushView(startingText, ndx as Number) {
-        WatchUi.pushView(new WatchUi.TextPicker(startingText), new MyTextPickerDelegate(ndx), WatchUi.SLIDE_IMMEDIATE);
+    function pushView(startingText, stationIndex as Number) {
+        WatchUi.pushView(new WatchUi.TextPicker(startingText), new MyTextPickerDelegate(stationIndex), WatchUi.SLIDE_IMMEDIATE);
     }
 
-    function pushListMenu(ndx as Number) {
+    function pushListMenu(stationIndex as Number) {
         needle = enteredText.toLower();
-        pushListMenuHelper("Search\nResults", 0, ndx, 1);
+        pushListMenuHelper("Search\nResults", 0, stationIndex, 1);
     }
 
-    function pushListMenuHelper(title as String, startIndex as Number, ndx as Number, depth as Number) as Void {
+    function pushListMenuHelper(title as String, startIndex as Number, stationIndex as Number, depth as Number) as Void {
         var stationList = RezUtil.getStationData() as Array<Dictionary>;
         var stationsToShow = 7;
 
@@ -65,7 +65,7 @@ module SearchStationMenu {
             if (name.find(needle) != null) {
                 menu.addItem(
                     new BasicCustomMenuItem(
-                        [ndx, stationList[i]["code"]],
+                        [stationIndex, stationList[i]["code"]],
                         stationList[i]["name"],
                         ""
                     )
@@ -86,12 +86,12 @@ module SearchStationMenu {
         }
 
         if (stationsAdded > 0) {
-            var delegate = new LoadMoreMenuDelegate(new Lang.Method(SearchStationMenu, :pushListMenuHelper), i, ndx, depth, allowWrap, true);
+            var delegate = new LoadMoreMenuDelegate(new Lang.Method(SearchStationMenu, :pushListMenuHelper), i, stationIndex, depth, allowWrap, true);
             WatchUi.pushView(menu, delegate, WatchUi.SLIDE_IMMEDIATE);
         } else {
             if (depth == 1) {
                 // No results at all - go back to text picker
-                SearchStationMenu.pushView(enteredText, ndx);
+                SearchStationMenu.pushView(enteredText, stationIndex);
                 Notification.showNotification("No results!", 2000);
             } else {
                 Notification.showNotification("No more results!", 2000);

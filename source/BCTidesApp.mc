@@ -11,28 +11,28 @@ using Toybox.Time;
 class BCTidesApp extends Application.AppBase {
     var delegate = null;
     var view = null;
-    var _hilo as Array<Array<Array> or Null> or Null;
-    var tideDataValid as Array<Boolean>;
     var background = false;
     var screenHeight = null;
+    var tideData as Array<Array<Array> or Null> or Null;
+    var tideDataValid as Array<Boolean>;
 
     function initialize() {
         AppBase.initialize();
         tideDataValid = [false, false, false];
-        _hilo = null;
+        tideData = null;
     }
 
     private function loadData() as Void {
-        if (_hilo == null) {
-            _hilo = Storage.getValue("tideData") as Array<Array<Array> or Null> or Null;
-            if (_hilo != null) {
-                for (var i = 0; i < _hilo.size(); i++) {
-                    if (_hilo[i] != null) {
+        if (tideData == null) {
+            tideData = Storage.getValue("tideData") as Array<Array<Array> or Null> or Null;
+            if (tideData != null) {
+                for (var i = 0; i < tideData.size(); i++) {
+                    if (tideData[i] != null) {
                         tideDataValid[i] = true;
                     }
                 }
             } else {
-                _hilo = [null, null, null]; // FIXME: don't hardcode 3 entries!
+                tideData = [null, null, null]; // FIXME: don't hardcode 3 entries!
             }
         }
     }

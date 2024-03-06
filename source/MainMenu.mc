@@ -10,11 +10,10 @@ class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
         MENU_SETTINGS_DISP_TYPE_ID,
         MENU_SETTINGS_DISP_MODE_ID,
         MENU_SETTINGS_ZONE_ID,
-        MENU_GET_DATA,
-        MENU_MANAGE_STATIONS,
-        MENU_SET_STATION,
-        MENU_SETTINGS_GPS_ID,
-        MENU_SETTINGS_ENABLE_BACKGROUND_DL
+        MENU_SETTINGS_ENABLE_BACKGROUND_DL_ID,
+        MENU_MANAGE_STATIONS_ID,
+        MENU_GET_DATA_ID,
+        MENU_GET_GPS_ID
     }
 
     function initialize() {
@@ -22,20 +21,18 @@ class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
     }
 
     function onSelect(item) {
-        if (item.getId() == MENU_SETTINGS_GPS_ID) {
+        if (item.getId() == MENU_GET_GPS_ID) {
             getApp().view.onPosition(Toybox.Position.getInfo());
             WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
-        } else if (item.getId() == MENU_SETTINGS_ENABLE_BACKGROUND_DL) {
+        } else if (item.getId() == MENU_SETTINGS_ENABLE_BACKGROUND_DL_ID) {
             (item as MultiToggleMenuItem).next();
             // TODO: some action here to control whether or not we download background data?
             // Here, if we set it to "no", we can disable any existing timer?
             // If we set it to "yes", should start the timer...
-        } else if (item.getId() == MENU_GET_DATA) {
+        } else if (item.getId() == MENU_GET_DATA_ID) {
             GetDataMenu.pushMenu();
-        } else if (item.getId() == MENU_MANAGE_STATIONS) {
+        } else if (item.getId() == MENU_MANAGE_STATIONS_ID) {
             ManageStationsMenu.pushMenu();
-        } else if (item.getId() == MENU_SET_STATION) {
-            StationMenu.pushMenu(/*pageNumber*/0, /*includeDelete*/true);
         } else if (item instanceof MultiToggleMenuItem) {
             item.next();
         }
@@ -52,7 +49,7 @@ module MainMenu {
         // Select Station
         menu.addItem(
             new BasicCustomMenuItem(
-                MainMenuDelegate.MENU_MANAGE_STATIONS,
+                MainMenuDelegate.MENU_MANAGE_STATIONS_ID,
                 "Manage Stations",
                 null
             )
@@ -102,7 +99,7 @@ module MainMenu {
         // Get Location
         menu.addItem(
             new BasicCustomMenuItem(
-                MainMenuDelegate.MENU_SETTINGS_GPS_ID,
+                MainMenuDelegate.MENU_GET_GPS_ID,
                 Rez.Strings.mainMenuLabelGetLocation,
                 Rez.Strings.mainMenuLabelGetLocationSub
             )
@@ -111,7 +108,7 @@ module MainMenu {
         // Get Data
         menu.addItem(
             new BasicCustomMenuItem(
-                MainMenuDelegate.MENU_GET_DATA,
+                MainMenuDelegate.MENU_GET_DATA_ID,
                 Rez.Strings.mainMenuLabelGetData,
                 ""
             )
@@ -125,7 +122,7 @@ module MainMenu {
                     Rez.Strings.no,
                     Rez.Strings.yes
                 ],
-                MainMenuDelegate.MENU_SETTINGS_ENABLE_BACKGROUND_DL,
+                MainMenuDelegate.MENU_SETTINGS_ENABLE_BACKGROUND_DL_ID,
                 "backgroundDownloadProp"
             )
         );

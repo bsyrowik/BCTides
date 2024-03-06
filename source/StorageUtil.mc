@@ -27,12 +27,12 @@ module StorageUtil {
         return Storage.getValue("recentStations");
     }
 
-    function deleteMaxTide(ndx as Number) {
+    function deleteMaxTide(stationIndex as Number) {
         var maxTides = Storage.getValue("maxTides") as Array<Float or Null>;
         if (maxTides == null) {
             maxTides = [null, null, null]; // FIXME: hardcoded 3....
         }
-        maxTides = maxTides.slice(0, ndx).addAll(maxTides.slice(ndx + 1, null)).add(null);
+        maxTides = maxTides.slice(0, stationIndex).addAll(maxTides.slice(stationIndex + 1, null)).add(null);
         Storage.setValue("maxTides", maxTides);
     }
 
@@ -53,10 +53,10 @@ module StorageUtil {
         return maxTides[stationIndex];
     }
 
-    function setStation(code as Number or Null, name as String or Null, ndx as Number) as Void {
+    function setStation(code as Number or Null, name as String or Null, stationIndex as Number) as Void {
         var codes = Storage.getValue("selectedStationCodes") as Array<Number or Null> or Null;
         var names = Storage.getValue("selectedStationNames") as Array<String or Null> or Null;
-        if (code != null && codes != null && ndx < codes.size()) {
+        if (code != null && codes != null && stationIndex < codes.size()) {
             for (var i = 0; i < codes.size(); i++) {
                 // Don't allow duplicates
                 if (code == codes[i]) {
@@ -73,25 +73,25 @@ module StorageUtil {
                 codes.add(null);
             }
         }
-        if (ndx >= 3) {
+        if (stationIndex >= 3) {
             return; // FIXME: error?
         }
         if (code == null) {
-            System.println("removing element " + ndx + " from " + names);
+            System.println("removing element " + stationIndex + " from " + names);
             // Remove element, and shift up all remaining entries
-            names = names.slice(0, ndx).addAll(names.slice(ndx + 1, null)).add(null);
-            codes = codes.slice(0, ndx).addAll(codes.slice(ndx + 1, null)).add(null);
+            names = names.slice(0, stationIndex).addAll(names.slice(stationIndex + 1, null)).add(null);
+            codes = codes.slice(0, stationIndex).addAll(codes.slice(stationIndex + 1, null)).add(null);
             var tdv = getApp().tideDataValid as Array<Boolean>;
-            getApp().tideDataValid = tdv.slice(0, ndx).addAll(tdv.slice(ndx + 1, null)).add(false);
-            var data = getApp()._hilo as Array<Array<Array> or Null>;
-            getApp()._hilo = data.slice(0, ndx).addAll(data.slice(ndx + 1, null)).add(null);
-            deleteMaxTide(ndx);
+            getApp().tideDataValid = tdv.slice(0, stationIndex).addAll(tdv.slice(stationIndex + 1, null)).add(false);
+            var data = getApp().tideData as Array<Array<Array> or Null>;
+            getApp().tideData = data.slice(0, stationIndex).addAll(data.slice(stationIndex + 1, null)).add(null);
+            deleteMaxTide(stationIndex);
         } else {
-            names[ndx] = name;
-            codes[ndx] = code;
+            names[stationIndex] = name;
+            codes[stationIndex] = code;
             addRecentStation(code, name);
-            getApp().tideDataValid[ndx] = false;
-            getApp()._hilo[ndx] = null;
+            getApp().tideDataValid[stationIndex] = false;
+            getApp().tideData[stationIndex] = null;
         }
         System.println("  --> result: " + names);
         Storage.setValue("selectedStationCodes", codes);
@@ -112,20 +112,20 @@ module StorageUtil {
         return count;
     }
 
-    function getStationCode(ndx as Number) as String or Null {
+    function getStationCode(stationIndex as Number) as String or Null {
         var codes = Storage.getValue("selectedStationCodes") as Array<Number> or Null;
-        if (codes == null || ndx > codes.size() || codes[ndx] == null) {
+        if (codes == null || stationIndex > codes.size() || codes[stationIndex] == null) {
             return null;
         }
-        return codes[ndx].format("%05i").toString();
+        return codes[stationIndex].format("%05i").toString();
     }
 
     (:glance)
-    function getStationName(ndx as Number) as String {
+    function getStationName(stationIndex as Number) as String {
         var names = Storage.getValue("selectedStationNames") as Array<String> or Null;
-        if (names == null || ndx > names.size() || names[ndx] == null) {
+        if (names == null || stationIndex > names.size() || names[stationIndex] == null) {
             return "No station selected"; // FIXME Rez.Strings
         }
-        return names[ndx];
+        return names[stationIndex];
     }
 }
