@@ -86,26 +86,30 @@ module WebRequests {
 
     public function onReceiveData(args as Dictionary or String or Array or Null, ndx as Number) as Void {
         //System.println("View:onReceive() \"" + args.toString() + "\"");
-        // FIXME: deal with ndx!!!!
         if (args instanceof Array) {
             var app = getApp();
             var maxTide = 0.0;
             //System.println("Got an array!");
-            app._hilo = [];
+            if (app._hilo == null) {
+                app._hilo = [];
+                for (var i = 0; i < 3; i++) { // FIXME: do not hard code 3
+                    app._hilo.add([]);
+                }
+            }
+            app._hilo[ndx] = [];
             for (var i = 0; i < args.size(); i++) {
                 var eventData = args[i] as Dictionary;
                 var height = eventData["value"].toFloat();
                 if (height > maxTide) {
                     maxTide = height;
                 }
-                app._hilo.add([DateUtil.parseDateString(eventData["eventDate"].toString()).value(), height]);
+                app._hilo[ndx].add([DateUtil.parseDateString(eventData["eventDate"].toString()).value(), height]);
             }
-            app.hilo_updated = true;
-            app.tideDataValid = true;
-            //System.println(app._hilo.toString());
+            app.tideDataValid[ndx] = true;
+            //System.println(app._hilo[ndx].toString());
 
-            Storage.setValue("hiloData", app._hilo);
-            Storage.setValue("maxTide", maxTide);
+            Storage.setValue("tideData", app._hilo);
+            StorageUtil.setMaxTide(ndx, maxTide);
             
             System.println("Successfully updated station '" + StorageUtil.getStationName(ndx) + "' data at " + Toybox.Time.now().value());
                 

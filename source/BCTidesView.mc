@@ -12,14 +12,16 @@ using Toybox.Time.Gregorian;
 
 class BCTidesView extends WatchUi.View {
     hidden var mIndicatorL;
+    hidden var mStationIndicator;
     hidden var mPosition = null;
     hidden var needGPS = true;
-    hidden var app;
+    hidden var app as BCTidesApp;
 
     private var mPage = 0;
     private var mPageCount = 7;
     private var mPageUpdated = true;
     private var stationIndex = 0; // which station we're displaying for on the screen
+    private var stationCount = 3; // how many stations to display
 
     public function cycleStations() as Void {
         do {
@@ -38,10 +40,11 @@ class BCTidesView extends WatchUi.View {
         mPageUpdated = true;
     }
 
-    function initialize(the_app) {
+    function initialize(the_app as BCTidesApp) {
         app = the_app;
         View.initialize();
         mIndicatorL = new PageIndicatorRad(mPageCount, Graphics.COLOR_WHITE, ALIGN_CENTER_LEFT, /*margin*/5);
+        mStationIndicator = new PageIndicatorRad(stationCount, Graphics.COLOR_WHITE, ALIGN_CENTER_RIGHT, /*margin*/5);
     }
 
     function onPosition(info as Position.Info) as Void {
@@ -124,7 +127,7 @@ class BCTidesView extends WatchUi.View {
 
         dc.setColor(Graphics.COLOR_BLUE, Graphics.COLOR_TRANSPARENT);
 
-        var max_tide = Storage.getValue("maxTide");
+        var max_tide = StorageUtil.getMaxTide(stationIndex);
         if (max_tide == null) {
             max_tide = 6.0;
         }
@@ -133,7 +136,7 @@ class BCTidesView extends WatchUi.View {
         var start_x = x + margin;
         var last_label_x = 0;
         var current_t = start.value();
-        var height = TideUtil.getHeightAtT(current_t, duration_per_increment, 0, app)[0];
+        var height = TideUtil.getHeightAtT(current_t, duration_per_increment, 0, app, stationIndex)[0];
         if (height == null) {
             drawNoDataWarning(dc, x, y, w, h, Rez.Strings.noDataAvailableForDate, true);
             return false;
@@ -144,7 +147,7 @@ class BCTidesView extends WatchUi.View {
         for (var i = start_x + 1; i < x + w - margin; i = i + increment) {
             var this_x = i;
             current_t += duration_per_increment;
-            var l = TideUtil.getHeightAtT(current_t, duration_per_increment, 0, app);
+            var l = TideUtil.getHeightAtT(current_t, duration_per_increment, 0, app, stationIndex);
             height = l[0];       
             if (height == null) {
                 drawNoDataWarning(dc, x, y, w, h, Rez.Strings.ranOutOfData, true);
@@ -201,9 +204,9 @@ class BCTidesView extends WatchUi.View {
         
         var i;
         var entries_for_date = 0;
-        for (i = 0; i < TideUtil.tideData(app).size(); i++) {
-            var time = TideUtil.tideData(app)[i][0];
-            var height = TideUtil.tideData(app)[i][1];
+        for (i = 0; i < TideUtil.tideData(app, stationIndex).size(); i++) {
+            var time = TideUtil.tideData(app, stationIndex)[i][0];
+            var height = TideUtil.tideData(app, stationIndex)[i][1];
             if (time > end.value()) {
                 break;
             }
@@ -221,7 +224,7 @@ class BCTidesView extends WatchUi.View {
         dc.drawLine(x + w / 2, startY + 5, x + w / 2, y);
 
         // Issue out of data warning
-        if (i >= TideUtil.tideData(app).size()) {
+        if (i >= TideUtil.tideData(app, stationIndex).size()) {
             drawNoDataWarning(dc, x, y, w, h, (entries_for_date > 0 ? Rez.Strings.ranOutOfData : Rez.Strings.noDataAvailableForDate), true);
         }
     }
@@ -259,7 +262,7 @@ class BCTidesView extends WatchUi.View {
         }
         var units = PropUtil.units();
         var duration_2h = new Time.Duration(Gregorian.SECONDS_PER_HOUR * 2);
-        var tideHeight = TideUtil.getHeightAtT(Time.now().value(), duration_2h.value(), 0, app)[0];
+        var tideHeight = TideUtil.getHeightAtT(Time.now().value(), duration_2h.value(), 0, app, stationIndex)[0];
         if (tideHeight != null) {
             tideHeight *= PropUtil.heightMultiplier();
             dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
@@ -339,12 +342,13 @@ class BCTidesView extends WatchUi.View {
 
         // Draw page indicator
         mIndicatorL.draw(dc, mPage);
+        mStationIndicator.draw(dc, stationIndex);
 
         var offset_x = dc.getWidth() * 0.1 as Number;
         var offset_y = dc.getHeight() / 4;
         var width = dc.getWidth() * 0.8 as Number;
         var height = dc.getHeight() / 2;
-        if (TideUtil.tideData(app) != null && app.tideDataValid) {
+        if (TideUtil.tideData(app, stationIndex) != null && app.tideDataValid[stationIndex]) {
             var duration_24h = new Time.Duration(Gregorian.SECONDS_PER_HOUR * 24);
             if (PropUtil.getDisplayType() == PropUtil.DISPLAY_PROP_GRAPH) {
                 drawTideGraphBox(dc, offset_x, offset_y, width, height);
