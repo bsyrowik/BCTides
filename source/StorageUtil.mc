@@ -27,6 +27,32 @@ module StorageUtil {
         return Storage.getValue("recentStations");
     }
 
+    function deleteMaxTide(ndx as Number) {
+        var maxTides = Storage.getValue("maxTides") as Array<Float or Null>;
+        if (maxTides == null) {
+            maxTides = [null, null, null]; // FIXME: hardcoded 3....
+        }
+        maxTides = maxTides.slice(0, ndx).addAll(maxTides.slice(ndx + 1, null)).add(null);
+        Storage.setValue("maxTides", maxTides);
+    }
+
+    function setMaxTide(stationIndex as Number, maxTide as Float) as Void {
+        var maxTides = Storage.getValue("maxTides") as Array<Float>;
+        if (maxTides == null) {
+            maxTides = [null, null, null]; // FIXME: hardcoded 3....
+        }
+        maxTides[stationIndex] = maxTide;
+        Storage.setValue("maxTides", maxTides);
+    }
+
+    function getMaxTide(stationIndex as Number) as Float {
+        var maxTides = Storage.getValue("maxTides") as Array<Float>;
+        if (maxTides == null) {
+            maxTides = [null, null, null]; // FIXME: hardcoded 3....
+        }
+        return maxTides[stationIndex];
+    }
+
     function setStation(code as Number or Null, name as String or Null, ndx as Number) as Void {
         var codes = Storage.getValue("selectedStationCodes") as Array<Number or Null> or Null;
         var names = Storage.getValue("selectedStationNames") as Array<String or Null> or Null;
@@ -50,21 +76,26 @@ module StorageUtil {
         if (ndx >= 3) {
             return; // FIXME: error?
         }
-        names[ndx] = name;
-        codes[ndx] = code;
         if (code == null) {
             System.println("removing element " + ndx + " from " + names);
             // Remove element, and shift up all remaining entries
             names = names.slice(0, ndx).addAll(names.slice(ndx + 1, null)).add(null);
             codes = codes.slice(0, ndx).addAll(codes.slice(ndx + 1, null)).add(null);
-            System.println("  --> result: " + names);
+            var tdv = getApp().tideDataValid as Array<Boolean>;
+            getApp().tideDataValid = tdv.slice(0, ndx).addAll(tdv.slice(ndx + 1, null)).add(false);
+            var data = getApp()._hilo as Array<Array<Array> or Null>;
+            getApp()._hilo = data.slice(0, ndx).addAll(data.slice(ndx + 1, null)).add(null);
+            deleteMaxTide(ndx);
+        } else {
+            names[ndx] = name;
+            codes[ndx] = code;
+            addRecentStation(code, name);
+            getApp().tideDataValid[ndx] = false;
+            getApp()._hilo[ndx] = null;
         }
+        System.println("  --> result: " + names);
         Storage.setValue("selectedStationCodes", codes);
         Storage.setValue("selectedStationNames", names);
-        if (code != null) {
-            addRecentStation(code, name);
-            getApp().tideDataValid = false;  // Fixme: should be array
-        }
     }
 
     function getNumValidStationCodes() as Number {

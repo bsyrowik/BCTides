@@ -11,21 +11,28 @@ using Toybox.Time;
 class BCTidesApp extends Application.AppBase {
     var delegate = null;
     var view = null;
-    var _hilo = null;
-    var hilo_updated = false;
-    var tideDataValid = false;
+    var _hilo as Array<Array<Array> or Null> or Null;
+    var tideDataValid as Array<Boolean>;
     var background = false;
     var screenHeight = null;
 
     function initialize() {
         AppBase.initialize();
+        tideDataValid = [false, false, false];
+        _hilo = null;
     }
 
     private function loadData() as Void {
         if (_hilo == null) {
-            _hilo = Storage.getValue("hiloData") as Array<Array>;
+            _hilo = Storage.getValue("tideData") as Array<Array<Array> or Null> or Null;
             if (_hilo != null) {
-                tideDataValid = true;
+                for (var i = 0; i < _hilo.size(); i++) {
+                    if (_hilo[i] != null) {
+                        tideDataValid[i] = true;
+                    }
+                }
+            } else {
+                _hilo = [null, null, null]; // FIXME: don't hardcode 3 entries!
             }
         }
     }
@@ -37,9 +44,6 @@ class BCTidesApp extends Application.AppBase {
 
     // onStop() is called when your application is exiting
     function onStop(state as Dictionary?) as Void {
-        if (_hilo != null && hilo_updated) {
-            Storage.setValue("hiloData", _hilo);
-        }
     }
 
     // Settings affect the display (units, display type, etc.)
