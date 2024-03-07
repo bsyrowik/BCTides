@@ -24,7 +24,7 @@ module GetDataMenu {
             );
         }
 
-        for (var i = 0; i < 3; i++) { // FIXME: don't hardcode 3 here
+        for (var i = 0; i < getApp().stationsToShow; i++) {
             var stationName = StorageUtil.getStationName(i);
             var stationCode = StorageUtil.getStationCode(i);
             if (stationCode == null) {
@@ -52,15 +52,15 @@ class GetDataMenuDelegate extends WatchUi.Menu2InputDelegate {
     function onSelect(item) as Void {
         var id = item.getId() as Number;
         if (id == -1) {
-            // Get all
+            // Get data for all stations
             for (var i = 0; i < StorageUtil.getNumValidStationCodes(); i++) {
                 if (StorageUtil.getStationCode(i) != null) {
                     WebRequests.getStationInfo(i);
                 }
             }
         } else {
+            // Get data for a specific station
             WebRequests.getStationInfo(id);
-            // Get for a specific station
         }
         WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
     }

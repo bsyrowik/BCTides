@@ -4,17 +4,17 @@ import Toybox.Graphics;
 using Toybox.WatchUi;
 
 module ManageStationsMenu {
-    function pushMenu() {
+    function pushMenu() as Void {
         var menu = new WatchUi.CustomMenu(getApp().screenHeight / 3, Graphics.COLOR_WHITE, {
                 :title => new CustomMenuTitle(Rez.Strings.selectStationMenuTitle), :theme => null});
 
-        for (var i = 0; i < 3; i++) { // FIXME: don't hardcode 3 here
+        for (var i = 0; i < getApp().stationsToShow; i++) {
             var stationName = StorageUtil.getStationName(i);
             var stationCode = StorageUtil.getStationCode(i);
             menu.addItem(
                 new BasicCustomMenuItem(
                     i, // identifier
-                    stationCode == null ? "+ Add" : stationName,
+                    stationCode == null ? "+ Add" : stationName, // FIXME: Rez.Strings
                     "" // Sub-Label
                 )
             );
@@ -25,8 +25,6 @@ module ManageStationsMenu {
 
         var delegate = new ManageStationsMenuDelegate();
         WatchUi.pushView(menu, delegate, WatchUi.SLIDE_IMMEDIATE);
-
-        return true;
     }
 }
 
@@ -36,7 +34,6 @@ class ManageStationsMenuDelegate extends WatchUi.Menu2InputDelegate {
     }
 
     function onSelect(item) as Void {
-        System.println("Configuring station " + item.getId());
         var addDeleteOption = StorageUtil.getStationCode(item.getId() as Number) != null;
         StationMenu.pushMenu(/*stationIndex*/item.getId() as Number, addDeleteOption);
     }

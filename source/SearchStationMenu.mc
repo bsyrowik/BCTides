@@ -14,14 +14,14 @@ class MyTextPickerDelegate extends WatchUi.TextPickerDelegate {
 
     function onTextEntered(text as String, changed as Boolean) as Boolean {
         SearchStationMenu.enteredText = text;
-        if (text.length() < 2) {        
+        if (text.length() < 2) { // FIXME: magic number
             // 1) Get rid of this picker view
             // 2) Add a new picker initialized with this text
             // 3) add notification
             // 4) add sacrificial view that will get dismissed when we exit this function
             WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
             SearchStationMenu.pushView(text, _stationIndex);
-            Notification.showNotification("Must be at least 2 characters.", 2000);
+            Notification.showNotification("Must be at least 2 characters.", 2000); // FIXME: Rez.Strings
             WatchUi.pushView(new WatchUi.View(), new WatchUi.BehaviorDelegate(), WatchUi.SLIDE_IMMEDIATE); // Sacrificial view
         } else {
             // 1) Get rid of this picker view
@@ -35,7 +35,6 @@ class MyTextPickerDelegate extends WatchUi.TextPickerDelegate {
     }
 
     function onCancel() as Boolean {
-        System.println("Canceled");
         return false;
     }
 }
@@ -43,20 +42,20 @@ class MyTextPickerDelegate extends WatchUi.TextPickerDelegate {
 module SearchStationMenu {
     var enteredText = "" as String;
     var needle;
-    function pushView(startingText, stationIndex as Number) {
+    function pushView(startingText, stationIndex as Number) as Void {
         WatchUi.pushView(new WatchUi.TextPicker(startingText), new MyTextPickerDelegate(stationIndex), WatchUi.SLIDE_IMMEDIATE);
     }
 
-    function pushListMenu(stationIndex as Number) {
+    function pushListMenu(stationIndex as Number) as Void {
         needle = enteredText.toLower();
-        pushListMenuHelper("Search\nResults", 0, stationIndex, 1);
+        pushListMenuHelper("Search\nResults", 0, stationIndex, 1); // FIXME: Rez.Strings
     }
 
     function pushListMenuHelper(title as String, startIndex as Number, stationIndex as Number, depth as Number) as Void {
         var stationList = RezUtil.getStationData() as Array<Dictionary>;
         var stationsToShow = 7;
 
-        var menu = new LoadMoreMenu(title, "Page " + (depth + 1), getApp().screenHeight / 3, Graphics.COLOR_WHITE, {:theme => null});
+        var menu = new LoadMoreMenu(title, "Page " + (depth + 1), getApp().screenHeight / 3, Graphics.COLOR_WHITE, {:theme => null}); // FIXME: Rez.Strings
 
         var i = startIndex;
         var stationsAdded = 0;
@@ -92,9 +91,9 @@ module SearchStationMenu {
             if (depth == 1) {
                 // No results at all - go back to text picker
                 SearchStationMenu.pushView(enteredText, stationIndex);
-                Notification.showNotification("No results!", 2000);
+                Notification.showNotification("No results!", 2000); // FIXME: Rez.Strings
             } else {
-                Notification.showNotification("No more results!", 2000);
+                Notification.showNotification("No more results!", 2000); // FIXME: Rez.Strings
             }
         }
     }

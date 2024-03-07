@@ -11,17 +11,17 @@ using Toybox.Time;
 using Toybox.Time.Gregorian;
 
 class BCTidesView extends WatchUi.View {
-    hidden var _pageIndicator;
-    hidden var _stationIndicator;
-    hidden var _position = null;
-    hidden var _needGPS = true;
-    hidden var _app as BCTidesApp;
+    private var _pageIndicator as PageIndicatorRad;
+    private var _stationIndicator as PageIndicatorRad;
+    private var _position as Position.Info or Null = null;
+    private var _needGPS as Boolean = true;
+    private var _app as BCTidesApp;
 
-    private var _page = 0;
-    private var _pageCount = 7;
-    private var _pageUpdated = true;
-    private var _stationIndex = 0; // which station we're displaying for on the screen
-    private var _stationCount = 3; // how many stations to display
+    private var _page as Number = 0;
+    private var _pageCount as Number = 7;
+    private var _pageUpdated as Boolean = true;
+    private var _stationIndex as Number = 0; // which station we're displaying for on the screen
+    private var _stationCount as Number = 3; // how many stations to display
 
     public function cycleStations() as Void {
         do {
@@ -229,7 +229,7 @@ class BCTidesView extends WatchUi.View {
         }
     }
 
-    function drawTableTimeTicks(dc as Dc, offset_x as Number, width as Number, offset_y as Number, height as Number) {
+    function drawTableTimeTicks(dc as Dc, offset_x as Number, width as Number, offset_y as Number, height as Number) as Void {
         // Bottom
         dc.drawLine(offset_x + width * 1 / 8, offset_y + height - 5, offset_x + width * 1 / 8, offset_y + height);
         dc.drawLine(offset_x + width * 2 / 8, offset_y + height - 8, offset_x + width * 2 / 8, offset_y + height);
@@ -248,14 +248,14 @@ class BCTidesView extends WatchUi.View {
         dc.drawLine(offset_x + width * 7 / 8, offset_y + 5, offset_x + width * 7 / 8, offset_y);
     }
 
-    function drawTideGraphBox(dc as Dc, offset_x as Number, offset_y as Number, width as Number, height as Number) {
+    function drawTideGraphBox(dc as Dc, offset_x as Number, offset_y as Number, width as Number, height as Number) as Void {
         dc.setColor(Graphics.COLOR_DK_GRAY, Graphics.COLOR_TRANSPARENT);
         dc.drawRectangle(offset_x, offset_y, width, height);
 
         drawTableTimeTicks(dc, offset_x, width, offset_y, height);
     }
 
-    function drawCurrentHeight(dc as Dc) {
+    function drawCurrentHeight(dc as Dc) as Void {
         // Current height string
         if (_page != 0) {
             return; // Only display current height on today's page
@@ -270,7 +270,7 @@ class BCTidesView extends WatchUi.View {
         }
     }
 
-    function drawNowLine(dc as Dc, today as Time.Moment, offset_x as Number, offset_y as Number, width as Number, height as Number) {
+    function drawNowLine(dc as Dc, today as Time.Moment, offset_x as Number, offset_y as Number, width as Number, height as Number) as Void {
         // Draw 'now' line
         if (_page != 0) {
             return; // Only draw 'now' line on today's page
@@ -282,12 +282,12 @@ class BCTidesView extends WatchUi.View {
         dc.drawLine(x1 - 1, offset_y + 1, x1 - 1, offset_y + height - 1);
     }
 
-    function drawDateString(dc as Dc, selectedDay as Time.Moment) {
+    function drawDateString(dc as Dc, selectedDay as Time.Moment) as Void {
         var dateInfo = Gregorian.info(selectedDay, Time.FORMAT_MEDIUM);
         dc.drawText(dc.getWidth() / 2, 8, Graphics.FONT_TINY, dateInfo.month + " " + dateInfo.day.toString(), Graphics.TEXT_JUSTIFY_CENTER);
     }
 
-    function drawStationName(dc as Dc) {
+    function drawStationName(dc as Dc) as Void {
         dc.drawText(dc.getWidth() / 2, dc.getWidth() * 0.13, Graphics.FONT_XTINY, StorageUtil.getStationName(_stationIndex), Graphics.TEXT_JUSTIFY_CENTER);
     }
 
@@ -295,7 +295,7 @@ class BCTidesView extends WatchUi.View {
         TideUtil.currentPosition = position;
     }
 
-    function dealWithPosition() {
+    function dealWithPosition() as Void {
         if (_needGPS) {
 	    	if (_position == null || _position.accuracy == null || _position.accuracy < Position.QUALITY_POOR) {
 		    	_position = Position.getInfo();

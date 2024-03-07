@@ -16,23 +16,28 @@ class BCTidesApp extends Application.AppBase {
     var tideData as Array<Array<Array> or Null> or Null;
     var tideDataValid as Array<Boolean>;
 
+    const stationsToShow as Number = 3;
+
     function initialize() {
         AppBase.initialize();
-        tideDataValid = [false, false, false];
-        tideData = null;
+        tideDataValid = new  Array<Boolean>[stationsToShow];
+        tideData = new Array<Null>[stationsToShow];
+        for (var i = 0; i < stationsToShow; i++) {
+            tideDataValid[i] = false;
+            tideData[i] = null;
+        }
     }
 
     private function loadData() as Void {
         if (tideData == null) {
-            tideData = Storage.getValue("tideData") as Array<Array<Array> or Null> or Null;
-            if (tideData != null) {
+            var tideDataFromStorage = Storage.getValue("tideData") as Array<Array<Array> or Null> or Null;
+            if (tideDataFromStorage != null) {
+                tideData = tideDataFromStorage;
                 for (var i = 0; i < tideData.size(); i++) {
                     if (tideData[i] != null) {
                         tideDataValid[i] = true;
                     }
                 }
-            } else {
-                tideData = [null, null, null]; // FIXME: don't hardcode 3 entries!
             }
         }
     }
