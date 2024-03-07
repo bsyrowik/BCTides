@@ -12,7 +12,7 @@ class BCTidesApp extends Application.AppBase {
     var view = null;
     var background = false;
     var screenHeight = null;
-    var tideData as Array<Array<Array>?>?;
+    var tideData as Array<Array<Array>?>? = null;
     var tideDataValid as Array<Boolean>;
     var currentPosition = null;
 
@@ -21,10 +21,8 @@ class BCTidesApp extends Application.AppBase {
     function initialize() {
         AppBase.initialize();
         tideDataValid = new  Array<Boolean>[stationsToShow];
-        tideData = new Array<Null>[stationsToShow];
         for (var i = 0; i < stationsToShow; i++) {
             tideDataValid[i] = false;
-            tideData[i] = null;
         }
     }
 
@@ -68,7 +66,7 @@ class BCTidesApp extends Application.AppBase {
 
     (:glance)
 	function getGlanceView() {
-        return [ new BCTidesGlanceView(me) ];
+        return [ new BCTidesGlanceView() ];
     }
 
     // Get service delegates to run background tasks for the app
