@@ -92,7 +92,7 @@ module WebRequests {
             //System.println("Got an array!");
             if (app.tideData == null) {
                 app.tideData = [];
-                for (var i = 0; i < 3; i++) { // FIXME: do not hard code 3
+                for (var i = 0; i < app.stationsToShow; i++) {
                     app.tideData.add([]);
                 }
             }
