@@ -1,5 +1,3 @@
-import Toybox.Application.Properties;
-import Toybox.Application.Storage;
 import Toybox.Graphics;
 import Toybox.Lang;
 import Toybox.System;

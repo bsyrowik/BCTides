@@ -1,7 +1,6 @@
 import Toybox.Communications;
 import Toybox.Lang;
 import Toybox.System;
-import Toybox.Application.Storage;
 import Toybox.Background;
 
 using Toybox.WatchUi;
@@ -134,7 +133,7 @@ module WebRequests {
             app.tideDataValid[stationIndex] = true;
             //System.println(app.tideData[stationIndex].toString());
 
-            Storage.setValue("tideData", app.tideData);
+            StorageUtil.setTideData(app.tideData);
             StorageUtil.setMaxTide(stationIndex, maxTide);
             
             System.println("Successfully updated station '" + StorageUtil.getStationName(stationIndex) + "' data at " + Toybox.Time.now().value());
