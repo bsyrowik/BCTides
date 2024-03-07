@@ -6,14 +6,16 @@ import Toybox.Application.Properties;
 class LoadMoreMenuDelegate extends SelectStationMenuDelegate {
     private var _data as Object;
     private var _depth as Number;
+    private var _stationIndex as Number;
     private var _wrap as Boolean;
     private var _callback as Method;
     private var _allowBack as Boolean;
 
-    public function initialize(callback as Method, data as Object, depth as Number, wrap as Boolean, allowBack as Boolean) {
+    public function initialize(callback as Method, data as Object, stationIndex as Number, depth as Number, wrap as Boolean, allowBack as Boolean) {
         SelectStationMenuDelegate.initialize();
         _callback = callback;
         _data = data;
+        _stationIndex = stationIndex;
         _depth = depth;
         _wrap = wrap;
         _allowBack = allowBack;
@@ -36,16 +38,16 @@ class LoadMoreMenuDelegate extends SelectStationMenuDelegate {
     }
 
     public function onSelect(item) {
-        SelectStationMenuDelegate.onSelect(item);
         for (var i = 0; i < _depth - 1; i++) {
             WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
         }
+        SelectStationMenuDelegate.onSelect(item);
     }
 
     // Handle footer being selected
     public function onFooter() as Void {
         if (_wrap) {
-            _callback.invoke("Page " + (_depth + 1), _data, _depth + 1);
+            _callback.invoke(Application.loadResource(Rez.Strings.loadMoreMenuPage) + " " + (_depth + 1), _data, _stationIndex, _depth + 1); // Fixme: Rez.Strings
         }
     }
     public function onTitle() as Void {
@@ -121,9 +123,9 @@ class CustomMenuTitle extends WatchUi.Drawable {
 
 class BasicCustomMenuItem extends WatchUi.CustomMenuItem {
     private var _label as String or Symbol;
-    private var _subLabel as String or Null;
+    private var _subLabel as String?;
 
-    public function initialize(id as Number, label as String or Symbol, subLabel as String or Symbol or Null) {
+    public function initialize(id as Object?, label as String or Symbol, subLabel as String or Symbol or Null) {
         CustomMenuItem.initialize(id, {});
         _label = label;
         setSubLabel(subLabel);
@@ -184,7 +186,7 @@ class MultiToggleMenuItem extends BasicCustomMenuItem {
 
     public function initialize(label as Symbol,
                                subLabelOptions as Array<Symbol>,
-                               identifier as Number,
+                               identifier as Object?,
                                propName as String) {
         BasicCustomMenuItem.initialize(identifier, label, null);
         _subLabelOptions = subLabelOptions;

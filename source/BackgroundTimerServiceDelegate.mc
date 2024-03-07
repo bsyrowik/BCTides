@@ -1,4 +1,3 @@
-import Toybox.Application.Storage;
 import Toybox.Background;
 import Toybox.Lang;
 import Toybox.System;
@@ -15,6 +14,6 @@ class BackgroundTimerServiceDelegate extends System.ServiceDelegate {
 
     public function onTemporalEvent() as Void {
         System.println("Attempting to retrieve tide data at " + Time.now().value());
-        WebRequests.getStationInfo();
+        WebRequests.downloadAllStationData();
     }
 }

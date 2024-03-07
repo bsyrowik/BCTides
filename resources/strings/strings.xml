@@ -30,6 +30,7 @@
     <string id="zoneSettingValNorth">North BC</string>
 
     <string id="mainMenuLabelGetData">Get Data</string>
+    <string id="getDataMenuAll">All</string>
 
     <string id="mainMenuLabelGetLocation">Get Location</string>
     <string id="mainMenuLabelGetLocationSub">Find GPS</string>
@@ -40,10 +41,21 @@
     <string id="no">No</string>
 
     <string id="mainMenuLabelSelectStation">Select Station</string>
+    <string id="mainMenuLabelManageStations">Manage Stations</string>
     <string id="selectStationMenuTitle">Station</string>
     <string id="selectStationMenuNearest">Nearest</string>
     <string id="selectStationMenuRecent">Recent</string>
     <string id="selectStationMenuSearch">Search</string>
+    <string id="selectStationMenuDelete">Delete</string>
+
+    <string id="stationSearchCharacterCountMessage">Must be at least 2 characters.</string>
+    <string id="stationSearchResultsMenuHeading">Search\nResults</string>
+    <string id="stationSearchNoResults">No results!</string>
+    <string id="stationSearchNoMoreResults">No more results!</string>
+
+    <string id="loadMoreMenuPage">Page</string>
+
+    <string id="manageStationsMenuAdd">+ Add</string>
 
     <!-- Warning/Error/Info Messages -->
     <string id="noDataAvailableForStation">No data available for station.</string>
@@ -51,6 +63,7 @@
     <string id="ranOutOfData">Ran out of data!</string>
     <string id="dataReceivedMessage">Tide data received.</string>
     <string id="noStationSelectedMessage">Select a station first!</string>
+    <string id="noStationSelectedStationName">No station selected.</string>
 
     <!-- Prompt Messages -->
     <string id="downloadDataPrompt">Download tide data?</string>

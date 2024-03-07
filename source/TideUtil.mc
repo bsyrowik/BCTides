@@ -4,24 +4,18 @@ import Toybox.Application.Properties;
 
 (:glance)
 module TideUtil {
-    const FEET_PER_METER = 3.28084;
-
-    var current_station_name = StorageUtil.getStationName();
-
-    var currentPosition = null;
-
     // static variables for getHeightAtT
     var t1 = null, t2 = null;
     var h1 = 0.0f, h2 = 0.0f;
     var A, B_n = Toybox.Math.PI, B_d, C, D;
 
-    function tideData(app) as Array<Array> {
-        return app._hilo as Array<Array>;
+    function tideData(app as BCTidesApp, stationIndex as Number) as Array<Array> {
+        return app.tideData[stationIndex] as Array<Array>?;
     }
 
-    function getNextEvent(t as Number, app) as Array {
+    function getNextEvent(t as Number, app, stationIndex as Number) as Array {
         var last_h = 0;
-        var data = tideData(app);
+        var data = tideData(app, stationIndex);
         for (var i = 0; data != null && i < data.size(); i++) {
             var time = data[i][0];
             var height = data[i][1];
@@ -38,7 +32,7 @@ module TideUtil {
     }
 
     // Predict the tide height at a given time using first-order sinusoidal interpolation.
-    function getHeightAtT(t as Number, d as Number, p, app) as Array {
+    function getHeightAtT(t as Number, d as Number, p, app, stationIndex as Number) as Array {
         // Compute h(t) = A * cos(B * (t - C)) + D
         // For: A = (h1 - h2) / 2
         //      B = PI / (t2 - t1)
@@ -48,7 +42,7 @@ module TideUtil {
         if (t1 == null) { t1 = t; }
         if (t2 == null) { t2 = t; }
         var found = false;
-        var data = tideData(app);
+        var data = tideData(app, stationIndex);
         for (var i = 0; data != null && i < data.size(); i++) {
             if (data[i][0] < t) {
                 t1 = data[i][0];

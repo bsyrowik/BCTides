@@ -1,3 +1,4 @@
+import Toybox.Application;
 import Toybox.Graphics;
 import Toybox.Lang;
 import Toybox.WatchUi;
@@ -22,32 +23,33 @@ module NearestStationMenu {
         return d * r;
     }
 
-    function buildHeap(all_stations as Array<Dictionary>) as HeapOfPair {
-        var position = TideUtil.currentPosition.toRadians() as Array;  // FIXME: deal with case where currentPosition is still null
+    function buildHeap(allStations as Array<Dictionary>) as HeapOfPair {
+        var position = getApp().currentPosition.toRadians() as Array;  // FIXME: deal with case where currentPosition is still null
         var myLatitude = position[0];
         var myLongitude = position[1];
-        var size = all_stations.size();
+        var size = allStations.size();
         var h = new HeapOfPair(size);
         for(var i = 0; i < size; i++) {
-            var d_squared = distanceSquaredApproximation(myLatitude, myLongitude, all_stations[i]["lat"], all_stations[i]["lon"]);
-            h.minHeapInsert(d_squared, i);
+            var dSquared = distanceSquaredApproximation(myLatitude, myLongitude, allStations[i]["lat"], allStations[i]["lon"]);
+            h.minHeapInsert(dSquared, i);
         }
         return h;
     }
 
-    function pushNextMenu(title as String, h as HeapOfPair or Null, depth as Number) as Void {
+    function pushNextMenu(title as String, h as HeapOfPair?, stationIndex as Number, depth as Number) as Void {
         var stationList = RezUtil.getStationData() as Array<Dictionary>;
         if (h == null) {
             h = buildHeap(stationList);
         }
         
-        var menu = new LoadMoreMenu(title, "Page " + (depth + 1), getApp().screenHeight / 3, Graphics.COLOR_WHITE, {:theme => null});
+        var menu = new LoadMoreMenu(title, Application.loadResource(Rez.Strings.loadMoreMenuPage) + " " + (depth + 1), getApp().screenHeight / 3, Graphics.COLOR_WHITE, {:theme => null});
 
         var allowWrap = true;
         var stationsToShow = 7;
         for (var i = 0; i < stationsToShow; i++) {
             var p = h.heapExtractMin();
             if (p == null) {
+                // Ran out of items -- this menu shouldn't allow scrolling to the next
                 menu.disableFooter();
                 allowWrap = false;
                 break;
@@ -55,7 +57,7 @@ module NearestStationMenu {
             var dist = distance(p.distance);
             menu.addItem(
                 new BasicCustomMenuItem(
-                    stationList[p.index]["code"],
+                    [stationIndex, stationList[p.index]["code"]],
                     stationList[p.index]["name"],
                     dist.format("%.2f") + "km"
                 )
@@ -64,7 +66,7 @@ module NearestStationMenu {
 
         // TODO: maybe cache each menu we push so we can scroll through them?
         //  --> The min heap is destroyed after creating each subsequent menu...
-        var delegate = new LoadMoreMenuDelegate(new Lang.Method(NearestStationMenu, :pushNextMenu), h, depth, allowWrap, false);
+        var delegate = new LoadMoreMenuDelegate(new Lang.Method(NearestStationMenu, :pushNextMenu), h, stationIndex, depth, allowWrap, false);
         WatchUi.pushView(menu, delegate, WatchUi.SLIDE_IMMEDIATE);
     }
 }

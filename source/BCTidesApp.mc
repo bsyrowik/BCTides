@@ -1,5 +1,4 @@
 import Toybox.Application;
-import Toybox.Application.Storage;
 import Toybox.Lang;
 import Toybox.System;
 import Toybox.WatchUi;
@@ -11,21 +10,34 @@ using Toybox.Time;
 class BCTidesApp extends Application.AppBase {
     var delegate = null;
     var view = null;
-    var _hilo = null;
-    var hilo_updated = false;
-    var tideDataValid = false;
     var background = false;
     var screenHeight = null;
+    var tideData as Array<Array<Array>?>?;
+    var tideDataValid as Array<Boolean>;
+    var currentPosition = null;
+
+    const stationsToShow as Number = 3;
 
     function initialize() {
         AppBase.initialize();
+        tideDataValid = new  Array<Boolean>[stationsToShow];
+        tideData = new Array<Null>[stationsToShow];
+        for (var i = 0; i < stationsToShow; i++) {
+            tideDataValid[i] = false;
+            tideData[i] = null;
+        }
     }
 
     private function loadData() as Void {
-        if (_hilo == null) {
-            _hilo = Storage.getValue("hiloData") as Array<Array>;
-            if (_hilo != null) {
-                tideDataValid = true;
+        if (tideData == null) {
+            var tideDataFromStorage = StorageUtil.getTideData() as Array<Array<Array>?>?;
+            if (tideDataFromStorage != null) {
+                tideData = tideDataFromStorage;
+                for (var i = 0; i < tideData.size(); i++) {
+                    if (tideData[i] != null) {
+                        tideDataValid[i] = true;
+                    }
+                }
             }
         }
     }
@@ -37,9 +49,6 @@ class BCTidesApp extends Application.AppBase {
 
     // onStop() is called when your application is exiting
     function onStop(state as Dictionary?) as Void {
-        if (_hilo != null && hilo_updated) {
-            Storage.setValue("hiloData", _hilo);
-        }
     }
 
     // Settings affect the display (units, display type, etc.)
