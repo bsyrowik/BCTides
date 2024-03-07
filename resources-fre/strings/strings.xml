@@ -41,6 +41,9 @@
     <string id="yes">Oui</string>
     <string id="no">Non</string>
 
+    <string id="fillGraphTitle">Remplir le Graphique</string>
+    <string id="fillGraphPrompt">Remplir le graphique des marées avec de la couleur.</string>
+
     <string id="mainMenuLabelSelectStation">Sélectionner une Station</string>
     <string id="mainMenuLabelManageStations">Gérer les Stations</string>
     <string id="selectStationMenuTitle">Station</string>

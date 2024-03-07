@@ -38,8 +38,8 @@ class BCTidesView extends WatchUi.View {
         _pageUpdated = true;
     }
 
-    function initialize(the_app as BCTidesApp) {
-        _app = the_app;
+    function initialize(app as BCTidesApp) {
+        _app = app;
         View.initialize();
         _pageIndicator = new PageIndicatorRad(_pageCount, Graphics.COLOR_WHITE, ALIGN_CENTER_LEFT, /*margin*/5);
         _stationIndicator = new PageIndicatorRad(_stationCount, Graphics.COLOR_WHITE, ALIGN_CENTER_RIGHT, /*margin*/5);
@@ -70,23 +70,7 @@ class BCTidesView extends WatchUi.View {
         WatchUi.requestUpdate();
     }
 
-
-    function drawSinusoid(dc as Dc, x, y, w, h) as Void {
-        dc.setColor(Graphics.COLOR_BLUE, Graphics.COLOR_TRANSPARENT);
-        var h_f = h / 2.0f;
-        var start_x = x + 2;
-        var last_x = start_x;
-        var last_y = y + h_f - Math.sin(0.1f * (last_x - start_x)) * h_f * 0.8f;
-        for (var i = start_x + 1; i < x + w - 2; i++) {
-            var this_x = i;
-            var this_y = y + h_f - Math.sin(0.1f * (i - start_x)) * h_f * 0.8f;
-            dc.drawLine(last_x, last_y, this_x, this_y);
-            last_x = this_x;
-            last_y = this_y;
-        }
-    }
-
-    function drawNoDataWarning(dc as Dc, x as Number, y as Number, w as Number, h as Number, message as String or Symbol, showConfirmation as Boolean) as Void {
+    function drawNoDataWarning(dc as Dc, x as Number, y as Number, w as Number, h as Number, message as String or Symbol, showDownloadPrompt as Boolean) as Void {
         message = message instanceof String ? message : WatchUi.loadResource(message) as String;
 
         var maxY = getApp().screenHeight * 0.57;
@@ -105,7 +89,7 @@ class BCTidesView extends WatchUi.View {
             });
         textArea.draw(dc);
         
-        if (!_pageUpdated || !showConfirmation) {
+        if (!_pageUpdated || !showDownloadPrompt) {
             return;
         }
 
@@ -116,12 +100,34 @@ class BCTidesView extends WatchUi.View {
         );
     }
 
-    function graphTides(dc as Dc, x as Number, y as Number, w as Number, h as Number, start as Time.Moment, end as Time.Moment) as Boolean {
+    function drawTideLabels(dc as Dc, labels as Array<Dictionary>?) as Void {
+        if (labels == null) {
+            return;
+        }
+        var heightMultiplier = PropUtil.heightMultiplier();
+        dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
+        for (var i = 0; i < labels.size(); i++) {
+            var labelString = "";
+            if (PropUtil.graphLabelType() == PropUtil.DATA_LABEL_PROP_TIME) {
+                var moment = new Time.Moment(labels[i][:time]);
+                labelString = DateUtil.formatTimeStringShort(moment);
+            } else if (PropUtil.graphLabelType() == PropUtil.DATA_LABEL_PROP_HEIGHT) {
+                var height = labels[i][:height] * heightMultiplier;
+                labelString = height.format("%.1f");
+            }
+            var yOffset = 1;
+            if (labels[i][:topLabel] || labels[i][:height] < 1) {
+                yOffset = -22;
+            }
+            dc.drawText(labels[i][:x], labels[i][:y] + yOffset, Graphics.FONT_XTINY, labelString, Graphics.TEXT_JUSTIFY_CENTER);
+        }
+    }
+
+    function graphTides(dc as Dc, x as Number, y as Number, w as Number, h as Number, start as Time.Moment, end as Time.Moment) as Array<Dictionary>? {
         // graphs tide height 0 at bottom, tide height "maxTide" at top
         var margin = 1;
         var increment = 4;
         var duration_per_increment = end.subtract(start).divide(w - margin * 2).multiply(increment).value();       
-        var heightMultiplier = PropUtil.heightMultiplier();
 
         dc.setColor(Graphics.COLOR_BLUE, Graphics.COLOR_TRANSPARENT);
 
@@ -134,47 +140,41 @@ class BCTidesView extends WatchUi.View {
         var start_x = x + margin;
         var last_label_x = 0;
         var current_t = start.value();
-        var height = TideUtil.getHeightAtT(current_t, duration_per_increment, 0, _app, _stationIndex)[0];
+        var height = TideUtil.getHeightAtT(current_t, duration_per_increment, _stationIndex)[:height];
         if (height == null) {
             drawNoDataWarning(dc, x, y, w, h, Rez.Strings.noDataAvailableForDate, true);
-            return false;
+            return null;
         }
         var last_y = y + h - (height / max_height) * h;
         var last_x = start_x;
+
+        var labels = [];
         
         for (var i = start_x + 1; i < x + w - margin; i = i + increment) {
-            var this_x = i;
             current_t += duration_per_increment;
-            var l = TideUtil.getHeightAtT(current_t, duration_per_increment, 0, _app, _stationIndex);
-            height = l[0];       
-            if (height == null) {
+            var l = TideUtil.getHeightAtT(current_t, duration_per_increment, _stationIndex);
+            if (l[:height] == null) {
                 drawNoDataWarning(dc, x, y, w, h, Rez.Strings.ranOutOfData, true);
-                return true;
+                return null;
             }
-            var this_y = y + h - (height / max_height) * h;
-            if (l[1] != null && (this_x - last_label_x > 10)) {
-                dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-                var h_label = l[2] * heightMultiplier;
-                var label_string = h_label.format("%.1f");
-                if (PropUtil.graphLabelType() == PropUtil.DATA_LABEL_PROP_TIME) {
-                    var m = new Time.Moment(l[3]);
-                    label_string = DateUtil.formatTimeStringShort(m);
-                } else if (PropUtil.graphLabelType() == PropUtil.DATA_LABEL_PROP_NONE) {
-                    label_string = "";
-                }
-                if (l[1] || height < 1) {
-                    dc.drawText(this_x, this_y - 22, Graphics.FONT_XTINY, label_string, Graphics.TEXT_JUSTIFY_CENTER);
-                } else {
-                    dc.drawText(this_x, this_y + 1, Graphics.FONT_XTINY, label_string, Graphics.TEXT_JUSTIFY_CENTER);
-                }
+            var this_x = i;
+            var this_y = y + h - (l[:height] / max_height) * h;
+            if (PropUtil.fillGraph()) {
+                dc.fillPolygon([[last_x, last_y], [this_x, this_y], [this_x, y + h - 2], [last_x, y + h - 2]]);
+            } else {
+                dc.drawLine(last_x, last_y, this_x, this_y);
+            }
+
+            // Labels
+            if (l[:eventHeight] != null && (this_x - last_label_x > 10)) {
+                labels.add({:x => this_x, :y => this_y, :height => l[:eventHeight], :time => l[:eventTime], :topLabel => l[:topLabel]});
                 last_label_x = this_x;
-                dc.setColor(Graphics.COLOR_BLUE, Graphics.COLOR_TRANSPARENT);
             }
-            dc.drawLine(last_x, last_y, this_x, this_y);
+
             last_y = this_y;
             last_x = this_x;
         }
-        return true;
+        return labels;
     }
 
     function tableTides(dc as Dc, x as Number, y as Number, w as Number, h as Number, start as Time.Moment, end as Time.Moment) as Void {
@@ -202,9 +202,9 @@ class BCTidesView extends WatchUi.View {
         
         var i;
         var entries_for_date = 0;
-        for (i = 0; i < TideUtil.tideData(_app, _stationIndex).size(); i++) {
-            var time = TideUtil.tideData(_app, _stationIndex)[i][0];
-            var height = TideUtil.tideData(_app, _stationIndex)[i][1];
+        for (i = 0; i < TideUtil.tideData(_stationIndex).size(); i++) {
+            var time = TideUtil.tideData(_stationIndex)[i][0];
+            var height = TideUtil.tideData(_stationIndex)[i][1];
             if (time > end.value()) {
                 break;
             }
@@ -222,7 +222,7 @@ class BCTidesView extends WatchUi.View {
         dc.drawLine(x + w / 2, startY + 5, x + w / 2, y);
 
         // Issue out of data warning
-        if (i >= TideUtil.tideData(_app, _stationIndex).size()) {
+        if (i >= TideUtil.tideData(_stationIndex).size()) {
             drawNoDataWarning(dc, x, y, w, h, (entries_for_date > 0 ? Rez.Strings.ranOutOfData : Rez.Strings.noDataAvailableForDate), true);
         }
     }
@@ -260,7 +260,7 @@ class BCTidesView extends WatchUi.View {
         }
         var units = PropUtil.units();
         var duration_2h = new Time.Duration(Gregorian.SECONDS_PER_HOUR * 2);
-        var tideHeight = TideUtil.getHeightAtT(Time.now().value(), duration_2h.value(), 0, _app, _stationIndex)[0];
+        var tideHeight = TideUtil.getHeightAtT(Time.now().value(), duration_2h.value(), _stationIndex)[:height];
         if (tideHeight != null) {
             tideHeight *= PropUtil.heightMultiplier();
             dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
@@ -346,12 +346,13 @@ class BCTidesView extends WatchUi.View {
         var offset_y = dc.getHeight() / 4;
         var width = dc.getWidth() * 0.8 as Number;
         var height = dc.getHeight() / 2;
-        if (TideUtil.tideData(_app, _stationIndex) != null && _app.tideDataValid[_stationIndex]) {
+        if (TideUtil.tideData(_stationIndex) != null && _app.tideDataValid[_stationIndex]) {
             var duration_24h = new Time.Duration(Gregorian.SECONDS_PER_HOUR * 24);
             if (PropUtil.getDisplayType() == PropUtil.DISPLAY_PROP_GRAPH) {
                 drawTideGraphBox(dc, offset_x, offset_y, width, height);
+                var labels = graphTides(dc, offset_x, offset_y, width, height, selectedDay, selectedDay.add(duration_24h));
                 drawNowLine(dc, selectedDay, offset_x, offset_y, width, height);
-                graphTides(dc, offset_x, offset_y, width, height, selectedDay, selectedDay.add(duration_24h));
+                drawTideLabels(dc, labels);
             } else {
                 tableTides(dc, offset_x, offset_y - 10, width, height, selectedDay, selectedDay.add(duration_24h));
             }
