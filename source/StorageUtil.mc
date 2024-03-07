@@ -10,6 +10,14 @@ module StorageUtil {
         return array.slice(0, index).addAll(array.slice(index + 1, null)).add(valueToInsert);
     }
 
+    function getTideData() as Array<Array<Array>?>? {
+        return Storage.getValue("tideData");
+    }
+
+    function setTideData(tideData as Array<Array<Array>?>?) as Void {
+        Storage.setValue("tideData", tideData);
+    }
+
     function addRecentStation(code as Number, name as String) as Void {
         var recents = getRecentStations();
         if (recents == null) {
@@ -86,7 +94,7 @@ module StorageUtil {
             // Remove element, and shift up all remaining entries, keeping array size constant
             names = deleteFromArrayByIndex(names, stationIndex, null);
             codes = deleteFromArrayByIndex(codes, stationIndex, null);
-            getApp().tideData = deleteFromArrayByIndex(getApp().tideData stationIndex, null);
+            getApp().tideData = deleteFromArrayByIndex(getApp().tideData, stationIndex, null);
             getApp().tideDataValid = deleteFromArrayByIndex(getApp().tideDataValid, stationIndex, false);
             deleteMaxTide(stationIndex);
         } else {

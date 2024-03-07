@@ -1,5 +1,4 @@
 import Toybox.Lang;
-import Toybox.Application.Storage;
 
 using Toybox.WatchUi;
 

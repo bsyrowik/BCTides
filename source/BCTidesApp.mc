@@ -1,5 +1,4 @@
 import Toybox.Application;
-import Toybox.Application.Storage;
 import Toybox.Lang;
 import Toybox.System;
 import Toybox.WatchUi;
@@ -31,7 +30,7 @@ class BCTidesApp extends Application.AppBase {
 
     private function loadData() as Void {
         if (tideData == null) {
-            var tideDataFromStorage = Storage.getValue("tideData") as Array<Array<Array>?>?;
+            var tideDataFromStorage = StorageUtil.getTideData() as Array<Array<Array>?>?;
             if (tideDataFromStorage != null) {
                 tideData = tideDataFromStorage;
                 for (var i = 0; i < tideData.size(); i++) {
