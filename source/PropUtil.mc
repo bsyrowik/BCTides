@@ -53,7 +53,7 @@ module PropUtil {
     (:glance)
     function heightMultiplier() as Float {
         if (getUnits() == System.UNIT_STATUTE) {
-            return 3.28084;
+            return 3.28084;  // Feet per meter
         }
         return 1.0f;
     }

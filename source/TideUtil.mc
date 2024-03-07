@@ -4,10 +4,6 @@ import Toybox.Application.Properties;
 
 (:glance)
 module TideUtil {
-    const FEET_PER_METER = 3.28084;
-
-    var currentPosition = null;
-
     // static variables for getHeightAtT
     var t1 = null, t2 = null;
     var h1 = 0.0f, h2 = 0.0f;

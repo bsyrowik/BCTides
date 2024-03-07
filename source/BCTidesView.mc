@@ -292,7 +292,7 @@ class BCTidesView extends WatchUi.View {
     }
 
     function updateLocation(position as Position.Location) as Void {
-        TideUtil.currentPosition = position;
+        _app.currentPosition = position;
     }
 
     function dealWithPosition() as Void {
