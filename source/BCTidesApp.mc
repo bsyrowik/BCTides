@@ -13,7 +13,7 @@ class BCTidesApp extends Application.AppBase {
     var view = null;
     var background = false;
     var screenHeight = null;
-    var tideData as Array<Array<Array> or Null> or Null;
+    var tideData as Array<Array<Array>?>?;
     var tideDataValid as Array<Boolean>;
 
     const stationsToShow as Number = 3;
@@ -30,7 +30,7 @@ class BCTidesApp extends Application.AppBase {
 
     private function loadData() as Void {
         if (tideData == null) {
-            var tideDataFromStorage = Storage.getValue("tideData") as Array<Array<Array> or Null> or Null;
+            var tideDataFromStorage = Storage.getValue("tideData") as Array<Array<Array>?>?;
             if (tideDataFromStorage != null) {
                 tideData = tideDataFromStorage;
                 for (var i = 0; i < tideData.size(); i++) {

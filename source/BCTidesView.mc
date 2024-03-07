@@ -13,7 +13,7 @@ using Toybox.Time.Gregorian;
 class BCTidesView extends WatchUi.View {
     private var _pageIndicator as PageIndicatorRad;
     private var _stationIndicator as PageIndicatorRad;
-    private var _position as Position.Info or Null = null;
+    private var _position as Position.Info? = null;
     private var _needGPS as Boolean = true;
     private var _app as BCTidesApp;
 

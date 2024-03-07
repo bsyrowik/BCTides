@@ -36,7 +36,7 @@ module NearestStationMenu {
         return h;
     }
 
-    function pushNextMenu(title as String, h as HeapOfPair or Null, stationIndex as Number, depth as Number) as Void {
+    function pushNextMenu(title as String, h as HeapOfPair?, stationIndex as Number, depth as Number) as Void {
         var stationList = RezUtil.getStationData() as Array<Dictionary>;
         if (h == null) {
             h = buildHeap(stationList);
