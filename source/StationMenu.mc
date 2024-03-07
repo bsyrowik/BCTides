@@ -1,3 +1,4 @@
+import Toybox.Application;
 import Toybox.Lang;
 import Toybox.Graphics;
 
@@ -33,7 +34,7 @@ module StationMenu {
             menu.addItem(
                 new BasicCustomMenuItem(
                     [StationMenuDelegate.MENU_STATION_DELETE, pageNumber], // identifier
-                    "Delete", // FIXME: Rez.Strings
+                    Rez.Strings.selectStationMenuDelete,
                     "" // Sub-Label
                 )
             );
@@ -62,7 +63,7 @@ class StationMenuDelegate extends WatchUi.Menu2InputDelegate {
         // TODO: search by coordinates?
         var id = item.getId() as Array<Number>;
         if (id[0] == MENU_STATION_NEAREST) {
-            NearestStationMenu.pushNextMenu("Nearest", null, id[1], 1); // FIXME: Rez.Strings
+            NearestStationMenu.pushNextMenu(Application.loadResource(Rez.Strings.selectStationMenuNearest), null, id[1], 1);
         } else if (id[0] == MENU_STATION_RECENT) {
             RecentStationMenu.pushMenu(id[1]);
         } else if (id[0] == MENU_STATION_SEARCH) {

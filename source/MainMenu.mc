@@ -50,7 +50,7 @@ module MainMenu {
         menu.addItem(
             new BasicCustomMenuItem(
                 MainMenuDelegate.MENU_MANAGE_STATIONS_ID,
-                "Manage Stations", // FIXME: Rez.Strings
+                Rez.Strings.mainMenuLabelManageStations,
                 null
             )
         );

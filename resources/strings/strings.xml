@@ -40,10 +40,14 @@
     <string id="no">No</string>
 
     <string id="mainMenuLabelSelectStation">Select Station</string>
+    <string id="mainMenuLabelManageStations">Manage Stations</string>
     <string id="selectStationMenuTitle">Station</string>
     <string id="selectStationMenuNearest">Nearest</string>
     <string id="selectStationMenuRecent">Recent</string>
     <string id="selectStationMenuSearch">Search</string>
+    <string id="selectStationMenuDelete">Delete</string>
+
+    <string id="manageStationsMenuAdd">+ Add</string>
 
     <!-- Warning/Error/Info Messages -->
     <string id="noDataAvailableForStation">No data available for station.</string>
