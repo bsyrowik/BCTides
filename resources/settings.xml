@@ -31,4 +31,7 @@
     <setting propertyKey="@Properties.backgroundDownloadProp" title="@Strings.backgroundDownloadSettingTitle" prompt="@Strings.backgroundDownloadSettingPrompt">
         <settingConfig type="boolean"/>
     </setting>
+    <setting propertyKey="@Properties.fillGraphProp" title="@Strings.fillGraphTitle" prompt="@Strings.fillGraphPrompt">
+        <settingConfig type="boolean"/>
+    </setting>
 </settings>

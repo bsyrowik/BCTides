@@ -8,6 +8,7 @@ class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
     public enum {
         MENU_SETTINGS_UNITS_ID,
         MENU_SETTINGS_DISP_TYPE_ID,
+        MENU_SETTINGS_FILL_GRAPH_ID,
         MENU_SETTINGS_DISP_MODE_ID,
         MENU_SETTINGS_ZONE_ID,
         MENU_SETTINGS_ENABLE_BACKGROUND_DL_ID,
@@ -124,6 +125,19 @@ module MainMenu {
                 ],
                 MainMenuDelegate.MENU_SETTINGS_ENABLE_BACKGROUND_DL_ID,
                 "backgroundDownloadProp"
+            )
+        );
+
+        // Fill Graph
+        menu.addItem(
+            new MultiToggleMenuItem(
+                Rez.Strings.fillGraphTitle,
+                [
+                    Rez.Strings.no,
+                    Rez.Strings.yes
+                ],
+                MainMenuDelegate.MENU_SETTINGS_FILL_GRAPH_ID,
+                "fillGraphProp"
             )
         );
 
