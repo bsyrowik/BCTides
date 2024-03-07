@@ -71,7 +71,7 @@ class HeapOfPair {
         }
     }
 
-    function heapExtractMin() as Pair or Null {
+    function heapExtractMin() as Pair? {
         if (_heapSize < 1) {
             return null;
         }

@@ -14,7 +14,7 @@ module TideUtil {
     var A, B_n = Toybox.Math.PI, B_d, C, D;
 
     function tideData(app as BCTidesApp, stationIndex as Number) as Array<Array> {
-        return app.tideData[stationIndex] as Array<Array> or Null;
+        return app.tideData[stationIndex] as Array<Array>?;
     }
 
     function getNextEvent(t as Number, app, stationIndex as Number) as Array {

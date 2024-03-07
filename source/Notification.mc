@@ -5,7 +5,7 @@ import Toybox.Timer;
 import Toybox.WatchUi;
 
 module Notification {
-    function showNotification(message as String or Symbol, timeout as Number or Null) as Void {
+    function showNotification(message as String or Symbol, timeout as Number?) as Void {
         var notificationView = new NotificationView(message, timeout);
         WatchUi.pushView(
             notificationView,
@@ -51,7 +51,7 @@ module Notification {
             WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
         }
 
-        function initialize(message as String or Symbol, timeout as Number or Null) {
+        function initialize(message as String or Symbol, timeout as Number?) {
             View.initialize();
             _text = message instanceof String ? message : Application.loadResource(message);
             if (timeout != null) {
