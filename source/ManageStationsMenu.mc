@@ -14,7 +14,7 @@ module ManageStationsMenu {
             menu.addItem(
                 new BasicCustomMenuItem(
                     i, // identifier
-                    stationCode == null ? "+ Add" : stationName, // FIXME: Rez.Strings
+                    stationCode == null ? Rez.Strings.manageStationsMenuAdd : stationName,
                     "" // Sub-Label
                 )
             );

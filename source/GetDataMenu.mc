@@ -7,18 +7,18 @@ module GetDataMenu {
     function pushMenu() {
         var validStationCount = StorageUtil.getNumValidStationCodes();
         if (validStationCount == 0) {
-            Notification.showNotification("No stations selected!", 2000);
+            Notification.showNotification("No stations selected!", 2000); // FIXME: Rez.Strings
             return;
         }
 
         var menu = new WatchUi.CustomMenu(getApp().screenHeight / 3, Graphics.COLOR_WHITE, {
-                :title => new CustomMenuTitle("Get Data"), :theme => null});
+                :title => new CustomMenuTitle("Get Data"), :theme => null}); // FIXME: Rez.Strings
 
         if (validStationCount > 1) {
             menu.addItem(
                 new BasicCustomMenuItem(
                     -1, // Identifier
-                    "All",
+                    "All", // FIXME: Rez.Strings
                     "" // Sub-Label
                 )
             );
