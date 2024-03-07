@@ -63,6 +63,7 @@
     <string id="ranOutOfData">Ran out of data!</string>
     <string id="dataReceivedMessage">Tide data received.</string>
     <string id="noStationSelectedMessage">Select a station first!</string>
+    <string id="noStationSelectedStationName">No station selected.</string>
 
     <!-- Prompt Messages -->
     <string id="downloadDataPrompt">Download tide data?</string>

@@ -64,6 +64,7 @@
     <string id="ranOutOfData">N'ai plus de données!</string>
     <string id="dataReceivedMessage">Données de marée reçues.</string>
     <string id="noStationSelectedMessage">Sélectionnez d'abord une station!</string>
+    <string id="noStationSelectedStationName">Aucune station sélectionnée.</string>
 
     <!-- Prompt Messages -->
     <string id="downloadDataPrompt">Télécharger des données de marée?</string>
