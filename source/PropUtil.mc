@@ -69,6 +69,10 @@ module PropUtil {
         return unitsSub;
     }
 
+    function fillGraph() as Boolean {
+        return Properties.getValue("fillGraphProp");
+    }
+
     function graphLabelType() as Number {
         return Properties.getValue("dataLabelProp");
     }
