@@ -4,6 +4,10 @@ import Toybox.Graphics;
 using Toybox.WatchUi;
 
 module GetDataMenu {
+    enum {
+        GET_ALL_STATIONS_ID = -1
+    }
+
     function pushMenu() {
         var validStationCount = StorageUtil.getNumValidStationCodes();
         if (validStationCount == 0) {
@@ -18,7 +22,7 @@ module GetDataMenu {
             // Add menu option to download data for all stations
             menu.addItem(
                 new BasicCustomMenuItem(
-                    -1, // Identifier
+                    GET_ALL_STATIONS_ID, // Identifier
                     Rez.Strings.getDataMenuAll,
                     "" // Sub-Label
                 )
@@ -52,7 +56,7 @@ class GetDataMenuDelegate extends WatchUi.Menu2InputDelegate {
 
     function onSelect(item) as Void {
         var id = item.getId() as Number;
-        if (id == -1) {
+        if (id == GetDataMenu.GET_ALL_STATIONS_ID) {
             // Get data for all stations
             WebRequests.downloadAllStationData();
         } else {

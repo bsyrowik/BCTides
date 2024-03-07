@@ -24,7 +24,7 @@ module NearestStationMenu {
     }
 
     function buildHeap(allStations as Array<Dictionary>) as HeapOfPair {
-        var position = TideUtil.currentPosition.toRadians() as Array;  // FIXME: deal with case where currentPosition is still null
+        var position = getApp().currentPosition.toRadians() as Array;  // FIXME: deal with case where currentPosition is still null
         var myLatitude = position[0];
         var myLongitude = position[1];
         var size = allStations.size();

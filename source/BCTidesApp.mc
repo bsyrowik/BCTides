@@ -15,6 +15,7 @@ class BCTidesApp extends Application.AppBase {
     var screenHeight = null;
     var tideData as Array<Array<Array>?>?;
     var tideDataValid as Array<Boolean>;
+    var currentPosition = null;
 
     const stationsToShow as Number = 3;
 
