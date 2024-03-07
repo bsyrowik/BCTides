@@ -1,3 +1,4 @@
+import Toybox.Application;
 import Toybox.Graphics;
 import Toybox.Lang;
 import Toybox.WatchUi;
@@ -41,7 +42,7 @@ module NearestStationMenu {
             h = buildHeap(stationList);
         }
         
-        var menu = new LoadMoreMenu(title, "Page " + (depth + 1), getApp().screenHeight / 3, Graphics.COLOR_WHITE, {:theme => null});
+        var menu = new LoadMoreMenu(title, Application.loadResource(Rez.Strings.loadMoreMenuPage) + " " + (depth + 1), getApp().screenHeight / 3, Graphics.COLOR_WHITE, {:theme => null});
 
         var allowWrap = true;
         var stationsToShow = 7;

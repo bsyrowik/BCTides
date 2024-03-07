@@ -30,6 +30,7 @@
     <string id="zoneSettingValNorth">North BC</string>
 
     <string id="mainMenuLabelGetData">Get Data</string>
+    <string id="getDataMenuAll">All</string>
 
     <string id="mainMenuLabelGetLocation">Get Location</string>
     <string id="mainMenuLabelGetLocationSub">Find GPS</string>
@@ -46,6 +47,13 @@
     <string id="selectStationMenuRecent">Recent</string>
     <string id="selectStationMenuSearch">Search</string>
     <string id="selectStationMenuDelete">Delete</string>
+
+    <string id="stationSearchCharacterCountMessage">Must be at least 2 characters.</string>
+    <string id="stationSearchResultsMenuHeading">Search\nResults</string>
+    <string id="stationSearchNoResults">No results!</string>
+    <string id="stationSearchNoMoreResults">No more results!</string>
+
+    <string id="loadMoreMenuPage">Page</string>
 
     <string id="manageStationsMenuAdd">+ Add</string>
 

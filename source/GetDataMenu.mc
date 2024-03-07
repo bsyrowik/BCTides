@@ -7,18 +7,19 @@ module GetDataMenu {
     function pushMenu() {
         var validStationCount = StorageUtil.getNumValidStationCodes();
         if (validStationCount == 0) {
-            Notification.showNotification("No stations selected!", 2000); // FIXME: Rez.Strings
+            Notification.showNotification(Rez.Strings.noStationSelectedMessage, 2000);
             return;
         }
 
         var menu = new WatchUi.CustomMenu(getApp().screenHeight / 3, Graphics.COLOR_WHITE, {
-                :title => new CustomMenuTitle("Get Data"), :theme => null}); // FIXME: Rez.Strings
+                :title => new CustomMenuTitle(Rez.Strings.mainMenuLabelGetData), :theme => null});
 
         if (validStationCount > 1) {
+            // Add menu option to download data for all stations
             menu.addItem(
                 new BasicCustomMenuItem(
                     -1, // Identifier
-                    "All", // FIXME: Rez.Strings
+                    Rez.Strings.getDataMenuAll,
                     "" // Sub-Label
                 )
             );
@@ -53,14 +54,10 @@ class GetDataMenuDelegate extends WatchUi.Menu2InputDelegate {
         var id = item.getId() as Number;
         if (id == -1) {
             // Get data for all stations
-            for (var i = 0; i < StorageUtil.getNumValidStationCodes(); i++) {
-                if (StorageUtil.getStationCode(i) != null) {
-                    WebRequests.getStationInfo(i);
-                }
-            }
+            WebRequests.downloadAllStationData();
         } else {
             // Get data for a specific station
-            WebRequests.getStationInfo(id);
+            WebRequests.downloadStationData(id);
         }
         WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
     }

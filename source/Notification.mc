@@ -1,10 +1,11 @@
+import Toybox.Application;
 import Toybox.Graphics;
 import Toybox.Lang;
 import Toybox.Timer;
 import Toybox.WatchUi;
 
 module Notification {
-    function showNotification(message as String, timeout as Number or Null) as Void {
+    function showNotification(message as String or Symbol, timeout as Number or Null) as Void {
         var notificationView = new NotificationView(message, timeout);
         WatchUi.pushView(
             notificationView,
@@ -50,9 +51,9 @@ module Notification {
             WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
         }
 
-        function initialize(message as String, timeout as Number or Null) {
+        function initialize(message as String or Symbol, timeout as Number or Null) {
             View.initialize();
-            _text = message;
+            _text = message instanceof String ? message : Application.loadResource(message);
             if (timeout != null) {
                 _timer = new Timer.Timer();
                 _timer.start(method(:timerCallback), timeout, false);  // Auto-dismiss after 'timeout' milliseconds
