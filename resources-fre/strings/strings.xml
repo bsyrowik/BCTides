@@ -31,6 +31,7 @@
     <string id="zoneSettingValNorth">BC Nord</string>
 
     <string id="mainMenuLabelGetData">Obtenir des données</string>
+    <string id="getDataMenuAll">Toutes</string>
 
     <string id="mainMenuLabelGetLocation">Obtenir l'emplacement</string>
     <string id="mainMenuLabelGetLocationSub">Trouver un GPS</string>
@@ -40,11 +41,22 @@
     <string id="yes">Oui</string>
     <string id="no">Non</string>
 
-    <string id="mainMenuLabelSelectStation">Sélectionner une station</string>
+    <string id="mainMenuLabelSelectStation">Sélectionner une Station</string>
+    <string id="mainMenuLabelManageStations">Gérer les Stations</string>
     <string id="selectStationMenuTitle">Station</string>
-    <string id="selectStationMenuNearest">La plus proche</string>
+    <string id="selectStationMenuNearest">La Plus Proche</string>
     <string id="selectStationMenuRecent">Récent</string>
     <string id="selectStationMenuSearch">Recherche</string>
+    <string id="selectStationMenuDelete">Supprimer</string>
+
+    <string id="stationSearchCharacterCountMessage">Doit contenir au moins 2 caractères.</string>
+    <string id="stationSearchResultsMenuHeading">Résultats\nde Recherche</string>
+    <string id="stationSearchNoResults">Aucun résultat!</string>
+    <string id="stationSearchNoMoreResults">Plus de résultats!</string>
+
+    <string id="loadMoreMenuPage">Page</string>
+
+    <string id="manageStationsMenuAdd">+ Ajouter</string>
 
     <!-- Warning/Error/Info Messages -->
     <string id="noDataAvailableForStation">Aucune donnée disponible pour la station.</string>

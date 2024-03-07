@@ -47,7 +47,7 @@ class LoadMoreMenuDelegate extends SelectStationMenuDelegate {
     // Handle footer being selected
     public function onFooter() as Void {
         if (_wrap) {
-            _callback.invoke("Page " + (_depth + 1), _data, _stationIndex, _depth + 1); // Fixme: Rez.Strings
+            _callback.invoke(Application.loadResource(Rez.Strings.loadMoreMenuPage) + " " + (_depth + 1), _data, _stationIndex, _depth + 1); // Fixme: Rez.Strings
         }
     }
     public function onTitle() as Void {

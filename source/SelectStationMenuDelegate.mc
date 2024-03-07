@@ -3,7 +3,6 @@ import Toybox.Application.Storage;
 
 using Toybox.WatchUi;
 
-// TODO: can we possibly just roll this into the LoadMoreMenuDelegate?
 class SelectStationMenuDelegate extends WatchUi.Menu2InputDelegate {
     function initialize() {
         Menu2InputDelegate.initialize();

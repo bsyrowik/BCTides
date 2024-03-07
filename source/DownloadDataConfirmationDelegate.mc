@@ -12,7 +12,7 @@ class DownloadDataConfirmationDelegate extends WatchUi.ConfirmationDelegate {
 
     function onResponse(response) {
         if (response == WatchUi.CONFIRM_YES) {
-            WebRequests.getStationInfo(_stationIndex);
+            WebRequests.downloadStationData(_stationIndex);
         }
         return true;
     }
