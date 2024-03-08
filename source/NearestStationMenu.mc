@@ -30,7 +30,7 @@ module NearestStationMenu {
         var size = allStations.size();
         var h = new HeapOfPair(size);
         for(var i = 0; i < size; i++) {
-            var dSquared = distanceSquaredApproximation(myLatitude, myLongitude, allStations[i]["lat"], allStations[i]["lon"]);
+            var dSquared = distanceSquaredApproximation(myLatitude, myLongitude, allStations[i][RezUtil.stationLatTag], allStations[i][RezUtil.stationLonTag]);
             h.minHeapInsert(dSquared, i);
         }
         return h;
@@ -57,8 +57,8 @@ module NearestStationMenu {
             var dist = distance(p.distance);
             menu.addItem(
                 new BasicCustomMenuItem(
-                    [stationIndex, stationList[p.index]["code"]],
-                    stationList[p.index]["name"],
+                    [stationIndex, stationList[p.index][RezUtil.stationCodeTag]],
+                    stationList[p.index][RezUtil.stationNameTag],
                     dist.format("%.2f") + "km"
                 )
             );

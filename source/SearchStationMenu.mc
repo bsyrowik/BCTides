@@ -61,12 +61,12 @@ module SearchStationMenu {
         var i = startIndex;
         var stationsAdded = 0;
         for (; i < stationList.size(); i++) {
-            var name = stationList[i]["name"].toLower();
+            var name = stationList[i][RezUtil.stationNameTag].toLower();
             if (name.find(needle) != null) {
                 menu.addItem(
                     new BasicCustomMenuItem(
-                        [stationIndex, stationList[i]["code"]],
-                        stationList[i]["name"],
+                        [stationIndex, stationList[i][RezUtil.stationCodeTag]],
+                        stationList[i][RezUtil.stationNameTag],
                         ""
                     )
                 );
