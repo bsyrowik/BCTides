@@ -40,6 +40,9 @@
     <string id="yes">Yes</string>
     <string id="no">No</string>
 
+    <string id="fillGraphTitle">Fill Graph</string>
+    <string id="fillGraphPrompt">Fill the tide graph with color</string>
+
     <string id="mainMenuLabelSelectStation">Select Station</string>
     <string id="mainMenuLabelManageStations">Manage Stations</string>
     <string id="selectStationMenuTitle">Station</string>
