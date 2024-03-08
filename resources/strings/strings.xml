@@ -10,6 +10,9 @@
     <string id="mainMenuLabelDisplayOptions">Display Options</string>
     <string id="displayOptionsMenuTitle">Display\nOptions</string>
 
+    <string id="mainMenuLabelStationData">Station Data</string>
+    <string id="stationDataMenuTitle">Station\nData</string>
+
     <string id="unitsSettingTitle">Units</string>
     <string id="unitsSettingPrompt">Select units to use</string>
     <string id="unitsSettingSystem">System</string>
