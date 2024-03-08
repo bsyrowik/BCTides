@@ -6,13 +6,10 @@ using Toybox.WatchUi;
 
 class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
     public enum {
-        MENU_SETTINGS_UNITS_ID,
-        MENU_SETTINGS_DISP_TYPE_ID,
-        MENU_SETTINGS_FILL_GRAPH_ID,
-        MENU_SETTINGS_DISP_MODE_ID,
         MENU_SETTINGS_ZONE_ID,
         MENU_SETTINGS_ENABLE_BACKGROUND_DL_ID,
         MENU_MANAGE_STATIONS_ID,
+        MENU_DISPLAY_OPTIONS_ID,
         MENU_GET_DATA_ID,
         MENU_GET_GPS_ID
     }
@@ -34,6 +31,8 @@ class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
             GetDataMenu.pushMenu();
         } else if (item.getId() == MENU_MANAGE_STATIONS_ID) {
             ManageStationsMenu.pushMenu();
+        } else if (item.getId() == MENU_DISPLAY_OPTIONS_ID) {
+            DisplayOptionsMenu.pushMenu();
         } else if (item instanceof MultiToggleMenuItem) {
             item.next();
         }
@@ -56,44 +55,12 @@ module MainMenu {
             )
         );
 
-        // Data Label
+        // Display Options
         menu.addItem(
-            new MultiToggleMenuItem(
-                Rez.Strings.labelSettingTitle,
-                [
-                    Rez.Strings.labelSettingValHeight,
-                    Rez.Strings.labelSettingValTime,
-                    Rez.Strings.labelSettingValNone
-                ],
-                MainMenuDelegate.MENU_SETTINGS_DISP_TYPE_ID,
-                "dataLabelProp"
-            )
-        );
-
-        // Units
-        menu.addItem(
-            new MultiToggleMenuItem(
-                Rez.Strings.unitsSettingTitle,
-                [
-                    Rez.Strings.unitsSettingSystem,
-                    Rez.Strings.unitsSettingMetric,
-                    Rez.Strings.unitsSettingImperial
-                ],
-                MainMenuDelegate.MENU_SETTINGS_UNITS_ID,
-                "unitsProp"
-            )
-        );
-
-        // Display Mode
-        menu.addItem(
-            new MultiToggleMenuItem(
-                Rez.Strings.displaySettingTitle,
-                [
-                    Rez.Strings.displaySettingValGraph,
-                    Rez.Strings.displaySettingValTable
-                ],
-                MainMenuDelegate.MENU_SETTINGS_DISP_MODE_ID,
-                "displayProp"
+            new BasicCustomMenuItem(
+                MainMenuDelegate.MENU_DISPLAY_OPTIONS_ID,
+                Rez.Strings.mainMenuLabelDisplayOptions,
+                null
             )
         );
 
@@ -128,19 +95,6 @@ module MainMenu {
             )
         );
 
-        // Fill Graph
-        menu.addItem(
-            new MultiToggleMenuItem(
-                Rez.Strings.fillGraphTitle,
-                [
-                    Rez.Strings.no,
-                    Rez.Strings.yes
-                ],
-                MainMenuDelegate.MENU_SETTINGS_FILL_GRAPH_ID,
-                "fillGraphProp"
-            )
-        );
-
         // Zone
         menu.addItem(
             new MultiToggleMenuItem(
@@ -157,4 +111,3 @@ module MainMenu {
         WatchUi.pushView(menu, new MainMenuDelegate(), WatchUi.SLIDE_IMMEDIATE);
     }
 }
-
