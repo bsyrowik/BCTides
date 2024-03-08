@@ -12,11 +12,13 @@ module RecentStationMenu {
         var menu = new WatchUi.CustomMenu(getApp().screenHeight / 3, Graphics.COLOR_WHITE, {
                 :title => new CustomMenuTitle(Rez.Strings.selectStationMenuRecent), :theme => null});
         for (var i = recents.size() - 1; i >= 0; i--) {
+            var distance = NearestStationMenu.getDistanceToStation(recents[i][0]);
+            var direction = NearestStationMenu.getDirectionToStation(recents[i][0]);
             menu.addItem(
                 new BasicCustomMenuItem(
                     [stationIndex, recents[i][0]], // ID (station code)
                     recents[i][1], // Station Name
-                    ""
+                    distance.format("%.2f") + "km " + direction
                 )
             );
         }
