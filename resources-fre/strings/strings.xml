@@ -8,6 +8,12 @@
     <string id="MainMenuLabel_nearby">La plus proche</string>
     <string id="MainMenuLabel_favorites">Favoris</string>
 
+    <string id="mainMenuLabelDisplayOptions">Option D'affichage</string>
+    <string id="displayOptionsMenuTitle">Option\nD'affichage</string>
+
+    <string id="mainMenuLabelStationData">Données de la Station</string>
+    <string id="stationDataMenuTitle">Données\nde la Station</string>
+
     <string id="unitsSettingTitle">Unités</string>
     <string id="unitsSettingPrompt">Sélectionnez les unités à utiliser</string>
     <string id="unitsSettingSystem">Système</string>
