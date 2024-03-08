@@ -9,13 +9,13 @@ module TideUtil {
     var h1 = 0.0f, h2 = 0.0f;
     var A, B_n = Toybox.Math.PI, B_d, C, D;
 
-    function tideData(app as BCTidesApp, stationIndex as Number) as Array<Array> {
-        return app.tideData[stationIndex] as Array<Array>?;
+    function tideData(stationIndex as Number) as Array<Array> {
+        return getApp().tideData[stationIndex] as Array<Array>?;
     }
 
-    function getNextEvent(t as Number, app, stationIndex as Number) as Array {
+    function getNextEvent(t as Number, stationIndex as Number) as Dictionary {
         var last_h = 0;
-        var data = tideData(app, stationIndex);
+        var data = tideData(stationIndex);
         for (var i = 0; data != null && i < data.size(); i++) {
             var time = data[i][0];
             var height = data[i][1];
@@ -24,15 +24,15 @@ module TideUtil {
                 if (last_h > height) {
                     event_type = "L";
                 }
-                return [time, height, event_type];
+                return {:eventTime => time, :eventHeight => height, :eventType => event_type};
             }
             last_h = height;
         }
-        return [null, null, null];
+        return {};
     }
 
     // Predict the tide height at a given time using first-order sinusoidal interpolation.
-    function getHeightAtT(t as Number, d as Number, p, app, stationIndex as Number) as Array {
+    function getHeightAtT(t as Number, d as Number, stationIndex as Number) as Dictionary {
         // Compute h(t) = A * cos(B * (t - C)) + D
         // For: A = (h1 - h2) / 2
         //      B = PI / (t2 - t1)
@@ -42,7 +42,7 @@ module TideUtil {
         if (t1 == null) { t1 = t; }
         if (t2 == null) { t2 = t; }
         var found = false;
-        var data = tideData(app, stationIndex);
+        var data = tideData(stationIndex);
         for (var i = 0; data != null && i < data.size(); i++) {
             if (data[i][0] < t) {
                 t1 = data[i][0];
@@ -55,29 +55,26 @@ module TideUtil {
             }
         }
         if (!found) {
-            return [null, null, null, null];
+            return {};
         }
         A = (h1 - h2) / 2.0f;
         B_d = t2 - t1;
         C = t1;
         D = (h2 + h1) / 2.0f;
         if (B_d == null || B_d == 0) {
-            /*
-            System.println("Failed to find an early enough time!");
-            System.println("h1: " + h1 + " h2: " + h2);
-            System.println("t: " + t + " t1: " + t1 + " t2: " + t2);
-            System.println("A: " + A + " B_n: " + B_n + " t: " + t + " C: " + C + " B_d: " + B_d + " D: " + D);
-            */
-            return [null, null, null, null];
+            return {};
         }
         var h = A * Toybox.Math.cos(B_n * (t - C) / B_d) + D;
-        //if (p) { System.println("h1 = " + h1.toString() + "; h2 = " + h2.toString() + "; t1 = " + formatDateStringShort(t1) + "; t2 = " + formatDateStringShort(t2)); }
-        //if (p) { System.println("h(t) = " + A.toString() + " * cos(" + B_n.toString() + " * (t - " + formatDateStringShort(C) + ") / " + B_d.toString() + ") + " + D.toString()); }
         if (t - t1 < d) {
-            return [h, (h1 > h2), h1, t1];
+            // In realm of event h1 at time t1
+            var atHigh = (h1 > h2);
+            return {:height => h, :topLabel => atHigh, :eventHeight => h1, :eventTime => t1};
         } else if (t2 - t < d) {
-            return [h, (h1 < h2), h2, t2];
+            // In realm of event h2 at time t2
+            var atHigh = (h2 > h1);
+            return {:height => h, :topLabel => atHigh, :eventHeight => h2, :eventTime => t2};
         }
-        return [h, null, null, null];
+        // Somewhere between t1 and t2
+        return {:height => h};
     }
 }
