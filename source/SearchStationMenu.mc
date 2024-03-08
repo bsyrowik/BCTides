@@ -63,12 +63,14 @@ module SearchStationMenu {
         for (; i < stationList.size(); i++) {
             var name = stationList[i][RezUtil.stationNameTag].toLower();
             if (name.find(needle) != null) {
-                var distance = NearestStationMenu.getDistanceToStation(stationList[i][RezUtil.stationCodeTag]);
+                var stationCode = stationList[i][RezUtil.stationCodeTag];
+                var distance = NearestStationMenu.getDistanceToStation(stationCode);
+                var direction = NearestStationMenu.getDirectionToStation(stationCode);
                 menu.addItem(
                     new BasicCustomMenuItem(
-                        [stationIndex, stationList[i][RezUtil.stationCodeTag]],
+                        [stationIndex, stationCode],
                         stationList[i][RezUtil.stationNameTag],
-                        distance.format("%.2f") + "km"
+                        distance.format("%.2f") + "km " + direction
                     )
                 );
                 stationsAdded += 1;

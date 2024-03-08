@@ -32,16 +32,14 @@ module NearestStationMenu {
     }
 
     function getDirectionToStation(code as Number) as String {
+        // Reference:
+        // https://www.igismap.com/formula-to-find-bearing-or-heading-angle-between-two-points-latitude-longitude/
         var stationData = RezUtil.getStationDataFromCode(code) as Dictionary;
         var position = getApp().currentPosition.toRadians() as Array;
-        var lat1 = position[0];
-        var lon1 = position[1];
-        var lat2 = stationData[RezUtil.stationLatTag];
-        var lon2 = stationData[RezUtil.stationLonTag];
 
-        var thetaA = lat1;
-        var thetaB = lat2;
-        var deltaL = lon2 - lon1;
+        var thetaA = position[0]; // Latitude
+        var thetaB = stationData[RezUtil.stationLatTag]; // Latitude
+        var deltaL = stationData[RezUtil.stationLonTag] - position[1]; // Longitude diff
 
         var X = Math.cos(thetaB) * Math.sin(deltaL);
         var Y = Math.cos(thetaA) * Math.sin(thetaB) - Math.sin(thetaA) * Math.cos(thetaB) * Math.cos(deltaL);
@@ -50,16 +48,9 @@ module NearestStationMenu {
         var angleDeg = angleRad * 180 / Math.PI;
         if (angleDeg < 0) { angleDeg += 360; }
 
-/*
-        var angleDegSegmentAdjusted = angleDeg + 22.5;
-        var segment = (angleDegSegmentAdjusted / 45).toNumber();
-        var coordNames = ["N", "NE", "E", "SE", "S", "SW", "W", "NW", "N"];
-*/
         var angleDegSegmentAdjusted = angleDeg + 11.25;
         var segment = (angleDegSegmentAdjusted / 22.5).toNumber();
         var coordNames = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW", "N"];
-
-        //Toybox.System.println("Angle to " + stationData[RezUtil.stationNameTag] + " is " + angleDeg + " (" + coordNames[segment] + ")");
 
         return coordNames[segment];
     }
