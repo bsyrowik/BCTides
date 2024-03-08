@@ -36,6 +36,11 @@ class BCTidesApp extends Application.AppBase {
                         tideDataValid[i] = true;
                     }
                 }
+            } else {
+                tideData = [];
+                for (var i = 0; i < stationsToShow; i++) {
+                    tideData.add(null);
+                }
             }
         }
     }
@@ -76,7 +81,7 @@ class BCTidesApp extends Application.AppBase {
             var duration26h = new Time.Duration(Time.Gregorian.SECONDS_PER_DAY + 2 * Time.Gregorian.SECONDS_PER_HOUR);
             var eventTime = Time.today().add(duration26h);  // ~2am
             Background.registerForTemporalEvent(eventTime);
-            System.println("Setting background timer for " + eventTime.value());
+            //System.println("Setting background timer for " + eventTime.value());
         }
 
         return [new BackgroundTimerServiceDelegate()] as Array<ServiceDelegate>;

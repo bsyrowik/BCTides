@@ -59,7 +59,7 @@ module StorageUtil {
     }
 
     function setMaxTide(stationIndex as Number, maxTide as Float) as Void {
-        var maxTides = Storage.getValue("maxTides") as Array<Float>;
+        var maxTides = getMaxTidesArray();
         maxTides[stationIndex] = maxTide;
         Storage.setValue("maxTides", maxTides);
     }
