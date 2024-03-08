@@ -23,6 +23,20 @@ module NearestStationMenu {
         return d * r;
     }
 
+    function getDistanceToStation(code as Number) as Float {
+        var stationData = RezUtil.getStationDataFromCode(code) as Dictionary;
+        var position = getApp().currentPosition.toRadians() as Array;
+        var dSquared = distanceSquaredApproximation(position[0], position[1], stationData[RezUtil.stationLatTag], stationData[RezUtil.stationLonTag]);
+        return distance(dSquared);
+    }
+
+    function getDirectionToStation(code as Number) as String {
+        var stationData = RezUtil.getStationDataFromCode(code) as Dictionary;
+        var position = getApp().currentPosition.toRadians() as Array;
+        //var angle = angleToStation(position[0], position[1], stationData[RezUtil.stationLatTag], stationData[RezUtil.stationLonTag]);
+        return "NW";
+    }
+
     function buildHeap(allStations as Array<Dictionary>) as HeapOfPair {
         var position = getApp().currentPosition.toRadians() as Array;  // FIXME: deal with case where currentPosition is still null
         var myLatitude = position[0];

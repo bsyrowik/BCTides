@@ -63,11 +63,12 @@ module SearchStationMenu {
         for (; i < stationList.size(); i++) {
             var name = stationList[i][RezUtil.stationNameTag].toLower();
             if (name.find(needle) != null) {
+                var distance = NearestStationMenu.getDistanceToStation(stationList[i][RezUtil.stationCodeTag]);
                 menu.addItem(
                     new BasicCustomMenuItem(
                         [stationIndex, stationList[i][RezUtil.stationCodeTag]],
                         stationList[i][RezUtil.stationNameTag],
-                        ""
+                        distance.format("%.2f") + "km"
                     )
                 );
                 stationsAdded += 1;
