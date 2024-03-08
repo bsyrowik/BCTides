@@ -48,9 +48,9 @@ class BCTidesView extends WatchUi.View {
     function onPosition(info as Position.Info) as Void {
         _position = info;
         if (_position == null || _position.accuracy < Position.QUALITY_POOR) {
-            System.println("got position update but accuracy not good!");
+            //System.println("got position update but accuracy not good!");
         } else {
-            System.println("got position and accuracy is acceptable.");
+            //System.println("got position and accuracy is acceptable.");
         }
         WatchUi.requestUpdate();
     }
@@ -319,7 +319,7 @@ class BCTidesView extends WatchUi.View {
                 var pos = cc.observationLocationPosition as Position.Location;
                 if (pos != null) {
                     updateLocation(pos);
-                    System.println("Got position from weather: " + pos.toDegrees()[0] + " " + pos.toDegrees()[1]);
+                    //System.println("Got position from weather: " + pos.toDegrees()[0] + " " + pos.toDegrees()[1]);
                 }
             }
         }
