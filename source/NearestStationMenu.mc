@@ -1,6 +1,7 @@
 import Toybox.Application;
 import Toybox.Graphics;
 import Toybox.Lang;
+import Toybox.Math;
 import Toybox.WatchUi;
 
 module NearestStationMenu {
@@ -33,8 +34,34 @@ module NearestStationMenu {
     function getDirectionToStation(code as Number) as String {
         var stationData = RezUtil.getStationDataFromCode(code) as Dictionary;
         var position = getApp().currentPosition.toRadians() as Array;
-        //var angle = angleToStation(position[0], position[1], stationData[RezUtil.stationLatTag], stationData[RezUtil.stationLonTag]);
-        return "NW";
+        var lat1 = position[0];
+        var lon1 = position[1];
+        var lat2 = stationData[RezUtil.stationLatTag];
+        var lon2 = stationData[RezUtil.stationLonTag];
+
+        var thetaA = lat1;
+        var thetaB = lat2;
+        var deltaL = lon2 - lon1;
+
+        var X = Math.cos(thetaB) * Math.sin(deltaL);
+        var Y = Math.cos(thetaA) * Math.sin(thetaB) - Math.sin(thetaA) * Math.cos(thetaB) * Math.cos(deltaL);
+        var angleRad = Math.atan2(X, Y);
+
+        var angleDeg = angleRad * 180 / Math.PI;
+        if (angleDeg < 0) { angleDeg += 360; }
+
+/*
+        var angleDegSegmentAdjusted = angleDeg + 22.5;
+        var segment = (angleDegSegmentAdjusted / 45).toNumber();
+        var coordNames = ["N", "NE", "E", "SE", "S", "SW", "W", "NW", "N"];
+*/
+        var angleDegSegmentAdjusted = angleDeg + 11.25;
+        var segment = (angleDegSegmentAdjusted / 22.5).toNumber();
+        var coordNames = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW", "N"];
+
+        //Toybox.System.println("Angle to " + stationData[RezUtil.stationNameTag] + " is " + angleDeg + " (" + coordNames[segment] + ")");
+
+        return coordNames[segment];
     }
 
     function buildHeap(allStations as Array<Dictionary>) as HeapOfPair {
@@ -73,7 +100,7 @@ module NearestStationMenu {
                 new BasicCustomMenuItem(
                     [stationIndex, stationList[p.index][RezUtil.stationCodeTag]],
                     stationList[p.index][RezUtil.stationNameTag],
-                    dist.format("%.2f") + "km"
+                    dist.format("%.2f") + "km " + getDirectionToStation(stationList[p.index][RezUtil.stationCodeTag])
                 )
             );
         }
